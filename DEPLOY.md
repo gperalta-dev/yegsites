@@ -1,34 +1,15 @@
-# Put the landing page live
+# Put the landing page live on yegsites.com
 
-Next action: decide the name (step 1), then buy the domain at Porkbun. About 25 min total.
+Next action: once yegsites.com is bought, add the DNS records in step 1. About 20 min total.
 
-## 1. Pick the name and domain (5 min)
+The domain purchase is handled separately (Town Hall session with Gabriel). This file only covers DNS, GitHub Pages and the form.
 
-**Problem found on Oct 27:** yegsites.ca is not just taken. It is a live Edmonton web design business called
-"YEG Sites" selling the same thing ($500 one-page sites for Edmonton small businesses). If you use YegSites, owners who
-Google you find them, and they could complain that you are using their name.
+Note: yegsites.ca belongs to a live Edmonton web design business called "YEG Sites". Gabriel chose yegsites.com knowing this
+(Oct 27 2026). Expect the odd owner to mix the two up.
 
-| Domain | First year | Renews | Notes |
-|---|---|---|---|
-| **gabrielperalta.ca** (recommended) | US$8.76 | about US$11.51 | Matches the "Hi, I'm Gabriel" pitch. Yours forever, works with any brand name. |
-| seeitfirst.ca | US$8.76 | about US$11.51 | Matches the headline. Generic, so check nobody local uses the name. |
-| yegsites.com | about US$11.08 | about US$11.08 | Exact brand, but same name as the live yegsites.ca business. Not recommended. |
-| yegsite.ca | US$8.76 | about US$11.51 | One letter off the competitor. Not recommended. |
+## 1. Point yegsites.com at GitHub Pages (5 min)
 
-Prices were seen on Porkbun search on Oct 27 2026, before tax. All under the $25 limit.
-
-If you drop the YegSites name, the brand appears in: the `<title>`, og:title, the meta description, the JSON-LD block,
-the nav logo, the form subject (`YegSites preview request`), the "from_name" field, the signature line and the footer of
-`index.html`. Tell Claude the new name and it will swap all of them.
-
-## 2. Buy it on Porkbun (5 min, you do this)
-
-1. porkbun.com, search the domain, add to cart, check out with the Money Town card. Turn off auto-renew add-ons you don't want.
-2. Log the spend in `ledger/ledger.csv` the same day: date, town `local-studio`, amount, `Porkbun`, `landing page domain`.
-
-## 3. Point the domain at GitHub Pages (5 min)
-
-Porkbun: Account, Domain Management, the domain, **DNS**. Delete the default parking records (the ALIAS and CNAME that point
+Porkbun: Account, Domain Management, yegsites.com, **DNS**. Delete the default parking records (the ALIAS and CNAME that point
 to `pixie.porkbun.com`). Then add:
 
 | Type | Host | Answer |
@@ -41,15 +22,15 @@ to `pixie.porkbun.com`). Then add:
 
 Leave TTL at the default. Do not turn on Porkbun URL forwarding.
 
-## 4. Create the repo and turn on Pages (5 min)
+## 2. Create the repo and turn on Pages (5 min)
 
-If the domain is not gabrielperalta.ca, put the real domain in the `CNAME` file first (one line, no `https://`), then commit.
+The repo already has a `CNAME` file containing `yegsites.com`.
 
 ```bash
 cd C:/dev/sites/yegsites
 gh repo create gperalta-dev/yegsites --public --source . --push
 gh api -X POST repos/gperalta-dev/yegsites/pages -f "source[branch]=main" -f "source[path]=/"
-gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=gabrielperalta.ca
+gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=yegsites.com
 ```
 
 Wait 10 to 30 minutes for DNS and the certificate, then force HTTPS:
@@ -58,9 +39,9 @@ Wait 10 to 30 minutes for DNS and the certificate, then force HTTPS:
 gh api -X PUT repos/gperalta-dev/yegsites/pages -F https_enforced=true
 ```
 
-Check: `https://gabrielperalta.ca` and `https://www.gabrielperalta.ca` both load the page with a lock icon.
+Check: `https://yegsites.com` and `https://www.yegsites.com` both load the page with a lock icon.
 
-## 5. Turn on the form (5 min, you sign up)
+## 3. Turn on the form (5 min, Gabriel signs up)
 
 Until this is done, the form opens a text message to 825-461-5061 with the visitor's details, and the button says
 "Continue in Messages". That works on phones but not on most laptops.
