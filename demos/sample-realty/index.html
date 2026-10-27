@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="frames/f000.webp" fetchpriority="high">
+<link rel="icon" href="/apple-touch-icon.png">
 <style>
   :root {
     color-scheme: dark;
@@ -41,11 +42,11 @@
   .story { position: relative; height: 640vh; }
   .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #1b1f26; }
   canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-  .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 10, 14, .55) 0%, rgba(8, 10, 14, 0) 26%, rgba(8, 10, 14, 0) 55%, rgba(8, 10, 14, .7) 100%); pointer-events: none; }
+  .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 10, 14, .62) 0%, rgba(8, 10, 14, .25) 34%, rgba(8, 10, 14, 0) 48%, rgba(8, 10, 14, 0) 55%, rgba(8, 10, 14, .7) 100%); pointer-events: none; }
   .chapters { position: absolute; inset: 0; pointer-events: none; }
   .ch { position: absolute; left: max(20px, calc((100vw - 1120px) / 2)); bottom: 12vh; max-width: 560px; opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s cubic-bezier(.2, .7, .2, 1); }
   .ch.on { opacity: 1; transform: none; }
-  .ch small { display: block; font: 600 14px var(--sans); color: var(--brass); margin-bottom: 10px; }
+  .ch small { display: block; font: 700 14px var(--sans); color: #f3d6a4; margin-bottom: 10px; text-shadow: 0 1px 10px rgba(0, 0, 0, .7); }
   .ch h2 { font: 400 clamp(44px, 6.4vw, 92px)/.95 var(--serif); margin: 0 0 14px; text-shadow: 0 2px 24px rgba(0, 0, 0, .45); }
   .ch p { margin: 0; font-size: 19px; color: #ece6dc; max-width: 36ch; text-shadow: 0 1px 12px rgba(0, 0, 0, .6); }
   .ch.first { bottom: auto; top: 22vh; }
@@ -209,8 +210,7 @@
     load(0);
     for (let i = 8; i < COUNT; i += 8) load(i);
     for (let i = 1; i < COUNT; i++) if (i % 8) setTimeout(() => load(i), 400 + i * 12);
-    let raf = 0;
-    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); }, { passive: true });
+    addEventListener('scroll', tick, { passive: true });
   }
   addEventListener('resize', size);
   size(); tick();
