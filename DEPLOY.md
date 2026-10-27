@@ -1,11 +1,11 @@
-# Put the [BRAND] landing page live on [DOMAIN]
+# Put the Whyte Web landing page live on whyteweb.ca
 
-Next action: pick the name, run step 0, buy the domain (step 1). Then steps 2 to 6, about 25 min.
+Next action: buy whyteweb.ca on Porkbun (step 1, you do this). Then steps 2 to 6, about 25 min.
 
-Brand is [BRAND] (Oct 27 2026). yegsites.com stays unused for the business. yegsites.ca belongs to a different Edmonton
+Brand is Whyte Web (Oct 27 2026). yegsites.com stays unused for the business. yegsites.ca belongs to a different Edmonton
 web design business, so the page does not use that name anywhere.
 
-## 0. Set the name (1 min)
+## 0. Set the name: DONE Oct 27 (Whyte Web, whyteweb.ca)
 
 The brand and domain are placeholders until the name is picked. One command swaps them everywhere (every page, the demos,
 404, sitemap, robots, this file) and writes the CNAME file:
@@ -21,15 +21,15 @@ Then ask Claude to re-render `og.png` (the link preview image) with the new name
 
 - The GitHub repo `gperalta-dev/yegsites` is live on https://yegsites.com with the OLD YegSites version (pushed earlier today).
 - The rebrand is committed locally only. It is not pushed, because pushing it with the new `CNAME` file moves GitHub Pages
-  to [DOMAIN], and that domain does not point anywhere until you buy it.
+  to whyteweb.ca, and that domain does not point anywhere until you buy it.
 
-## 1. Buy [DOMAIN] (5 min, you do this)
+## 1. Buy whyteweb.ca (5 min, you do this)
 
-Porkbun, search [DOMAIN], check out with the Money Town card. Log it in `ledger/ledger.csv` the same day.
+Porkbun, search whyteweb.ca, check out with the Money Town card. Log it in `ledger/ledger.csv` the same day.
 
-## 2. DNS for [DOMAIN] (5 min, Claude can do this in your Chrome)
+## 2. DNS for whyteweb.ca (5 min, Claude can do this in your Chrome)
 
-Porkbun, Domain Management, [DOMAIN], DNS. Delete the parking ALIAS and wildcard CNAME. Keep the MX and SPF records
+Porkbun, Domain Management, whyteweb.ca, DNS. Delete the parking ALIAS and wildcard CNAME. Keep the MX and SPF records
 (they run Porkbun's free email forwarding). Add:
 
 | Type | Host | Answer |
@@ -42,15 +42,15 @@ Porkbun, Domain Management, [DOMAIN], DNS. Delete the parking ALIAS and wildcard
 
 ## 3. Email (2 min, Claude can do this in your Chrome)
 
-Porkbun, [DOMAIN], Email, Email Forwarding: `contact` delivers to `gperaltainbox@gmail.com`. The page already shows
-contact@[DOMAIN].
+Porkbun, whyteweb.ca, Email, Email Forwarding: `contact` delivers to `gperaltainbox@gmail.com`. The page already shows
+contact@whyteweb.ca.
 
 ## 4. Push and switch Pages to the new domain (5 min)
 
 ```bash
 cd C:/dev/sites/yegsites
 git push origin main
-gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=[DOMAIN]
+gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=whyteweb.ca
 ```
 
 Wait 10 to 30 minutes for the certificate, then:
@@ -68,7 +68,7 @@ gh repo rename <new-repo-name> -R gperalta-dev/yegsites --yes
 ## 5. What to do with yegsites.com
 
 Once Pages moves, yegsites.com shows a GitHub "site not found" page. Pick one:
-- Porkbun URL forwarding: yegsites.com to https://[DOMAIN] (permanent, 301). Old links keep working.
+- Porkbun URL forwarding: yegsites.com to https://whyteweb.ca (permanent, 301). Old links keep working.
 - Or delete its A and CNAME records and let it sit unused until it expires on 2027-10-27 (turn off auto-renew).
 
 The contact@yegsites.com forward to Gmail can stay or be deleted. Nothing on the new page uses it.
@@ -87,5 +87,5 @@ Until this is done, the form opens a text message to 825-461-5061 with the visit
 
 - Add a real photo of yourself if you have one (replaces the GP circle in the About section).
 - Founding price "first 3 clients": change the line once 3 clients have paid.
-- Search Console: add [DOMAIN] as a Domain property with whichever Google account should own it, then add its TXT
+- Search Console: add whyteweb.ca as a Domain property with whichever Google account should own it, then add its TXT
   record in Porkbun DNS.
