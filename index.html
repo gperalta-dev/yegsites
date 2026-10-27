@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YegSites | Edmonton websites you see before you pay</title>
+<meta name="description" content="Websites for Edmonton small businesses. I build a free preview from your Google listing. $150 to keep it, $20 a month for hosting and edits.">
+<meta name="theme-color" content="#0e1013">
+<meta property="og:title" content="YegSites | See your website before you pay">
+<meta property="og:description" content="Free website preview for Edmonton small businesses. $150 to keep it, $20 a month for hosting and edits.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1013'/%3E%3Crect x='7' y='7' width='18' height='18' rx='3' fill='%23ffc83d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"YegSites","description":"Websites for Edmonton small businesses","telephone":"+1-825-461-5061","email":"gperaltainbox@gmail.com","areaServed":"Edmonton, Alberta","founder":"Gabriel Peralta"}
+</script>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0e1013; --surface: #16191e; --surface-2: #1d2128; --field: #111419;
+    --line: rgba(255, 255, 255, 0.1); --line-strong: rgba(255, 255, 255, 0.2);
+    --ink: #f2efe6; --muted: #b0b4bb; --faint: #8a8f98;
+    --accent: #ffc83d; --accent-hover: #ffd76b; --accent-ink: #1a1405;
+    --ok: #57d491; --err: #ff9d8c;
+    --display: "Archivo", "Arial Narrow", system-ui, sans-serif; --body: "Figtree", system-ui, sans-serif;
+    --r-lg: 22px; --r-md: 14px; --r-sm: 10px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 12px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; transition: background-color .18s, color .18s, border-color .18s, transform .12s; }
+  .btn:active { transform: scale(.97); }
+  .btn-main { background: var(--accent); color: var(--accent-ink); }
+  .btn-main:hover { background: var(--accent-hover); }
+  .btn-line { border: 1.5px solid var(--line-strong); color: var(--ink); background: transparent; }
+  .btn-line:hover { border-color: var(--ink); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .btn .ring { transform-origin: 50% 50%; }
+  .btn:hover .ring { animation: ring .5s ease; }
+  @keyframes ring { 25% { transform: rotate(-14deg); } 50% { transform: rotate(12deg); } 75% { transform: rotate(-6deg); } }
+  .btn[disabled] { opacity: .7; cursor: progress; }
+  .spin { width: 16px; height: 16px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; display: none; }
+  .btn.busy .spin { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* nav */
+  nav.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 76px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font: 850 23px/1 var(--display); font-stretch: 90%; letter-spacing: -0.01em; text-decoration: none; min-height: 44px; }
+  .logo i { width: 18px; height: 18px; border-radius: 4px; background: var(--accent); display: block; transition: transform .3s; }
+  .logo:hover i { transform: rotate(90deg); }
+  .top .links { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 600; }
+  .top .links a:not(.btn) { text-decoration: none; color: var(--muted); transition: color .15s; padding: 10px 0; }
+  .top .links a:not(.btn):hover { color: var(--ink); }
+  .top .links .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(400px, .78fr); grid-template-areas: "copy form" "facts form"; grid-template-rows: auto 1fr; column-gap: 64px; padding: 28px 0 72px; min-height: calc(100svh - 76px); align-content: center; }
+  .copy { grid-area: copy; padding-top: 18px; }
+  h1 { font: 900 clamp(45px, 6.6vw, 92px)/.88 var(--display); font-stretch: 64%; text-transform: uppercase; letter-spacing: -0.01em; margin: 0 0 26px; }
+  .where { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px; font-size: 16px; font-weight: 600; color: var(--ink); }
+  .where::before { content: ""; width: 26px; height: 2px; background: var(--accent); }
+  .lead { font-size: 20px; line-height: 1.5; color: var(--muted); max-width: 33ch; margin: 0; }
+  .facts { grid-area: facts; align-self: start; display: grid; grid-template-columns: repeat(3, max-content); gap: 18px 40px; margin: 40px 0 0; padding: 26px 0 0; list-style: none; border-top: 1px solid var(--line); }
+  .facts b { display: block; font: 850 40px/1 var(--display); font-stretch: 80%; color: var(--ink); margin-bottom: 6px; }
+  .facts span { font-size: 15px; color: var(--muted); }
+
+  /* form */
+  form.quote { grid-area: form; align-self: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: grid; gap: 14px; box-shadow: 0 30px 80px -40px rgba(255, 200, 61, .22); }
+  form.quote h2 { font: 850 30px/1.05 var(--display); font-stretch: 85%; margin: 0; }
+  form.quote .note { margin: -6px 0 2px; font-size: 15px; color: var(--muted); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field { display: grid; gap: 6px; align-content: start; }
+  .field label { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .field label small { font-weight: 500; color: var(--faint); font-size: 13px; }
+  input, select { width: 100%; min-height: 48px; background: var(--field); border: 1.5px solid #2c323c; border-radius: var(--r-sm); color: var(--ink); font: 400 16px var(--body); padding: 10px 14px; transition: border-color .15s, background-color .15s; }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23b0b4bb' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+  input:hover, select:hover { border-color: #3c4450; }
+  input:focus, select:focus { border-color: var(--accent); background-color: #14181e; outline: none; }
+  input::placeholder { color: #8a909a; }
+  .field.bad input { border-color: var(--err); }
+  .err { display: none; font-size: 13.5px; color: var(--err); font-weight: 600; }
+  .field.bad .err { display: block; }
+  .hp { display: none; }
+  form.quote .btn { width: 100%; min-height: 54px; font-size: 17px; }
+  .status { display: none; padding: 14px 16px; border-radius: var(--r-md); font-size: 15.5px; line-height: 1.5; }
+  .status.show { display: block; }
+  .status.ok { background: rgba(87, 212, 145, .1); color: var(--ok); }
+  .status.warn { background: rgba(255, 200, 61, .08); color: var(--ink); border: 1px solid rgba(255, 200, 61, .3); }
+  .status.bad { background: rgba(255, 157, 140, .1); color: var(--err); }
+  .status a { font-weight: 700; }
+  .small { font-size: 13.5px; color: var(--faint); margin: 0; text-align: center; }
+  .small a { color: var(--ink); text-underline-offset: 3px; display: inline-block; padding: 14px 0; margin: -14px 0; }
+  form.quote.done .hide-done { display: none; }
+
+  /* sections */
+  section { padding: 112px 0; border-top: 1px solid var(--line); }
+  h2.big { font: 900 clamp(40px, 5.2vw, 68px)/.95 var(--display); font-stretch: 72%; text-transform: uppercase; letter-spacing: -0.005em; margin: 0 0 18px; max-width: 16ch; }
+  .intro { font-size: 18.5px; color: var(--muted); max-width: 54ch; margin: 0 0 52px; }
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 52px; }
+  .head .intro { margin: 0; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); list-style: none; padding: 0; margin: 0; counter-reset: s; }
+  .steps li { counter-increment: s; padding: 30px 32px 6px 0; border-top: 2px solid var(--line-strong); position: relative; }
+  .steps li + li { padding-left: 32px; }
+  .steps li::before { content: counter(s); display: block; font: 900 64px/1 var(--display); font-stretch: 70%; color: var(--accent); margin-bottom: 18px; }
+  .steps li:first-child { border-top-color: var(--accent); }
+  .steps h3 { font: 800 24px/1.2 var(--display); font-stretch: 90%; margin: 0 0 10px; }
+  .steps p { color: var(--muted); margin: 0; max-width: 34ch; }
+
+  /* showcase */
+  .demo { display: grid; grid-template-columns: minmax(0, 1fr) 120px 300px; align-items: center; justify-content: center; gap: 0; }
+  .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line-strong); padding: 7px 14px; border-radius: 999px; margin-bottom: 22px; }
+  .tag::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+  .src { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 10px; max-width: 470px; justify-self: end; width: 100%; }
+  .src .cap { font-size: 14px; color: var(--faint); padding: 10px 14px 6px; margin: 0; }
+  .src ol { list-style: none; margin: 0; padding: 0; }
+  .src li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: center; padding: 13px 14px; border-radius: var(--r-md); transition: background-color .3s; }
+  .src li svg { width: 40px; height: 40px; padding: 10px; border-radius: 10px; background: var(--surface-2); color: var(--muted); transition: color .3s, background-color .3s; }
+  .src li b { display: block; font-weight: 700; font-size: 16px; }
+  .src li span { font-size: 14.5px; color: var(--muted); }
+  .src li.lit { background: rgba(255, 200, 61, .08); }
+  .src li.lit svg { color: var(--accent-ink); background: var(--accent); }
+  .pipe { width: 100%; height: 60px; color: var(--accent); }
+  .pipe path { stroke-dasharray: 6 8; }
+  .demo.play .pipe path { animation: flow 1s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -28; } }
+  .pipe-v { display: none; }
+
+  .phone { width: 300px; border-radius: 44px; padding: 10px; background: #050608; box-shadow: 0 0 0 1px var(--line-strong), 0 40px 90px -30px rgba(0, 0, 0, .8); }
+  .screen { border-radius: 35px; overflow: hidden; background: #f7f4ec; color: #1c1d1f; font-size: 13px; line-height: 1.4; height: 650px; display: flex; flex-direction: column; }
+  .screen .bar { height: 30px; display: flex; justify-content: center; align-items: center; }
+  .screen .bar i { width: 84px; height: 22px; border-radius: 12px; background: #050608; display: block; }
+  .s-body { padding: 8px 16px 16px; display: grid; gap: 12px; }
+  .s-head { display: flex; justify-content: space-between; align-items: center; }
+  .s-head b { font: 800 16px/1 var(--display); font-stretch: 85%; }
+  .s-open { font-size: 11.5px; font-weight: 700; color: #0f6b3e; background: #d9f2e3; padding: 4px 9px; border-radius: 99px; }
+  .s-hero { background: #1f3b3a; color: #f7f4ec; border-radius: 16px; padding: 18px 16px; display: grid; gap: 12px; }
+  .s-hero strong { font: 900 25px/1 var(--display); font-stretch: 72%; text-transform: uppercase; }
+  .s-call { background: #f2b84b; color: #1f1608; border-radius: 10px; padding: 11px; font-weight: 700; text-align: center; font-size: 13.5px; }
+  .s-card { background: #fff; border: 1px solid #e6e0d3; border-radius: 12px; padding: 11px 13px; }
+  .s-card h4 { margin: 0 0 6px; font-size: 12px; font-weight: 700; color: #6b6558; }
+  .s-hours { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; }
+  .s-svc { display: flex; flex-wrap: wrap; gap: 6px; }
+  .s-svc span { font-size: 11.5px; font-weight: 600; padding: 4px 9px; border-radius: 99px; background: #ece6d8; color: #3b3a35; }
+  .s-ph { color: #4b4840; font-style: italic; display: block; margin-top: 2px; }
+  .s-stars { color: #8a5a00; font-size: 11.5px; font-weight: 700; }
+  .s-map { height: 76px; border-radius: 12px; overflow: hidden; background: #e4ecdf; position: relative; }
+  .s-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .demo-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 40px; color: var(--muted); font-size: 15px; }
+  .linkbtn { background: none; border: 0; color: var(--ink); font: 600 15px var(--body); cursor: pointer; min-height: 44px; padding: 0 4px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--accent); transition: text-underline-offset .15s; }
+  .linkbtn:hover { text-underline-offset: 7px; }
+
+  .js .demo .site-part { opacity: 0; transform: translateY(10px); }
+  .js .demo.play .site-part { animation: rise .55s cubic-bezier(.2, .7, .2, 1) forwards; animation-delay: calc(var(--i) * .75s + .3s); }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* pricing */
+  .prices { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; align-items: stretch; }
+  .plan { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px; display: flex; flex-direction: column; gap: 14px; background: var(--surface); }
+  .plan.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); padding: 36px; }
+  .plan.main :focus-visible { outline-color: var(--accent-ink); }
+  .plan h3 { font: 800 22px/1.2 var(--display); font-stretch: 90%; margin: 0; }
+  .plan .amt { font: 900 64px/1 var(--display); font-stretch: 75%; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .plan.main .amt { font-size: 88px; }
+  .plan .amt small { font: 600 16px var(--body); letter-spacing: 0; opacity: .78; }
+  .plan .amt s { font: 700 26px var(--display); opacity: .55; text-decoration-thickness: 2px; }
+  .plan .sub { margin: 0; font-size: 15.5px; color: var(--muted); }
+  .plan.main .sub { color: var(--accent-ink); font-weight: 600; }
+  .feat { list-style: none; margin: 8px 0 6px; padding: 0; display: grid; gap: 11px; }
+  .feat li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 15.5px; line-height: 1.45; }
+  .feat svg { width: 22px; height: 22px; margin-top: 0; }
+  .feat .k { font-weight: 700; }
+  .plan:not(.main) .feat svg { color: var(--accent); }
+  .plan:not(.main) .feat li { color: var(--muted); }
+  .plan:not(.main) .feat .k { color: var(--ink); }
+  .plan .btn { margin-top: auto; }
+  .plan.main .btn { background: var(--accent-ink); color: var(--accent); }
+  .plan.main .btn:hover { background: #2c2210; }
+  .addon { margin-top: 18px; display: grid; grid-template-columns: 1fr auto auto; gap: 16px 40px; align-items: center; padding: 26px 30px; border: 1px dashed var(--line-strong); border-radius: var(--r-lg); }
+  .addon h3 { font: 800 20px/1.2 var(--display); font-stretch: 90%; margin: 0 0 6px; }
+  .addon p { margin: 0; color: var(--muted); font-size: 15.5px; max-width: 62ch; }
+  .addon-amt b { display: block; font: 900 40px/1 var(--display); font-stretch: 75%; }
+  .addon-amt span { font-size: 14px; color: var(--muted); }
+  .fine { margin: 22px 0 0; font-size: 15px; color: var(--faint); }
+
+  /* about */
+  .me { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 56px; align-items: start; }
+  .letter { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 44px 48px; }
+  .letter h2 { font: 850 36px/1.1 var(--display); font-stretch: 85%; margin: 0 0 18px; }
+  .letter p { margin: 0 0 16px; max-width: 58ch; color: #d6d4cd; font-size: 18px; }
+  .sig { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .mono { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font: 900 19px var(--display); font-stretch: 80%; }
+  .sig b { display: block; font: 800 18px/1.2 var(--display); font-stretch: 90%; }
+  .sig div span { font-size: 14.5px; color: var(--muted); }
+  .contact { display: grid; gap: 12px; }
+  .contact h3 { font: 800 24px/1.2 var(--display); font-stretch: 90%; margin: 0 0 4px; }
+  .contact p { margin: 0 0 8px; color: var(--muted); }
+  .contact .btn { justify-content: flex-start; }
+  .contact .btn-line { font-weight: 600; overflow-wrap: anywhere; }
+
+  /* faq */
+  .faq { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; font: 750 20px/1.3 var(--display); font-stretch: 92%; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; min-height: 44px; }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: #fff; }
+  .plus { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--line-strong); position: relative; transition: transform .25s, background-color .2s, border-color .2s; }
+  .plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; margin: -1px 0 0 -6px; background: var(--accent); border-radius: 2px; }
+  .plus::after { transform: rotate(90deg); }
+  summary:hover .plus { border-color: var(--accent); }
+  details[open] .plus { transform: rotate(45deg); background: var(--surface-2); }
+  details p { color: var(--muted); margin: -6px 0 22px; max-width: 52ch; }
+
+  /* final */
+  .final { text-align: center; padding: 120px 0; }
+  .final h2.big { margin-inline: auto; max-width: 22ch; }
+  .final .intro { margin: 0 auto 36px; }
+  .final .ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 15px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 32px; }
+  footer nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  footer a { text-decoration: none; padding: 10px 0; }
+  footer a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+  @media (max-width: 1080px) {
+    .demo { grid-template-columns: minmax(0, 1fr) 70px 280px; }
+    .phone { width: 280px; }
+  }
+  @media (max-width: 900px) {
+    .top .links a:not(.btn) { display: none; }
+    nav.top { height: 64px; }
+    .hero { grid-template-columns: 1fr; grid-template-areas: "copy" "form" "facts"; grid-template-rows: none; padding: 8px 0 56px; min-height: 0; }
+    .copy { padding-top: 6px; }
+    h1 { margin-bottom: 16px; font-stretch: 62%; }
+    .lead { font-size: 18px; margin-bottom: 24px; }
+    form.quote { padding: 22px 18px; }
+    form.quote h2 { font-size: 26px; }
+    .facts { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; padding-top: 22px; }
+    .facts b { font-size: 32px; }
+    .facts span { font-size: 14.5px; display: block; line-height: 1.35; }
+    section { padding: 60px 0; }
+    .head { grid-template-columns: 1fr; gap: 0; margin-bottom: 36px; }
+    .head h2.big { margin-bottom: 14px; }
+    .intro { margin-bottom: 36px; font-size: 17px; }
+    .steps { grid-template-columns: 1fr; gap: 28px; }
+    .steps li, .steps li + li { padding: 22px 0 0; }
+    .steps li::before { font-size: 52px; margin-bottom: 12px; }
+    .demo { grid-template-columns: 1fr; justify-items: center; }
+    .src { justify-self: stretch; max-width: none; }
+    .pipe { display: none; }
+    .pipe-v { display: block; width: 60px; height: 64px; color: var(--accent); }
+    .prices { grid-template-columns: 1fr; }
+    .addon { grid-template-columns: 1fr; padding: 24px 22px; gap: 14px; }
+    .plan.main { order: -1; padding: 30px 24px; }
+    .plan.main .amt { font-size: 76px; }
+    .plan { padding: 26px 22px; }
+    .me { grid-template-columns: 1fr; gap: 28px; }
+    .letter { padding: 30px 22px; }
+    .letter h2 { font-size: 30px; }
+    .letter p { font-size: 17px; }
+    .faq { grid-template-columns: 1fr; }
+    summary { font-size: 18.5px; }
+    .final { padding: 80px 0; }
+    .final .ctas .btn { width: 100%; }
+  }
+  @media (max-width: 420px) {
+    .row2:not(.keep) { grid-template-columns: 1fr; }
+    .wrap { width: calc(100% - 32px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js .demo .site-part { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="top" aria-label="Main">
+    <a class="logo" href="#top" aria-label="YegSites home"><i aria-hidden="true"></i>YegSites</a>
+    <div class="links">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#faq">Questions</a>
+      <a class="btn btn-main" href="tel:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="ring" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>825-461-5061</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="copy">
+      <p class="where">Websites for Edmonton small businesses</p>
+      <h1>See your site before you pay.</h1>
+      <p class="lead">I build a free preview of your website from your Google listing. Like it? $150, then $20 a month.</p>
+    </div>
+
+    <form class="quote" id="quote" action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <h2 class="hide-done">Get your free preview</h2>
+      <p class="note hide-done">Tell me about your shop. I'll build a preview and send you the link.</p>
+      <!-- paste the Web3Forms access key into value="" below. empty = the form opens a text message to Gabriel instead -->
+      <input type="hidden" name="access_key" value="" id="w3f-key">
+      <input type="hidden" name="subject" value="YegSites preview request">
+      <input type="hidden" name="from_name" value="YegSites website">
+      <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+      <div class="row2 keep hide-done">
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name" aria-describedby="e-name"><span class="err" id="e-name">Add your name so I know who to reply to.</span></div>
+        <div class="field"><label for="f-biz">Business name</label><input id="f-biz" name="business" required autocomplete="organization" aria-describedby="e-biz"><span class="err" id="e-biz">Add your business name.</span></div>
+      </div>
+      <div class="field hide-done"><label for="f-contact">Phone or email</label><input id="f-contact" name="contact" required autocomplete="tel" inputmode="email" placeholder="So I can send you the link" aria-describedby="e-contact"><span class="err" id="e-contact">Add a phone number with area code, or an email.</span></div>
+      <div class="field hide-done"><label for="f-need">What do you need?</label>
+        <select id="f-need" name="need">
+          <option>A new website</option>
+          <option>Fix or replace my current site</option>
+          <option>Missed-call text back or AI receptionist</option>
+          <option>Not sure yet, just a question</option>
+        </select>
+      </div>
+      <button class="btn btn-main hide-done" type="submit" id="send"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <p class="small hide-done" id="how-sent">Free and no obligation. I only use your details to reply.</p>
+    </form>
+
+    <ul class="facts" aria-label="Prices">
+      <li><b>$0</b><span>to see your preview</span></li>
+      <li><b>$150</b><span>once, to keep it (normally $200)</span></li>
+      <li><b>$20</b><span>a month for hosting and edits</span></li>
+    </ul>
+  </header>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="big">How it works.</h2>
+      <p class="intro">No calls to sit through and nothing to sign up for. You see the real thing before any money moves.</p>
+    </div>
+    <ol class="steps">
+      <li><h3>I build a preview</h3><p>From your Google listing: your hours, reviews, services, map and a call button. Usually within a couple of days.</p></li>
+      <li><h3>You look at it</h3><p>On your own phone. Ask for changes, swap in your own photos, or say no thanks.</p></li>
+      <li><h3>Keep it if you like it</h3><p>Pay $150 and it goes live. $20 a month covers hosting and small edits, and you can cancel any month.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="tag">Concept demo, not a client</span>
+        <h2 class="big">From listing to website.</h2>
+      </div>
+      <p class="intro">Shown on a made-up shop. I take what's already on your Google listing and build a site that gets people to call, find you and walk in.</p>
+    </div>
+
+    <div class="demo" id="demo-run">
+      <div class="src">
+        <p class="cap">What's on your Google listing</p>
+        <ol>
+          <li data-i="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9M3 9h18v11H3zM9 20v-6h6v6"/></svg><div><b>Name and services</b><span>Sample Barber Co., cuts and fades</span></div></li>
+          <li data-i="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><div><b>Phone number</b><span>Becomes a one-tap call button</span></div></li>
+          <li data-i="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Hours</b><span>Shows open or closed right now</span></div></li>
+          <li data-i="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><div><b>Reviews</b><span>Your real ones, word for word</span></div></li>
+          <li data-i="4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><b>Address</b><span>A map and directions to your door</span></div></li>
+        </ol>
+      </div>
+
+      <svg class="pipe" viewBox="0 0 120 60" fill="none" aria-hidden="true"><path d="M8 30h96" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M98 21l10 9-10 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:none"/></svg>
+      <svg class="pipe-v" viewBox="0 0 60 64" fill="none" aria-hidden="true"><path d="M30 6v46" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 8"/><path d="M21 46l9 10 9-10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+      <div class="phone" role="img" aria-label="Concept demo of a phone website for a made-up barber shop, showing open status, a call button, hours, a review and a map">
+        <div class="screen" aria-hidden="true">
+          <div class="bar"><i></i></div>
+          <div class="s-body">
+            <div class="s-head site-part" style="--i:0"><b>Sample Barber Co.</b><span class="s-open site-part" style="--i:2">Open now</span></div>
+            <div class="s-hero site-part" style="--i:0"><strong>Walk-ins welcome. Fresh cuts all week.</strong><div class="s-call site-part" style="--i:1">Call (780) 555-0100</div></div>
+            <div class="s-svc site-part" style="--i:0"><span>Haircuts</span><span>Fades</span><span>Beard trims</span><span>Kids cuts</span></div>
+            <div class="s-card s-hours site-part" style="--i:2"><h4 style="grid-column:1/-1">Hours</h4><span>Mon to Fri</span><span>9 am to 7 pm</span><span>Saturday</span><span>9 am to 5 pm</span><span>Sunday</span><span>Closed</span></div>
+            <div class="s-card site-part" style="--i:3"><h4>From Google reviews</h4><div class="s-stars">Sample review spot</div><em class="s-ph">Your best Google review goes here, word for word, with the reviewer's first name.</em></div>
+            <div class="s-map site-part" style="--i:4"><svg viewBox="0 0 260 76" preserveAspectRatio="xMidYMid slice"><path d="M0 52h260M0 20h260M70 0v76M180 0v76" stroke="#fff" stroke-width="7"/><path d="M0 64l260-40" stroke="#cfdcc8" stroke-width="5"/><path d="M125 18c-6 0-10 4-10 10 0 8 10 18 10 18s10-10 10-18c0-6-4-10-10-10z" fill="#1f3b3a"/><circle cx="125" cy="28" r="3.5" fill="#f2b84b"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-foot"><span>Sample Barber Co. is made up. Your preview uses your own listing.</span><button class="linkbtn" type="button" id="replay">Play the demo again</button></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="big">Prices, up front.</h2>
+      <p class="intro">$150 once to build it, then $20 a month to keep it online. No contract, and the preview is always free.</p>
+    </div>
+    <div class="prices">
+      <div class="plan main">
+        <h3>Website</h3>
+        <div class="amt">$150 <s>$200</s><small>one time</small></div>
+        <p class="sub">Founding price for the first 3 clients. Normally $200. Hosting is the $20 care plan.</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Built from your Google listing</span>, so your hours, reviews and services are already there</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Made for phones first</span>, where your customers look you up</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">One-tap call, map and open or closed status</span></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">You own it.</span> Your photos, your words, your files</span></li>
+        </ul>
+        <a class="btn" href="#quote" data-focus>Get my free preview</a>
+      </div>
+      <div class="plan">
+        <h3>Care plan</h3>
+        <div class="amt">$20 <small>a month</small></div>
+        <p class="sub">Keeps your site online and up to date. Starts when your site goes live.</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Hosting</span> included</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Small edits</span> like hours, prices and photos</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Text me</span> when something needs changing</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Cancel any month</span>, no fee</span></li>
+        </ul>
+        <a class="btn btn-line" href="#quote" data-focus>Ask a question</a>
+      </div>
+    </div>
+    <div class="addon">
+      <div>
+        <h3>Add-on: missed-call text back</h3>
+        <p>When you can't pick up, the caller gets a text right away so they don't call the next shop. Want calls answered too? I'll quote an AI receptionist for your shop. Setup is always quoted before you agree.</p>
+      </div>
+      <div class="addon-amt"><b>$149</b><span>a month and up</span></div>
+      <a class="btn btn-line" href="#quote" data-focus data-need="Missed-call text back or AI receptionist">Ask about it</a>
+    </div>
+    <p class="fine">Prices in Canadian dollars.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap me">
+    <article class="letter">
+      <h2>Hi, I'm Gabriel, a computer systems student in Edmonton.</h2>
+      <p>I build websites for local shops that have great Google reviews and nowhere to send people. A lot of good businesses only show up as a pin on a map, and customers pick the shop down the street that has a site.</p>
+      <p>I'd rather show you than pitch you, so I build the preview first. You deal with me directly, from the first look to the small edits later. If it's not for you, no hard feelings.</p>
+      <div class="sig"><span class="mono" aria-hidden="true">GP</span><div><b>Gabriel Peralta</b><span>YegSites, Edmonton, Alberta</span></div></div>
+    </article>
+    <aside class="contact" aria-label="Contact">
+      <h3>Text or call</h3>
+      <p>Usually faster than email. I reply within a day.</p>
+      <a class="btn btn-main" href="sms:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Text 825-461-5061</a>
+      <a class="btn btn-line" href="tel:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="ring" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call 825-461-5061</a>
+      <a class="btn btn-line" href="mailto:gperaltainbox@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>gperaltainbox@gmail.com</a>
+    </aside>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="big" style="margin-bottom:28px">Questions.</h2>
+    <div class="faq">
+      <div>
+        <details><summary>Do I really own it?<span class="plus" aria-hidden="true"></span></summary><p>Yes. The site is yours. If you ever leave, you get the files and I help you move it.</p></details>
+        <details><summary>What if I already have Instagram?<span class="plus" aria-hidden="true"></span></summary><p>Keep it. People who search Google want hours, a map and a call button, and Google shows websites for that. Your site links to your Instagram.</p></details>
+        <details><summary>Do I need a domain?<span class="plus" aria-hidden="true"></span></summary><p>Not to start. If you want one like yourshop.ca, I'll set it up in your name and you pay the yearly fee directly.</p></details>
+      </div>
+      <div>
+        <details><summary>What do you need from me?<span class="plus" aria-hidden="true"></span></summary><p>Nothing to see the preview. To go live: a few photos and anything I got wrong about your hours or services.</p></details>
+        <details><summary>Do I have to pay every month?<span class="plus" aria-hidden="true"></span></summary><p>The $20 a month keeps your site online and covers small edits. Cancel any month with no fee. You keep the site files and can host them anywhere.</p></details>
+        <details><summary>Where are you?<span class="plus" aria-hidden="true"></span></summary><p>Edmonton. I'm happy to meet at your shop to go over the preview.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="big">Your preview is free. Ask for one.</h2>
+    <p class="intro">Takes a minute. I'll send you the link when it's ready.</p>
+    <div class="ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>YegSites by Gabriel Peralta, Edmonton, Alberta</span>
+    <nav aria-label="Contact"><a href="tel:+18254615061">825-461-5061</a><a href="mailto:gperaltainbox@gmail.com">gperaltainbox@gmail.com</a></nav>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  const SMS = '+18254615061', EMAIL = 'gperaltainbox@gmail.com';
+  const form = document.getElementById('quote'), status = document.getElementById('status'), send = document.getElementById('send');
+  const KEY = document.getElementById('w3f-key').value.trim();
+  // no Web3Forms key yet: say plainly that the button hands off to the visitor's messages app
+  if (!KEY) {
+    send.querySelector('.label').textContent = 'Continue in Messages';
+    document.getElementById('how-sent').innerHTML = 'Opens a text to Gabriel with your details filled in. Rather email? <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>';
+  }
+
+  function say(kind, html) { status.className = 'status show ' + kind; status.innerHTML = html; }
+
+  function check() {
+    let first = null;
+    const rules = {
+      name: (v) => v.trim().length > 0,
+      business: (v) => v.trim().length > 0,
+      contact: (v) => v.replace(/\D/g, '').length >= 10 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    };
+    for (const [name, ok] of Object.entries(rules)) {
+      const input = form.elements[name], field = input.closest('.field'), good = ok(input.value);
+      field.classList.toggle('bad', !good);
+      input.setAttribute('aria-invalid', good ? 'false' : 'true');
+      if (!good && !first) first = input;
+    }
+    if (first) first.focus();
+    return !first;
+  }
+  form.addEventListener('input', (e) => { const f = e.target.closest('.field.bad'); if (f) f.classList.remove('bad'); });
+
+  // until a Web3Forms key is pasted into #w3f-key, the form opens a pre-filled text message instead of failing
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!check()) return;
+    const d = Object.fromEntries(new FormData(form));
+    const text = `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}. You can reach me at ${d.contact}.`;
+    const fallback = `<a href="sms:${SMS}?&body=${encodeURIComponent(text)}">text 825-461-5061</a> or <a href="mailto:${EMAIL}?subject=${encodeURIComponent('Website preview for ' + d.business)}&body=${encodeURIComponent(text)}">email me</a>`;
+    if (!KEY) {
+      say('warn', `Your messages app should open with your request filled in. Tap send there to reach me. Nothing opened? ${fallback}.`);
+      location.href = `sms:${SMS}?&body=${encodeURIComponent(text)}`;
+      return;
+    }
+    send.disabled = true; send.classList.add('busy'); send.querySelector('.label').textContent = 'Sending...';
+    try {
+      const r = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || j.success === false) throw new Error(j.message || r.status);
+      form.classList.add('done');
+      say('ok', `<strong>Request sent.</strong> I'll get back to you at ${d.contact.replace(/[<>&"]/g, '')} within a day.`);
+    } catch (err) {
+      say('bad', `That didn't send. Please ${fallback} instead.`);
+    } finally {
+      send.disabled = false; send.classList.remove('busy'); send.querySelector('.label').textContent = 'Send my request';
+    }
+  });
+
+  // buttons that jump to the form put the cursor in the first field
+  document.querySelectorAll('[data-focus]').forEach((a) => a.addEventListener('click', () => {
+    if (a.dataset.need) form.elements.need.value = a.dataset.need;
+    setTimeout(() => form.elements.name.focus({ preventScroll: true }), 450);
+  }));
+
+  // concept demo: listing rows light up as the matching part of the site appears
+  const demo = document.getElementById('demo-run'), rows = demo.querySelectorAll('.src li');
+  let timers = [];
+  function play() {
+    timers.forEach(clearTimeout); timers = [];
+    rows.forEach((r) => r.classList.remove('lit'));
+    demo.classList.remove('play'); void demo.offsetWidth; demo.classList.add('play');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { rows.forEach((r) => r.classList.add('lit')); return; }
+    rows.forEach((r, i) => timers.push(setTimeout(() => {
+      rows.forEach((x) => x.classList.remove('lit')); r.classList.add('lit');
+    }, i * 750 + 100)));
+    timers.push(setTimeout(() => rows.forEach((x) => x.classList.remove('lit')), rows.length * 750 + 600));
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { play(); io.disconnect(); } }, { threshold: 0.4 }).observe(demo.querySelector('.phone'));
+  } else { play(); }
+  document.getElementById('replay').addEventListener('click', play);
+</script>
+</body>
+</html>
