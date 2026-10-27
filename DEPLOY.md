@@ -46,7 +46,7 @@ Check: `https://yegsites.com` and `https://www.yegsites.com` both load the page 
 Until this is done, the form opens a text message to 825-461-5061 with the visitor's details, and the button says
 "Continue in Messages". That works on phones but not on most laptops.
 
-1. web3forms.com, create a free access key with gperaltainbox@gmail.com (the key is public by design, it is safe in the page).
+1. web3forms.com, create a free access key with gperaltainbox@gmail.com (the site shows contact@yegsites.com, which forwards there) (the key is public by design, it is safe in the page).
 2. In `index.html`, find `id="w3f-key"` and paste the key between the quotes of `value=""`.
 3. Commit and push: `git commit -am "turn on web3forms" && git push`.
 4. Send yourself a test request from your phone and check it lands in Gmail. The button now says "Send my request".
