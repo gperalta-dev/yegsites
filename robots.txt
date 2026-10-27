@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yegsites.com/sitemap.xml
+Sitemap: https://[DOMAIN]/sitemap.xml

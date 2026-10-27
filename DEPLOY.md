@@ -1,16 +1,36 @@
-# Put the landing page live on yegsites.com
+# Put the [BRAND] landing page live on [DOMAIN]
 
-Next action: run the 3 commands in step 2. About 10 min total.
+Next action: pick the name, run step 0, buy the domain (step 1). Then steps 2 to 6, about 25 min.
 
-The domain purchase is handled separately (Town Hall session with Gabriel). This file only covers DNS, GitHub Pages and the form.
+Brand is [BRAND] (Oct 27 2026). yegsites.com stays unused for the business. yegsites.ca belongs to a different Edmonton
+web design business, so the page does not use that name anywhere.
 
-Note: yegsites.ca belongs to a live Edmonton web design business called "YEG Sites". Gabriel chose yegsites.com knowing this
-(Oct 27 2026). Expect the odd owner to mix the two up.
+## 0. Set the name (1 min)
 
-## 1. Point yegsites.com at GitHub Pages: DONE Oct 27 (parking ALIAS and wildcard CNAME deleted, records below added, Porkbun mail-forwarding MX and SPF kept)
+The brand and domain are placeholders until the name is picked. One command swaps them everywhere (every page, the demos,
+404, sitemap, robots, this file) and writes the CNAME file:
 
-Porkbun: Account, Domain Management, yegsites.com, **DNS**. Delete the default parking records (the ALIAS and CNAME that point
-to `pixie.porkbun.com`). Then add:
+```bash
+cd C:/dev/sites/yegsites
+py set_brand.py "New Name" newname.ca
+```
+
+Then ask Claude to re-render `og.png` (the link preview image) with the new name, and commit.
+
+## Right now
+
+- The GitHub repo `gperalta-dev/yegsites` is live on https://yegsites.com with the OLD YegSites version (pushed earlier today).
+- The rebrand is committed locally only. It is not pushed, because pushing it with the new `CNAME` file moves GitHub Pages
+  to [DOMAIN], and that domain does not point anywhere until you buy it.
+
+## 1. Buy [DOMAIN] (5 min, you do this)
+
+Porkbun, search [DOMAIN], check out with the Money Town card. Log it in `ledger/ledger.csv` the same day.
+
+## 2. DNS for [DOMAIN] (5 min, Claude can do this in your Chrome)
+
+Porkbun, Domain Management, [DOMAIN], DNS. Delete the parking ALIAS and wildcard CNAME. Keep the MX and SPF records
+(they run Porkbun's free email forwarding). Add:
 
 | Type | Host | Answer |
 |---|---|---|
@@ -20,33 +40,45 @@ to `pixie.porkbun.com`). Then add:
 | A | (blank) | 185.199.111.153 |
 | CNAME | www | gperalta-dev.github.io |
 
-Leave TTL at the default. Do not turn on Porkbun URL forwarding.
+## 3. Email (2 min, Claude can do this in your Chrome)
 
-## 2. Create the repo and turn on Pages (5 min)
+Porkbun, [DOMAIN], Email, Email Forwarding: `contact` delivers to `gperaltainbox@gmail.com`. The page already shows
+contact@[DOMAIN].
 
-The repo already has a `CNAME` file containing `yegsites.com`.
+## 4. Push and switch Pages to the new domain (5 min)
 
 ```bash
 cd C:/dev/sites/yegsites
-gh repo create gperalta-dev/yegsites --public --source . --push
-gh api -X POST repos/gperalta-dev/yegsites/pages -f "source[branch]=main" -f "source[path]=/"
-gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=yegsites.com
+git push origin main
+gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=[DOMAIN]
 ```
 
-Wait 10 to 30 minutes for DNS and the certificate, then force HTTPS:
+Wait 10 to 30 minutes for the certificate, then:
 
 ```bash
 gh api -X PUT repos/gperalta-dev/yegsites/pages -F https_enforced=true
 ```
 
-Check: `https://yegsites.com` and `https://www.yegsites.com` both load the page with a lock icon.
+Optional, so the repo name matches the brand (GitHub redirects the old name):
 
-## 3. Turn on the form (5 min, Gabriel signs up)
+```bash
+gh repo rename <new-repo-name> -R gperalta-dev/yegsites --yes
+```
+
+## 5. What to do with yegsites.com
+
+Once Pages moves, yegsites.com shows a GitHub "site not found" page. Pick one:
+- Porkbun URL forwarding: yegsites.com to https://[DOMAIN] (permanent, 301). Old links keep working.
+- Or delete its A and CNAME records and let it sit unused until it expires on 2027-10-27 (turn off auto-renew).
+
+The contact@yegsites.com forward to Gmail can stay or be deleted. Nothing on the new page uses it.
+
+## 6. Turn on the form (5 min, you sign up)
 
 Until this is done, the form opens a text message to 825-461-5061 with the visitor's details, and the button says
-"Continue in Messages". That works on phones but not on most laptops.
+"Continue in Messages".
 
-1. web3forms.com, create a free access key with gperaltainbox@gmail.com (the site shows contact@yegsites.com, which forwards there) (the key is public by design, it is safe in the page).
+1. web3forms.com, create a free access key with gperaltainbox@gmail.com (the key is public by design, it is safe in the page).
 2. In `index.html`, find `id="w3f-key"` and paste the key between the quotes of `value=""`.
 3. Commit and push: `git commit -am "turn on web3forms" && git push`.
 4. Send yourself a test request from your phone and check it lands in Gmail. The button now says "Send my request".
@@ -55,3 +87,5 @@ Until this is done, the form opens a text message to 825-461-5061 with the visit
 
 - Add a real photo of yourself if you have one (replaces the GP circle in the About section).
 - Founding price "first 3 clients": change the line once 3 clients have paid.
+- Search Console: add [DOMAIN] as a Domain property with whichever Google account should own it, then add its TXT
+  record in Porkbun DNS.
