@@ -1,13 +1,13 @@
 # Put the landing page live on yegsites.com
 
-Next action: once yegsites.com is bought, add the DNS records in step 1. About 20 min total.
+Next action: run the 3 commands in step 2. About 10 min total.
 
 The domain purchase is handled separately (Town Hall session with Gabriel). This file only covers DNS, GitHub Pages and the form.
 
 Note: yegsites.ca belongs to a live Edmonton web design business called "YEG Sites". Gabriel chose yegsites.com knowing this
 (Oct 27 2026). Expect the odd owner to mix the two up.
 
-## 1. Point yegsites.com at GitHub Pages (5 min)
+## 1. Point yegsites.com at GitHub Pages: DONE Oct 27 (parking ALIAS and wildcard CNAME deleted, records below added, Porkbun mail-forwarding MX and SPF kept)
 
 Porkbun: Account, Domain Management, yegsites.com, **DNS**. Delete the default parking records (the ALIAS and CNAME that point
 to `pixie.porkbun.com`). Then add:
