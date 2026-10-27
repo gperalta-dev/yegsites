@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Barber Co. | Concept demo by YegSites</title>
+<meta name="description" content="Concept demo website by YegSites. Sample Barber Co. is a made-up business.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; --bg:#f4f1ea; --ink:#1b1d1c; --muted:#585b57; --card:#fff; --line:#e2ddd2; --accent:#f2b84b; --accent-ink:#1f1608; --hero:#1f3b3a; --hero-ink:#f4f1ea; --ok-bg:#d9f2e3; --ok-ink:#0f6b3e; --radius:12px; --radius-lg:22px; --body:"Figtree",system-ui,sans-serif; --brand-font:800 22px/1 "Archivo",sans-serif; --h1:900 clamp(48px,7vw,88px)/.9 "Archivo",sans-serif; --h2:800 30px/1.1 "Archivo",sans-serif; --art:repeating-linear-gradient(135deg,#2c5755 0 26px,#f4f1ea 26px 40px,#b8453a 40px 66px,#f4f1ea 66px 80px); --map:#e4ecdf; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1100px, 100% - 40px); margin-inline: auto; }
+  .note { background: #0e1013; color: #f2efe6; font: 600 14px/1.4 "Figtree", system-ui, sans-serif; }
+  .note .wrap { display: flex; flex-wrap: wrap; gap: 0 16px; justify-content: space-between; align-items: center; padding: 4px 0; }
+  .note a { color: #ffc83d; display: inline-flex; align-items: center; min-height: 44px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 76px; }
+  .brand { font: var(--brand-font); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+  .open { font-size: 14px; font-weight: 700; color: var(--ok-ink); background: var(--ok-bg); padding: 6px 12px; border-radius: 99px; white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: var(--radius); font-weight: 700; text-decoration: none; transition: transform .12s, filter .15s; }
+  .btn:hover { filter: brightness(1.06); } .btn:active { transform: scale(.97); }
+  .btn-main { background: var(--accent); color: var(--accent-ink); }
+  .btn-line { border: 2px solid currentColor; }
+  .hero { background: var(--hero); color: var(--hero-ink); border-radius: var(--radius-lg); padding: clamp(32px, 6vw, 64px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
+  .hero h1 { font: var(--h1); margin: 0 0 18px; }
+  .hero p { margin: 0 0 28px; font-size: 19px; max-width: 34ch; opacity: .92; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .art { align-self: stretch; min-height: 280px; border-radius: calc(var(--radius-lg) - 8px); background: var(--art); position: relative; overflow: hidden; }
+  .art span { position: absolute; left: 14px; bottom: 12px; font-size: 13px; font-weight: 600; background: rgba(0,0,0,.55); color: #fff; padding: 4px 10px; border-radius: 99px; }
+  section { padding: 64px 0 0; }
+  h2 { font: var(--h2); margin: 0 0 22px; }
+  .grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; }
+  .svc { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .svc li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 20px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 600; }
+  .svc li span { color: var(--muted); font-weight: 500; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+  .hours { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin: 0; }
+  .hours dt { color: var(--muted); } .hours dd { margin: 0; font-weight: 600; text-align: right; }
+  .review { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .review small { display: block; font-weight: 700; color: var(--muted); margin-bottom: 6px; font-size: 14px; }
+  .map { margin-top: 64px; height: 220px; border-radius: var(--radius-lg); background: var(--map); position: relative; overflow: hidden; }
+  .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .map .btn { position: absolute; right: 18px; bottom: 18px; }
+  footer { padding: 48px 0 56px; color: var(--muted); font-size: 15px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; padding: 28px 22px; gap: 24px; }
+    .art { min-height: 170px; order: -1; }
+    .grid { grid-template-columns: 1fr; }
+    .ctas .btn { flex: 1 1 100%; }
+    section { padding-top: 48px; }
+    .wrap { width: calc(100% - 32px); }
+    .map .btn { left: 16px; right: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="note"><div class="wrap"><span>Concept demo by YegSites. Sample Barber Co. is made up.</span><a href="/#work">Back to YegSites</a></div></div>
+<div class="wrap">
+  <header class="top"><a class="brand" href="#">Sample Barber Co.</a><span class="open">Open today until 7 pm</span></header>
+  <div class="hero">
+    <div>
+      <h1><span style="font-stretch:70%;text-transform:uppercase">Walk-ins welcome. Fresh cuts all week.</span></h1>
+      <p>Cuts, fades and beard trims on Sample Ave. Call ahead or just come in.</p>
+      <div class="ctas"><a class="btn btn-main" href="tel:+17805550100">Call (780) 555-0100</a><a class="btn btn-line" href="#map">Get directions</a></div>
+    </div>
+    <div class="art" role="img" aria-label="Barber pole stripes where the shop photo goes"><span>Your photo goes here</span></div>
+  </div>
+
+  <section>
+    <div class="grid">
+      <div>
+        <h2>Services</h2>
+        <ul class="svc"><li>Haircut<span>Ask for a price</span></li><li>Skin fade<span>Ask for a price</span></li><li>Beard trim<span>Ask for a price</span></li><li>Kids cut<span>Ask for a price</span></li></ul>
+      </div>
+      <div>
+        <h2>Hours</h2>
+        <div class="card">
+          <dl class="hours"><dt>Mon to Fri</dt><dd>9 am to 7 pm</dd><dt>Saturday</dt><dd>9 am to 5 pm</dd><dt>Sunday</dt><dd>Closed</dd></dl>
+          <div class="review"><small>From Google reviews</small><em>Your best Google review goes here, word for word, with the reviewer's first name.</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="map" id="map" role="img" aria-label="Map placeholder">
+    <svg viewBox="0 0 1100 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 150h1100M0 60h1100M300 0v220M760 0v220" stroke="#fff" stroke-width="16"/><path d="M0 200L1100 30" stroke="#cfdcc8" stroke-width="10"/><path d="M530 50c-15 0-26 11-26 26 0 20 26 46 26 46s26-26 26-46c0-15-11-26-26-26z" fill="#1f3b3a"/><circle cx="530" cy="76" r="9" fill="#fff"/></svg>
+    <a class="btn btn-main" href="#map">Directions to the shop</a>
+  </div>
+
+  <footer><span>Sample Barber Co., Sample Ave, Edmonton</span><span>Concept demo, not a client. Built by YegSites.</span></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Bake House | Concept demo by YegSites</title>
+<meta name="description" content="Concept demo website by YegSites. Sample Bake House is a made-up business.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; --bg:#fbf4ec; --ink:#2b1a14; --muted:#6a554b; --card:#fffaf5; --line:#efdfd0; --accent:#b3264d; --accent-ink:#fff; --hero:#f3dccb; --hero-ink:#2b1a14; --ok-bg:#f6e3c6; --ok-ink:#6e4204; --radius:999px; --radius-lg:28px; --body:"Figtree",system-ui,sans-serif; --brand-font:700 24px/1 "Fraunces",serif; --h1:800 clamp(42px,6vw,76px)/1.02 "Fraunces",serif; --h2:700 32px/1.1 "Fraunces",serif; --art:radial-gradient(circle at 30% 35%,#e8b48a 0 18%,transparent 19%),radial-gradient(circle at 68% 58%,#c9784b 0 22%,transparent 23%),radial-gradient(circle at 40% 78%,#f1cfa6 0 12%,transparent 13%),#b3264d; --map:#efe4d6; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1100px, 100% - 40px); margin-inline: auto; }
+  .note { background: #0e1013; color: #f2efe6; font: 600 14px/1.4 "Figtree", system-ui, sans-serif; }
+  .note .wrap { display: flex; flex-wrap: wrap; gap: 0 16px; justify-content: space-between; align-items: center; padding: 4px 0; }
+  .note a { color: #ffc83d; display: inline-flex; align-items: center; min-height: 44px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 76px; }
+  .brand { font: var(--brand-font); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+  .open { font-size: 14px; font-weight: 700; color: var(--ok-ink); background: var(--ok-bg); padding: 6px 12px; border-radius: 99px; white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: var(--radius); font-weight: 700; text-decoration: none; transition: transform .12s, filter .15s; }
+  .btn:hover { filter: brightness(1.06); } .btn:active { transform: scale(.97); }
+  .btn-main { background: var(--accent); color: var(--accent-ink); }
+  .btn-line { border: 2px solid currentColor; }
+  .hero { background: var(--hero); color: var(--hero-ink); border-radius: var(--radius-lg); padding: clamp(32px, 6vw, 64px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
+  .hero h1 { font: var(--h1); margin: 0 0 18px; }
+  .hero p { margin: 0 0 28px; font-size: 19px; max-width: 34ch; opacity: .92; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .art { align-self: stretch; min-height: 280px; border-radius: calc(var(--radius-lg) - 8px); background: var(--art); position: relative; overflow: hidden; }
+  .art span { position: absolute; left: 14px; bottom: 12px; font-size: 13px; font-weight: 600; background: rgba(0,0,0,.55); color: #fff; padding: 4px 10px; border-radius: 99px; }
+  section { padding: 64px 0 0; }
+  h2 { font: var(--h2); margin: 0 0 22px; }
+  .grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; }
+  .svc { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .svc li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 20px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 600; }
+  .svc li span { color: var(--muted); font-weight: 500; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+  .hours { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin: 0; }
+  .hours dt { color: var(--muted); } .hours dd { margin: 0; font-weight: 600; text-align: right; }
+  .review { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .review small { display: block; font-weight: 700; color: var(--muted); margin-bottom: 6px; font-size: 14px; }
+  .map { margin-top: 64px; height: 220px; border-radius: var(--radius-lg); background: var(--map); position: relative; overflow: hidden; }
+  .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .map .btn { position: absolute; right: 18px; bottom: 18px; }
+  footer { padding: 48px 0 56px; color: var(--muted); font-size: 15px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; padding: 28px 22px; gap: 24px; }
+    .art { min-height: 170px; order: -1; }
+    .grid { grid-template-columns: 1fr; }
+    .ctas .btn { flex: 1 1 100%; }
+    section { padding-top: 48px; }
+    .wrap { width: calc(100% - 32px); }
+    .map .btn { left: 16px; right: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="note"><div class="wrap"><span>Concept demo by YegSites. Sample Bake House is made up.</span><a href="/#work">Back to YegSites</a></div></div>
+<div class="wrap">
+  <header class="top"><a class="brand" href="#">Sample Bake House</a><span class="open">Open today until 5 pm</span></header>
+  <div class="hero">
+    <div>
+      <h1>Fresh bread and cakes, baked every morning.</h1>
+      <p>Sourdough, cinnamon buns and custom cakes on Sample Street. Order a cake by phone.</p>
+      <div class="ctas"><a class="btn btn-main" href="tel:+17805550100">Call (780) 555-0100</a><a class="btn btn-line" href="#map">Get directions</a></div>
+    </div>
+    <div class="art" role="img" aria-label="Pastry shapes where the bakery photo goes"><span>Your photo goes here</span></div>
+  </div>
+
+  <section>
+    <div class="grid">
+      <div>
+        <h2>What we bake</h2>
+        <ul class="svc"><li>Sourdough loaves<span>Daily</span></li><li>Cinnamon buns<span>Daily</span></li><li>Custom cakes<span>Call to order</span></li><li>Cookies by the dozen<span>Ask for a price</span></li></ul>
+      </div>
+      <div>
+        <h2>Hours</h2>
+        <div class="card">
+          <dl class="hours"><dt>Tue to Sat</dt><dd>8 am to 5 pm</dd><dt>Sunday</dt><dd>9 am to 1 pm</dd><dt>Monday</dt><dd>Closed</dd></dl>
+          <div class="review"><small>From Google reviews</small><em>Your best Google review goes here, word for word, with the reviewer's first name.</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="map" id="map" role="img" aria-label="Map placeholder">
+    <svg viewBox="0 0 1100 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 150h1100M0 60h1100M300 0v220M760 0v220" stroke="#fffaf5" stroke-width="16"/><path d="M0 200L1100 30" stroke="#e3cdb8" stroke-width="10"/><path d="M530 50c-15 0-26 11-26 26 0 20 26 46 26 46s26-26 26-46c0-15-11-26-26-26z" fill="#b3264d"/><circle cx="530" cy="76" r="9" fill="#fff"/></svg>
+    <a class="btn btn-main" href="#map">Directions to the bakery</a>
+  </div>
+
+  <footer><span>Sample Bake House, Sample Street, Edmonton</span><span>Concept demo, not a client. Built by YegSites.</span></footer>
+</div>
+</body>
+</html>

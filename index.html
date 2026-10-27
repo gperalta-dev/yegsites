@@ -48,6 +48,12 @@
   .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+  /* background: fine grid fading out behind the hero, soft glow behind the form */
+  body { position: relative; isolation: isolate; }
+  .backdrop { position: absolute; inset: 0 0 auto; height: 1100px; z-index: -1; pointer-events: none; overflow: hidden; }
+  .backdrop::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 60% 25%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 60% 25%, #000 20%, transparent 75%); }
+  .backdrop::after { content: ""; position: absolute; width: 900px; height: 700px; right: -180px; top: -120px; background: radial-gradient(closest-side, rgba(255, 200, 61, .13), transparent); }
+
   /* buttons */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 12px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; transition: background-color .18s, color .18s, border-color .18s, transform .12s; }
   .btn:active { transform: scale(.97); }
@@ -102,6 +108,9 @@
   .err { display: none; font-size: 13.5px; color: var(--err); font-weight: 600; }
   .field.bad .err { display: block; }
   .hp { display: none; }
+  .picked { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 4px 6px 4px 14px; border-radius: var(--r-sm); background: rgba(255, 200, 61, .09); border: 1px solid rgba(255, 200, 61, .35); font-size: 14.5px; }
+  .picked[hidden] { display: none; }
+  .picked .linkbtn { font-size: 14px; }
   form.quote .btn { width: 100%; min-height: 54px; font-size: 17px; }
   .status { display: none; padding: 14px 16px; border-radius: var(--r-md); font-size: 15.5px; line-height: 1.5; }
   .status.show { display: block; }
@@ -175,6 +184,24 @@
   .js .demo .site-part { opacity: 0; transform: translateY(10px); }
   .js .demo.play .site-part { animation: rise .55s cubic-bezier(.2, .7, .2, 1) forwards; animation-delay: calc(var(--i) * .75s + .3s); }
   @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* work */
+  .work { display: grid; grid-template-columns: 1fr 1fr; gap: 44px 28px; }
+  .work-card { display: grid; gap: 20px; align-content: start; }
+  .frame { display: block; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); background: var(--surface); text-decoration: none; transition: border-color .2s, transform .3s cubic-bezier(.2, .7, .2, 1); }
+  .frame:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .frame img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+  .frame:hover img { transform: scale(1.025); }
+  .frame-bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+  .frame-bar i { width: 9px; height: 9px; border-radius: 50%; background: #3a404a; }
+  .frame-bar b { margin-left: 10px; font: 500 13px var(--body); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .work-body h3 { font: 800 26px/1.15 var(--display); font-stretch: 88%; margin: 10px 0 6px; }
+  .work-body p { margin: 0 0 18px; color: var(--muted); max-width: 46ch; }
+  .kind { display: inline-flex; font-size: 13.5px; font-weight: 700; padding: 5px 12px; border-radius: 99px; background: rgba(87, 212, 145, .12); color: var(--ok); }
+  .kind-demo { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line-strong); }
+  .work-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+  .work-ctas .btn { min-height: 48px; padding: 0 18px; font-size: 15px; }
+  .pick[aria-pressed="true"] { background: var(--ok); color: #06210f; }
 
   /* pricing */
   .prices { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; align-items: stretch; }
@@ -271,6 +298,8 @@
     .src { justify-self: stretch; max-width: none; }
     .pipe { display: none; }
     .pipe-v { display: block; width: 60px; height: 64px; color: var(--accent); }
+    .work { grid-template-columns: 1fr; gap: 48px; }
+    .work-ctas .btn { flex: 1 1 auto; }
     .prices { grid-template-columns: 1fr; }
     .addon { grid-template-columns: 1fr; padding: 24px 22px; gap: 14px; }
     .plan.main { order: -1; padding: 30px 24px; }
@@ -297,11 +326,13 @@
 </style>
 </head>
 <body>
+<div class="backdrop" aria-hidden="true"></div>
 <div class="wrap">
   <nav class="top" aria-label="Main">
     <a class="logo" href="#top" aria-label="YegSites home"><i aria-hidden="true"></i>YegSites</a>
     <div class="links">
       <a href="#how">How it works</a>
+      <a href="#work">Work</a>
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
       <a href="#faq">Questions</a>
@@ -337,6 +368,8 @@
           <option>Not sure yet, just a question</option>
         </select>
       </div>
+      <input type="hidden" name="style" id="f-style" value="">
+      <div class="picked hide-done" id="picked" hidden><span>Style you picked: <b id="picked-name"></b></span><button type="button" class="linkbtn" id="unpick">Remove</button></div>
       <button class="btn btn-main hide-done" type="submit" id="send"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
       <div class="status" id="status" role="status" aria-live="polite"></div>
       <p class="small hide-done" id="how-sent">Free and no obligation. I only use your details to reply.</p>
@@ -404,6 +437,65 @@
       </div>
     </div>
     <div class="demo-foot"><span>Sample Barber Co. is made up. Your preview uses your own listing.</span><button class="linkbtn" type="button" id="replay">Play the demo again</button></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="big">Work you can open.</h2>
+      <p class="intro">Two live sites I built and run myself, plus concept demos. See one you like? Tap the button and I'll build yours in that style.</p>
+    </div>
+    <div class="work">
+      <article class="work-card">
+        <a class="frame" href="https://easykeeps.ca/" target="_blank" rel="noopener" aria-label="Open Easykeeps">
+          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>easykeeps.ca</b></span>
+          <img src="work/easykeeps.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of Easykeeps">
+        </a>
+        <div class="work-body">
+          <span class="kind">My own business, live</span>
+          <h3>Easykeeps</h3>
+          <p>Bookkeeping for Edmonton businesses. Built and run by me, with animated receipts and a full pricing page.</p>
+          <div class="work-ctas"><a class="btn btn-line" href="https://easykeeps.ca/" target="_blank" rel="noopener">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like Easykeeps (clean, animated, trust-first)">I want one like this</button></div>
+        </div>
+      </article>
+      <article class="work-card">
+        <a class="frame" href="https://www.autotier.ca/" target="_blank" rel="noopener" aria-label="Open AutoTier">
+          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>autotier.ca</b></span>
+          <img src="work/autotier.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of AutoTier">
+        </a>
+        <div class="work-body">
+          <span class="kind">My own project, live</span>
+          <h3>AutoTier</h3>
+          <p>A Canadian used-car data app: paste a listing, get red flags and a price check. Built and run by me.</p>
+          <div class="work-ctas"><a class="btn btn-line" href="https://www.autotier.ca/" target="_blank" rel="noopener">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like AutoTier (bold, data-heavy)">I want one like this</button></div>
+        </div>
+      </article>
+      <article class="work-card">
+        <a class="frame" href="demos/sample-barber/" aria-label="Open Sample Barber Co.">
+          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>yegsites.com/demos/sample-barber</b></span>
+          <img src="work/sample-barber.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of Sample Barber Co.">
+        </a>
+        <div class="work-body">
+          <span class="kind kind-demo">Concept demo, not a client</span>
+          <h3>Sample Barber Co.</h3>
+          <p>A made-up barber shop. Big type, one-tap call, hours and a spot for your real reviews.</p>
+          <div class="work-ctas"><a class="btn btn-line" href="demos/sample-barber/">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like the barber demo (bold and simple)">I want one like this</button></div>
+        </div>
+      </article>
+      <article class="work-card">
+        <a class="frame" href="demos/sample-bakery/" aria-label="Open Sample Bake House">
+          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>yegsites.com/demos/sample-bakery</b></span>
+          <img src="work/sample-bakery.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of Sample Bake House">
+        </a>
+        <div class="work-body">
+          <span class="kind kind-demo">Concept demo, not a client</span>
+          <h3>Sample Bake House</h3>
+          <p>A made-up bakery. Warm colours, serif type and a menu that is easy to read on a phone.</p>
+          <div class="work-ctas"><a class="btn btn-line" href="demos/sample-bakery/">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like the bakery demo (warm and friendly)">I want one like this</button></div>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -538,7 +630,7 @@
     e.preventDefault();
     if (!check()) return;
     const d = Object.fromEntries(new FormData(form));
-    const text = `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}. You can reach me at ${d.contact}.`;
+    const text = `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}.${d.style ? ' Style I like: ' + d.style + '.' : ''} You can reach me at ${d.contact}.`;
     const fallback = `<a href="sms:${SMS}?&body=${encodeURIComponent(text)}">text 825-461-5061</a> or <a href="mailto:${EMAIL}?subject=${encodeURIComponent('Website preview for ' + d.business)}&body=${encodeURIComponent(text)}">email me</a>`;
     if (!KEY) {
       say('warn', `Your messages app should open with your request filled in. Tap send there to reach me. Nothing opened? ${fallback}.`);
@@ -564,6 +656,22 @@
     if (a.dataset.need) form.elements.need.value = a.dataset.need;
     setTimeout(() => form.elements.name.focus({ preventScroll: true }), 450);
   }));
+
+  // "I want one like this": carry the chosen style into the form, then put the cursor in it
+  const picked = document.getElementById('picked'), styleIn = document.getElementById('f-style');
+  function setStyle(v) {
+    styleIn.value = v; picked.hidden = !v; document.getElementById('picked-name').textContent = v;
+    document.querySelectorAll('.pick').forEach((b) => {
+      const on = b.dataset.style === v;
+      b.setAttribute('aria-pressed', on); b.textContent = on ? 'Picked. Finish above' : 'I want one like this';
+    });
+  }
+  document.querySelectorAll('.pick').forEach((b) => b.addEventListener('click', () => {
+    setStyle(b.dataset.style); form.elements.need.value = 'A new website';
+    form.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    setTimeout(() => form.elements.name.focus({ preventScroll: true }), 500);
+  }));
+  document.getElementById('unpick').addEventListener('click', () => setStyle(''));
 
   // concept demo: listing rows light up as the matching part of the site appears
   const demo = document.getElementById('demo-run'), rows = demo.querySelectorAll('.src li');
