@@ -23,6 +23,8 @@
 <link rel="canonical" href="https://southsites.ca/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1013'/%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%23ffc83d'/%3E%3Cpath d='M20.6 11.6c-.9-1.5-2.6-2.4-4.6-2.4-2.6 0-4.4 1.4-4.4 3.3 0 4.5 9.4 2.5 9.4 7.3 0 2-1.9 3.4-4.7 3.4-2.2 0-4-.9-5-2.6' fill='none' stroke='%231a1405' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="image" href="demos/sample-realty/frames/d/f000.webp" media="(min-aspect-ratio: 9/10)" fetchpriority="high">
+<link rel="preload" as="image" href="demos/sample-realty/frames/m/f000.webp" media="(max-aspect-ratio: 9/10)" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -35,624 +37,409 @@
     color-scheme: dark;
     --bg: #0e1013; --surface: #16191e; --surface-2: #1d2128; --field: #111419;
     --line: rgba(255, 255, 255, 0.1); --line-strong: rgba(255, 255, 255, 0.2);
-    --ink: #f2efe6; --muted: #b0b4bb; --faint: #8a8f98;
+    --ink: #f2efe6; --muted: #b8bcc3; --faint: #8f949c;
     --accent: #ffc83d; --accent-hover: #ffd76b; --accent-ink: #1a1405;
     --ok: #57d491; --err: #ff9d8c;
     --display: "Archivo", "Arial Narrow", system-ui, sans-serif; --body: "Figtree", system-ui, sans-serif;
     --r-lg: 22px; --r-md: 14px; --r-sm: 10px;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: clip; }
   a { color: inherit; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
   .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-  /* background: fine grid fading out behind the hero, soft glow behind the form */
-  body { position: relative; isolation: isolate; }
-  .backdrop { position: absolute; inset: 0 0 auto; height: 1100px; z-index: -1; pointer-events: none; overflow: hidden; }
-  .backdrop::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 60% 25%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 60% 25%, #000 20%, transparent 75%); }
-  .backdrop::after { content: ""; position: absolute; width: 900px; height: 700px; right: -180px; top: -120px; background: radial-gradient(closest-side, rgba(255, 200, 61, .13), transparent); }
+  .skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--accent); color: var(--accent-ink); padding: 10px 16px; border-radius: 10px; font-weight: 700; }
+  .skip:focus { top: 12px; }
 
   /* buttons */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 12px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; transition: background-color .18s, color .18s, border-color .18s, transform .12s; }
   .btn:active { transform: scale(.97); }
   .btn-main { background: var(--accent); color: var(--accent-ink); }
   .btn-main:hover { background: var(--accent-hover); }
-  .btn-line { border: 1.5px solid var(--line-strong); color: var(--ink); background: transparent; }
+  .btn-line { border: 1.5px solid var(--line-strong); color: var(--ink); background: rgba(14, 16, 19, .35); backdrop-filter: blur(6px); }
   .btn-line:hover { border-color: var(--ink); }
   .btn svg { width: 18px; height: 18px; flex: none; }
-  .btn .ring { transform-origin: 50% 50%; }
-  .btn:hover .ring { animation: ring .5s ease; }
-  @keyframes ring { 25% { transform: rotate(-14deg); } 50% { transform: rotate(12deg); } 75% { transform: rotate(-6deg); } }
   .btn[disabled] { opacity: .7; cursor: progress; }
   .spin { width: 16px; height: 16px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; display: none; }
   .btn.busy .spin { display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* nav */
-  nav.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 76px; }
+  /* nav over the first screen */
+  nav.top { position: absolute; z-index: 6; left: 0; right: 0; top: 0; }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 76px; }
   .logo { display: inline-flex; align-items: center; gap: 10px; font: 850 23px/1 var(--display); font-stretch: 90%; letter-spacing: -0.01em; text-decoration: none; min-height: 44px; }
-  .logo i { width: 18px; height: 18px; border-radius: 4px; background: var(--accent); display: block; transition: transform .3s; }
-  .logo:hover i { transform: rotate(90deg); }
-  .top .links { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 600; }
-  .top .links a:not(.btn) { text-decoration: none; color: var(--muted); transition: color .15s; padding: 10px 0; }
-  .top .links a:not(.btn):hover { color: var(--ink); }
-  .top .links .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+  .logo i { width: 18px; height: 18px; border-radius: 4px; background: var(--accent); display: block; }
+  nav.top .links { display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 600; }
+  nav.top .links a:not(.btn) { text-decoration: none; color: var(--muted); padding: 10px 0; }
+  nav.top .links a:not(.btn):hover { color: var(--ink); }
+  nav.top .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
 
-  /* hero */
-  .hero { display: grid; grid-template-columns: minmax(0, 1fr) 264px minmax(360px, 380px); grid-template-areas: "copy phone form" "facts phone form"; grid-template-rows: auto 1fr; column-gap: 40px; padding: 28px 0 72px; min-height: calc(100svh - 76px); align-content: center; }
-  .copy { grid-area: copy; padding-top: 18px; }
-  h1 { font: 900 clamp(46px, 6vw, 80px)/.88 var(--display); font-stretch: 64%; text-transform: uppercase; letter-spacing: -0.01em; margin: 0 0 26px; }
-  .where { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px; font-size: 16px; font-weight: 600; color: var(--ink); }
+  /* the flight: one sticky canvas behind the first screen and the realty sample */
+  .fly { position: relative; }
+  .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #2a2a28 center / cover no-repeat; }
+  .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10, 12, 15, .9) 0%, rgba(10, 12, 15, .62) 55%, rgba(10, 12, 15, .5) 100%); pointer-events: none; }
+  .hero { position: relative; z-index: 3; margin-top: -100vh; margin-top: -100svh; min-height: 100vh; min-height: 100svh; display: grid; align-items: center; }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 390px); gap: 48px; align-items: center; padding: 96px 0 56px; }
+  .where { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 20px; font-size: 16px; font-weight: 600; }
   .where::before { content: ""; width: 26px; height: 2px; background: var(--accent); }
-  .lead { font-size: 19px; line-height: 1.5; color: var(--muted); max-width: 30ch; margin: 0; }
-  .facts { grid-area: facts; align-self: start; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 22px; margin: 40px 0 0; padding: 26px 0 0; list-style: none; border-top: 1px solid var(--line); }
-  .facts b { display: block; font: 850 40px/1 var(--display); font-stretch: 80%; color: var(--ink); margin-bottom: 6px; }
-  .facts span { font-size: 15px; color: var(--muted); }
+  h1 { font: 900 clamp(48px, 7vw, 96px)/.88 var(--display); font-stretch: 64%; text-transform: uppercase; letter-spacing: -0.01em; margin: 0 0 24px; text-wrap: balance; }
+  .lead { font-size: 20px; line-height: 1.5; color: #d9dbde; max-width: 32ch; margin: 0; }
+  .facts { display: flex; flex-wrap: wrap; gap: 14px 34px; margin: 30px 0 0; padding: 0; list-style: none; }
+  .facts b { display: block; font: 850 38px/1 var(--display); font-stretch: 80%; }
+  .facts span { font-size: 14.5px; color: var(--muted); }
+  .hero-ctas { display: none; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
 
   /* form */
-  form.quote { grid-area: form; align-self: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: grid; gap: 14px; box-shadow: 0 30px 80px -40px rgba(255, 200, 61, .22); }
+  form.quote { background: rgba(22, 25, 30, .92); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; display: grid; gap: 13px; box-shadow: 0 30px 80px -40px rgba(0, 0, 0, .8); scroll-margin-top: 20px; }
   form.quote h2 { font: 850 30px/1.05 var(--display); font-stretch: 85%; margin: 0; }
   form.quote .note { margin: -6px 0 2px; font-size: 15px; color: var(--muted); }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .field { display: grid; gap: 6px; align-content: start; }
-  .field label { font-size: 14px; font-weight: 600; color: var(--ink); }
-  .field label small { font-weight: 500; color: var(--faint); font-size: 13px; }
-  input, select { width: 100%; min-height: 48px; background: var(--field); border: 1.5px solid #2c323c; border-radius: var(--r-sm); color: var(--ink); font: 400 16px var(--body); padding: 10px 14px; transition: border-color .15s, background-color .15s; }
+  .field label { font-size: 14px; font-weight: 600; }
+  input, select { width: 100%; min-height: 48px; background: var(--field); border: 1.5px solid #2c323c; border-radius: var(--r-sm); color: var(--ink); font: 400 16px var(--body); padding: 10px 14px; }
   select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23b0b4bb' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
-  input:hover, select:hover { border-color: #3c4450; }
-  input:focus, select:focus { border-color: var(--accent); background-color: #14181e; outline: none; }
+  input:focus, select:focus { border-color: var(--accent); outline: none; }
   input::placeholder { color: #8a909a; }
   .field.bad input { border-color: var(--err); }
   .err { display: none; font-size: 13.5px; color: var(--err); font-weight: 600; }
   .field.bad .err { display: block; }
   .hp { display: none; }
-  .picked { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 4px 6px 4px 14px; border-radius: var(--r-sm); background: rgba(255, 200, 61, .09); border: 1px solid rgba(255, 200, 61, .35); font-size: 14.5px; }
-  .picked[hidden] { display: none; }
-  .picked .linkbtn { font-size: 14px; }
   form.quote .btn { width: 100%; min-height: 54px; font-size: 17px; }
   .status { display: none; padding: 14px 16px; border-radius: var(--r-md); font-size: 15.5px; line-height: 1.5; }
   .status.show { display: block; }
   .status.ok { background: rgba(87, 212, 145, .1); color: var(--ok); }
-  .status.warn { background: rgba(255, 200, 61, .08); color: var(--ink); border: 1px solid rgba(255, 200, 61, .3); }
+  .status.warn { background: rgba(255, 200, 61, .08); border: 1px solid rgba(255, 200, 61, .3); }
   .status.bad { background: rgba(255, 157, 140, .1); color: var(--err); }
-  .status a { font-weight: 700; }
+  .status a { color: inherit; font-weight: 700; }
   .small { font-size: 13.5px; color: var(--faint); margin: 0; text-align: center; }
-  .small a { color: var(--ink); text-underline-offset: 3px; display: inline-block; padding: 14px 0; margin: -14px 0; }
+  .small a { color: var(--ink); text-underline-offset: 3px; }
   form.quote.done .hide-done { display: none; }
 
-  /* sections */
-  section { padding: 112px 0; border-top: 1px solid var(--line); }
-  h2.big { font: 900 clamp(40px, 5.2vw, 68px)/.95 var(--display); font-stretch: 72%; text-transform: uppercase; letter-spacing: -0.005em; margin: 0 0 18px; max-width: 16ch; }
-  .intro { font-size: 18.5px; color: var(--muted); max-width: 54ch; margin: 0 0 52px; }
-  .head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 52px; }
-  .head .intro { margin: 0; }
+  /* over the flight: first line, then a realtor's site fades in */
+  .cap { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 11vh; max-width: 620px; opacity: 0; transform: translateY(20px); transition: opacity .45s, transform .45s; pointer-events: none; }
+  .cap.on { opacity: 1; transform: none; }
+  .cap h2 { font: 900 clamp(40px, 6.4vw, 84px)/.9 var(--display); font-stretch: 66%; text-transform: uppercase; margin: 0 0 12px; text-shadow: 0 2px 30px rgba(0, 0, 0, .45); }
+  .cap p { margin: 0; font-size: 18px; color: #eceae4; text-shadow: 0 1px 14px rgba(0, 0, 0, .7); max-width: 40ch; }
+  .realty { position: absolute; inset: 0; opacity: 0; transition: opacity .5s; pointer-events: none; font-family: Georgia, "Times New Roman", serif; }
+  .realty.on { opacity: 1; pointer-events: auto; }
+  .r-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px max(20px, calc((100vw - 1180px) / 2)); background: linear-gradient(180deg, rgba(8, 10, 14, .7), transparent); }
+  .r-brand { font-size: 30px; letter-spacing: .01em; color: #fbf7ee; text-shadow: 0 1px 12px rgba(0, 0, 0, .4); }
+  .r-nav { display: flex; align-items: center; gap: 22px; font: 600 14.5px var(--body); color: #efe9de; }
+  .r-btn { display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border-radius: 99px; background: #d8b47a; color: #1d1407; font: 700 15px var(--body); text-decoration: none; }
+  .r-card { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 9vh; width: min(420px, 100% - 40px); background: rgba(13, 17, 23, .82); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .14); border-radius: 18px; padding: 22px 24px; color: #f4efe6; }
+  .r-card small { display: inline-block; font: 700 12.5px var(--body); color: #f3d6a4; margin-bottom: 8px; }
+  .r-card h3 { font-size: 30px; font-weight: 400; line-height: 1.05; margin: 0 0 10px; }
+  .r-card p { margin: 0 0 14px; font: 500 15px var(--body); color: #d9d2c6; }
+  .r-card .price { font-size: 34px; color: #d8b47a; margin: 0 0 2px; }
+  .r-card .pnote { font: 500 13px var(--body); color: #b9b2a6; margin: 0 0 16px; }
+  .r-tag { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 96px; font: 700 13px var(--body); background: rgba(8, 10, 14, .7); padding: 8px 12px; border-radius: 99px; color: #f3d6a4; }
+  .fly-track { height: 250vh; }
 
-  /* steps */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); list-style: none; padding: 0; margin: 0; counter-reset: s; }
-  .steps li { counter-increment: s; padding: 30px 32px 6px 0; border-top: 2px solid var(--line-strong); position: relative; }
-  .steps li + li { padding-left: 32px; }
-  .steps li::before { content: counter(s); display: block; font: 900 64px/1 var(--display); font-stretch: 70%; color: var(--accent); margin-bottom: 18px; }
-  .steps li:first-child { border-top-color: var(--accent); }
-  .steps h3 { font: 800 24px/1.2 var(--display); font-stretch: 90%; margin: 0 0 10px; }
-  .steps p { color: var(--muted); margin: 0; max-width: 34ch; }
+  /* sticky call to action, after the first screen */
+  .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .82); backdrop-filter: blur(10px); border: 1px solid var(--line); transform: translateY(130%); opacity: 0; transition: transform .35s, opacity .35s; }
+  .dock.on { transform: none; opacity: 1; }
+  .dock .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+  .dock .ic { width: 44px; padding: 0; }
 
-  /* hero phone: a live sample site */
-  .hero-phone { grid-area: phone; align-self: center; margin: 0; display: grid; justify-items: center; gap: 12px; }
-  .sample { font-size: 13.5px; font-weight: 700; padding: 5px 12px; border-radius: 99px; background: var(--surface-2); border: 1px solid var(--line-strong); color: var(--ink); }
-  .hero-phone figcaption { font-size: 13.5px; color: var(--faint); text-align: center; }
-  .linkbtn { background: none; border: 0; color: var(--ink); font: 600 15px var(--body); cursor: pointer; min-height: 44px; padding: 0 4px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--accent); transition: text-underline-offset .15s; }
-  .linkbtn:hover { text-underline-offset: 7px; }
+  /* "or what about": live sample sites slide in and scroll themselves */
+  .morph { position: relative; height: 220vh; }
+  .m-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 30%, #1b1f26, var(--bg) 70%); }
+  .m-title { position: absolute; top: 9vh; left: 0; right: 0; text-align: center; font: 900 clamp(44px, 8vw, 120px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0; padding: 0 20px; transition: opacity .3s; }
+  .m-title span { color: var(--accent); }
+  .win { position: absolute; left: 50%; top: 56%; width: min(1040px, 88vw); height: min(620px, 64vh); transform: translate(-50%, -50%); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); will-change: transform, opacity; }
+  .win .wbar { height: 36px; background: #e9e6df; display: flex; align-items: center; gap: 8px; padding: 0 14px; }
+  .win .wbar i { width: 11px; height: 11px; border-radius: 50%; background: #cfc9bd; }
+  .win .wbar b { margin-left: 10px; flex: 1; max-width: 420px; background: #fff; border-radius: 99px; font: 600 12.5px var(--body); color: #55524b; padding: 5px 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .win iframe { display: block; width: 100%; height: calc(100% - 36px); border: 0; pointer-events: none; background: #fff; }
+  .win .wlabel { position: absolute; right: 12px; bottom: 12px; font: 700 13px var(--body); background: rgba(14, 16, 19, .86); color: var(--ink); padding: 7px 12px; border-radius: 99px; }
+  .win.w2 { opacity: 0; }
+  .m-links { position: absolute; bottom: 4vh; left: 0; right: 0; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 0 20px; }
+  .m-links a { font-size: 15px; font-weight: 600; color: var(--muted); text-underline-offset: 4px; padding: 10px 4px; }
 
-  .phone { width: 264px; border-radius: 40px; padding: 9px; background: #050608; box-shadow: 0 0 0 1px var(--line-strong), 0 40px 90px -30px rgba(0, 0, 0, .8); }
-  .screen { border-radius: 32px; overflow: hidden; background: #f7f4ec; color: #1c1d1f; font-size: 12.5px; line-height: 1.4; height: 520px; display: flex; flex-direction: column; }
-  .screen .bar { height: 30px; display: flex; justify-content: center; align-items: center; }
-  .screen .bar i { width: 84px; height: 22px; border-radius: 12px; background: #050608; display: block; }
-  .s-body { padding: 6px 14px 14px; display: grid; gap: 10px; }
-  .s-head { display: flex; justify-content: space-between; align-items: center; }
-  .s-head { gap: 8px; }
-  .s-head b { font: 800 14px/1.1 var(--display); font-stretch: 80%; }
-  .s-open { white-space: nowrap; font-size: 10.5px; font-weight: 700; color: #0f6b3e; background: #d9f2e3; padding: 4px 9px; border-radius: 99px; }
-  .s-hero { background: #1f3b3a; color: #f7f4ec; border-radius: 16px; padding: 18px 16px; display: grid; gap: 12px; }
-  .s-hero strong { font: 900 25px/1 var(--display); font-stretch: 72%; text-transform: uppercase; }
-  .s-call { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; background: #f2b84b; color: #1f1608; border: 0; border-radius: 10px; font: 700 14px var(--body); cursor: pointer; transition: transform .12s, filter .15s; }
-  .s-call:hover { filter: brightness(1.05); } .s-call:active { transform: scale(.97); }
-  .s-call svg { width: 16px; height: 16px; }
-  .s-call:hover svg { animation: ring .5s ease; }
-  .s-called { font-size: 12px; min-height: 0; color: #f7f4ec; opacity: .9; }
-  .s-called:empty { display: none; }
-  .s-rating { display: flex; gap: 10px; align-items: center; }
-  .s-rating svg { width: 22px; height: 22px; color: #c98a12; flex: none; }
-  .s-rating b { display: block; font-size: 12.5px; }
-  .s-rating span { color: #5d594f; font-size: 12px; }
-  .s-card { background: #fff; border: 1px solid #e6e0d3; border-radius: 12px; padding: 11px 13px; }
-  .s-card h4 { margin: 0 0 6px; font-size: 12px; font-weight: 700; color: #6b6558; }
-  .s-hours { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; margin: 0; }
-  .s-hours dd { margin: 0; text-align: right; }
-  .s-hours .today { font-weight: 800; color: #0f6b3e; }
-  .s-open.closed { color: #8a2a1d; background: #f6dcd6; }
-  .s-svc { display: flex; flex-wrap: wrap; gap: 6px; }
-  .s-svc span { font-size: 11.5px; font-weight: 600; padding: 4px 9px; border-radius: 99px; background: #ece6d8; color: #3b3a35; }
-  .s-ph { color: #4b4840; font-style: italic; display: block; margin-top: 2px; }
-  .s-stars { color: #8a5a00; font-size: 11.5px; font-weight: 700; }
-  .s-map { height: 70px; border-radius: 12px; overflow: hidden; background: #e4ecdf; position: relative; }
-  .s-map span { position: absolute; right: 8px; bottom: 8px; font-size: 11.5px; font-weight: 700; background: #1f3b3a; color: #f7f4ec; padding: 4px 9px; border-radius: 99px; }
-  .s-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  /* features */
-  .feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .feat-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; display: flex; flex-direction: column; gap: 10px; }
-  .feat-card h3 { font: 800 21px/1.2 var(--display); font-stretch: 88%; margin: 6px 0 0; }
-  .feat-card p { margin: 0; color: var(--muted); font-size: 15.5px; }
-  .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(255, 200, 61, .12); color: var(--accent); }
-  .ic svg { width: 22px; height: 22px; }
-  .feat-card:hover .ic svg { animation: ring .5s ease; }
-  .mini { margin-top: auto; padding-top: 14px; }
-  .mini-call span { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 10px; }
-  .mini-call svg { width: 16px; height: 16px; }
-  .mini-hours { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14.5px; color: var(--ok); }
-  .mini-hours i { width: 10px; height: 10px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(87, 212, 145, .18); }
-  .mini-stars { display: flex; gap: 3px; color: var(--accent); }
-  .mini-stars svg { width: 20px; height: 20px; fill: currentColor; }
-  .mini-map { height: 64px; border-radius: 12px; overflow: hidden; background: var(--surface-2); }
-  .mini-map svg { width: 100%; height: 100%; display: block; }
-  .f-text { grid-column: 1 / -1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; border-style: dashed; border-color: var(--line-strong); }
-  .f-text .from { margin-top: 12px; color: var(--ink); }
-  .sms { background: var(--bg); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: grid; gap: 10px; }
-  .sms-tag { justify-self: start; font-size: 12.5px; font-weight: 700; color: var(--faint); }
-  .sms p { margin: 0; max-width: 85%; padding: 10px 14px; border-radius: 16px; font-size: 14.5px; line-height: 1.4; }
-  .sms .in { background: var(--surface-2); color: var(--ink); justify-self: start; border-bottom-left-radius: 4px; }
-  .sms .out { background: var(--accent); color: var(--accent-ink); justify-self: end; border-bottom-right-radius: 4px; }
+  /* real work */
+  .real { position: relative; height: 140vh; }
+  .r-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+  .r-stage .wrap { height: 100%; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 48px; align-items: center; }
+  .real h2 { font: 900 clamp(44px, 6vw, 88px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0 0 18px; }
+  .real p { color: var(--muted); font-size: 18px; margin: 0 0 24px; max-width: 34ch; }
+  .tagreal { display: inline-flex; font-size: 13.5px; font-weight: 700; color: var(--ok); background: rgba(87, 212, 145, .1); border: 1px solid rgba(87, 212, 145, .35); padding: 5px 12px; border-radius: 99px; margin-bottom: 18px; }
+  .ek { position: relative; height: min(640px, 78vh); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); }
+  .ek .wbar { height: 36px; background: #e9e6df; display: flex; align-items: center; gap: 8px; padding: 0 14px; position: relative; z-index: 2; }
+  .ek .wbar i { width: 11px; height: 11px; border-radius: 50%; background: #cfc9bd; }
+  .ek .wbar b { margin-left: 10px; background: #fff; border-radius: 99px; font: 600 12.5px var(--body); color: #55524b; padding: 5px 14px; }
+  .ek picture, .ek img { display: block; width: 100%; height: auto; }
+  .ek .scroller { position: absolute; left: 0; right: 0; top: 36px; will-change: transform; }
 
-  /* work */
-  .work { display: grid; grid-template-columns: 1fr 1fr; gap: 44px 28px; }
-  .work-card { display: grid; gap: 20px; align-content: start; }
-  .work-card.wide { grid-column: 1 / -1; grid-template-columns: 1.5fr 1fr; gap: 36px; align-items: center; }
-  .frame { display: block; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); background: var(--surface); text-decoration: none; transition: border-color .2s, transform .3s cubic-bezier(.2, .7, .2, 1); }
-  .frame:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .frame img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
-  .frame:hover img { transform: scale(1.025); }
-  .frame-bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
-  .frame-bar i { width: 9px; height: 9px; border-radius: 50%; background: #3a404a; }
-  .frame-bar b { margin-left: 10px; font: 500 13px var(--body); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .work-body h3 { font: 800 26px/1.15 var(--display); font-stretch: 88%; margin: 10px 0 6px; }
-  .work-body p { margin: 0 0 18px; color: var(--muted); max-width: 46ch; }
-  .kind { display: inline-flex; font-size: 13.5px; font-weight: 700; padding: 5px 12px; border-radius: 99px; background: rgba(87, 212, 145, .12); color: var(--ok); }
-  .kind-demo { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line-strong); }
-  .work-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
-  .work-ctas .btn { min-height: 48px; padding: 0 18px; font-size: 15px; }
-  .pick[aria-pressed="true"] { background: var(--ok); color: #06210f; }
-
-  /* pricing */
-  .prices { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; align-items: stretch; }
-  .plan { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px; display: flex; flex-direction: column; gap: 14px; background: var(--surface); }
-  .plan.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); padding: 36px; }
-  .plan.main :focus-visible { outline-color: var(--accent-ink); }
-  .plan h3 { font: 800 22px/1.2 var(--display); font-stretch: 90%; margin: 0; }
-  .plan .amt { font: 900 64px/1 var(--display); font-stretch: 75%; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .plan.main .amt { font-size: 88px; }
-  .plan .amt small { font: 600 16px var(--body); letter-spacing: 0; opacity: .78; }
-  .plan .amt s { font: 700 26px var(--display); opacity: .55; text-decoration-thickness: 2px; }
-  .plan .sub { margin: 0; font-size: 15.5px; color: var(--muted); }
-  .plan.main .sub { color: var(--accent-ink); font-weight: 600; }
-  .feat { list-style: none; margin: 8px 0 6px; padding: 0; display: grid; gap: 11px; }
-  .feat li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 15.5px; line-height: 1.45; }
-  .feat svg { width: 22px; height: 22px; margin-top: 0; }
-  .feat .k { font-weight: 700; }
-  .plan:not(.main) .feat svg { color: var(--accent); }
-  .plan:not(.main) .feat li { color: var(--muted); }
-  .plan:not(.main) .feat .k { color: var(--ink); }
-  .plan .btn { margin-top: auto; }
-  .plan.main .btn { background: var(--accent-ink); color: var(--accent); }
-  .plan.main .btn:hover { background: #2c2210; }
-  .addon { margin-top: 18px; display: grid; grid-template-columns: 1fr auto auto; gap: 16px 40px; align-items: center; padding: 26px 30px; border: 1px dashed var(--line-strong); border-radius: var(--r-lg); }
-  .addon h3 { font: 800 20px/1.2 var(--display); font-stretch: 90%; margin: 0 0 6px; }
-  .addon p { margin: 0; color: var(--muted); font-size: 15.5px; max-width: 62ch; }
-  .addon-amt b { display: block; font: 900 40px/1 var(--display); font-stretch: 75%; }
-  .addon-amt span { font-size: 14px; color: var(--muted); }
-  .fine { margin: 22px 0 0; font-size: 15px; color: var(--faint); }
-
-  /* about */
-  .me { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 56px; align-items: start; }
-  .letter { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 44px 48px; }
-  .letter h2 { font: 850 36px/1.1 var(--display); font-stretch: 85%; margin: 0 0 18px; }
-  .letter p { margin: 0 0 16px; max-width: 58ch; color: #d6d4cd; font-size: 18px; }
-  .sig { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
-  .mono { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font: 900 19px var(--display); font-stretch: 80%; }
-  .sig b { display: block; font: 800 18px/1.2 var(--display); font-stretch: 90%; }
-  .sig div span { font-size: 14.5px; color: var(--muted); }
-  .contact { display: grid; gap: 12px; }
-  .contact h3 { font: 800 24px/1.2 var(--display); font-stretch: 90%; margin: 0 0 4px; }
-  .contact p { margin: 0 0 8px; color: var(--muted); }
-  .contact .btn { justify-content: flex-start; }
-  .contact .btn-line { font-weight: 600; overflow-wrap: anywhere; }
-
-  /* faq */
-  .faq { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  /* people */
+  .people { padding: 110px 0 40px; }
+  .people h2 { font: 900 clamp(48px, 8.5vw, 132px)/.86 var(--display); font-stretch: 62%; text-transform: uppercase; margin: 0 0 22px; text-wrap: balance; }
+  .people h2 span { color: var(--accent); }
+  .people .intro { font-size: 20px; color: var(--muted); max-width: 46ch; margin: 0 0 44px; }
+  .faces { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+  .faces li { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--surface); }
+  .faces li:nth-child(even) { transform: translateY(34px); }
+  .faces img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .faces span { position: absolute; left: 10px; bottom: 10px; font-size: 13.5px; font-weight: 700; background: rgba(14, 16, 19, .82); padding: 6px 11px; border-radius: 99px; }
+  .credit { font-size: 13px; color: var(--faint); margin: 56px 0 0; }
+  .close { padding: 80px 0 100px; border-top: 1px solid var(--line); margin-top: 60px; }
+  .close .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .close h3 { font: 850 clamp(34px, 4vw, 52px)/.95 var(--display); font-stretch: 72%; margin: 0 0 16px; }
+  .close p { color: var(--muted); margin: 0 0 22px; }
+  .close .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .steps li::before { content: counter(s); font: 850 30px/1 var(--display); font-stretch: 80%; color: var(--accent); }
+  .steps b { display: block; margin-bottom: 2px; }
+  .steps span { color: var(--muted); font-size: 15.5px; }
   details { border-bottom: 1px solid var(--line); }
-  summary { cursor: pointer; font: 750 20px/1.3 var(--display); font-stretch: 92%; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; min-height: 44px; }
+  summary { cursor: pointer; list-style: none; padding: 16px 0; font-weight: 700; min-height: 44px; }
   summary::-webkit-details-marker { display: none; }
-  summary:hover { color: #fff; }
-  .plus { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--line-strong); position: relative; transition: transform .25s, background-color .2s, border-color .2s; }
-  .plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; margin: -1px 0 0 -6px; background: var(--accent); border-radius: 2px; }
-  .plus::after { transform: rotate(90deg); }
-  summary:hover .plus { border-color: var(--accent); }
-  details[open] .plus { transform: rotate(45deg); background: var(--surface-2); }
-  details p { color: var(--muted); margin: -6px 0 22px; max-width: 52ch; }
+  details p { margin: 0 0 16px; color: var(--muted); }
+  footer { border-top: 1px solid var(--line); padding: 30px 0 110px; color: var(--faint); font-size: 14px; }
+  footer .wrap { display: grid; gap: 12px; }
+  footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 26px; color: var(--muted); }
+  footer a { color: var(--ink); }
 
-  /* final */
-  .final { text-align: center; padding: 120px 0; }
-  .final h2.big { margin-inline: auto; max-width: 22ch; }
-  .final .intro { margin: 0 auto 36px; }
-  .final .ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
-  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 15px; }
-  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 32px; }
-  footer nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-  footer a { text-decoration: none; padding: 10px 0; }
-  footer a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  /* still version for reduced motion and no JS */
+  .stills { display: none; }
 
-  @media (max-width: 1180px) {
-    .hero { grid-template-columns: minmax(0, 1fr) minmax(340px, 380px); grid-template-areas: "copy form" "facts form" "phone form"; }
-    .hero-phone { display: none; }
-    .feats { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 1000px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 28px; padding: 92px 0 40px; }
+    .hero-ctas { display: flex; }
+    .r-stage .wrap { grid-template-columns: 1fr; gap: 22px; align-content: center; }
+    .real p { margin-bottom: 14px; }
+    .ek { height: 56vh; }
+    .faces { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .faces li:nth-child(even) { transform: none; }
+    .faces li:last-child { grid-column: span 2; aspect-ratio: 16 / 10; }
+    .close .grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 900px) {
-    .top .links a:not(.btn) { display: none; }
-    nav.top { height: 64px; }
-    .hero { grid-template-columns: 1fr; grid-template-areas: "copy" "form" "phone" "facts"; grid-template-rows: none; padding: 8px 0 56px; min-height: 0; }
-    .hero-phone { display: grid; margin-top: 36px; }
-    .copy { padding-top: 6px; }
-    h1 { margin-bottom: 16px; font-stretch: 62%; }
-    .lead { font-size: 18px; margin-bottom: 24px; }
-    form.quote { padding: 22px 18px; }
-    form.quote h2 { font-size: 26px; }
-    .facts { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; padding-top: 22px; }
-    .facts b { font-size: 32px; }
-    .facts span { font-size: 14.5px; display: block; line-height: 1.35; }
-    section { padding: 60px 0; }
-    .head { grid-template-columns: 1fr; gap: 0; margin-bottom: 36px; }
-    .head h2.big { margin-bottom: 14px; }
-    .intro { margin-bottom: 36px; font-size: 17px; }
-    .steps { grid-template-columns: 1fr; gap: 28px; }
-    .steps li, .steps li + li { padding: 22px 0 0; }
-    .steps li::before { font-size: 52px; margin-bottom: 12px; }
-    .feats { grid-template-columns: 1fr; }
-    .f-text { grid-template-columns: 1fr; gap: 22px; }
-    .work { grid-template-columns: 1fr; gap: 48px; }
-    .work-card.wide { grid-template-columns: 1fr; gap: 20px; }
-    .work-ctas .btn { flex: 1 1 auto; }
-    .prices { grid-template-columns: 1fr; }
-    .addon { grid-template-columns: 1fr; padding: 24px 22px; gap: 14px; }
-    .plan.main { order: -1; padding: 30px 24px; }
-    .plan.main .amt { font-size: 76px; }
-    .plan { padding: 26px 22px; }
-    .me { grid-template-columns: 1fr; gap: 28px; }
-    .letter { padding: 30px 22px; }
-    .letter h2 { font-size: 30px; }
-    .letter p { font-size: 17px; }
-    .faq { grid-template-columns: 1fr; }
-    summary { font-size: 18.5px; }
-    .final { padding: 80px 0; }
-    .final .ctas .btn { width: 100%; }
-  }
-  @media (max-width: 420px) {
-    .row2:not(.keep) { grid-template-columns: 1fr; }
+  @media (max-width: 700px) {
+    body { font-size: 16.5px; }
     .wrap { width: calc(100% - 32px); }
+    nav.top .links a:not(.btn) { display: none; }
+    .veil { background: linear-gradient(180deg, rgba(10, 12, 15, .86) 0%, rgba(10, 12, 15, .7) 60%, rgba(10, 12, 15, .82) 100%); }
+    .lead { font-size: 18px; }
+    .facts b { font-size: 32px; }
+    .row2 { grid-template-columns: 1fr; }
+    form.quote { padding: 22px 18px; }
+    .dock { left: 12px; right: 12px; top: auto; bottom: calc(12px + env(safe-area-inset-bottom)); justify-content: stretch; }
+    .dock .btn:first-child { flex: 1; }
+    .dock.on { transform: none; }
+    .dock { transform: translateY(130%); }
+    .r-nav a:not(.r-btn) { display: none; }
+    .r-brand { font-size: 24px; }
+    .r-card { bottom: 104px; padding: 18px; }
+    .r-card h3 { font-size: 25px; }
+    .r-tag { right: auto; left: 20px; top: 80px; bottom: auto; }
+    .cap { left: 20px; right: 20px; bottom: 110px; }
+    .win { width: 88vw; height: 54vh; top: 51%; }
+    .m-links { bottom: 12vh; }
+    .m-links a:last-child { display: none; }
+    .r-card { width: auto; right: 20px; bottom: 96px; }
+    .r-card p:not(.pnote), .r-card .pnote { display: none; }
+    .r-card .price { font-size: 28px; margin-bottom: 12px; }
+    .m-title { top: 7vh; }
+    .people { padding-top: 80px; }
+    .hero .wrap { padding-top: 84px; gap: 22px; }
+    h1 { margin-bottom: 18px; }
+    .hero-ctas { display: grid; grid-template-columns: 1fr 1fr; margin-top: 20px; }
+    .hero-ctas .btn { padding: 0 10px; font-size: 15px; }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
+    .facts b { font-size: 28px; }
+    .facts span { font-size: 12.5px; line-height: 1.3; display: block; }
+    .faces { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin: 0 -16px; padding: 0 16px 6px; scrollbar-width: none; }
+    .faces li, .faces li:last-child { flex: 0 0 64vw; aspect-ratio: 4 / 5; scroll-snap-align: start; grid-column: auto; }
+    .people .intro { margin-bottom: 28px; }
+    .credit { margin-top: 18px; }
+    .close { padding: 56px 0 70px; margin-top: 40px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .fly-track, .morph, .real { height: auto; }
+    .stage, .m-stage, .r-stage { position: relative; }
+    .stage { height: 100svh; }
+    .cap, .realty { display: none; }
+    .m-stage { height: auto; padding: 80px 0; display: block; }
+    .m-title { position: static; margin-bottom: 30px; }
+    .win { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 30px; opacity: 1 !important; }
+    .m-links { position: static; }
+    .r-stage { height: auto; padding: 80px 0; }
+    .stills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 40px 0; }
+    .stills img { width: 100%; height: auto; border-radius: 12px; display: block; }
+    .dock, .cap { transition: none; }
   }
 </style>
 </head>
 <body>
-<div class="backdrop" aria-hidden="true"></div>
-<div class="wrap">
-  <nav class="top" aria-label="Main">
-    <a class="logo" href="#top" aria-label="Southsites home"><i aria-hidden="true"></i>Southsites</a>
+<a class="skip" href="#quote">Skip to the form</a>
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Southsites home"><i aria-hidden="true"></i>Southsites</a>
     <div class="links">
-      <a href="#how">How it works</a>
-      <a href="#features">Features</a>
-      <a href="#work">Work</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#about">About</a>
-      <a href="#faq">Questions</a>
-      <a class="btn btn-main" href="tel:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="ring" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>825-461-5061</a>
+      <a href="#samples">Samples</a>
+      <a href="#work">Real work</a>
+      <a href="#prices">Prices</a>
+      <a class="btn btn-main" href="tel:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>825-461-5061</a>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<div class="dock" id="dock" aria-label="Get a free preview">
+  <a class="btn btn-main" href="#quote" data-focus>Get my free preview</a>
+  <a class="btn btn-line ic" href="sms:+18254615061" aria-label="Text 825-461-5061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></a>
+  <a class="btn btn-line ic" href="tel:+18254615061" aria-label="Call 825-461-5061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
 </div>
 
 <main id="main">
-<div class="wrap">
-  <header class="hero" id="top">
-    <div class="copy">
-      <p class="where">Websites for Edmonton small businesses</p>
-      <h1>Your site is already built.</h1>
-      <p class="lead">Look at it first, then decide. Free preview from your Google listing. Like it? $150, then $20 a month.</p>
+<div class="fly" id="fly">
+  <div class="stage" id="stage">
+    <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, across the river valley, down a suburban street to one house and around it"></canvas>
+    <div class="veil" id="veil"></div>
+    <div class="cap" id="cap1"><h2>Here's what a site can feel like.</h2><p>Keep scrolling. This is a sample we made for a made-up realtor.</p></div>
+    <div class="realty" id="realty" aria-hidden="true">
+      <div class="r-bar"><span class="r-brand">Sample Realty</span><div class="r-nav"><a>Listings</a><a>Neighbourhoods</a><a>About</a><a class="r-btn" href="demos/sample-realty/#showing" tabindex="-1">Book a showing</a></div></div>
+      <div class="r-card">
+        <small>Sample listing, not a real home</small>
+        <h3>Two storeys on a quiet street.</h3>
+        <p>4 bedrooms, 3.5 baths, 2,250 sq ft, double garage and a fenced backyard.</p>
+        <div class="price">$649,900</div>
+        <p class="pnote">Sample price for this concept demo.</p>
+        <a class="r-btn" href="demos/sample-realty/" tabindex="-1">See the full sample site</a>
+      </div>
+      <span class="r-tag">Sample site by Southsites. Sample Realty is made up.</span>
     </div>
+  </div>
 
-    <form class="quote" id="quote" action="https://api.web3forms.com/submit" method="POST" novalidate>
-      <h2 class="hide-done">Get your free preview</h2>
-      <p class="note hide-done">Tell me about your shop. I'll build a preview and send you the link.</p>
-      <!-- paste the Web3Forms access key into value="" below. empty = the form opens a text message to Gabriel instead -->
-      <input type="hidden" name="access_key" value="" id="w3f-key">
-      <input type="hidden" name="subject" value="Southsites preview request">
-      <input type="hidden" name="from_name" value="Southsites website">
-      <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
-      <div class="row2 keep hide-done">
-        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name" aria-describedby="e-name"><span class="err" id="e-name">Add your name so I know who to reply to.</span></div>
-        <div class="field"><label for="f-biz">Business name</label><input id="f-biz" name="business" required autocomplete="organization" aria-describedby="e-biz"><span class="err" id="e-biz">Add your business name.</span></div>
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="copy">
+        <p class="where">Websites for Edmonton small businesses</p>
+        <h1>Your site is already built.</h1>
+        <p class="lead">Look at it first, then decide. Free preview from your Google listing. Like it? $150, then $20 a month.</p>
+        <div class="hero-ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a></div>
+        <ul class="facts" aria-label="Prices">
+          <li><b>$0</b><span>to see your preview</span></li>
+          <li><b>$150</b><span>once, to keep it (normally $200)</span></li>
+          <li><b>$20</b><span>a month, hosting and edits</span></li>
+        </ul>
       </div>
-      <div class="field hide-done"><label for="f-contact">Phone or email</label><input id="f-contact" name="contact" required autocomplete="tel" inputmode="email" placeholder="So I can send you the link" aria-describedby="e-contact"><span class="err" id="e-contact">Add a phone number with area code, or an email.</span></div>
-      <div class="field hide-done"><label for="f-need">What do you need?</label>
-        <select id="f-need" name="need">
-          <option>A new website</option>
-          <option>Fix or replace my current site</option>
-          <option>Missed-call text back or AI receptionist</option>
-          <option>Not sure yet, just a question</option>
-        </select>
-      </div>
-      <input type="hidden" name="style" id="f-style" value="">
-      <div class="picked hide-done" id="picked" hidden><span>Style you picked: <b id="picked-name"></b></span><button type="button" class="linkbtn" id="unpick">Remove</button></div>
-      <button class="btn btn-main hide-done" type="submit" id="send"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
-      <div class="status" id="status" role="status" aria-live="polite"></div>
-      <p class="small hide-done" id="how-sent">Free and no obligation. I only use your details to reply.</p>
-    </form>
 
-    <figure class="hero-phone">
-      <span class="sample">Sample site, made-up shop</span>
-      <div class="phone">
-        <div class="screen">
-          <div class="bar" aria-hidden="true"><i></i></div>
-          <div class="s-body">
-            <div class="s-head"><b>Sample Barber Co.</b><span class="s-open" id="s-open">Open now</span></div>
-            <div class="s-hero"><strong>Walk-ins welcome. Fresh cuts all week.</strong><button class="s-call" type="button" id="s-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Tap to call</button><span class="s-called" id="s-called" role="status" aria-live="polite"></span></div>
-            <div class="s-card s-rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span><b>Google rating</b>Your real rating and reviews show here</span></div>
-            <div class="s-card"><h4>Hours</h4><dl class="s-hours" id="s-hours"><dt data-d="1-5">Mon to Fri</dt><dd>9 am to 7 pm</dd><dt data-d="6">Saturday</dt><dd>9 am to 5 pm</dd><dt data-d="0">Sunday</dt><dd>Closed</dd></dl></div>
-            <div class="s-map"><svg viewBox="0 0 260 76" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 52h260M0 20h260M70 0v76M180 0v76" stroke="#fff" stroke-width="7"/><path d="M0 64l260-40" stroke="#cfdcc8" stroke-width="5"/><path d="M125 18c-6 0-10 4-10 10 0 8 10 18 10 18s10-10 10-18c0-6-4-10-10-10z" fill="#1f3b3a"/><circle cx="125" cy="28" r="3.5" fill="#f2b84b"/></svg><span>Directions</span></div>
-          </div>
+      <form class="quote" id="quote" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <h2 class="hide-done">Get your free preview</h2>
+        <p class="note hide-done">Tell me about your shop. I'll build a preview and send you the link.</p>
+        <!-- paste the Web3Forms access key into value="" below. empty = the form opens a text message to Gabriel instead -->
+        <input type="hidden" name="access_key" value="" id="w3f-key">
+        <input type="hidden" name="subject" value="Southsites preview request">
+        <input type="hidden" name="from_name" value="Southsites website">
+        <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+        <div class="row2 hide-done">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name" aria-describedby="e-name"><span class="err" id="e-name">Add your name so I know who to reply to.</span></div>
+          <div class="field"><label for="f-biz">Business name</label><input id="f-biz" name="business" required autocomplete="organization" aria-describedby="e-biz"><span class="err" id="e-biz">Add your business name.</span></div>
         </div>
-      </div>
-      <figcaption>Open or closed is live, in Edmonton time.</figcaption>
-    </figure>
-
-    <ul class="facts" aria-label="Prices">
-      <li><b>$0</b><span>to see your preview</span></li>
-      <li><b>$150</b><span>once, to keep it (normally $200)</span></li>
-      <li><b>$20</b><span>a month: hosting, plus edits like hours and photos</span></li>
-    </ul>
+        <div class="field hide-done"><label for="f-contact">Phone or email</label><input id="f-contact" name="contact" required autocomplete="tel" inputmode="email" placeholder="So I can send you the link" aria-describedby="e-contact"><span class="err" id="e-contact">Add a phone number with area code, or an email.</span></div>
+        <div class="field hide-done"><label for="f-need">What do you need?</label>
+          <select id="f-need" name="need">
+            <option>A new website</option>
+            <option>Fix or replace my current site</option>
+            <option>Missed-call text back or AI receptionist</option>
+            <option>Not sure yet, just a question</option>
+          </select>
+        </div>
+        <button class="btn btn-main hide-done" type="submit" id="send"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+        <p class="small hide-done" id="how-sent">Free and no obligation. I only use your details to reply.</p>
+      </form>
+    </div>
   </header>
+  <div class="fly-track" id="track"></div>
+  <div class="wrap stills" aria-label="Stills from the sample realty site">
+    <img src="demos/sample-realty/frames/d/f000.webp" alt="Downtown Edmonton from the air at sunset" loading="lazy" width="1440" height="810">
+    <img src="demos/sample-realty/frames/d/f120.webp" alt="A new suburb with autumn trees" loading="lazy" width="1440" height="810">
+    <img src="demos/sample-realty/frames/d/f172.webp" alt="A two-storey house with a double garage" loading="lazy" width="1440" height="810">
+  </div>
 </div>
 
-<section id="how">
-  <div class="wrap">
-    <div class="head">
-      <h2 class="big">How it works.</h2>
-      <p class="intro">No calls to sit through and nothing to sign up for. You see the real thing before any money moves.</p>
+<section class="morph" id="samples" aria-label="Sample sites">
+  <div class="m-stage">
+    <h2 class="m-title" id="m-title">Or what about <span>a barber?</span></h2>
+    <div class="win w1" id="w1">
+      <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/sample-barber</b></div>
+      <iframe src="demos/sample-barber/" title="Sample Barber Co., a made-up barber shop site" loading="lazy" tabindex="-1"></iframe>
+      <span class="wlabel">Sample site. Sample Barber Co. is made up.</span>
     </div>
-    <ol class="steps">
-      <li><h3>I build a preview</h3><p>From your Google listing: your hours, reviews, services, map and a call button. Usually within a couple of days.</p></li>
-      <li><h3>You look at it</h3><p>On your own phone. Ask for changes, swap in your own photos, or say no thanks.</p></li>
-      <li><h3>Keep it if you like it</h3><p>Pay $150 and it goes live. $20 a month covers hosting and small edits, and you can cancel any month.</p></li>
-    </ol>
+    <div class="win w2" id="w2">
+      <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/sample-bakery</b></div>
+      <iframe src="demos/sample-bakery/" title="Sample Bake House, a made-up bakery site" loading="lazy" tabindex="-1"></iframe>
+      <span class="wlabel">Sample site. Sample Bake House is made up.</span>
+    </div>
+    <div class="m-links"><a href="demos/sample-barber/">Open the barber sample</a><a href="demos/sample-bakery/">Open the bakery sample</a><a href="demos/sample-realty/">Open the realty sample</a></div>
   </div>
 </section>
 
-<section id="features">
-  <div class="wrap">
-    <div class="head">
-      <h2 class="big">More than a page with your name on it.</h2>
-      <p class="intro">A plain web page tells people you exist. These get them to call, show up, and trust you before they walk in.</p>
-    </div>
-    <div class="feats">
-      <article class="feat-card f-call">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>
-        <h3>A big call button, up top</h3>
-        <p>Big, one tap, right at the top of the page. No hunting for your number.</p>
-        <div class="mini mini-call" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call now</span></div>
-      </article>
-      <article class="feat-card f-hours">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-        <h3>Open or closed, right now</h3>
-        <p>Your hours show whether you're open at this moment, in Edmonton time. Holiday hours are one text to me.</p>
-        <div class="mini mini-hours" aria-hidden="true"><i></i><span>Open now, closes 7 pm</span></div>
-      </article>
-      <article class="feat-card f-rating">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span>
-        <h3>Your Google rating, up front</h3>
-        <p>Your real rating and your best reviews from your listing, word for word. Nothing made up.</p>
-        <div class="mini mini-stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></div>
-      </article>
-      <article class="feat-card f-map">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
-        <h3>Directions in one tap</h3>
-        <p>A map to your door that opens straight in the phone's maps app.</p>
-        <div class="mini mini-map" aria-hidden="true"><svg viewBox="0 0 200 64" preserveAspectRatio="xMidYMid slice"><path d="M0 44h200M0 16h200M50 0v64M140 0v64" stroke="#2a3038" stroke-width="6"/><path d="M95 12c-5 0-9 4-9 9 0 7 9 16 9 16s9-9 9-16c0-5-4-9-9-9z" fill="#ffc83d"/></svg></div>
-      </article>
-      <article class="feat-card f-text">
-        <div>
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span>
-          <h3>Add-on: missed-call text back</h3>
-          <p>When you can't pick up, the caller gets a text right away, so they don't call the next shop. AI receptionist options too.</p>
-          <p class="from"><b>From $149 a month</b>, setup quoted first.</p>
-        </div>
-        <div class="sms" aria-hidden="true">
-          <span class="sms-tag">Sample messages</span>
-          <p class="in">Missed call from (780) 555-0142</p>
-          <p class="out">Hi, sorry we missed you. Want to book a time? Reply here and we'll text you back.</p>
-          <p class="in">Yes, Saturday morning?</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="work">
-  <div class="wrap">
-    <div class="head">
-      <h2 class="big">Work you can open.</h2>
-      <p class="intro">Two live sites I built and run myself, plus three concept demos. See one you like? Tap the button and I'll build yours in that style.</p>
-    </div>
-    <div class="work">
-      <article class="work-card wide">
-        <a class="frame" href="demos/sample-realty/" aria-label="Open Sample Realty">
-          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/sample-realty</b></span>
-          <img src="work/sample-realty.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of Sample Realty: a 3D render of downtown Edmonton at sunset">
-        </a>
-        <div class="work-body">
-          <span class="kind kind-demo">Concept demo, not a client</span>
-          <h3>Sample Realty</h3>
-          <p>A made-up real estate agent. Scroll and a 3D flight goes from downtown Edmonton, across the river valley, down to one house in the suburbs, then all the way around it. Rendered in Blender.</p>
-          <div class="work-ctas"><a class="btn btn-line" href="demos/sample-realty/" aria-label="Open the Sample Realty site">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like the real estate demo (3D scroll story)">I want one like this</button></div>
-        </div>
-      </article>
-      <article class="work-card">
-        <a class="frame" href="https://easykeeps.ca/" target="_blank" rel="noopener" aria-label="Open Easykeeps">
-          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>easykeeps.ca</b></span>
-          <img src="work/easykeeps.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of Easykeeps">
-        </a>
-        <div class="work-body">
-          <span class="kind">My own business, live</span>
-          <h3>Easykeeps</h3>
-          <p>Bookkeeping for Edmonton businesses. Built and run by me, with animated receipts and a full pricing page.</p>
-          <div class="work-ctas"><a class="btn btn-line" href="https://easykeeps.ca/" target="_blank" rel="noopener" aria-label="Open the Easykeeps site">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like Easykeeps (clean, animated, trust-first)">I want one like this</button></div>
-        </div>
-      </article>
-      <article class="work-card">
-        <a class="frame" href="https://www.autotier.ca/" target="_blank" rel="noopener" aria-label="Open AutoTier">
-          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>autotier.ca</b></span>
-          <img src="work/autotier.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of AutoTier">
-        </a>
-        <div class="work-body">
-          <span class="kind">My own project, live</span>
-          <h3>AutoTier</h3>
-          <p>A Canadian used-car data app: paste a listing, get red flags and a price check. Built and run by me.</p>
-          <div class="work-ctas"><a class="btn btn-line" href="https://www.autotier.ca/" target="_blank" rel="noopener" aria-label="Open the AutoTier site">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like AutoTier (bold, data-heavy)">I want one like this</button></div>
-        </div>
-      </article>
-      <article class="work-card">
-        <a class="frame" href="demos/sample-barber/" aria-label="Open Sample Barber Co.">
-          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/sample-barber</b></span>
-          <img src="work/sample-barber.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of Sample Barber Co.">
-        </a>
-        <div class="work-body">
-          <span class="kind kind-demo">Concept demo, not a client</span>
-          <h3>Sample Barber Co.</h3>
-          <p>A made-up barber shop. Big type, one-tap call, hours and a spot for your real reviews.</p>
-          <div class="work-ctas"><a class="btn btn-line" href="demos/sample-barber/" aria-label="Open the Sample Barber Co. site">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like the barber demo (bold and simple)">I want one like this</button></div>
-        </div>
-      </article>
-      <article class="work-card">
-        <a class="frame" href="demos/sample-bakery/" aria-label="Open Sample Bake House">
-          <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/sample-bakery</b></span>
-          <img src="work/sample-bakery.webp" width="960" height="600" loading="lazy" decoding="async" alt="Front page of Sample Bake House">
-        </a>
-        <div class="work-body">
-          <span class="kind kind-demo">Concept demo, not a client</span>
-          <h3>Sample Bake House</h3>
-          <p>A made-up bakery. Warm colours, serif type and a menu that is easy to read on a phone.</p>
-          <div class="work-ctas"><a class="btn btn-line" href="demos/sample-bakery/" aria-label="Open the Sample Bake House site">Open the site</a><button class="btn btn-main pick" type="button" data-style="Like the bakery demo (warm and friendly)">I want one like this</button></div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="pricing">
-  <div class="wrap">
-    <div class="head">
-      <h2 class="big">Prices, up front.</h2>
-      <p class="intro">$150 once to build it, then $20 a month to keep it online. No contract, and the preview is always free.</p>
-    </div>
-    <div class="prices">
-      <div class="plan main">
-        <h3>Website</h3>
-        <div class="amt">$150 <s>$200</s><small>one time</small></div>
-        <p class="sub">Founding price for the first 3 clients. Normally $200. Hosting is the $20 care plan.</p>
-        <ul class="feat">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Built from your Google listing</span>, so your hours, reviews and services are already there</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Made for phones first</span>, where your customers look you up</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">One-tap call, map and open or closed status</span></span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">You own it.</span> Your photos, your words, your files</span></li>
-        </ul>
-        <a class="btn" href="#quote" data-focus>Get my free preview</a>
-      </div>
-      <div class="plan">
-        <h3>Care plan</h3>
-        <div class="amt">$20 <small>a month</small></div>
-        <p class="sub">Keeps your site online and up to date. Starts when your site goes live.</p>
-        <ul class="feat">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Hosting</span> included</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Small edits</span> like hours, prices and photos</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Text me</span> when something needs changing</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><span class="k">Cancel any month</span>, no fee</span></li>
-        </ul>
-        <a class="btn btn-line" href="#quote" data-focus>Ask a question</a>
-      </div>
-    </div>
-    <div class="addon">
+<section class="real" id="work" aria-label="Real work">
+  <div class="r-stage">
+    <div class="wrap">
       <div>
-        <h3>Add-on: missed-call text back</h3>
-        <p>When you can't pick up, the caller gets a text right away so they don't call the next shop. Want calls answered too? I'll quote an AI receptionist for your shop. Setup is always quoted before you agree.</p>
+        <span class="tagreal">Real work, live</span>
+        <h2>And one that's real.</h2>
+        <p>Easykeeps is my own bookkeeping business for Edmonton small businesses. I built the site and I run it.</p>
+        <a class="btn btn-line" href="https://easykeeps.ca/" target="_blank" rel="noopener">Visit easykeeps.ca</a>
       </div>
-      <div class="addon-amt"><b>$149</b><span>a month and up</span></div>
-      <a class="btn btn-line" href="#quote" data-focus data-need="Missed-call text back or AI receptionist">Ask about it</a>
+      <div class="ek" aria-label="The Easykeeps home page">
+        <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>easykeeps.ca</b></div>
+        <div class="scroller" id="ek">
+          <picture>
+            <source media="(max-width: 700px)" srcset="story/easykeeps-m.webp" width="585" height="5550">
+            <img src="story/easykeeps-d.webp" width="1280" height="4300" loading="lazy" decoding="async" alt="The top of easykeeps.ca: Your books, done every month, with a price summary and how it works">
+          </picture>
+        </div>
+      </div>
     </div>
-    <p class="fine">Prices in Canadian dollars.</p>
   </div>
 </section>
 
-<section id="about">
-  <div class="wrap me">
-    <article class="letter">
-      <h2>Hi, I'm Jan Gabriel, a computer systems student in Edmonton.</h2>
-      <p>I build websites for local shops that have great Google reviews and nowhere to send people. A lot of good businesses only show up as a pin on a map, and customers pick the shop down the street that has a site.</p>
-      <p>I'd rather show you than pitch you, so I build the preview first. You deal with me directly, from the first look to the small edits later. If it's not for you, no hard feelings.</p>
-      <div class="sig"><span class="mono" aria-hidden="true">JG</span><div><b>Jan Gabriel</b><span>Southsites, Edmonton</span></div></div>
-    </article>
-    <aside class="contact" aria-label="Contact">
-      <h3>Text or call</h3>
-      <p>Usually faster than email. I reply within a day.</p>
-      <a class="btn btn-main" href="sms:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Text 825-461-5061</a>
-      <a class="btn btn-line" href="tel:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="ring" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call 825-461-5061</a>
-      <a class="btn btn-line" href="mailto:contact@southsites.ca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>contact@southsites.ca</a>
-    </aside>
-  </div>
-</section>
-
-<section id="faq">
+<section class="people" id="people">
   <div class="wrap">
-    <h2 class="big" style="margin-bottom:28px">Questions.</h2>
-    <div class="faq">
+    <h2>Do what you do. <span>We'll do the dot-ca.</span></h2>
+    <p class="intro">You'd rather be working. I'll handle the website: built from your Google listing, checked on your own phone, live when you say so.</p>
+    <ul class="faces">
+      <li><img src="story/people/barber.webp" width="720" height="900" loading="lazy" decoding="async" alt="A barber trimming a customer's beard"><span>Barber</span></li>
+      <li><img src="story/people/baker.webp" width="720" height="900" loading="lazy" decoding="async" alt="A baker kneading dough"><span>Baker</span></li>
+      <li><img src="story/people/tailor.webp" width="720" height="900" loading="lazy" decoding="async" alt="A tailor measuring cloth at a work table"><span>Tailor</span></li>
+      <li><img src="story/people/electrician.webp" width="720" height="900" loading="lazy" decoding="async" alt="An electrician working on a panel"><span>Electrician</span></li>
+      <li><img src="story/people/nails.webp" width="720" height="900" loading="lazy" decoding="async" alt="A nail technician at work"><span>Nail tech</span></li>
+    </ul>
+    <p class="credit">Stock photos from Pexels, free licence: Antoni Shkraba, Gustavo Fring, Tima Miroshnichenko, ranjeet, Mehmet Turgut Kirkgoz. These are not our clients.</p>
+  </div>
+
+  <div class="close" id="prices">
+    <div class="wrap grid">
       <div>
-        <details><summary>Do I really own it?<span class="plus" aria-hidden="true"></span></summary><p>Yes. The site is yours. If you ever leave, you get the files and I help you move it.</p></details>
-        <details><summary>What if I already have Instagram?<span class="plus" aria-hidden="true"></span></summary><p>Keep it. People who search Google want hours, a map and a call button, and Google shows websites for that. Your site links to your Instagram.</p></details>
-        <details><summary>Do I need a domain?<span class="plus" aria-hidden="true"></span></summary><p>Not to start. If you want one like yourshop.ca, I'll set it up in your name and you pay the yearly fee directly.</p></details>
+        <h3>Your preview is free. Ask for one.</h3>
+        <p>$0 to see it. $150 once to keep it (founding price for the first 3 clients, normally $200). $20 a month covers hosting and small edits like hours and photos. Cancel any month.</p>
+        <div class="ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a><a class="btn btn-line" href="mailto:contact@southsites.ca">contact@southsites.ca</a></div>
       </div>
       <div>
-        <details><summary>What do you need from me?<span class="plus" aria-hidden="true"></span></summary><p>Nothing to see the preview. To go live: a few photos and anything I got wrong about your hours or services.</p></details>
-        <details><summary>Do I have to pay every month?<span class="plus" aria-hidden="true"></span></summary><p>The $20 a month keeps your site online and covers small edits. Cancel any month with no fee. You keep the site files and can host them anywhere.</p></details>
-        <details><summary>Where are you?<span class="plus" aria-hidden="true"></span></summary><p>Edmonton. I'm happy to meet at your shop to go over the preview.</p></details>
+        <ol class="steps">
+          <li><div><b>I build a preview</b><span>From your Google listing: hours, reviews, services, map and a call button.</span></div></li>
+          <li><div><b>You look at it</b><span>On your own phone. Ask for changes, swap in photos, or say no thanks.</span></div></li>
+          <li><div><b>Keep it if you like it</b><span>$150 and it goes live. You own it.</span></div></li>
+        </ol>
+        <details><summary>Add-on: missed-call text back</summary><p>When you can't pick up, the caller gets a text right away. From $149 a month, setup quoted before you agree.</p></details>
+        <details><summary>Who builds it?</summary><p>Me, Jan Gabriel, a computer systems student in Edmonton. You deal with me directly, from the first look to the small edits later.</p></details>
       </div>
     </div>
   </div>
 </section>
-
-<section class="final">
-  <div class="wrap">
-    <h2 class="big">Your preview is free. Ask for one.</h2>
-    <p class="intro">Takes a minute. I'll send you the link when it's ready.</p>
-    <div class="ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a></div>
-  </div>
-</section>
-
 </main>
 
 <footer>
   <div class="wrap">
-    <span>Jan Gabriel, Southsites, Edmonton</span>
-    <nav aria-label="Contact"><a href="tel:+18254615061">825-461-5061</a><a href="mailto:contact@southsites.ca">contact@southsites.ca</a></nav>
+    <div class="row"><span>Jan Gabriel, Southsites, Edmonton</span><span><a href="tel:+18254615061">825-461-5061</a> &nbsp; <a href="mailto:contact@southsites.ca">contact@southsites.ca</a></span></div>
+    <span>Sample Realty, Sample Barber Co. and Sample Bake House are made-up businesses built as samples. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>.</span>
   </div>
 </footer>
 
@@ -666,9 +453,7 @@
     send.querySelector('.label').textContent = 'Continue in Messages';
     document.getElementById('how-sent').innerHTML = 'Opens a text to Gabriel with your details filled in. Rather email? <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>';
   }
-
   function say(kind, html) { status.className = 'status show ' + kind; status.innerHTML = html; }
-
   function check() {
     let first = null;
     const rules = {
@@ -686,13 +471,11 @@
     return !first;
   }
   form.addEventListener('input', (e) => { const f = e.target.closest('.field.bad'); if (f) f.classList.remove('bad'); });
-
-  // until a Web3Forms key is pasted into #w3f-key, the form opens a pre-filled text message instead of failing
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!check()) return;
     const d = Object.fromEntries(new FormData(form));
-    const text = `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}.${d.style ? ' Style I like: ' + d.style + '.' : ''} You can reach me at ${d.contact}.`;
+    const text = `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}. You can reach me at ${d.contact}.`;
     const fallback = `<a href="sms:${SMS}?&body=${encodeURIComponent(text)}">text 825-461-5061</a> or <a href="mailto:${EMAIL}?subject=${encodeURIComponent('Website preview for ' + d.business)}&body=${encodeURIComponent(text)}">email me</a>`;
     if (!KEY) {
       say('warn', `Your messages app should open with your request filled in. Tap send there to reach me. Nothing opened? ${fallback}.`);
@@ -712,45 +495,129 @@
       send.disabled = false; send.classList.remove('busy'); send.querySelector('.label').textContent = 'Send my request';
     }
   });
-
-  // buttons that jump to the form put the cursor in the first field
-  document.querySelectorAll('[data-focus]').forEach((a) => a.addEventListener('click', () => {
-    if (a.dataset.need) form.elements.need.value = a.dataset.need;
-    setTimeout(() => form.elements.name.focus({ preventScroll: true }), 450);
+  // anything that jumps to the form puts the cursor in the first field
+  document.querySelectorAll('[data-focus]').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    form.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' });
+    setTimeout(() => form.elements.name.focus({ preventScroll: true }), 600);
   }));
 
-  // "I want one like this": carry the chosen style into the form, then put the cursor in it
-  const picked = document.getElementById('picked'), styleIn = document.getElementById('f-style');
-  function setStyle(v) {
-    styleIn.value = v; picked.hidden = !v; document.getElementById('picked-name').textContent = v;
-    document.querySelectorAll('.pick').forEach((b) => {
-      const on = b.dataset.style === v;
-      b.setAttribute('aria-pressed', on); b.textContent = on ? 'Picked. Finish above' : 'I want one like this';
-    });
+  // ---------------------------------------------------------------- the scroll story
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
+  const N = 120;                       // every second frame of the 240-frame flight
+  const AI = [];                       // frame numbers that have an AI-polished version in story/ (none yet)
+  const pad = (i) => String(i).padStart(3, '0');
+  const src = (k) => { const i = k * 2; return AI.includes(i) ? `story/${SET}/f${pad(i)}.webp` : `demos/sample-realty/frames/${SET}/f${pad(i)}.webp`; };
+  const canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
+  const stage = document.getElementById('stage'), veil = document.getElementById('veil'), track = document.getElementById('track');
+  const cap1 = document.getElementById('cap1'), realty = document.getElementById('realty'), dock = document.getElementById('dock');
+  const hero = document.getElementById('top');
+  stage.style.backgroundImage = `url(${src(0)})`;
+  const frames = new Array(N);
+  let want = 0, shown = -1, doorImg = null, doorA = 0;
+
+  function load(k) {
+    if (frames[k]) return;
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = src(k);
+    frames[k] = img;
+    img.decode().then(() => { img.ok = true; draw(); }).catch(() => {});
   }
-  document.querySelectorAll('.pick').forEach((b) => b.addEventListener('click', () => {
-    setStyle(b.dataset.style); form.elements.need.value = 'A new website';
-    form.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-    setTimeout(() => form.elements.name.focus({ preventScroll: true }), 500);
-  }));
-  document.getElementById('unpick').addEventListener('click', () => setStyle(''));
+  function nearest(i) {
+    for (let d = 0; d < N; d++) {
+      if (frames[i - d] && frames[i - d].ok) return frames[i - d];
+      if (frames[i + d] && frames[i + d].ok) return frames[i + d];
+    }
+    return null;
+  }
+  function cover(img) {
+    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    const w = img.naturalWidth * s, h = img.naturalHeight * s;
+    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+  function draw(force) {
+    const img = nearest(want);
+    if (!img) return;
+    const k = frames.indexOf(img);
+    if (!force && k === shown && !doorA) return;
+    ctx.globalAlpha = 1;
+    cover(img);
+    if (doorA > 0 && doorImg && doorImg.ok) { ctx.globalAlpha = doorA; cover(doorImg); ctx.globalAlpha = 1; }
+    shown = k;
+  }
+  function size() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
+    shown = -1; draw(true);
+  }
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const ramp = (p, a, b) => clamp((p - a) / (b - a));
 
-  // sample phone: open or closed right now in Edmonton time, today's hours in bold
-  (function () {
-    const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Edmonton', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
-    const get = (t) => parts.find((p) => p.type === t).value;
-    const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday')), hour = +get('hour') + +get('minute') / 60;
-    const close = day === 0 ? 0 : day === 6 ? 17 : 19, open = day !== 0 && hour >= 9 && hour < close;
-    const badge = document.getElementById('s-open');
-    badge.textContent = open ? `Open, closes ${close - 12} pm` : 'Closed now';
-    badge.classList.toggle('closed', !open);
-    document.querySelectorAll('#s-hours dt').forEach((dt) => {
-      const [a, b] = dt.dataset.d.split('-').map(Number), on = day >= a && day <= (b ?? a);
-      dt.classList.toggle('today', on); dt.nextElementSibling.classList.toggle('today', on);
-    });
-    const called = document.getElementById('s-called');
-    document.getElementById('s-call').addEventListener('click', () => { called.textContent = 'On a real site, this calls the shop.'; });
-  })();
+  // samples: two live sites, the second fades over the first, each scrolls itself
+  const morph = document.getElementById('samples'), w1 = document.getElementById('w1'), w2 = document.getElementById('w2');
+  const mTitle = document.getElementById('m-title');
+  const real = document.getElementById('work'), ek = document.getElementById('ek');
+  function frameScroll(win, f) {
+    const fr = win.querySelector('iframe');
+    try {
+      const doc = fr.contentDocument;
+      if (!doc || !doc.documentElement) return;
+      const max = doc.documentElement.scrollHeight - fr.clientHeight;
+      fr.contentWindow.scrollTo(0, Math.max(0, max * f));
+    } catch (e) {}
+  }
+
+  function tick() {
+    const vh = innerHeight, y = scrollY;
+    // first screen: the hero scrolls away and the veil lifts off the skyline
+    const heroOut = clamp(y / Math.max(1, hero.offsetHeight * 0.9));
+    veil.style.opacity = String(1 - heroOut * 0.88);
+    // the flight runs over the stretch where the stage is pinned: from the hero leaving to the stage letting go
+    const fly = stage.parentElement, start = fly.offsetTop + hero.offsetHeight * 0.85, end = fly.offsetTop + fly.offsetHeight - vh;
+    const p = clamp((y - start) / Math.max(1, end - start));
+    want = Math.round(p * (N - 1));
+    doorA = ramp(p, 0.93, 1);
+    cap1.classList.toggle('on', heroOut > 0.85 && p < 0.22);
+    realty.classList.toggle('on', p > 0.56 && p < 0.995);
+    draw();
+    dock.classList.toggle('on', y > hero.offsetHeight * 0.8);
+    // or what about
+    const m = morph.getBoundingClientRect();
+    const q = clamp(-m.top / Math.max(1, m.height - vh));
+    const in1 = ramp(q, 0, 0.12), swap = ramp(q, 0.48, 0.6);
+    w1.style.transform = `translate(-50%, ${-50 + (1 - in1) * 40}%) scale(${0.94 + 0.06 * in1})`;
+    w1.style.opacity = String(in1 * (1 - swap));
+    w2.style.opacity = String(swap);
+    w2.style.transform = `translate(-50%, ${-50 + (1 - swap) * 12}%) scale(${0.96 + 0.04 * swap})`;
+    mTitle.innerHTML = q < 0.54 ? 'Or what about <span>a barber?</span>' : 'Or <span>a bakery?</span>';
+    frameScroll(w1, ramp(q, 0.1, 0.5));
+    frameScroll(w2, ramp(q, 0.58, 1));
+    // real work: the screenshot scrolls inside its window
+    const r = real.getBoundingClientRect();
+    const s = clamp(-r.top / Math.max(1, r.height - vh));
+    const box = ek.parentElement.clientHeight - 36;
+    ek.style.transform = `translateY(${-Math.max(0, ek.offsetHeight - box) * s}px)`;
+  }
+
+  if (still) {
+    load(0); load(N - 1);
+    dock.classList.add('on');
+  } else {
+    load(0);
+    // the first screen is instant; the flight loads just behind it, sparse first, the rest when the visitor starts moving
+    const sparse = () => { for (let k = 6; k < N; k += 6) load(k); };
+    const rest = () => { for (let k = 1; k < N; k++) setTimeout(() => load(k), k * 18); };
+    addEventListener('load', () => setTimeout(sparse, 200), { once: true });
+    addEventListener('scroll', () => { sparse(); rest(); }, { once: true, passive: true });
+    setTimeout(rest, 4000);
+    doorImg = new Image(); doorImg.src = `story/${SET}/door.webp`; doorImg.decode().then(() => { doorImg.ok = true; }).catch(() => {});
+    addEventListener('scroll', tick, { passive: true });
+  }
+  addEventListener('resize', () => { size(); if (!still) tick(); });
+  size();
+  if (!still) tick();
 </script>
 </body>
 </html>
