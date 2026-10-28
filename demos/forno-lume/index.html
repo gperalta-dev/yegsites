@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forno Lume | Wood-fired pizza and fresh pasta, Providence (sample site by Southsites)</title>
+<meta name="description" content="Sample website by Southsites. Forno Lume is a made-up pizza and pasta restaurant on Federal Hill in Providence.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #15110e; --bg-2: #1e1814; --card: #241d18; --ink: #f4ece0; --muted: #c4b6a4; --faint: #998a78; --line: rgba(244, 236, 224, .13);
+    --tomato: #e04b2f; --tomato-2: #f0634a; --basil: #7fa36a; --gold: #e8b86a;
+    --head: "DM Serif Display", Georgia, serif; --body: "DM Sans", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.65 var(--body); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--head); font-weight: 400; line-height: 1.02; margin: 0; text-wrap: balance; }
+  h2 em, h1 em { font-style: italic; color: var(--gold); }
+
+  .sample { background: #0b0907; color: #e9e1d4; font: 600 13.5px/1.4 var(--body); border-bottom: 1px solid var(--line); }
+  .sample .wrap { display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; padding: 8px 0; }
+  .sample a { color: #ffc83d; }
+
+  header.top { position: absolute; left: 0; right: 0; z-index: 5; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 84px; }
+  .logo { display: flex; align-items: center; gap: 11px; text-decoration: none; font: 400 30px/1 var(--head); }
+  .logo svg { width: 30px; height: 30px; }
+  nav.links { display: flex; align-items: center; gap: 28px; font-weight: 600; font-size: 15.5px; }
+  nav.links a:not(.btn) { text-decoration: none; color: #e9e1d4; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border-radius: 99px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; }
+  .btn-red { background: var(--tomato); color: #fff; }
+  .btn-red:hover { background: var(--tomato-2); }
+  .btn-line { border: 1.5px solid rgba(244, 236, 224, .55); color: var(--ink); background: rgba(21, 17, 14, .25); }
+  .btn-line:hover { border-color: var(--ink); }
+
+  .hero { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 11, 8, .86) 0%, rgba(15, 11, 8, .5) 50%, rgba(15, 11, 8, .1) 100%), linear-gradient(0deg, rgba(15, 11, 8, .7), transparent 40%); }
+  .hero .wrap { position: relative; z-index: 2; padding: 150px 0 80px; }
+  .hero h1 { font-size: clamp(48px, 6.4vw, 94px); max-width: 15ch; margin-bottom: 22px; }
+  .hero p { font-size: 20px; color: #eadfce; max-width: 36ch; margin: 0 0 30px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .tonight { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 15px; color: #e3d6c3; }
+  .tonight i { width: 10px; height: 10px; border-radius: 50%; background: var(--tomato); box-shadow: 0 0 0 5px rgba(224, 75, 47, .22); }
+
+  section.block { padding: 96px 0; }
+  .trio { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 18px; align-items: end; }
+  .trio figure { margin: 0; }
+  .trio img { width: 100%; border-radius: 18px; object-fit: cover; }
+  .trio figure:nth-child(1) img, .trio figure:nth-child(3) img { aspect-ratio: 3 / 4; }
+  .trio figure:nth-child(2) img { aspect-ratio: 4 / 3.4; }
+  .trio figcaption { margin-top: 12px; color: var(--muted); font-size: 15px; }
+  .trio figcaption b { display: block; color: var(--ink); font: 400 24px/1.1 var(--head); margin-bottom: 4px; }
+
+  .menu { background: var(--bg-2); }
+  .menu .top-row { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
+  .menu h2 { font-size: clamp(44px, 5.4vw, 76px); }
+  .menu .note { color: var(--faint); font-size: 14.5px; margin: 0; }
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 56px; }
+  .course h3 { font-size: 32px; color: var(--gold); margin-bottom: 10px; display: flex; align-items: baseline; gap: 12px; }
+  .course h3 small { font: 600 13px var(--body); color: var(--faint); }
+  .dish { display: grid; grid-template-columns: 1fr auto; gap: 2px 18px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .dish b { font-weight: 700; font-size: 17.5px; }
+  .dish span { grid-column: 1; color: var(--muted); font-size: 15px; }
+  .dish em { font-style: normal; font-weight: 700; color: var(--ink); grid-row: 1; grid-column: 2; }
+
+  .made .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 56px; align-items: center; }
+  .made img { border-radius: 22px; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .made h2, .room h2, .visit h2, .reserve h2 { font-size: clamp(40px, 4.8vw, 66px); margin-bottom: 18px; }
+  .made p, .room p { color: var(--muted); margin: 0 0 18px; max-width: 42ch; }
+  .made ul { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 14px; }
+  .made li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+  .made li svg { width: 24px; height: 24px; color: var(--basil); margin-top: 2px; }
+
+  .room { position: relative; }
+  .room .pic { border-radius: 24px; overflow: hidden; position: relative; }
+  .room .pic img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+  .room .over { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; margin-top: 36px; }
+  .room .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; }
+  .room .card h3 { font-size: 28px; margin-bottom: 8px; }
+  .room .card p { margin: 0; }
+
+  .visit .wrap { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: stretch; }
+  .map { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); min-height: 400px; background: #2a2420; }
+  .map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; display: block; filter: grayscale(.35) contrast(1.05); }
+  .visit p { color: var(--muted); margin: 0 0 20px; }
+  table.hours { width: 100%; border-collapse: collapse; font-size: 16px; margin-bottom: 22px; }
+  table.hours td { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  table.hours td:last-child { text-align: right; font-weight: 700; }
+  .front { border-radius: 18px; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+  .reserve { background: var(--bg-2); }
+  .reserve .wrap { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 56px; align-items: start; }
+  .reserve p { color: var(--muted); margin: 0 0 18px; }
+  .reserve .call { font: 400 34px/1 var(--head); text-decoration: none; color: var(--gold); }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: grid; gap: 14px; }
+  .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label { display: grid; gap: 6px; font-size: 14.5px; font-weight: 600; color: #e9e1d4; }
+  input, select { width: 100%; min-height: 48px; border: 1.5px solid #4a3f36; border-radius: 12px; padding: 10px 13px; font: 400 16px var(--body); color: var(--ink); background: #1a1511; color-scheme: dark; }
+  input:focus, select:focus { outline: none; border-color: var(--gold); }
+  form .btn { width: 100%; min-height: 54px; }
+  .sent { display: none; background: rgba(127, 163, 106, .14); border: 1px solid rgba(127, 163, 106, .45); color: #d6e8cc; padding: 14px 16px; border-radius: 12px; font-size: 15.5px; margin: 0; }
+  .sent a { color: #fff; font-weight: 700; }
+  form.done .sent { display: block; }
+
+  footer { padding: 50px 0 64px; color: var(--faint); font-size: 14.5px; border-top: 1px solid var(--line); }
+  footer .wrap { display: grid; gap: 14px; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 30px; align-items: center; color: var(--muted); }
+  footer .credits { font-size: 13px; }
+
+  @media (max-width: 900px) {
+    nav.links a:not(.btn) { display: none; }
+    .trio { grid-template-columns: 1fr 1fr; }
+    .trio figure:nth-child(2) { grid-column: span 2; order: -1; }
+    .cols, .made .wrap, .room .over, .visit .wrap, .reserve .wrap { grid-template-columns: 1fr; gap: 32px; }
+    .room .pic img { aspect-ratio: 16 / 10; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16.5px; }
+    .wrap { width: calc(100% - 32px); }
+    header.top .wrap { height: 70px; }
+    .logo { font-size: 25px; }
+    nav.links .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+    .hero { min-height: 88vh; }
+    .hero::after { background: linear-gradient(0deg, rgba(15, 11, 8, .92) 0%, rgba(15, 11, 8, .55) 55%, rgba(15, 11, 8, .35) 100%); }
+    .hero .wrap { padding: 120px 0 48px; }
+    .hero h1 { font-size: 50px; }
+    .hero p { font-size: 18px; }
+    .ctas .btn { flex: 1 1 100%; }
+    section.block { padding: 68px 0; }
+    .trio { grid-template-columns: 1fr; }
+    .trio figure:nth-child(2) { grid-column: auto; }
+    .trio figure:nth-child(3) { display: none; }
+    .row3, .row2 { grid-template-columns: 1fr 1fr; }
+    .row3 label:first-child { grid-column: span 2; }
+    form { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="sample"><div class="wrap"><span>Sample site. Forno Lume is a made-up restaurant.</span><a href="/">Built by Southsites</a></div></div>
+<div style="position:relative">
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Forno Lume, home"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="14" fill="#e04b2f"/><path d="M15 6c3 4 6 6.5 6 10.5a6 6 0 0 1-12 0c0-2.4 1.3-4 2.6-5.3.3 1.9 1.3 3 2.4 3.3C13.4 11.8 14 9 15 6z" fill="#f4ece0"/></svg>Forno Lume</a>
+    <nav class="links" aria-label="Main"><a href="#menu">Menu</a><a href="#room">The room</a><a href="#visit">Visit</a><a class="btn btn-red" href="#reserve">Reserve</a></nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <img src="img/hero.webp" width="1800" height="1202" alt="A chef dressing a pizza with olive oil before it goes in the oven" fetchpriority="high">
+  <div class="wrap">
+    <h1>Wood‑fired pizza and fresh pasta on <em>Federal Hill.</em></h1>
+    <p>The oven is lit by four. Dinner from five, Tuesday to Sunday, with a few seats at the bar kept for walk-ins.</p>
+    <div class="ctas"><a class="btn btn-red" href="#reserve">Reserve a table</a><a class="btn btn-line" href="#menu">See the menu</a></div>
+    <p class="tonight"><i aria-hidden="true"></i>Open tonight from 5 pm</p>
+  </div>
+</section>
+</div>
+
+<section class="block" aria-label="From the kitchen">
+  <div class="wrap trio">
+    <figure><img src="img/dough.webp" width="800" height="1200" alt="A cook stretching pizza dough in the air" loading="lazy"><figcaption><b>Dough with time</b>Rested slow, stretched by hand, never rolled.</figcaption></figure>
+    <figure><img src="img/oven.webp" width="1200" height="800" alt="A cook sliding a pizza into a hot oven with a long peel" loading="lazy"><figcaption><b>A very hot oven</b>About ninety seconds, then straight to the table.</figcaption></figure>
+    <figure><img src="img/pasta.webp" width="900" height="601" alt="Fresh tagliatelle being cut and lifted by hand" loading="lazy"><figcaption><b>Pasta every afternoon</b>Cut by hand before service.</figcaption></figure>
+  </div>
+</section>
+
+<section class="block menu" id="menu">
+  <div class="wrap">
+    <div class="top-row"><h2>The <em>menu</em></h2><p class="note">Sample menu and prices for this concept site.</p></div>
+    <div class="cols">
+      <div class="course">
+        <h3>Pizze <small>wood-fired</small></h3>
+        <div class="dish"><b>Margherita</b><em>$18</em><span>San Marzano tomato, fior di latte, basil, olive oil</span></div>
+        <div class="dish"><b>Diavola</b><em>$21</em><span>Spicy salami, tomato, mozzarella, chili honey</span></div>
+        <div class="dish"><b>Funghi e taleggio</b><em>$22</em><span>Roasted mushrooms, taleggio, thyme, no tomato</span></div>
+        <div class="dish"><b>Bianca al limone</b><em>$20</em><span>Ricotta, lemon zest, garlic, basil, pecorino</span></div>
+      </div>
+      <div class="course">
+        <h3>Pasta <small>made here</small></h3>
+        <div class="dish"><b>Tagliatelle al ragù</b><em>$24</em><span>Slow beef and pork ragù, parmigiano</span></div>
+        <div class="dish"><b>Cacio e pepe</b><em>$21</em><span>Tonnarelli, pecorino romano, cracked pepper</span></div>
+        <div class="dish"><b>Pappardelle ai funghi</b><em>$25</em><span>Wild mushrooms, butter, sage</span></div>
+        <div class="dish"><b>Spaghetti alle vongole</b><em>$27</em><span>Littleneck clams, white wine, garlic, parsley</span></div>
+      </div>
+      <div class="course">
+        <h3>To start</h3>
+        <div class="dish"><b>Burrata</b><em>$16</em><span>Roasted tomatoes, basil oil, grilled bread</span></div>
+        <div class="dish"><b>Arancini</b><em>$12</em><span>Saffron rice, mozzarella, tomato sugo</span></div>
+        <div class="dish"><b>Focaccia</b><em>$8</em><span>From the oven, rosemary, sea salt</span></div>
+      </div>
+      <div class="course">
+        <h3>Dolci</h3>
+        <div class="dish"><b>Tiramisù</b><em>$11</em><span>Mascarpone, espresso, cocoa</span></div>
+        <div class="dish"><b>Panna cotta</b><em>$10</em><span>Vanilla, roasted plums</span></div>
+        <div class="dish"><b>Affogato</b><em>$8</em><span>Fior di latte gelato, a shot of espresso</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block made">
+  <div class="wrap">
+    <img src="img/kitchen.webp" width="1200" height="800" alt="Two cooks holding a fresh pizza and a plate of pasta at the bar" loading="lazy">
+    <div>
+      <h2>Two things, done <em>properly.</em></h2>
+      <p>Pizza from the wood oven and pasta made in the same kitchen. A short menu means everything on it is cooked often and cooked well.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c4 5 7 8 7 12a7 7 0 0 1-14 0c0-4 3-7 7-12z"/></svg><span>Oak and maple in the oven, nothing else</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Pasta cut fresh before every service</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v18M17 3c-2 2-3 4-3 7s1 4 3 4V3zM17 14v7"/></svg><span>Gluten-free crust on request, made separately</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block room" id="room">
+  <div class="wrap">
+    <div class="pic"><img src="img/room.webp" width="1400" height="934" alt="A warm dining room full of guests at wooden tables" loading="lazy"></div>
+    <div class="over">
+      <div><h2>The room</h2><p>A long room, a short bar and candles on every table. It gets loud in the best way after seven.</p></div>
+      <div class="card"><h3>Private dining</h3><p>The back room holds one long table for birthdays, rehearsal dinners and team nights. Family-style menus, set together with you ahead of time.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block visit" id="visit">
+  <div class="wrap">
+    <div class="map"><iframe title="Map of Federal Hill, Providence" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-71.4405%2C41.8135%2C-71.4105%2C41.8305&amp;layer=mapnik"></iframe></div>
+    <div>
+      <h2>Visit</h2>
+      <p>On Federal Hill in Providence, a short walk from downtown. Street parking after six, and a lot two blocks up.</p>
+      <table class="hours">
+        <tr><td>Tuesday to Thursday</td><td>5 pm to 10 pm</td></tr>
+        <tr><td>Friday and Saturday</td><td>5 pm to 11 pm</td></tr>
+        <tr><td>Sunday</td><td>4 pm to 9 pm</td></tr>
+        <tr><td>Monday</td><td>Closed</td></tr>
+      </table>
+      <img class="front" src="img/front.webp" width="1200" height="851" alt="A restaurant front with potted trees and a window into the kitchen" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="block reserve" id="reserve">
+  <div class="wrap">
+    <div>
+      <h2>Reserve a <em>table</em></h2>
+      <p>Book up to thirty days ahead. For six or more, call us and we'll set up the long table.</p>
+      <a class="call" href="tel:+14015550163">(401) 555-0163</a>
+    </div>
+    <form id="f" novalidate>
+      <div class="row3">
+        <label>Date<input type="date" name="date"></label>
+        <label>Time<select name="time"><option>5:00 pm</option><option>5:30 pm</option><option>6:00 pm</option><option selected>6:30 pm</option><option>7:00 pm</option><option>7:30 pm</option><option>8:00 pm</option><option>8:30 pm</option><option>9:00 pm</option></select></label>
+        <label>Guests<select name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></label>
+      </div>
+      <div class="row2"><label>Name<input name="name" autocomplete="name"></label><label>Phone<input name="phone" type="tel" autocomplete="tel"></label></div>
+      <button class="btn btn-red" type="submit">Reserve</button>
+      <p class="sent" role="status">This is a sample site, so no table was booked. Like how it works? <a href="/" target="_top">Southsites</a> builds sites like this for real restaurants.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row"><span class="logo" style="font-size:24px"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="14" fill="#e04b2f"/><path d="M15 6c3 4 6 6.5 6 10.5a6 6 0 0 1-12 0c0-2.4 1.3-4 2.6-5.3.3 1.9 1.3 3 2.4 3.3C13.4 11.8 14 9 15 6z" fill="#f4ece0"/></svg>Forno Lume</span><span>Federal Hill, Providence, Rhode Island &nbsp; <a href="tel:+14015550163">(401) 555-0163</a></span></div>
+    <p>Sample site. Forno Lume is a made-up restaurant, the menu and prices are samples, and the phone number is a fictional 555 number. Built as a sample by <a href="/">Southsites</a>.</p>
+    <p class="credits">Photos from <a href="https://www.pexels.com/license/">Pexels</a>: Kampus Production, Canan Ataklı, Gustavo Fring, Derwin Edwards, Samuel Nuñez, Cihan Yüce, Oscar Ruiz. Map &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>.</p>
+  </div>
+</footer>
+<script>
+  // sample site: the form never books anything, it just says so
+  const f = document.getElementById('f');
+  f.addEventListener('submit', (e) => { e.preventDefault(); f.classList.add('done'); });
+  const d = f.elements.date; const t = new Date(); t.setDate(t.getDate() + 1); d.value = t.toISOString().slice(0, 10);
+</script>
+</body>
+</html>

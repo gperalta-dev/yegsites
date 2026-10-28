@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mirrorline Detail Co. | Car detailing in Scottsdale (sample site by Southsites)</title>
+<meta name="description" content="Sample website by Southsites. Mirrorline Detail Co. is a made-up car detailing shop in Scottsdale, Arizona.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0a0b0d; --bg-2: #111317; --card: #16191e; --ink: #eef1f4; --muted: #aab2bb; --faint: #7d8590; --line: rgba(238, 241, 244, .12);
+    --ice: #9fd8ff; --ice-2: #c6e8ff; --ice-ink: #04131f;
+    --head: "Unbounded", system-ui, sans-serif; --body: "Manrope", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ice); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--head); font-weight: 600; line-height: 1.04; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+
+  .sample { background: #000; color: #e9e6df; font: 600 13.5px/1.4 var(--body); position: relative; z-index: 6; }
+  .sample .wrap { display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; padding: 8px 0; }
+  .sample a { color: #ffc83d; }
+
+  /* the trademark: wordmark with its own reflection */
+  .mark { display: inline-grid; text-decoration: none; line-height: 1; }
+  .mark b { font: 700 21px/1 var(--head); letter-spacing: .16em; background: linear-gradient(180deg, #ffffff 0%, #c9d3dc 55%, #8a96a3 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .mark i { display: block; height: 2px; margin-top: 7px; border-radius: 2px; background: linear-gradient(90deg, rgba(198, 232, 255, 0), #c6e8ff 28%, #fff 50%, #c6e8ff 72%, rgba(198, 232, 255, 0)); }
+  .mark small { font: 600 10.5px/1 var(--body); letter-spacing: .32em; color: var(--ice); margin-top: 5px; text-transform: uppercase; }
+
+  header.top { position: absolute; left: 0; right: 0; z-index: 5; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 86px; }
+  nav.links { display: flex; align-items: center; gap: 26px; font-weight: 600; font-size: 15px; }
+  nav.links a:not(.btn) { text-decoration: none; color: #d6dce2; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border-radius: 12px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; }
+  .btn-ice { background: var(--ice); color: var(--ice-ink); }
+  .btn-ice:hover { background: var(--ice-2); }
+  .btn-line { border: 1.5px solid rgba(238, 241, 244, .4); color: var(--ink); background: rgba(10, 11, 13, .3); }
+
+  /* the wash: scroll scrubs dirty -> foam -> rinse -> gloss */
+  .wash { position: relative; height: 460vh; }
+  .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #0c0d10; }
+  .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(6, 7, 9, .72) 0%, rgba(6, 7, 9, 0) 22%), linear-gradient(90deg, rgba(6, 7, 9, .82) 0%, rgba(6, 7, 9, .42) 42%, rgba(6, 7, 9, 0) 70%), linear-gradient(0deg, rgba(6, 7, 9, .55), transparent 35%); }
+  .sweep { position: absolute; inset: -20% -60%; pointer-events: none; opacity: 0; mix-blend-mode: screen; background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .0) 44%, rgba(220, 240, 255, .34) 50%, rgba(255, 255, 255, 0) 56%, transparent 60%); will-change: transform, opacity; }
+  .spark { position: absolute; width: 46px; height: 46px; margin: -23px 0 0 -23px; pointer-events: none; opacity: 0; will-change: transform, opacity; }
+  .spark svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 0 6px rgba(200, 235, 255, .9)); }
+  .beat { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 12vh; max-width: 560px; opacity: 0; transform: translateY(18px); transition: opacity .45s, transform .45s; pointer-events: none; }
+  .beat.on { opacity: 1; transform: none; pointer-events: auto; }
+  .beat small { display: block; font: 600 14px var(--body); color: var(--ice); margin-bottom: 14px; }
+  .beat h1, .beat h2 { font-size: clamp(40px, 5.6vw, 80px); margin-bottom: 16px; text-shadow: 0 2px 30px rgba(0, 0, 0, .5); }
+  .beat p { margin: 0 0 24px; font-size: 18.5px; color: #dfe5ea; max-width: 36ch; text-shadow: 0 1px 14px rgba(0, 0, 0, .7); }
+  .meter { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 12vh; display: grid; gap: 8px; justify-items: end; font: 700 12.5px var(--body); letter-spacing: .08em; text-transform: uppercase; color: #c9d1d8; }
+  .meter .bar { width: 180px; height: 4px; border-radius: 4px; background: rgba(255, 255, 255, .16); overflow: hidden; }
+  .meter .bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #8a7a5e, var(--ice)); transform-origin: left; transform: scaleX(0); }
+  .meter span b { color: var(--ice); }
+
+  section.block { padding: 96px 0; }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 38px; flex-wrap: wrap; }
+  .head h2 { font-size: clamp(34px, 4vw, 54px); }
+  .head p { margin: 0; color: var(--muted); max-width: 44ch; }
+  .note { font-size: 14px; color: var(--faint); margin: 18px 0 0; }
+  .pkgs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .pkg { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+  .pkg img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .pkg div { padding: 20px 20px 24px; display: grid; gap: 8px; align-content: start; }
+  .pkg h3 { font-size: 19px; }
+  .pkg p { margin: 0; color: var(--muted); font-size: 15px; }
+  .pkg .price { font: 600 22px var(--head); color: var(--ice); }
+  .pkg .price small { font: 600 13px var(--body); color: var(--faint); }
+
+  .inside .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 56px; align-items: center; }
+  .inside img { border-radius: 22px; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .inside h2, .book h2, .find h2 { font-size: clamp(34px, 4vw, 54px); margin-bottom: 18px; }
+  .inside p { color: var(--muted); margin: 0 0 18px; }
+  .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .ticks li { display: flex; gap: 12px; font-weight: 600; }
+  .ticks svg { width: 22px; height: 22px; color: var(--ice); flex: none; margin-top: 2px; }
+
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  .steps li { counter-increment: s; border-top: 2px solid var(--ice); padding: 18px 4px 0; }
+  .steps li::before { content: "0" counter(s); font: 600 14px var(--head); color: var(--ice); display: block; margin-bottom: 12px; }
+  .steps b { display: block; font: 600 18px/1.2 var(--head); margin-bottom: 8px; }
+  .steps span { color: var(--muted); font-size: 15.5px; }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 44px; }
+  .gallery img { border-radius: 18px; width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+  .book { background: var(--bg-2); }
+  .book .wrap { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 56px; align-items: start; }
+  .book p { color: var(--muted); margin: 0 0 18px; }
+  .book .call { font: 600 26px/1 var(--head); text-decoration: none; color: var(--ice); }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: grid; gap: 14px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label { display: grid; gap: 6px; font-size: 14.5px; font-weight: 600; color: #dfe5ea; }
+  input, select { width: 100%; min-height: 48px; border: 1.5px solid #2e343c; border-radius: 12px; padding: 10px 13px; font: 400 16px var(--body); color: var(--ink); background: #0e1013; color-scheme: dark; }
+  input:focus, select:focus { outline: none; border-color: var(--ice); }
+  form .btn { width: 100%; min-height: 54px; }
+  .sent { display: none; background: rgba(159, 216, 255, .1); border: 1px solid rgba(159, 216, 255, .4); color: #d9efff; padding: 14px 16px; border-radius: 12px; font-size: 15.5px; margin: 0; }
+  .sent a { color: #fff; font-weight: 700; }
+  form.done .sent { display: block; }
+
+  .find .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: stretch; }
+  .map { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); min-height: 380px; }
+  .map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; filter: invert(.9) hue-rotate(180deg) saturate(.6) brightness(.95); }
+  .find p { color: var(--muted); margin: 0 0 20px; }
+  table.hours { width: 100%; border-collapse: collapse; font-size: 16px; }
+  table.hours td { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  table.hours td:last-child { text-align: right; font-weight: 700; }
+
+  footer { padding: 50px 0 64px; color: var(--faint); font-size: 14.5px; border-top: 1px solid var(--line); }
+  footer .wrap { display: grid; gap: 14px; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 30px; align-items: center; color: var(--muted); }
+  footer .credits { font-size: 13px; }
+
+  @media (max-width: 900px) {
+    nav.links a:not(.btn) { display: none; }
+    .pkgs { grid-template-columns: 1fr 1fr; }
+    .inside .wrap, .book .wrap, .find .wrap { grid-template-columns: 1fr; gap: 32px; }
+    .steps { grid-template-columns: 1fr 1fr; gap: 26px 16px; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16.5px; }
+    .wrap { width: calc(100% - 32px); }
+    header.top .wrap { height: 72px; }
+    .mark b { font-size: 17px; }
+    nav.links .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+    .shade { background: linear-gradient(180deg, rgba(6, 7, 9, .88) 0%, rgba(6, 7, 9, .55) 38%, rgba(6, 7, 9, 0) 60%, rgba(6, 7, 9, .35) 100%); }
+    .beat { left: 16px; right: 16px; top: 132px; bottom: auto; }
+    .beat h1, .beat h2 { font-size: 40px; }
+    .beat p { font-size: 16.5px; margin-bottom: 18px; }
+    .meter { right: 16px; left: auto; top: 86px; bottom: auto; }
+    .meter .bar { width: 120px; }
+    section.block { padding: 68px 0; }
+    .pkgs { grid-template-columns: 1fr; }
+    .pkg { grid-template-rows: none; grid-template-columns: 120px 1fr; }
+    .pkg img { aspect-ratio: auto; height: 100%; }
+    .steps, .row2 { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr 1fr; }
+    .gallery img:last-child { display: none; }
+    form { padding: 22px 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wash { height: auto; }
+    .stage { position: relative; height: 92vh; }
+    .beat { position: relative; left: auto; bottom: auto; opacity: 1; transform: none; transition: none; }
+    .beats { position: absolute; inset: auto 0 10vh 0; }
+    .beat:not(.last) { display: none; }
+    .meter { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sample"><div class="wrap"><span>Sample site. Mirrorline Detail Co. is a made-up business.</span><a href="/">Built by Southsites</a></div></div>
+
+<div class="wash" id="wash">
+  <div class="stage" id="stage">
+    <canvas id="film" role="img" aria-label="A sports car in a dark wash bay goes from dusty and muddy to foamed, rinsed and glossy"></canvas>
+    <div class="shade"></div>
+    <div class="sweep" id="sweep"></div>
+    <div id="sparks" aria-hidden="true"></div>
+    <header class="top">
+      <div class="wrap">
+        <a class="mark" href="#wash" aria-label="Mirrorline Detail Co., home"><b>MIRRORLINE</b><i aria-hidden="true"></i><small>Detail Co.</small></a>
+        <nav class="links" aria-label="Main"><a href="#packages">Packages</a><a href="#inside">Interiors</a><a href="#find">Find us</a><a class="btn btn-ice" href="#book">Book a detail</a></nav>
+      </div>
+    </header>
+    <div class="beats">
+      <div class="beat on" data-a="0" data-b="0.16"><small>Car detailing in Scottsdale, Arizona</small><h1>Bring it in like this.</h1><p>Desert dust, monsoon mud, a month of the 101. Scroll and watch it come off.</p></div>
+      <div class="beat" data-a="0.2" data-b="0.4"><small>Step one</small><h2>Foam first.</h2><p>Thick foam soaks the grit loose before a mitt ever touches the paint.</p></div>
+      <div class="beat" data-a="0.44" data-b="0.8"><small>Step two</small><h2>Rinse, top down.</h2><p>Soft water and low pressure, so the dirt slides off instead of scratching on its way out.</p></div>
+      <div class="beat last" data-a="0.84" data-b="1.01"><small>Mirrorline finish</small><h2>Leave like this.</h2><p>Decontaminated, polished and sealed. Water beads and rolls right off.</p><a class="btn btn-ice" href="#book">Book a detail</a></div>
+    </div>
+    <div class="meter" aria-hidden="true"><span><b id="pct">0%</b> clean</span><div class="bar"><i id="bar"></i></div></div>
+  </div>
+</div>
+
+<main>
+<section class="block" id="packages">
+  <div class="wrap">
+    <div class="head"><h2>Packages</h2><p>Every package starts with a proper two-bucket hand wash. Nothing goes through a tunnel.</p></div>
+    <div class="pkgs">
+      <article class="pkg"><img src="img/beads.webp" width="800" height="1200" alt="Water beading on a black car hood next to the badge" loading="lazy"><div><h3>Wash and seal</h3><p>Foam, hand wash, wheels, glass and a spray sealant.</p><span class="price"><small>from </small>$89</span></div></article>
+      <article class="pkg"><img src="img/interior.webp" width="1200" height="800" alt="A detailer cleaning the inside of a red car door" loading="lazy"><div><h3>Full detail</h3><p>Inside and out: vacuum, steam, leather, plastics, then the full wash.</p><span class="price"><small>from </small>$249</span></div></article>
+      <article class="pkg"><img src="img/polish.webp" width="800" height="1422" alt="A detailer polishing a car panel with a machine polisher" loading="lazy"><div><h3>Paint correction</h3><p>Swirls and light scratches polished out under inspection lights.</p><span class="price"><small>from </small>$549</span></div></article>
+      <article class="pkg"><img src="img/coat.webp" width="800" height="1202" alt="A ceramic coating being dripped onto an applicator pad" loading="lazy"><div><h3>Ceramic coating</h3><p>A hard, slick layer that keeps the shine through Arizona summers.</p><span class="price"><small>from </small>$899</span></div></article>
+    </div>
+    <p class="note">Sample packages and prices for this concept site.</p>
+  </div>
+</section>
+
+<section class="block inside" id="inside">
+  <div class="wrap">
+    <img src="img/foam.webp" width="1200" height="800" alt="A detailer working a foamed sponge over a side window" loading="lazy">
+    <div>
+      <h2>Done by hand, start to finish</h2>
+      <p>One car at a time in a shaded bay, by the same detailer from check-in to hand-back. You get photos of the before and the after.</p>
+      <ul class="ticks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Drop off by 9, most cars back by 5</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>pH-neutral soaps, safe on coatings and wraps</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Mobile service for coatings at your garage</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="head"><h2>How it goes</h2><p>Simple on your end. Careful on ours.</p></div>
+    <ol class="steps">
+      <li><b>Book a slot</b><span>Pick a package and a day. We confirm by text.</span></li>
+      <li><b>Drop it off</b><span>We walk around the car with you and note anything that needs care.</span></li>
+      <li><b>We get to work</b><span>Foam, wash, decontaminate, then the package you chose.</span></li>
+      <li><b>Pick it up</b><span>A final walk-around in daylight, with before and after photos.</span></li>
+    </ol>
+    <div class="gallery">
+      <img src="img/wheel.webp" width="800" height="800" alt="A gloved hand wiping a polished wheel" loading="lazy">
+      <img src="img/kit.webp" width="800" height="1202" alt="A cart with polishes, pads and microfibre towels" loading="lazy">
+      <img src="img/beads.webp" width="800" height="1200" alt="Water beads on fresh paint" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="block book" id="book">
+  <div class="wrap">
+    <div>
+      <h2>Book a detail</h2>
+      <p>Tell us the car and the package. We'll text you a time that works.</p>
+      <a class="call" href="tel:+14805550127">(480) 555-0127</a>
+    </div>
+    <form id="f" novalidate>
+      <div class="row2"><label>Name<input name="name" autocomplete="name"></label><label>Phone<input name="phone" type="tel" autocomplete="tel"></label></div>
+      <div class="row2">
+        <label>Vehicle<select name="car"><option>Car or coupe</option><option>SUV or crossover</option><option>Truck</option><option>Van</option></select></label>
+        <label>Package<select name="pkg"><option>Wash and seal</option><option selected>Full detail</option><option>Paint correction</option><option>Ceramic coating</option></select></label>
+      </div>
+      <label>Preferred day<input type="date" name="day"></label>
+      <button class="btn btn-ice" type="submit">Request a time</button>
+      <p class="sent" role="status">This is a sample site, so nothing was booked. Like how it works? <a href="/" target="_top">Southsites</a> builds sites like this for real shops.</p>
+    </form>
+  </div>
+</section>
+
+<section class="block find" id="find">
+  <div class="wrap">
+    <div class="map"><iframe title="Map of Scottsdale, Arizona" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-111.985%2C33.45%2C-111.855%2C33.53&amp;layer=mapnik"></iframe></div>
+    <div>
+      <h2>Find us</h2>
+      <p>In south Scottsdale, minutes from Old Town. Shaded bays, a cold drink while you wait, and a ride to work if you need one.</p>
+      <table class="hours" aria-label="Opening hours">
+        <tr><td>Monday to Friday</td><td>8 am to 6 pm</td></tr>
+        <tr><td>Saturday</td><td>8 am to 4 pm</td></tr>
+        <tr><td>Sunday</td><td>Closed</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row"><a class="mark" href="#wash"><b>MIRRORLINE</b><i aria-hidden="true"></i><small>Detail Co.</small></a><span>Scottsdale, Arizona &nbsp; <a href="tel:+14805550127">(480) 555-0127</a></span></div>
+    <p>Sample site. Mirrorline Detail Co. is a made-up business, the packages and prices are samples, and the phone number is a fictional 555 number. Built as a sample by <a href="/">Southsites</a>.</p>
+    <p class="credits">The wash at the top was made with AI from a photo by Tima Miroshnichenko: Google Gemini added the dirt, Google Veo animated the rinse. Other photos from <a href="https://www.pexels.com/license/">Pexels</a>: Tima Miroshnichenko, Bulat843, WAVYVISUALS, Caio Renato de Campos, Malcolm Garret, Luis Quintero. Map &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>.</p>
+  </div>
+</footer>
+
+<script>
+  // sample site: the form never books anything, it just says so
+  const f = document.getElementById('f');
+  f.addEventListener('submit', (e) => { e.preventDefault(); f.classList.add('done'); });
+  { const t = new Date(); t.setDate(t.getDate() + 2); f.elements.day.value = t.toISOString().slice(0, 10); }
+
+  // the wash: frame 0 is the dirty car, 1-14 dissolve into the foam, 15-82 are the rinse, then a gloss sweep and glints
+  const N = 83, FOAM = 15, SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
+  const IW = SET === 'm' ? 456 : 1440, IH = 810, X0 = SET === 'm' ? 420 : 0;  // the phone set is a crop of the desktop frame
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('film'), ctx = canvas.getContext('2d'), wash = document.getElementById('wash');
+  const beats = [...document.querySelectorAll('.beat')], sweep = document.getElementById('sweep'), bar = document.getElementById('bar'), pct = document.getElementById('pct');
+  const frames = new Array(N);
+  let want = 0, shown = -1;
+  const pad = (i) => String(i).padStart(3, '0');
+  function load(i) {
+    if (frames[i]) return;
+    const img = new Image(); img.decoding = 'async'; img.src = `frames/${SET}/f${pad(i)}.webp`; frames[i] = img;
+    img.decode().then(() => { img.ok = true; draw(); }).catch(() => {});
+  }
+  function nearest(i) {
+    for (let d = 0; d < N; d++) {
+      if (frames[i - d] && frames[i - d].ok) return frames[i - d];
+      if (frames[i + d] && frames[i + d].ok) return frames[i + d];
+    }
+    return null;
+  }
+  let fit = { s: 1, x: 0, y: 0 };
+  function size() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
+    const s = Math.max(canvas.clientWidth / IW, canvas.clientHeight / IH);
+    fit = { s, x: (canvas.clientWidth - IW * s) / 2, y: (canvas.clientHeight - IH * s) / 2 };
+    placeSparks(); shown = -1; draw();
+  }
+  function draw() {
+    const img = nearest(want);
+    if (!img) return;
+    const k = frames.indexOf(img);
+    if (k === shown) return;
+    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    ctx.drawImage(img, (cw - img.naturalWidth * s) / 2, (ch - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
+    shown = k;
+  }
+  // glints on the headlights, the hood line and the lip lights (in desktop frame pixels)
+  const GLINTS = [[198, 535, 1], [1094, 540, .9], [684, 540, .75], [590, 470, .6], [110, 648, .7], [1152, 672, .65]];
+  const star = '<svg viewBox="0 0 40 40"><path d="M20 0 C21 14 26 19 40 20 C26 21 21 26 20 40 C19 26 14 21 0 20 C14 19 19 14 20 0Z" fill="#fff"/></svg>';
+  const sparks = GLINTS.map(([x, y, w]) => { const el = document.createElement('i'); el.className = 'spark'; el.innerHTML = star; el.dataset.w = w; el.dataset.x = x; el.dataset.y = y; document.getElementById('sparks').append(el); return el; });
+  function placeSparks() {
+    sparks.forEach((el) => { el.style.left = `${fit.x + (el.dataset.x - X0) * fit.s}px`; el.style.top = `${fit.y + el.dataset.y * fit.s}px`; });
+  }
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const ramp = (p, a, b) => clamp((p - a) / (b - a));
+  function progress() {
+    const r = wash.getBoundingClientRect();
+    return clamp(-r.top / Math.max(1, wash.offsetHeight - innerHeight));
+  }
+  function tick() {
+    const p = progress();
+    // dirty holds, then dissolves into the foam, then the rinse plays to the clean car
+    want = p < 0.12 ? 0 : p < 0.36 ? Math.round(ramp(p, 0.12, 0.36) * FOAM) : Math.round(FOAM + ramp(p, 0.36, 0.84) * (N - 1 - FOAM));
+    beats.forEach((b) => b.classList.toggle('on', p >= +b.dataset.a && p < +b.dataset.b));
+    const clean = Math.round(ramp(p, 0.08, 0.86) * 100);
+    pct.textContent = clean + '%'; bar.style.transform = `scaleX(${clean / 100})`;
+    const g = ramp(p, 0.84, 0.97);
+    sweep.style.opacity = String(g > 0 && g < 1 ? 1 : 0);
+    sweep.style.transform = `translateX(${-40 + g * 80}%)`;
+    sparks.forEach((el, i) => {
+      const t = ramp(p, 0.86 + i * 0.015, 0.93 + i * 0.015), a = Math.sin(t * Math.PI) * el.dataset.w;
+      el.style.opacity = String(a);
+      el.style.transform = `scale(${0.3 + a}) rotate(${t * 90}deg)`;
+    });
+    draw();
+  }
+  if (still) {
+    want = N - 1; load(N - 1);
+  } else {
+    load(0); load(FOAM); load(N - 1);
+    for (let i = 1; i < N; i++) setTimeout(() => load(i), 150 + i * 20);
+    addEventListener('scroll', tick, { passive: true });
+  }
+  addEventListener('resize', () => { size(); if (!still) tick(); });
+  size();
+  if (!still) tick();
+</script>
+</body>
+</html>

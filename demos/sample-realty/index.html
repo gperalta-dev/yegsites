@@ -40,7 +40,7 @@
   .brand { font: 400 30px/1 var(--serif); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; text-shadow: 0 1px 12px rgba(0, 0, 0, .4); }
 
   /* scroll story: a sticky canvas scrubs the rendered flight while the chapters scroll past */
-  .story { position: relative; height: 848vh; }
+  .story { position: relative; height: 1016vh; }
   .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #1b1f26; }
   canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 10, 14, .62) 0%, rgba(8, 10, 14, .25) 34%, rgba(8, 10, 14, 0) 48%, rgba(8, 10, 14, 0) 55%, rgba(8, 10, 14, .7) 100%); pointer-events: none; }
@@ -112,12 +112,13 @@
     <div class="meter" aria-hidden="true"><i id="meter"></i></div>
     <div class="loading" id="loading" aria-hidden="true">Loading the flight</div>
     <div class="chapters">
-      <div class="ch first on" data-from="0.000" data-to="0.098"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
-      <div class="ch" data-from="0.128" data-to="0.272"><small>The river valley</small><h2>Cross the river.</h2><p>Trails, trees and the bridges between downtown and the south side.</p></div>
-      <div class="ch" data-from="0.317" data-to="0.423"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
-      <div class="ch" data-from="0.453" data-to="0.543"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
-      <div class="ch" data-from="0.589" data-to="0.751"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.785" data-to="1.01"><small>Sample interior, made with AI</small><h2>Step inside.</h2><p>The entry, the living room and the kitchen. This interior was generated with AI from our render of the front door. It is not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch first on" data-from="0.000" data-to="0.082"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
+      <div class="ch" data-from="0.107" data-to="0.227"><small>The river valley</small><h2>Cross the river.</h2><p>Trails, trees and the bridges between downtown and the south side.</p></div>
+      <div class="ch" data-from="0.265" data-to="0.353"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
+      <div class="ch" data-from="0.378" data-to="0.453"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
+      <div class="ch" data-from="0.492" data-to="0.627"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.655" data-to="0.831"><small>Sample interior, made with AI</small><h2>Step inside.</h2><p>The entry, the living room and the kitchen. This interior was generated with AI from our render of the front door. It is not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.855" data-to="1.01"><small>Sample interior, made with AI</small><h2>Down the hall.</h2><p>Past the kitchen to the main bedroom, with the trees right outside the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
     </div>
   </div>
 </div>
@@ -162,7 +163,7 @@
   // portrait screens get a lighter centre-cropped set (456x810), wider screens the 1440x810 set.
   // frames 0-239 are the rendered flight, 240 on the AI walk inside
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
-  const COUNT = 318, canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
+  const COUNT = 381, canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
   const story = document.getElementById('story'), meter = document.getElementById('meter'), loading = document.getElementById('loading');
   const chapters = [...document.querySelectorAll('.ch')];
   const frames = new Array(COUNT), still = matchMedia('(prefers-reduced-motion: reduce)').matches;

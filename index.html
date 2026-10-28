@@ -144,7 +144,7 @@
   .r-in h3 { font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1; margin: 0 0 10px; text-shadow: 0 2px 24px rgba(0, 0, 0, .5); }
   .r-in p { margin: 0; font: 500 16px var(--body); color: #ece6dc; text-shadow: 0 1px 12px rgba(0, 0, 0, .7); max-width: 40ch; }
   .r-tag { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 96px; font: 700 13px var(--body); background: rgba(8, 10, 14, .7); padding: 8px 12px; border-radius: 99px; color: #f3d6a4; }
-  .fly-track { height: 355vh; }
+  .fly-track { height: 419vh; }
 
   /* sticky call to action, after the first screen */
   .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .82); backdrop-filter: blur(10px); border: 1px solid var(--line); transform: translateY(130%); opacity: 0; transition: transform .35s, opacity .35s; }
@@ -152,20 +152,35 @@
   .dock .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
   .dock .ic { width: 44px; padding: 0; }
 
-  /* "or what about": live sample sites slide in and scroll themselves */
-  .morph { position: relative; height: 200vh; }
-  .m-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 30%, #1b1f26, var(--bg) 70%); }
-  .m-title { position: absolute; top: 9vh; left: 0; right: 0; text-align: center; font: 900 clamp(44px, 8vw, 120px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0; padding: 0 20px; transition: opacity .3s; }
-  .m-title span { color: var(--accent); }
-  .win { position: absolute; left: 50%; top: 56%; width: min(1040px, 88vw); height: min(620px, 64vh); transform: translate(-50%, -50%); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); will-change: transform, opacity; }
-  .win .wbar { height: 36px; background: #e9e6df; display: flex; align-items: center; gap: 8px; padding: 0 14px; }
-  .win .wbar i { width: 11px; height: 11px; border-radius: 50%; background: #cfc9bd; }
-  .win .wbar b { margin-left: 10px; flex: 1; max-width: 420px; background: #fff; border-radius: 99px; font: 600 12.5px var(--body); color: #55524b; padding: 5px 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .win iframe { display: block; width: 100%; height: calc(100% - 36px); border: 0; pointer-events: none; background: #fff; }
-  .win .wlabel { position: absolute; right: 12px; bottom: 12px; font: 700 13px var(--body); background: rgba(14, 16, 19, .86); color: var(--ink); padding: 7px 12px; border-radius: 99px; }
-  .win.w2 { opacity: 0; }
-  .m-links { position: absolute; bottom: 4vh; left: 0; right: 0; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 0 20px; }
-  .m-links a { font-size: 15px; font-weight: 600; color: var(--muted); text-underline-offset: 4px; padding: 10px 4px; }
+  /* "or what about": each sample grows from a card to full screen, then its own page scrolls, slowly */
+  .sx { position: relative; height: 600vh; }
+  .sx-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 50% 30%, #1b1f26, var(--bg) 70%); }
+  .sx-title { position: absolute; top: 9vh; left: 0; right: 0; text-align: center; font: 900 clamp(44px, 8vw, 116px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0; padding: 0 20px; }
+  .sx-title span { color: var(--accent); }
+  .sx-sub { position: absolute; top: calc(9vh + clamp(44px, 8vw, 116px) * .95 + 12px); left: 0; right: 0; text-align: center; margin: 0; padding: 0 20px; color: var(--muted); font-size: 17px; }
+  .sx-win { position: absolute; inset: 0; transform-origin: 50% 100%; will-change: transform, opacity; opacity: 0; }
+  .sx-win .frame { position: absolute; inset: 0; overflow: hidden; border-radius: 0 0 var(--rad, 0px) var(--rad, 0px); background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); }
+  .sx-win iframe { display: block; width: 100%; height: 100%; border: 0; pointer-events: none; background: #fff; }
+  .sx-win .wbar { position: absolute; left: 0; right: 0; bottom: 100%; height: 42px; background: #e9e6df; display: flex; align-items: center; gap: 9px; padding: 0 18px; border-radius: var(--rad, 0px) var(--rad, 0px) 0 0; }
+  .sx-win .wbar i { width: 13px; height: 13px; border-radius: 50%; background: #cfc9bd; }
+  .sx-win .wbar b { margin-left: 12px; flex: 1; max-width: 480px; background: #fff; border-radius: 99px; font: 600 15px var(--body); color: #55524b; padding: 6px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sx-tag { position: absolute; z-index: 3; left: 18px; bottom: 18px; display: flex; gap: 10px; align-items: center; margin: 0; font: 700 13.5px var(--body); background: rgba(14, 16, 19, .9); color: var(--ink); padding: 5px 5px 5px 13px; border-radius: 99px; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; pointer-events: none; }
+  .sx-tag.on { opacity: 1; transform: none; pointer-events: auto; }
+  .sx-tag a { background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 8px 12px; border-radius: 99px; }
+
+  /* "like it?": a small tab on the side while the samples play, opens the inquiry popup */
+  .likeit { position: fixed; z-index: 21; right: 0; top: 50%; transform: translate(110%, -50%); transition: transform .35s; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 16px 11px; border: 0; border-radius: 14px 0 0 14px; background: var(--accent); color: var(--accent-ink); font: 800 15px/1 var(--body); cursor: pointer; box-shadow: 0 12px 34px -12px rgba(0, 0, 0, .7); }
+  .likeit.on { transform: translate(0, -50%); }
+  .likeit:hover { background: var(--accent-hover); }
+  .likeit span { writing-mode: vertical-rl; transform: rotate(180deg); }
+  .likeit svg { width: 20px; height: 20px; }
+  dialog.like { padding: 0; border: 0; background: transparent; color: var(--ink); width: min(460px, 100% - 24px); max-height: calc(100dvh - 24px); overflow: auto; }
+  dialog.like::backdrop { background: rgba(5, 6, 8, .74); backdrop-filter: blur(4px); }
+  dialog.like form.quote { position: relative; background: var(--surface); }
+  dialog.like h2 { padding-right: 44px; }
+  .x { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--muted); cursor: pointer; display: grid; place-items: center; }
+  .x:hover { color: var(--ink); background: var(--surface-2); }
+  .x svg { width: 20px; height: 20px; }
 
   /* real work */
   .real { position: relative; height: 130vh; }
@@ -174,7 +189,7 @@
   .real h2 { font: 900 clamp(44px, 6vw, 88px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0 0 18px; }
   .real p { color: var(--muted); font-size: 18px; margin: 0 0 24px; max-width: 34ch; }
   .tagreal { display: inline-flex; font-size: 13.5px; font-weight: 700; color: var(--ok); background: rgba(87, 212, 145, .1); border: 1px solid rgba(87, 212, 145, .35); padding: 5px 12px; border-radius: 99px; margin-bottom: 18px; }
-  .ek { position: relative; height: min(640px, 78vh); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); }
+  .ek { position: relative; height: min(640px, 100vh - 200px); height: min(640px, 100svh - 200px); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); }
   .ek .wbar { height: 36px; background: #e9e6df; display: flex; align-items: center; gap: 8px; padding: 0 14px; position: relative; z-index: 2; }
   .ek .wbar i { width: 11px; height: 11px; border-radius: 50%; background: #cfc9bd; }
   .ek .wbar b { margin-left: 10px; background: #fff; border-radius: 99px; font: 600 12.5px var(--body); color: #55524b; padding: 5px 14px; }
@@ -217,9 +232,9 @@
   @media (max-width: 1000px) {
     .hero .wrap { grid-template-columns: 1fr; gap: 28px; padding: 92px 0 40px; }
     .hero-ctas { display: flex; }
-    .r-stage .wrap { grid-template-columns: 1fr; gap: 22px; align-content: center; }
+    .r-stage .wrap { display: flex; flex-direction: column; justify-content: center; gap: 20px; padding: 28px 0 calc(96px + env(safe-area-inset-bottom)); }
     .real p { margin-bottom: 14px; }
-    .ek { height: 56vh; }
+    .ek { flex: 1 1 0; height: auto; min-height: 0; max-height: 620px; }
     .faces { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .faces li:nth-child(even) { transform: none; }
     .faces li:last-child { grid-column: span 2; aspect-ratio: 16 / 10; }
@@ -244,13 +259,15 @@
     .r-card h3 { font-size: 25px; }
     .r-tag { right: auto; left: 20px; top: 80px; bottom: auto; }
     .cap { left: 20px; right: 20px; bottom: 110px; }
-    .win { width: 88vw; height: 54vh; top: 51%; }
-    .m-links { bottom: 12vh; }
-    .m-links a:last-child { display: none; }
     .r-card { width: auto; right: 20px; bottom: 96px; }
     .r-card p:not(.pnote), .r-card .pnote { display: none; }
     .r-card .price { font-size: 28px; margin-bottom: 12px; }
-    .m-title { top: 7vh; }
+    .sx-title { top: 7vh; }
+    .sx-sub { top: calc(7vh + 92px); font-size: 15px; }
+    .sx-win .wbar { height: 36px; padding: 0 14px; }
+    .sx-win .wbar b { font-size: 14px; }
+    .sx-tag { left: 12px; bottom: calc(84px + env(safe-area-inset-bottom)); }
+    .likeit { padding: 13px 9px; font-size: 14px; }
     .people { padding-top: 80px; }
     .hero .wrap { padding-top: 84px; gap: 22px; }
     h1 { margin-bottom: 18px; }
@@ -264,17 +281,25 @@
     .people .intro { margin-bottom: 28px; }
     .credit { margin-top: 18px; }
     .close { padding: 56px 0 70px; margin-top: 40px; }
+    .real h2 { font-size: 42px; margin-bottom: 10px; }
+    .real p { font-size: 16px; margin-bottom: 12px; }
+    .tagreal { margin-bottom: 10px; }
+    .real .btn { min-height: 46px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .fly-track, .morph, .real { height: auto; }
-    .stage, .m-stage, .r-stage { position: relative; }
+    .fly-track, .sx, .real { height: auto; }
+    .stage, .sx-stage, .r-stage { position: relative; }
     .stage { height: 100svh; }
     .cap, .realty { display: none; }
-    .m-stage { height: auto; padding: 80px 0; display: block; }
-    .m-title { position: static; margin-bottom: 30px; }
-    .win { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 30px; opacity: 1 !important; }
-    .m-links { position: static; }
+    .sx-stage { height: auto; padding: 72px 0 40px; }
+    .sx-title, .sx-sub { position: static; }
+    .sx-sub { margin-top: 12px; }
+    .sx-win { position: relative; inset: auto; width: min(1100px, 100% - 32px); height: 78vh; margin: 70px auto 0; opacity: 1; --rad: 14px; }
+    .sx-win iframe { pointer-events: auto; }
+    .sx-tag { position: static; opacity: 1; transform: none; pointer-events: auto; width: max-content; margin: 14px auto 0; }
+    .likeit { transition: none; }
     .r-stage { height: auto; padding: 80px 0; }
+    .ek { flex: none; height: min(640px, 70vh); }
     .stills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 40px 0; }
     .stills img { width: 100%; height: auto; border-radius: 12px; display: block; }
     .stills p { grid-column: 1 / -1; margin: 0; font-size: 15px; color: var(--muted); }
@@ -302,6 +327,30 @@
   <a class="btn btn-line ic" href="tel:+18254615061" aria-label="Call 825-461-5061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
 </div>
 
+<button class="likeit" id="likeit" type="button" aria-haspopup="dialog" aria-controls="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Like it?</span></button>
+<dialog class="like" id="like" aria-labelledby="like-h">
+  <form class="quote" id="like-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+    <button class="x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h2 class="hide-done" id="like-h">Want one like this?</h2>
+    <p class="note hide-done">Tell me about your business. I'll build a free preview and send you the link.</p>
+    <input type="hidden" name="access_key" value="">
+    <input type="hidden" name="subject" value="Southsites: Like it? request">
+    <input type="hidden" name="from_name" value="Southsites website">
+    <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+    <div class="row2 hide-done">
+      <div class="field"><label for="l-name">Your name</label><input id="l-name" name="name" required autocomplete="name"><span class="err">Add your name so I know who to reply to.</span></div>
+      <div class="field"><label for="l-biz">Business name</label><input id="l-biz" name="business" required autocomplete="organization"><span class="err">Add your business name.</span></div>
+    </div>
+    <div class="field hide-done"><label for="l-contact">Phone or email</label><input id="l-contact" name="contact" required autocomplete="tel" inputmode="email" placeholder="So I can send you the link"><span class="err">Add a phone number with area code, or an email.</span></div>
+    <div class="field hide-done"><label for="l-liked">Which sample caught your eye?</label>
+      <select id="l-liked" name="liked"><option>The realty flight</option><option>Saltbox Plumbing</option><option>Forno Lume</option><option>Mirrorline Detail</option><option>Just looking around</option></select>
+    </div>
+    <button class="btn btn-main hide-done" type="submit"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
+    <div class="status" role="status" aria-live="polite"></div>
+    <p class="small hide-done how-sent">Free and no obligation. I only use your details to reply.</p>
+  </form>
+</dialog>
+
 <main id="main">
 <div class="fly" id="fly">
   <div class="stage" id="stage">
@@ -318,7 +367,7 @@
         <p class="pnote">Sample price for this concept demo.</p>
         <a class="r-btn" href="demos/sample-realty/" tabindex="-1">See the full sample site</a>
       </div>
-      <div class="r-in"><h3>Step inside.</h3><p>The entry, the living room and the kitchen. This interior was made with AI from our render of the front door. It is not a real home.</p></div>
+      <div class="r-in"><h3>Step inside.</h3><p>The entry, the living room, the kitchen and down the hall to the main bedroom. Made with AI from our render of the front door. It is not a real home.</p></div>
       <span class="r-tag">Sample site by Southsites. Sample Realty is made up.</span>
     </div>
   </div>
@@ -360,34 +409,53 @@
         </div>
         <button class="btn btn-main hide-done" type="submit" id="send"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
         <div class="status" id="status" role="status" aria-live="polite"></div>
-        <p class="small hide-done" id="how-sent">Free and no obligation. I only use your details to reply.</p>
+        <p class="small hide-done how-sent" id="how-sent">Free and no obligation. I only use your details to reply.</p>
       </form>
     </div>
   </header>
   <div class="fly-track" id="track"></div>
   <div class="wrap stills" aria-label="Stills from the sample realty site">
     <img src="demos/sample-realty/frames/d/f000.webp" alt="Downtown Edmonton from the air at sunset" loading="lazy" width="1440" height="810">
-    <img src="demos/sample-realty/frames/d/f120.webp" alt="A new suburb with autumn trees" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f172.webp" alt="A two-storey house with a double garage" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f310.webp" alt="An open-plan kitchen with a white island, made with AI" loading="lazy" width="1440" height="810">
-    <p>Sample Realty and the house are made up. The kitchen was made with AI and is not a real home.</p>
+    <img src="demos/sample-realty/frames/d/f376.webp" alt="A bright bedroom with autumn trees outside the window, made with AI" loading="lazy" width="1440" height="810">
+    <p>Sample Realty and the house are made up. The kitchen and bedroom were made with AI and are not a real home.</p>
   </div>
 </div>
 
-<section class="morph" id="samples" aria-label="Sample sites">
-  <div class="m-stage">
-    <h2 class="m-title" id="m-title">Or what about <span>a barber?</span></h2>
-    <div class="win w1" id="w1">
-      <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/sample-barber</b></div>
-      <iframe src="demos/sample-barber/" title="Sample Barber Co., a made-up barber shop site" loading="lazy" tabindex="-1"></iframe>
-      <span class="wlabel">Sample site. Sample Barber Co. is made up.</span>
+<section class="samples" id="samples" aria-label="Sample sites">
+  <div class="sx" data-name="Saltbox Plumbing">
+    <div class="sx-stage">
+      <h2 class="sx-title">Or what about <span>a plumber?</span></h2>
+      <p class="sx-sub">Saltbox Plumbing &amp; Heating in Halifax. A made-up business with a finished site.</p>
+      <div class="sx-win">
+        <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/saltbox-plumbing</b></div>
+        <div class="frame"><iframe data-src="demos/saltbox-plumbing/" title="Saltbox Plumbing and Heating, a made-up plumber's site" tabindex="-1" loading="lazy"></iframe></div>
+      </div>
+      <p class="sx-tag">Sample site. Made-up business.<a href="demos/saltbox-plumbing/">Open it</a></p>
     </div>
-    <div class="win w2" id="w2">
-      <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/sample-bakery</b></div>
-      <iframe src="demos/sample-bakery/" title="Sample Bake House, a made-up bakery site" loading="lazy" tabindex="-1"></iframe>
-      <span class="wlabel">Sample site. Sample Bake House is made up.</span>
+  </div>
+  <div class="sx" data-name="Forno Lume">
+    <div class="sx-stage">
+      <h2 class="sx-title">Or <span>a pizza place?</span></h2>
+      <p class="sx-sub">Forno Lume on Federal Hill, Providence. Made up, from the menu to the map.</p>
+      <div class="sx-win">
+        <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/forno-lume</b></div>
+        <div class="frame"><iframe data-src="demos/forno-lume/" title="Forno Lume, a made-up restaurant's site" tabindex="-1" loading="lazy"></iframe></div>
+      </div>
+      <p class="sx-tag">Sample site. Made-up business.<a href="demos/forno-lume/">Open it</a></p>
     </div>
-    <div class="m-links"><a href="demos/sample-barber/">Open the barber sample</a><a href="demos/sample-bakery/">Open the bakery sample</a><a href="demos/sample-realty/">Open the realty sample</a></div>
+  </div>
+  <div class="sx" data-name="Mirrorline Detail">
+    <div class="sx-stage">
+      <h2 class="sx-title">Or <span>a detail shop?</span></h2>
+      <p class="sx-sub">Mirrorline Detail Co. in Scottsdale. Keep scrolling and the car gets cleaner.</p>
+      <div class="sx-win">
+        <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/mirrorline-detail</b></div>
+        <div class="frame"><iframe data-src="demos/mirrorline-detail/" title="Mirrorline Detail Co., a made-up detail shop's site" tabindex="-1" loading="lazy"></iframe></div>
+      </div>
+      <p class="sx-tag">Sample site. Made-up business.<a href="demos/mirrorline-detail/">Open it</a></p>
+    </div>
   </div>
 </section>
 
@@ -451,62 +519,69 @@
 <footer>
   <div class="wrap">
     <div class="row"><span>Jan Gabriel, Southsites, Edmonton</span><span><a href="tel:+18254615061">825-461-5061</a> &nbsp; <a href="mailto:contact@southsites.ca">contact@southsites.ca</a></span></div>
-    <span>Sample Realty, Sample Barber Co. and Sample Bake House are made-up businesses built as samples. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). The walk-through inside the house was generated with Google Veo (AI) from our render of the front door, and is not a real home. Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>.</span>
+    <span>Sample Realty, Saltbox Plumbing &amp; Heating, Forno Lume and Mirrorline Detail Co. are made-up businesses built as samples, and each sample credits its own photos. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). The walk-through inside the house was generated with Google Veo (AI) from our render of the front door, and is not a real home. The Mirrorline wash was made with Google Gemini and Veo from a Pexels photo by Tima Miroshnichenko. Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>.</span>
   </div>
 </footer>
 
 <script>
   document.documentElement.classList.add('js');
   const SMS = '+18254615061', EMAIL = 'contact@southsites.ca';
-  const form = document.getElementById('quote'), status = document.getElementById('status'), send = document.getElementById('send');
+  const form = document.getElementById('quote'), likeForm = document.getElementById('like-form');
+  // one Web3Forms key for every form on the page (it goes in the main form's access_key). empty = forms open a text to Gabriel
   const KEY = document.getElementById('w3f-key').value.trim();
-  // no Web3Forms key yet: say plainly that the button hands off to the visitor's messages app
-  if (!KEY) {
-    send.querySelector('.label').textContent = 'Continue in Messages';
-    document.getElementById('how-sent').innerHTML = 'Opens a text to Gabriel with your details filled in. Rather email? <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>';
-  }
-  function say(kind, html) { status.className = 'status show ' + kind; status.innerHTML = html; }
-  function check() {
-    let first = null;
-    const rules = {
-      name: (v) => v.trim().length > 0,
-      business: (v) => v.trim().length > 0,
-      contact: (v) => v.replace(/\D/g, '').length >= 10 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
-    };
-    for (const [name, ok] of Object.entries(rules)) {
-      const input = form.elements[name], field = input.closest('.field'), good = ok(input.value);
-      field.classList.toggle('bad', !good);
-      input.setAttribute('aria-invalid', good ? 'false' : 'true');
-      if (!good && !first) first = input;
-    }
-    if (first) first.focus();
-    return !first;
-  }
-  form.addEventListener('input', (e) => { const f = e.target.closest('.field.bad'); if (f) f.classList.remove('bad'); });
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!check()) return;
-    const d = Object.fromEntries(new FormData(form));
-    const text = `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}. You can reach me at ${d.contact}.`;
-    const fallback = `<a href="sms:${SMS}?&body=${encodeURIComponent(text)}">text 825-461-5061</a> or <a href="mailto:${EMAIL}?subject=${encodeURIComponent('Website preview for ' + d.business)}&body=${encodeURIComponent(text)}">email me</a>`;
+  function wire(f, message) {
+    const status = f.querySelector('.status'), send = f.querySelector('button[type=submit]'), label = send.querySelector('.label');
+    f.elements.access_key.value = KEY;
+    // no Web3Forms key yet: say plainly that the button hands off to the visitor's messages app
     if (!KEY) {
-      say('warn', `Your messages app should open with your request filled in. Tap send there to reach me. Nothing opened? ${fallback}.`);
-      location.href = `sms:${SMS}?&body=${encodeURIComponent(text)}`;
-      return;
+      label.textContent = 'Continue in Messages';
+      f.querySelector('.how-sent').innerHTML = 'Opens a text to Gabriel with your details filled in. Rather email? <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>';
     }
-    send.disabled = true; send.classList.add('busy'); send.querySelector('.label').textContent = 'Sending...';
-    try {
-      const r = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-      const j = await r.json().catch(() => ({}));
-      if (!r.ok || j.success === false) throw new Error(j.message || r.status);
-      form.classList.add('done');
-      say('ok', `<strong>Request sent.</strong> I'll get back to you at ${d.contact.replace(/[<>&"]/g, '')} within a day.`);
-    } catch (err) {
-      say('bad', `That didn't send. Please ${fallback} instead.`);
-    } finally {
-      send.disabled = false; send.classList.remove('busy'); send.querySelector('.label').textContent = 'Send my request';
+    const say = (kind, html) => { status.className = 'status show ' + kind; status.innerHTML = html; };
+    function check() {
+      let first = null;
+      const rules = {
+        name: (v) => v.trim().length > 0,
+        business: (v) => v.trim().length > 0,
+        contact: (v) => v.replace(/\D/g, '').length >= 10 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+      };
+      for (const [name, ok] of Object.entries(rules)) {
+        const input = f.elements[name], field = input.closest('.field'), good = ok(input.value);
+        field.classList.toggle('bad', !good);
+        input.setAttribute('aria-invalid', good ? 'false' : 'true');
+        if (!good && !first) first = input;
+      }
+      if (first) first.focus();
+      return !first;
     }
-  });
+    f.addEventListener('input', (e) => { const fl = e.target.closest('.field.bad'); if (fl) fl.classList.remove('bad'); });
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!check()) return;
+      const d = Object.fromEntries(new FormData(f));
+      const text = message(d);
+      const fallback = `<a href="sms:${SMS}?&body=${encodeURIComponent(text)}">text 825-461-5061</a> or <a href="mailto:${EMAIL}?subject=${encodeURIComponent('Website preview for ' + d.business)}&body=${encodeURIComponent(text)}">email me</a>`;
+      if (!KEY) {
+        say('warn', `Your messages app should open with your request filled in. Tap send there to reach me. Nothing opened? ${fallback}.`);
+        location.href = `sms:${SMS}?&body=${encodeURIComponent(text)}`;
+        return;
+      }
+      send.disabled = true; send.classList.add('busy'); label.textContent = 'Sending...';
+      try {
+        const r = await fetch(f.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(f) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || j.success === false) throw new Error(j.message || r.status);
+        f.classList.add('done');
+        say('ok', `<strong>Request sent.</strong> I'll get back to you at ${d.contact.replace(/[<>&"]/g, '')} within a day.`);
+      } catch (err) {
+        say('bad', `That didn't send. Please ${fallback} instead.`);
+      } finally {
+        send.disabled = false; send.classList.remove('busy'); label.textContent = 'Send my request';
+      }
+    });
+  }
+  wire(form, (d) => `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}. You can reach me at ${d.contact}.`);
+  wire(likeForm, (d) => `Hi Gabriel, I'm ${d.name} from ${d.business}. I liked the ${d.liked} sample and I'd like a free preview. You can reach me at ${d.contact}.`);
   // anything that jumps to the form puts the cursor in the first field
   document.querySelectorAll('[data-focus]').forEach((a) => a.addEventListener('click', (e) => {
     e.preventDefault();
@@ -517,7 +592,7 @@
   // ---------------------------------------------------------------- the scroll story
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
-  const EXT = 120, IN = 78;          // every second frame of the 240-frame flight, then the walk inside
+  const EXT = 120, IN = 141;          // every second frame of the 240-frame flight, then the walk inside
   const N = EXT + IN;
   const AI = [];                       // frame numbers that have an AI-polished version in story/ (none yet)
   const pad = (i) => String(i).padStart(3, '0');
@@ -566,18 +641,56 @@
   const clamp = (v) => Math.min(1, Math.max(0, v));
   const ramp = (p, a, b) => clamp((p - a) / (b - a));
 
-  // samples: two live sites, the second fades over the first, each scrolls itself
-  const morph = document.getElementById('samples'), w1 = document.getElementById('w1'), w2 = document.getElementById('w2');
-  const mTitle = document.getElementById('m-title');
+  // samples: each made-up business grows from a card to full screen, then its own page scrolls, slowly
+  // px of the sample's page per px of ours, and how much of each sample page to show before moving on
+  const RATIO = innerWidth < 700 ? 2.2 : 1.5, SHOW = 0.74;
+  const sx = [...document.querySelectorAll('.sx')].map((el) => ({ el, name: el.dataset.name, win: el.querySelector('.sx-win'), frame: el.querySelector('iframe'),
+    title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0 }));
   const real = document.getElementById('work'), ek = document.getElementById('ek');
-  function frameScroll(win, f) {
-    const fr = win.querySelector('iframe');
-    try {
-      const doc = fr.contentDocument;
-      if (!doc || !doc.documentElement) return;
-      const max = doc.documentElement.scrollHeight - fr.clientHeight;
-      fr.contentWindow.scrollTo(0, Math.max(0, max * f));
-    } catch (e) {}
+  function dims(s) {
+    const vh = innerHeight;
+    try { const d = s.frame.contentDocument; if (d && d.documentElement && s.frame.getAttribute('src')) s.max = Math.max(0, d.documentElement.scrollHeight - s.frame.clientHeight); } catch (e) {}
+    s.enter = vh * 0.3; s.grow = vh * 0.45; s.run = (s.max * SHOW || vh * 3) / RATIO; s.hold = vh * 0.15;
+    if (!still) s.el.style.height = `${Math.round(vh + s.enter + s.grow + s.run + s.hold)}px`;
+  }
+  function loadSamples() {
+    sx.forEach((s) => {
+      if (s.frame.getAttribute('src')) return;
+      s.frame.addEventListener('load', () => { dims(s); setTimeout(() => { dims(s); if (!still) tick(); }, 1500); if (!still) tick(); });
+      if (!still) s.frame.loading = 'eager';
+      s.frame.src = s.frame.dataset.src;
+    });
+  }
+  let current = 'The realty flight';
+  function samples(vh) {
+    for (const s of sx) {
+      const y = -s.el.getBoundingClientRect().top;
+      const e = ramp(y, -vh * 0.4, s.enter), g = ramp(y, s.enter, s.enter + s.grow), t = ramp(y, s.enter + s.grow, s.enter + s.grow + s.run);
+      const k = g * g * (3 - 2 * g), s0 = innerWidth < 700 ? 0.66 : 0.6, sc = s0 + (1 - s0) * k;
+      s.win.style.transform = `translateY(${(1 - e) * 34 - (1 - k) * 5}vh) scale(${sc})`;
+      s.win.style.opacity = String(e);
+      s.win.style.setProperty('--rad', `${((1 - k) * 18 / sc).toFixed(1)}px`);
+      s.title.style.opacity = s.sub.style.opacity = String(1 - ramp(g, 0, 0.45));
+      s.tag.classList.toggle('on', k > 0.98 && y < s.el.offsetHeight - vh);
+      s.goal = t * s.max * SHOW;
+      if (y > -vh * 0.5 && y < s.el.offsetHeight - vh * 0.5) current = s.name;
+    }
+  }
+  // the sample pages glide to where the scroll says instead of jumping
+  let gliding = false;
+  function glide() {
+    let moving = false;
+    for (const s of sx) {
+      const d = s.goal - s.cur;
+      if (Math.abs(d) < 0.5) {
+        if (d) { s.cur = s.goal; try { s.frame.contentWindow.scrollTo(0, s.cur); } catch (e) {} }
+        continue;
+      }
+      s.cur += d * 0.18; moving = true;
+      try { s.frame.contentWindow.scrollTo(0, s.cur); } catch (e) {}
+    }
+    gliding = moving;
+    if (moving) requestAnimationFrame(glide);
   }
 
   function tick() {
@@ -594,17 +707,11 @@
     realty.classList.toggle('inside', want >= EXT);
     draw();
     dock.classList.toggle('on', y > hero.offsetHeight * 0.8);
-    // or what about
-    const m = morph.getBoundingClientRect();
-    const q = clamp(-m.top / Math.max(1, m.height - vh));
-    const in1 = ramp(q, 0, 0.12), swap = ramp(q, 0.48, 0.6);
-    w1.style.transform = `translate(-50%, ${-50 + (1 - in1) * 40}%) scale(${0.94 + 0.06 * in1})`;
-    w1.style.opacity = String(in1 * (1 - swap));
-    w2.style.opacity = String(swap);
-    w2.style.transform = `translate(-50%, ${-50 + (1 - swap) * 12}%) scale(${0.96 + 0.04 * swap})`;
-    mTitle.innerHTML = q < 0.54 ? 'Or what about <span>a barber?</span>' : 'Or <span>a bakery?</span>';
-    frameScroll(w1, ramp(q, 0.1, 0.5));
-    frameScroll(w2, ramp(q, 0.58, 1));
+    // or what about: the samples grow to full screen and their pages glide
+    current = 'The realty flight';
+    samples(vh);
+    if (!gliding) { gliding = true; requestAnimationFrame(glide); }
+    likeTab.classList.toggle('on', y > hero.offsetHeight * 0.8 && y < real.offsetTop - vh * 0.4);
     // real work: the screenshot scrolls inside its window
     const r = real.getBoundingClientRect();
     const s = clamp(-r.top / Math.max(1, r.height - vh));
@@ -612,20 +719,31 @@
     ek.style.transform = `translateY(${-Math.max(0, ek.offsetHeight - box) * s}px)`;
   }
 
+  const likeTab = document.getElementById('likeit'), like = document.getElementById('like');
+  likeTab.addEventListener('click', () => {
+    likeForm.elements.liked.value = current;
+    like.showModal();
+    setTimeout(() => likeForm.elements.name.focus(), 60);
+  });
+  like.addEventListener('click', (e) => { if (e.target === like || e.target.closest('[data-close]')) like.close(); });
+  sx.forEach(dims);
+
   if (still) {
     load(0);
     dock.classList.add('on');
+    likeTab.classList.add('on');
+    loadSamples();
   } else {
     load(0);
     // the first screen is instant; the flight loads just behind it, sparse first, the rest when the visitor starts moving
     const sparse = () => { for (let k = 6; k < N; k += 6) load(k); };
     const rest = () => { for (let k = 1; k < N; k++) setTimeout(() => load(k), k * 18); };
-    addEventListener('load', () => setTimeout(sparse, 200), { once: true });
+    addEventListener('load', () => { setTimeout(sparse, 200); setTimeout(loadSamples, 2500); }, { once: true });
     addEventListener('scroll', () => { sparse(); rest(); }, { once: true, passive: true });
     setTimeout(rest, 4000);
     addEventListener('scroll', tick, { passive: true });
   }
-  addEventListener('resize', () => { size(); if (!still) tick(); });
+  addEventListener('resize', () => { size(); sx.forEach(dims); if (!still) tick(); });
   size();
   if (!still) tick();
 </script>
