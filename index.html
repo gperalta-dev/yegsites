@@ -628,7 +628,9 @@
   // style writes only when the value really changed, so a scroll frame never restyles what stood still
   const put = (el, prop, v) => { const c = el._c || (el._c = {}); if (c[prop] !== v) { c[prop] = v; el.style.setProperty(prop, v); } };
   // time-based easing: the same feel at 60 and 120 Hz. ms to close most of the gap, shorter on touch where the finger leads
-  const TAU = touch ? 55 : 95;
+  // a laptop trackpad sends many small steps and wants the short catch-up too; only chunky mouse-wheel notches get the long one
+  let TAU = touch ? 55 : 70;
+  if (!touch) addEventListener('wheel', (e) => { TAU = e.deltaMode || Math.abs(e.deltaY) >= 50 ? 95 : 55; }, { passive: true });
   const ease = (dt) => 1 - Math.exp(-dt / TAU);
 
   // the flight: an image sequence on a canvas. it eases toward the scroll position and blends the two nearest frames,
