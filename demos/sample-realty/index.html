@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sample Realty | Concept demo by Whyte Web</title>
-<meta name="description" content="Concept demo website by Whyte Web: a scroll story from downtown Edmonton to a home in the suburbs. Sample Realty is a made-up business.">
+<meta name="description" content="Concept demo website by Whyte Web: a 3D scroll story from downtown Edmonton, across the river valley, to a home in the suburbs. Sample Realty is a made-up business.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0d1117">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="frames/f000.webp" fetchpriority="high">
+<link rel="preload" as="image" href="frames/d/f000.webp" fetchpriority="high" media="(min-aspect-ratio: 9/10)">
+<link rel="preload" as="image" href="frames/m/f000.webp" fetchpriority="high" media="(max-aspect-ratio: 9/10)">
 <link rel="icon" href="/apple-touch-icon.png">
 <style>
   :root {
@@ -74,6 +75,7 @@
   .showing .ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
   footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 15px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; }
+  footer .credits { flex-basis: 100%; font-size: 13.5px; }
 
   @media (max-width: 800px) {
     header.top .wrap { min-height: 68px; }
@@ -112,7 +114,7 @@
     <div class="chapters">
       <div class="ch first on" data-from="0" data-to="0.13"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
       <div class="ch" data-from="0.17" data-to="0.36"><small>The river valley</small><h2>Cross the river.</h2><p>Trails, trees and the bridges between downtown and the south side.</p></div>
-      <div class="ch" data-from="0.42" data-to="0.56"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet crescents, parks and schools close by.</p></div>
+      <div class="ch" data-from="0.42" data-to="0.56"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
       <div class="ch" data-from="0.6" data-to="0.72"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
       <div class="ch" data-from="0.78" data-to="1.01"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
     </div>
@@ -135,7 +137,7 @@
     </div>
     <ul class="feat">
       <li>Bonus room over the garage, big enough for a home office or playroom.</li>
-      <li>Covered front porch with stone columns.</li>
+      <li>Covered front porch with a stone column and coach lights.</li>
       <li>Back deck and a fully fenced yard.</li>
       <li>Boulevard trees out front and a park a short walk away.</li>
       <li>Downtown and the river valley across the bridge.</li>
@@ -152,10 +154,12 @@
 </section>
 </main>
 
-<footer><div class="wrap"><span>Sample Realty is a concept demo, not a client. Built by Whyte Web.</span><span>3D flight rendered in Blender. The city is a stylized take on Edmonton, not an exact model.</span></div></footer>
+<footer><div class="wrap"><span>Sample Realty is a concept demo, not a client. Built by Whyte Web.</span><span>3D flight rendered in Blender (Cycles). Downtown, the river and the valley follow real building footprints and heights. The suburb and the house are made up.</span><span class="credits">Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Elevation from Terrain Tiles on AWS, including data from Natural Resources Canada (Open Government Licence, Canada). Trees, plants, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0).</span></div></footer>
 
 <script>
-  // scroll-scrubbed flight: frames load sparse first (every 8th), then fill in, and the canvas shows the nearest loaded one
+  // scroll-scrubbed flight: frames load sparse first (every 8th), then fill in, and the canvas shows the nearest loaded one.
+  // portrait screens get a lighter centre-cropped set (506x900), wider screens the 1600x900 set
+  const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
   const COUNT = 240, canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
   const story = document.getElementById('story'), meter = document.getElementById('meter'), loading = document.getElementById('loading');
   const chapters = [...document.querySelectorAll('.ch')];
@@ -166,7 +170,7 @@
     if (frames[i]) return frames[i].ready;
     const img = new Image();
     img.decoding = 'async';
-    img.src = `frames/f${String(i).padStart(3, '0')}.webp`;
+    img.src = `frames/${SET}/f${String(i).padStart(3, '0')}.webp`;
     frames[i] = img;
     img.ready = img.decode().then(() => { img.ok = true; loaded++; if (loaded > 30) loading.classList.add('done'); draw(); }).catch(() => {});
     return img.ready;
