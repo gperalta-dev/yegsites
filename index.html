@@ -54,17 +54,27 @@
   .skip:focus { top: 12px; }
 
   /* buttons */
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 12px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; transition: background-color .18s, color .18s, border-color .18s, transform .12s; }
-  .btn:active { transform: scale(.97); }
-  .btn-main { background: var(--accent); color: var(--accent-ink); }
-  .btn-main:hover { background: var(--accent-hover); }
-  .btn-line { border: 1.5px solid var(--line-strong); color: var(--ink); background: rgba(14, 16, 19, .35); backdrop-filter: blur(6px); }
-  .btn-line:hover { border-color: var(--ink); }
+  a, button, summary, select, input, label { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 12px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; user-select: none; transition: background-color .15s, color .15s, border-color .15s, box-shadow .2s, transform .18s cubic-bezier(.2, .8, .2, 1); }
+  .btn:active { transform: scale(.96); transition-duration: .05s; }
+  .btn-main { background: var(--accent); color: var(--accent-ink); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 6px 18px -10px rgba(255, 200, 61, .6); }
+  .btn-line { border: 1.5px solid var(--line-strong); color: var(--ink); background: rgba(14, 16, 19, .6); }
+  /* hover only where there is a mouse, so a tapped button on a phone doesn't stay lit */
+  @media (hover: hover) {
+    .btn-main:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), 0 14px 30px -12px rgba(255, 200, 61, .7); }
+    .btn-line:hover { border-color: var(--ink); background: rgba(14, 16, 19, .8); transform: translateY(-1px); }
+    .btn:active { transform: scale(.96); }
+  }
   .btn svg { width: 18px; height: 18px; flex: none; }
   .btn[disabled] { opacity: .7; cursor: progress; }
   .spin { width: 16px; height: 16px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; display: none; }
   .btn.busy .spin { display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* how far down the page you are: one accent hairline, moved by transform only */
+  .progress { position: fixed; z-index: 30; left: 0; top: 0; width: 100%; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
   /* nav over the first screen */
   nav.top { position: absolute; z-index: 6; left: 0; right: 0; top: 0; }
@@ -73,7 +83,10 @@
   .logo i { width: 18px; height: 18px; border-radius: 4px; background: var(--accent); display: block; }
   nav.top .links { display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 600; }
   nav.top .links a:not(.btn) { text-decoration: none; color: var(--muted); padding: 10px 0; }
+  nav.top .links a:not(.btn) { position: relative; transition: color .15s; }
+  nav.top .links a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; transition: transform .25s cubic-bezier(.2, .8, .2, 1); }
   nav.top .links a:not(.btn):hover { color: var(--ink); }
+  nav.top .links a:not(.btn):hover::after { transform: scaleX(1); }
   nav.top .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
 
   /* the flight: one sticky canvas behind the first screen and the realty sample */
@@ -93,7 +106,7 @@
   .hero-ctas { display: none; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
 
   /* form */
-  form.quote { background: rgba(22, 25, 30, .92); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; display: grid; gap: 13px; box-shadow: 0 30px 80px -40px rgba(0, 0, 0, .8); scroll-margin-top: 20px; }
+  form.quote { background: rgba(22, 25, 30, .96); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; display: grid; gap: 13px; box-shadow: 0 30px 80px -40px rgba(0, 0, 0, .8); scroll-margin-top: 20px; }
   form.quote h2 { font: 850 30px/1.05 var(--display); font-stretch: 85%; margin: 0; }
   form.quote .note { margin: -6px 0 2px; font-size: 15px; color: var(--muted); }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -101,7 +114,9 @@
   .field label { font-size: 14px; font-weight: 600; }
   input, select { width: 100%; min-height: 48px; background: var(--field); border: 1.5px solid #2c323c; border-radius: var(--r-sm); color: var(--ink); font: 400 16px var(--body); padding: 10px 14px; }
   select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23b0b4bb' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
-  input:focus, select:focus { border-color: var(--accent); outline: none; }
+  input, select { transition: border-color .15s, box-shadow .15s; }
+  input:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(255, 200, 61, .16); }
+  @media (hover: hover) { input:hover:not(:focus), select:hover:not(:focus) { border-color: #3d4552; } }
   input::placeholder { color: #8a909a; }
   .field.bad input { border-color: var(--err); }
   .err { display: none; font-size: 13.5px; color: var(--err); font-weight: 600; }
@@ -129,7 +144,7 @@
   .r-brand { font-size: 30px; letter-spacing: .01em; color: #fbf7ee; text-shadow: 0 1px 12px rgba(0, 0, 0, .4); }
   .r-nav { display: flex; align-items: center; gap: 22px; font: 600 14.5px var(--body); color: #efe9de; }
   .r-btn { display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border-radius: 99px; background: #d8b47a; color: #1d1407; font: 700 15px var(--body); text-decoration: none; }
-  .r-card { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 9vh; width: min(420px, 100% - 40px); background: rgba(13, 17, 23, .82); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .14); border-radius: 18px; padding: 22px 24px; color: #f4efe6; }
+  .r-card { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 9vh; width: min(420px, 100% - 40px); background: rgba(13, 17, 23, .9); border: 1px solid rgba(255, 255, 255, .14); border-radius: 18px; padding: 22px 24px; color: #f4efe6; }
   .r-card small { display: inline-block; font: 700 12.5px var(--body); color: #f3d6a4; margin-bottom: 8px; }
   .r-card h3 { font-size: 30px; font-weight: 400; line-height: 1.05; margin: 0 0 10px; }
   .r-card p { margin: 0 0 14px; font: 500 15px var(--body); color: #d9d2c6; }
@@ -147,7 +162,7 @@
   .fly-track { height: 419vh; }
 
   /* sticky call to action, after the first screen */
-  .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .82); backdrop-filter: blur(10px); border: 1px solid var(--line); transform: translateY(130%); opacity: 0; transition: transform .35s, opacity .35s; }
+  .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .94); border: 1px solid var(--line); box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .9); transform: translateY(130%); opacity: 0; transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
   .dock.on { transform: none; opacity: 1; }
   .dock .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
   .dock .ic { width: 44px; padding: 0; }
@@ -166,12 +181,14 @@
   .sx-win .wbar b { margin-left: 12px; flex: 1; max-width: 480px; background: #fff; border-radius: 99px; font: 600 15px var(--body); color: #55524b; padding: 6px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sx-tag { position: absolute; z-index: 3; left: 18px; bottom: 18px; display: flex; gap: 10px; align-items: center; margin: 0; font: 700 13.5px var(--body); background: rgba(14, 16, 19, .9); color: var(--ink); padding: 5px 5px 5px 13px; border-radius: 99px; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; pointer-events: none; }
   .sx-tag.on { opacity: 1; transform: none; pointer-events: auto; }
-  .sx-tag a { background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 8px 12px; border-radius: 99px; }
+  .sx-tag a { display: inline-flex; align-items: center; min-height: 36px; background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 0 14px; border-radius: 99px; transition: transform .15s; }
+  .sx-tag a:active { transform: scale(.95); }
 
   /* "like it?": a small tab on the side while the samples play, opens the inquiry popup */
   .likeit { position: fixed; z-index: 21; right: 0; top: 50%; transform: translate(110%, -50%); transition: transform .35s; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 16px 11px; border: 0; border-radius: 14px 0 0 14px; background: var(--accent); color: var(--accent-ink); font: 800 15px/1 var(--body); cursor: pointer; box-shadow: 0 12px 34px -12px rgba(0, 0, 0, .7); }
   .likeit.on { transform: translate(0, -50%); }
-  .likeit:hover { background: var(--accent-hover); }
+  .likeit:active { filter: brightness(.94); }
+  @media (hover: hover) { .likeit:hover { background: var(--accent-hover); } }
   .likeit span { writing-mode: vertical-rl; transform: rotate(180deg); }
   .likeit svg { width: 20px; height: 20px; }
   dialog.like { padding: 0; border: 0; background: transparent; color: var(--ink); width: min(460px, 100% - 24px); max-height: calc(100dvh - 24px); overflow: auto; }
@@ -183,7 +200,7 @@
   .x svg { width: 20px; height: 20px; }
 
   /* real work */
-  .real { position: relative; height: 130vh; }
+  .real { position: relative; height: 260vh; }   /* the screenshot gets 1.6 screens of scroll, so it reads instead of racing */
   .r-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
   .r-stage .wrap { height: 100%; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 48px; align-items: center; }
   .real h2 { font: 900 clamp(44px, 6vw, 88px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0 0 18px; }
@@ -218,7 +235,10 @@
   .steps b { display: block; margin-bottom: 2px; }
   .steps span { color: var(--muted); font-size: 15.5px; }
   details { border-bottom: 1px solid var(--line); }
-  summary { cursor: pointer; list-style: none; padding: 16px 0; font-weight: 700; min-height: 44px; }
+  summary { cursor: pointer; list-style: none; padding: 16px 0; font-weight: 700; min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: color .15s; }
+  summary::after { content: ""; flex: none; width: 12px; height: 12px; margin-right: 4px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: translateY(-3px) rotate(45deg); transition: transform .25s cubic-bezier(.2, .8, .2, 1); }
+  details[open] summary::after { transform: translateY(3px) rotate(-135deg); }
+  @media (hover: hover) { summary:hover { color: var(--accent); } }
   summary::-webkit-details-marker { display: none; }
   details p { margin: 0 0 16px; color: var(--muted); }
   footer { border-top: 1px solid var(--line); padding: 30px 0 110px; color: var(--faint); font-size: 14px; }
@@ -304,11 +324,13 @@
     .stills img { width: 100%; height: auto; border-radius: 12px; display: block; }
     .stills p { grid-column: 1 / -1; margin: 0; font-size: 15px; color: var(--muted); }
     .dock, .cap { transition: none; }
+    .progress { display: none; }
   }
 </style>
 </head>
 <body>
 <a class="skip" href="#quote">Skip to the form</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 <nav class="top" aria-label="Main">
   <div class="wrap">
     <a class="logo" href="/" aria-label="Southsites home"><i aria-hidden="true"></i>Southsites</a>
@@ -591,64 +613,100 @@
 
   // ---------------------------------------------------------------- the scroll story
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
+  const touch = matchMedia('(pointer: coarse)').matches, narrow = innerWidth < 700;
+  const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd', IW = SET === 'm' ? 456 : 1440, IH = 810;
   const EXT = 120, IN = 141;          // every second frame of the 240-frame flight, then the walk inside
   const N = EXT + IN;
-  const AI = [];                       // frame numbers that have an AI-polished version in story/ (none yet)
   const pad = (i) => String(i).padStart(3, '0');
-  const src = (k) => { if (k >= EXT) return `demos/sample-realty/frames/${SET}/f${pad(240 + k - EXT)}.webp`; const i = k * 2; return AI.includes(i) ? `story/${SET}/f${pad(i)}.webp` : `demos/sample-realty/frames/${SET}/f${pad(i)}.webp`; };
-  const canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
-  const stage = document.getElementById('stage'), veil = document.getElementById('veil'), track = document.getElementById('track');
+  const src = (k) => `demos/sample-realty/frames/${SET}/f${pad(k >= EXT ? 240 + k - EXT : k * 2)}.webp`;
+  const stage = document.getElementById('stage'), veil = document.getElementById('veil'), fly = document.getElementById('fly');
   const cap1 = document.getElementById('cap1'), realty = document.getElementById('realty'), dock = document.getElementById('dock');
-  const hero = document.getElementById('top');
+  const hero = document.getElementById('top'), bar = document.getElementById('progress');
   stage.style.backgroundImage = `url(${src(0)})`;
-  const frames = new Array(N);
-  let want = 0, shown = -1;
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const ramp = (p, a, b) => clamp((p - a) / (b - a));
+  // style writes only when the value really changed, so a scroll frame never restyles what stood still
+  const put = (el, prop, v) => { const c = el._c || (el._c = {}); if (c[prop] !== v) { c[prop] = v; el.style.setProperty(prop, v); } };
+  // time-based easing: the same feel at 60 and 120 Hz. ms to close most of the gap, shorter on touch where the finger leads
+  const TAU = touch ? 55 : 95;
+  const ease = (dt) => 1 - Math.exp(-dt / TAU);
 
+  // the flight: an image sequence on a canvas. it eases toward the scroll position and blends the two nearest frames,
+  // so a wheel notch or a flick never shows as a jump
+  const canvas = document.getElementById('film'), ctx = canvas.getContext('2d', { alpha: false });
+  const frames = new Array(N);
+  let want = 0, pos = 0, painted = '', running = false, last = 0, geo = null;
+  const ready = (k) => (frames[k] && frames[k].ok ? frames[k] : null);
   function load(k) {
-    if (frames[k]) return;
+    if (frames[k] || k < 0 || k >= N) return;
     const img = new Image();
     img.decoding = 'async';
     img.src = src(k);
     frames[k] = img;
-    img.decode().then(() => { img.ok = true; draw(); }).catch(() => {});
+    img.decode().then(() => { img.ok = true; if (!painted || Math.abs(k - pos) < 3) { painted = ''; paint(); } }).catch(() => {});
   }
   function nearest(i) {
-    for (let d = 0; d < N; d++) {
-      if (frames[i - d] && frames[i - d].ok) return frames[i - d];
-      if (frames[i + d] && frames[i + d].ok) return frames[i + d];
-    }
-    return null;
-  }
-  function cover(img) {
-    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-    const w = img.naturalWidth * s, h = img.naturalHeight * s;
-    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-  }
-  function draw(force) {
-    const img = nearest(want);
-    if (!img) return;
-    const k = frames.indexOf(img);
-    if (!force && k === shown) return;
-    cover(img);
-    shown = k;
+    for (let d = 0; d < N; d++) { if (ready(i - d)) return i - d; if (ready(i + d)) return i + d; }
+    return -1;
   }
   function size() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
-    shown = -1; draw(true);
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    // no more canvas pixels than the frames have: sharper is impossible, bigger only costs (a phone drops from 3x to about 1.2x)
+    const k = Math.max(1, Math.min(devicePixelRatio || 1, 2, 1.25 / Math.max(w / IW, h / IH)));
+    const bw = Math.round(w * k), bh = Math.round(h * k);
+    if (geo && bw === canvas.width && bh === canvas.height) return;
+    canvas.width = bw; canvas.height = bh;
+    const s = Math.max(bw / IW, bh / IH);
+    geo = [(bw - IW * s) / 2, (bh - IH * s) / 2, IW * s, IH * s];
+    painted = ''; paint();
   }
-  const clamp = (v) => Math.min(1, Math.max(0, v));
-  const ramp = (p, a, b) => clamp((p - a) / (b - a));
+  function paint() {
+    if (!geo) return;
+    let a = Math.floor(pos), A = ready(a), B = null;
+    const f = pos - a;
+    if (A && f > 0.02) B = ready(a + 1);
+    if (!A) { a = nearest(Math.round(pos)); if (a < 0) return; A = frames[a]; }
+    const key = B ? `${a}+${f.toFixed(2)}` : String(a);
+    if (key === painted) return;
+    ctx.globalAlpha = 1; ctx.drawImage(A, ...geo);
+    if (B) { ctx.globalAlpha = f; ctx.drawImage(B, ...geo); ctx.globalAlpha = 1; }
+    painted = key;
+  }
+  function step(now) {
+    const d = want - pos;
+    pos = Math.abs(d) < 0.004 ? want : pos + d * ease(Math.min(50, now - last));
+    last = now;
+    paint();
+    if (pos !== want) requestAnimationFrame(step); else running = false;
+  }
+  function seek(t) {
+    want = t;
+    if (Math.abs(t - pos) > 40) { pos = t; paint(); }  // a jump (a link, a reload mid-page) cuts instead of racing through
+    if (!running && pos !== want) { running = true; last = performance.now(); requestAnimationFrame(step); }
+  }
 
   // samples: each made-up business grows from a card to full screen, then its own page scrolls, slowly
   // px of the sample's page per px of ours, and how much of each sample page to show before moving on
-  const RATIO = innerWidth < 700 ? 2.2 : 1.5, SHOW = 0.74;
+  const RATIO = narrow ? 2.2 : 1.5, SHOW = 0.74;
   const sx = [...document.querySelectorAll('.sx')].map((el) => ({ el, name: el.dataset.name, win: el.querySelector('.sx-win'), frame: el.querySelector('iframe'),
-    title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0 }));
+    title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0, px: -1, top: 0, h: 0 }));
   const real = document.getElementById('work'), ek = document.getElementById('ek');
+  // every position the scroll needs, read once here (on load and resize) instead of on every scroll frame
+  const L = { vh: stage.clientHeight || innerHeight };
+  const docTop = (el) => el.getBoundingClientRect().top + scrollY;
+  function measure() {
+    L.vh = stage.clientHeight || innerHeight;   // 100svh: steady while a phone's address bar slides
+    L.hero = hero.offsetHeight;
+    const ft = docTop(fly);
+    L.start = ft + L.hero * 0.85; L.end = ft + fly.offsetHeight - L.vh;
+    for (const s of sx) { s.top = docTop(s.el); s.h = s.el.offsetHeight; }
+    L.real = docTop(real); L.realH = real.offsetHeight;
+    L.ek = Math.max(0, ek.offsetHeight - (ek.parentElement.clientHeight - 36));
+    L.doc = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  }
   function dims(s) {
-    const vh = innerHeight;
+    const vh = L.vh;
     try { const d = s.frame.contentDocument; if (d && d.documentElement && s.frame.getAttribute('src')) s.max = Math.max(0, d.documentElement.scrollHeight - s.frame.clientHeight); } catch (e) {}
     s.enter = vh * 0.3; s.grow = vh * 0.45; s.run = (s.max * SHOW || vh * 3) / RATIO; s.hold = vh * 0.15;
     if (!still) s.el.style.height = `${Math.round(vh + s.enter + s.grow + s.run + s.hold)}px`;
@@ -656,76 +714,77 @@
   function loadSamples() {
     sx.forEach((s) => {
       if (s.frame.getAttribute('src')) return;
-      s.frame.addEventListener('load', () => { dims(s); setTimeout(() => { dims(s); if (!still) tick(); }, 1500); if (!still) tick(); });
+      s.frame.addEventListener('load', () => { dims(s); setTimeout(() => dims(s), 1500); });
       if (!still) s.frame.loading = 'eager';
       s.frame.src = s.frame.dataset.src;
     });
   }
   let current = 'The realty flight';
-  function samples(vh) {
+  function samples(y) {
+    const vh = L.vh, s0 = narrow ? 0.66 : 0.6;
     for (const s of sx) {
-      const y = -s.el.getBoundingClientRect().top;
-      const e = ramp(y, -vh * 0.4, s.enter), g = ramp(y, s.enter, s.enter + s.grow), t = ramp(y, s.enter + s.grow, s.enter + s.grow + s.run);
-      const k = g * g * (3 - 2 * g), s0 = innerWidth < 700 ? 0.66 : 0.6, sc = s0 + (1 - s0) * k;
-      s.win.style.transform = `translateY(${(1 - e) * 34 - (1 - k) * 5}vh) scale(${sc})`;
-      s.win.style.opacity = String(e);
-      s.win.style.setProperty('--rad', `${((1 - k) * 18 / sc).toFixed(1)}px`);
-      s.title.style.opacity = s.sub.style.opacity = String(1 - ramp(g, 0, 0.45));
-      s.tag.classList.toggle('on', k > 0.98 && y < s.el.offsetHeight - vh);
+      const r = y - s.top;
+      if (r < -vh * 1.2 || r > s.h + vh * 0.2) continue;  // far away: nothing on screen to move
+      const e = ramp(r, -vh * 0.4, s.enter), g = ramp(r, s.enter, s.enter + s.grow), t = ramp(r, s.enter + s.grow, s.enter + s.grow + s.run);
+      const k = g * g * (3 - 2 * g), sc = s0 + (1 - s0) * k;
+      put(s.win, 'transform', `translate3d(0, ${((1 - e) * 34 - (1 - k) * 5).toFixed(2)}vh, 0) scale(${sc.toFixed(4)})`);
+      put(s.win, 'opacity', e.toFixed(3));
+      put(s.win, '--rad', `${Math.round((1 - k) * 18 / sc)}px`);
+      const head = (1 - ramp(g, 0, 0.45)).toFixed(3);
+      put(s.title, 'opacity', head); put(s.sub, 'opacity', head);
+      s.tag.classList.toggle('on', k > 0.98 && r < s.h - vh);
       s.goal = t * s.max * SHOW;
-      if (y > -vh * 0.5 && y < s.el.offsetHeight - vh * 0.5) current = s.name;
+      if (r > -vh * 0.5 && r < s.h - vh * 0.5) current = s.name;
     }
   }
   // the sample pages glide to where the scroll says instead of jumping
-  let gliding = false;
-  function glide() {
+  let gliding = false, glast = 0;
+  function glide(now) {
+    const a = ease(Math.min(50, now - glast));
+    glast = now;
     let moving = false;
     for (const s of sx) {
       const d = s.goal - s.cur;
-      if (Math.abs(d) < 0.5) {
-        if (d) { s.cur = s.goal; try { s.frame.contentWindow.scrollTo(0, s.cur); } catch (e) {} }
-        continue;
-      }
-      s.cur += d * 0.18; moving = true;
-      try { s.frame.contentWindow.scrollTo(0, s.cur); } catch (e) {}
+      if (!d) continue;
+      s.cur = Math.abs(d) < 0.5 ? s.goal : s.cur + d * a;
+      if (s.cur !== s.goal) moving = true;
+      const px = Math.round(s.cur);
+      if (px !== s.px) { s.px = px; try { s.frame.contentWindow.scrollTo(0, px); } catch (e) {} }
     }
-    gliding = moving;
-    if (moving) requestAnimationFrame(glide);
-  }
-
-  function tick() {
-    const vh = innerHeight, y = scrollY;
-    // first screen: the hero scrolls away and the veil lifts off the skyline
-    const heroOut = clamp(y / Math.max(1, hero.offsetHeight * 0.9));
-    veil.style.opacity = String(1 - heroOut * 0.88);
-    // the flight runs over the stretch where the stage is pinned: from the hero leaving to the stage letting go
-    const fly = stage.parentElement, start = fly.offsetTop + hero.offsetHeight * 0.85, end = fly.offsetTop + fly.offsetHeight - vh;
-    const p = clamp((y - start) / Math.max(1, end - start));
-    want = Math.round(p * (N - 1));
-    cap1.classList.toggle('on', heroOut > 0.85 && p < 0.22);
-    realty.classList.toggle('on', want >= 67 && p < 0.995);
-    realty.classList.toggle('inside', want >= EXT);
-    draw();
-    dock.classList.toggle('on', y > hero.offsetHeight * 0.8);
-    // or what about: the samples grow to full screen and their pages glide
-    current = 'The realty flight';
-    samples(vh);
-    if (!gliding) { gliding = true; requestAnimationFrame(glide); }
-    likeTab.classList.toggle('on', y > hero.offsetHeight * 0.8 && y < real.offsetTop - vh * 0.4);
-    // real work: the screenshot scrolls inside its window
-    const r = real.getBoundingClientRect();
-    const s = clamp(-r.top / Math.max(1, r.height - vh));
-    const box = ek.parentElement.clientHeight - 36;
-    ek.style.transform = `translateY(${-Math.max(0, ek.offsetHeight - box) * s}px)`;
+    if (moving) requestAnimationFrame(glide); else gliding = false;
   }
 
   const likeTab = document.getElementById('likeit'), like = document.getElementById('like');
+  function tick() {
+    const y = scrollY, vh = L.vh;
+    // first screen: the hero scrolls away and the veil lifts off the skyline
+    const heroOut = clamp(y / Math.max(1, L.hero * 0.9));
+    put(veil, 'opacity', (1 - heroOut * 0.88).toFixed(3));
+    // the flight runs over the stretch where the stage is pinned: from the hero leaving to the stage letting go
+    const p = clamp((y - L.start) / Math.max(1, L.end - L.start)), f = p * (N - 1);
+    if (y < L.end + vh) seek(f);
+    cap1.classList.toggle('on', heroOut > 0.85 && p < 0.22);
+    realty.classList.toggle('on', f >= 67 && p < 0.995);
+    realty.classList.toggle('inside', f >= EXT);
+    dock.classList.toggle('on', y > L.hero * 0.8);
+    // or what about: the samples grow to full screen and their pages glide
+    current = 'The realty flight';
+    samples(y);
+    if (!gliding && sx.some((s) => s.goal !== s.cur)) { gliding = true; glast = performance.now(); requestAnimationFrame(glide); }
+    likeTab.classList.toggle('on', y > L.hero * 0.8 && y < L.real - vh * 0.4);
+    // real work: the screenshot scrolls inside its window
+    const s = clamp((y - L.real) / Math.max(1, L.realH - vh));
+    put(ek, 'transform', `translate3d(0, ${(-L.ek * s).toFixed(1)}px, 0)`);
+    put(bar, 'transform', `scaleX(${clamp(y / L.doc).toFixed(4)})`);
+  }
+
   likeTab.addEventListener('click', () => {
     likeForm.elements.liked.value = current;
     like.showModal();
     setTimeout(() => likeForm.elements.name.focus(), 60);
   });
   like.addEventListener('click', (e) => { if (e.target === like || e.target.closest('[data-close]')) like.close(); });
+  measure();
   sx.forEach(dims);
 
   if (still) {
@@ -737,13 +796,23 @@
     load(0);
     // the first screen is instant; the flight loads just behind it, sparse first, the rest when the visitor starts moving
     const sparse = () => { for (let k = 6; k < N; k += 6) load(k); };
-    const rest = () => { for (let k = 1; k < N; k++) setTimeout(() => load(k), k * 18); };
+    let queued = false;
+    const rest = () => { if (queued) return; queued = true; for (let k = 1; k < N; k++) setTimeout(() => load(k), k * 14); };
     addEventListener('load', () => { setTimeout(sparse, 200); setTimeout(loadSamples, 2500); }, { once: true });
     addEventListener('scroll', () => { sparse(); rest(); }, { once: true, passive: true });
     setTimeout(rest, 4000);
     addEventListener('scroll', tick, { passive: true });
+    // anything that changes the page's height (a sample loading, a font, an image) re-measures
+    const ro = new ResizeObserver(() => { measure(); tick(); });
+    ro.observe(document.body); ro.observe(ek);
   }
-  addEventListener('resize', () => { size(); sx.forEach(dims); if (!still) tick(); });
+  let lastW = innerWidth;
+  addEventListener('resize', () => {
+    size();
+    if (innerWidth !== lastW) { lastW = innerWidth; sx.forEach(dims); }
+    measure();
+    if (!still) tick();
+  });
   size();
   if (!still) tick();
 </script>

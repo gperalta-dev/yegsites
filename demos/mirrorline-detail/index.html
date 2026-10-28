@@ -284,12 +284,15 @@
   const canvas = document.getElementById('film'), ctx = canvas.getContext('2d'), wash = document.getElementById('wash');
   const beats = [...document.querySelectorAll('.beat')], sweep = document.getElementById('sweep'), bar = document.getElementById('bar'), pct = document.getElementById('pct');
   const frames = new Array(N);
-  let want = 0, shown = -1;
+  // the wash eases toward the scroll and blends neighbouring frames, so it never steps. quicker inside the home page,
+  // which already glides this page into place
+  const TAU = window !== top ? 35 : matchMedia('(pointer: coarse)').matches ? 55 : 95;
+  let want = 0, pos = 0, painted = '', running = false, last = 0;
   const pad = (i) => String(i).padStart(3, '0');
   function load(i) {
     if (frames[i]) return;
     const img = new Image(); img.decoding = 'async'; img.src = `frames/${SET}/f${pad(i)}.webp`; frames[i] = img;
-    img.decode().then(() => { img.ok = true; draw(); }).catch(() => {});
+    img.decode().then(() => { img.ok = true; if (!painted || Math.abs(i - pos) < 3) { painted = ''; draw(); } }).catch(() => {});
   }
   function nearest(i) {
     for (let d = 0; d < N; d++) {
@@ -298,22 +301,44 @@
     }
     return null;
   }
-  let fit = { s: 1, x: 0, y: 0 };
+  let fit = { s: 1, x: 0, y: 0 }, geo = null;
   function size() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
-    const s = Math.max(canvas.clientWidth / IW, canvas.clientHeight / IH);
-    fit = { s, x: (canvas.clientWidth - IW * s) / 2, y: (canvas.clientHeight - IH * s) / 2 };
-    placeSparks(); shown = -1; draw();
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    const s = Math.max(w / IW, h / IH);
+    fit = { s, x: (w - IW * s) / 2, y: (h - IH * s) / 2 };
+    placeSparks();
+    // no more canvas pixels than the frames have
+    const k = Math.max(1, Math.min(devicePixelRatio || 1, 2, 1.25 / s)), bw = Math.round(w * k), bh = Math.round(h * k);
+    if (geo && bw === canvas.width && bh === canvas.height) return;
+    canvas.width = bw; canvas.height = bh;
+    const S = Math.max(bw / IW, bh / IH);
+    geo = [(bw - IW * S) / 2, (bh - IH * S) / 2, IW * S, IH * S];
+    painted = ''; draw();
   }
+  const ready = (k) => (frames[k] && frames[k].ok ? frames[k] : null);
   function draw() {
-    const img = nearest(want);
-    if (!img) return;
-    const k = frames.indexOf(img);
-    if (k === shown) return;
-    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-    ctx.drawImage(img, (cw - img.naturalWidth * s) / 2, (ch - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
-    shown = k;
+    if (!geo) return;
+    let a = Math.floor(pos), A = ready(a), B = null;
+    const f = pos - a;
+    if (A && f > 0.02) B = ready(a + 1);
+    if (!A) { const img = nearest(Math.round(pos)); if (!img) return; A = img; a = frames.indexOf(img); }
+    const key = B ? a + '+' + f.toFixed(2) : String(a);
+    if (key === painted) return;
+    ctx.globalAlpha = 1; ctx.drawImage(A, ...geo);
+    if (B) { ctx.globalAlpha = f; ctx.drawImage(B, ...geo); ctx.globalAlpha = 1; }
+    painted = key;
+  }
+  function step(now) {
+    const d = want - pos;
+    pos = Math.abs(d) < 0.004 ? want : pos + d * (1 - Math.exp(-Math.min(50, now - last) / TAU));
+    last = now;
+    draw();
+    if (pos !== want) requestAnimationFrame(step); else running = false;
+  }
+  function seek(t) {
+    want = t;
+    if (Math.abs(t - pos) > 30) pos = t;
+    if (!running) { running = true; last = performance.now(); requestAnimationFrame(step); }
   }
   // glints on the headlights, the hood line and the lip lights (in desktop frame pixels)
   const GLINTS = [[198, 535, 1], [1094, 540, .9], [684, 540, .75], [590, 470, .6], [110, 648, .7], [1152, 672, .65]];
@@ -324,14 +349,14 @@
   }
   const clamp = (v) => Math.min(1, Math.max(0, v));
   const ramp = (p, a, b) => clamp((p - a) / (b - a));
-  function progress() {
-    const r = wash.getBoundingClientRect();
-    return clamp(-r.top / Math.max(1, wash.offsetHeight - innerHeight));
-  }
+  // where the wash sits, read on load and resize instead of on every scroll frame
+  let washTop = 0, washRun = 1;
+  function measure() { washTop = wash.getBoundingClientRect().top + scrollY; washRun = Math.max(1, wash.offsetHeight - innerHeight); }
+  function progress() { return clamp((scrollY - washTop) / washRun); }
   function tick() {
     const p = progress();
     // dirty holds, then dissolves into the foam, then the rinse plays to the clean car
-    want = p < 0.12 ? 0 : p < 0.36 ? Math.round(ramp(p, 0.12, 0.36) * FOAM) : Math.round(FOAM + ramp(p, 0.36, 0.84) * (N - 1 - FOAM));
+    seek(p < 0.12 ? 0 : p < 0.36 ? ramp(p, 0.12, 0.36) * FOAM : FOAM + ramp(p, 0.36, 0.84) * (N - 1 - FOAM));
     beats.forEach((b) => b.classList.toggle('on', p >= +b.dataset.a && p < +b.dataset.b));
     const clean = Math.round(ramp(p, 0.08, 0.86) * 100);
     pct.textContent = clean + '%'; bar.style.transform = `scaleX(${clean / 100})`;
@@ -343,16 +368,17 @@
       el.style.opacity = String(a);
       el.style.transform = `scale(${0.3 + a}) rotate(${t * 90}deg)`;
     });
-    draw();
   }
   if (still) {
-    want = N - 1; load(N - 1);
+    want = pos = N - 1; load(N - 1);
   } else {
     load(0); load(FOAM); load(N - 1);
     for (let i = 1; i < N; i++) setTimeout(() => load(i), 150 + i * 20);
     addEventListener('scroll', tick, { passive: true });
   }
-  addEventListener('resize', () => { size(); if (!still) tick(); });
+  addEventListener('resize', () => { size(); measure(); if (!still) tick(); });
+  new ResizeObserver(() => { measure(); if (!still) tick(); }).observe(document.body);
+  measure();
   size();
   if (!still) tick();
 </script>
