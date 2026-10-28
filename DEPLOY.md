@@ -1,36 +1,31 @@
-# Put the Whyte Web landing page live on whyteweb.ca
+# Put the Southsites landing page live on southsites.ca
 
-Next action: buy whyteweb.ca on Porkbun (step 1, you do this). Then steps 2 to 6, about 25 min.
+Brand is Southsites (Gabriel's pick, Oct 28 2026), domain southsites.ca (bought at Porkbun Oct 28), email
+contact@southsites.ca, sign-off "Jan Gabriel, Southsites". It replaces Whyte Web (whyteweb.ca was never bought).
+yegsites.ca belongs to a different Edmonton web design business, so the page never uses "YEG Sites". yegsites.com is ours
+and only forwards to southsites.ca.
 
-Brand is Whyte Web (Oct 27 2026). yegsites.com stays unused for the business. yegsites.ca belongs to a different Edmonton
-web design business, so the page does not use that name anywhere.
+The repo folder and GitHub repo are still called `yegsites`. That is only a path; nothing public shows it.
 
-## 0. Set the name: DONE Oct 27 (Whyte Web, whyteweb.ca)
-
-The brand and domain are placeholders until the name is picked. One command swaps them everywhere (every page, the demos,
-404, sitemap, robots, this file) and writes the CNAME file:
+## Rename the brand later
 
 ```bash
 cd C:/dev/sites/yegsites
 py set_brand.py "New Name" newname.ca
 ```
 
-Then ask Claude to re-render `og.png` (the link preview image) with the new name, and commit.
+It swaps the name and domain in every page, demo, 404, sitemap, robots and this file, and writes `CNAME`. Then re-render
+`og.png` and `apple-touch-icon.png` (ask Claude) and commit.
 
-## Right now
+## Right now (Oct 28)
 
-- The GitHub repo `gperalta-dev/yegsites` is live on https://yegsites.com with the OLD YegSites version (pushed earlier today).
-- The rebrand is committed locally only. It is not pushed, because pushing it with the new `CNAME` file moves GitHub Pages
-  to whyteweb.ca, and that domain does not point anywhere until you buy it.
+- The page is pushed with the Southsites brand, but `CNAME` is still `yegsites.com`, so it is live on https://yegsites.com
+  until southsites.ca has DNS. Pushing `CNAME` = southsites.ca before DNS exists would take the page offline.
 
-## 1. Buy whyteweb.ca (5 min, you do this)
+## 1. DNS for southsites.ca (5 min)
 
-Porkbun, search whyteweb.ca, check out with the Money Town card. Log it in `ledger/ledger.csv` the same day.
-
-## 2. DNS for whyteweb.ca (5 min, Claude can do this in your Chrome)
-
-Porkbun, Domain Management, whyteweb.ca, DNS. Delete the parking ALIAS and wildcard CNAME. Keep the MX and SPF records
-(they run Porkbun's free email forwarding). Add:
+Porkbun, Domain Management, southsites.ca, DNS. Delete the parking ALIAS (`southsites.ca` -> pixie.porkbun.com) and the
+wildcard CNAME (`*.southsites.ca` -> pixie.porkbun.com). Add:
 
 | Type | Host | Answer |
 |---|---|---|
@@ -40,17 +35,26 @@ Porkbun, Domain Management, whyteweb.ca, DNS. Delete the parking ALIAS and wildc
 | A | (blank) | 185.199.111.153 |
 | CNAME | www | gperalta-dev.github.io |
 
-## 3. Email (2 min, Claude can do this in your Chrome)
+## 2. Email (2 min)
 
-Porkbun, whyteweb.ca, Email, Email Forwarding: `contact` delivers to `gperaltainbox@gmail.com`. The page already shows
-contact@whyteweb.ca.
+Porkbun, southsites.ca, Email Forwarding: `contact` delivers to `gperaltainbox@gmail.com`. Porkbun adds its forwarding
+MX and SPF records itself; check they are in the DNS list afterwards (MX fwd1.porkbun.com and fwd2.porkbun.com, TXT
+`v=spf1 include:_spf.porkbun.com ~all`).
 
-## 4. Push and switch Pages to the new domain (5 min)
+To reply as contact@southsites.ca from Gmail:
+1. myaccount.google.com, Security, App passwords: make one called "Southsites mail".
+2. Gmail, Settings, Accounts and Import, "Send mail as", Add another email address. Name "Jan Gabriel", address
+   contact@southsites.ca, leave "Treat as an alias" ticked.
+3. SMTP server smtp.gmail.com, port 587, username gperaltainbox@gmail.com, password = the app password, TLS.
+4. Gmail emails a code to contact@southsites.ca, which forwards back to your inbox. Paste it.
+5. Optional: same screen, "When replying to a message", pick "Reply from the same address the message was sent to".
+
+## 3. Switch Pages to the new domain (5 min, after step 1)
 
 ```bash
 cd C:/dev/sites/yegsites
-git push origin main
-gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=whyteweb.ca
+printf 'southsites.ca\n' > CNAME && git commit -am "pages: southsites.ca" && git push
+gh api -X PUT repos/gperalta-dev/yegsites/pages -f cname=southsites.ca
 ```
 
 Wait 10 to 30 minutes for the certificate, then:
@@ -59,21 +63,12 @@ Wait 10 to 30 minutes for the certificate, then:
 gh api -X PUT repos/gperalta-dev/yegsites/pages -F https_enforced=true
 ```
 
-Optional, so the repo name matches the brand (GitHub redirects the old name):
+## 4. yegsites.com forwards to southsites.ca (3 min, after step 3)
 
-```bash
-gh repo rename <new-repo-name> -R gperalta-dev/yegsites --yes
-```
+Porkbun, yegsites.com, URL Forwarding: forward to `https://southsites.ca`, permanent (301), include path, with and without
+www. Porkbun replaces the A and www records itself. The contact@yegsites.com email forward can stay; nothing public uses it.
 
-## 5. What to do with yegsites.com
-
-Once Pages moves, yegsites.com shows a GitHub "site not found" page. Pick one:
-- Porkbun URL forwarding: yegsites.com to https://whyteweb.ca (permanent, 301). Old links keep working.
-- Or delete its A and CNAME records and let it sit unused until it expires on 2027-10-27 (turn off auto-renew).
-
-The contact@yegsites.com forward to Gmail can stay or be deleted. Nothing on the new page uses it.
-
-## 6. Turn on the form (5 min, you sign up)
+## 5. Turn on the form (5 min, you sign up)
 
 Until this is done, the form opens a text message to 825-461-5061 with the visitor's details, and the button says
 "Continue in Messages".
@@ -85,7 +80,6 @@ Until this is done, the form opens a text message to 825-461-5061 with the visit
 
 ## Before you send the link
 
-- Add a real photo of yourself if you have one (replaces the GP circle in the About section).
 - Founding price "first 3 clients": change the line once 3 clients have paid.
-- Search Console: add whyteweb.ca as a Domain property with whichever Google account should own it, then add its TXT
+- Search Console: add southsites.ca as a Domain property with whichever Google account should own it, then add its TXT
   record in Porkbun DNS.

@@ -9,7 +9,7 @@ from pathlib import Path
 
 OUT = Path(sys.argv[1])
 OUT.mkdir(parents=True, exist_ok=True)
-UA = {"User-Agent": "WhyteWebDemo/1.0 (concept render, contact gperaltainbox@gmail.com)"}
+UA = {"User-Agent": "SouthsitesDemo/1.0 (concept render, contact contact@southsites.ca)"}
 S, W, N, E = 53.500, -113.570, 53.565, -113.440
 BB = f"({S},{W},{N},{E})"
 QUERIES = {

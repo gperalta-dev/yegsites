@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://whyteweb.ca/sitemap.xml
+Sitemap: https://southsites.ca/sitemap.xml

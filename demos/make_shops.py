@@ -1,4 +1,4 @@
-"""one-off: writes the Local Studio concept demo shop pages (made-up businesses, fictional 555 numbers)."""
+"""one-off: writes the Southsites concept demo shop pages (made-up businesses, fictional 555 numbers)."""
 from pathlib import Path
 OUT = Path(r"C:\dev\sites\yegsites\demos")
 
@@ -7,8 +7,8 @@ PAGE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{name} | Concept demo by Whyte Web</title>
-<meta name="description" content="Concept demo website by Local Studio. {name} is a made-up business.">
+<title>{name} | Concept demo by Southsites</title>
+<meta name="description" content="Concept demo website by Southsites. {name} is a made-up business.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,7 +64,7 @@ PAGE = """<!doctype html>
 </style>
 </head>
 <body>
-<div class="note"><div class="wrap"><span>Concept demo by Whyte Web. {name} is made up.</span><a href="/#work">Back to Whyte Web</a></div></div>
+<div class="note"><div class="wrap"><span>Concept demo by Southsites. {name} is made up.</span><a href="/#work">Back to Southsites</a></div></div>
 <div class="wrap">
   <header class="top"><a class="brand" href="#">{name}</a><span class="open">{open}</span></header>
   <div class="hero">
@@ -97,7 +97,7 @@ PAGE = """<!doctype html>
     <a class="btn btn-main" href="#map">Directions to {short}</a>
   </div>
 
-  <footer><span>{name}, {area}, Edmonton</span><span>Concept demo, not a client. Built by Whyte Web.</span></footer>
+  <footer><span>{name}, {area}, Edmonton</span><span>Concept demo, not a client. Built by Southsites.</span></footer>
 </div>
 </body>
 </html>

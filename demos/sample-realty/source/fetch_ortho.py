@@ -23,7 +23,7 @@ CACHE = G / "ortho_tiles"
 CACHE.mkdir(exist_ok=True)
 URL = ("https://data.source.coop/dataforcanada/d4c-datapkg-orthoimagery/processed/"
        "ca-ab_edmonton-2024A00054811061_d4c-datapkg-orthoimagery_2024_075mm_v0.1.0-beta.pmtiles")
-UA = {"User-Agent": "WhyteWebDemo/1.0"}
+UA = {"User-Agent": "SouthsitesDemo/1.0"}
 LAT0, LON0 = 53.5300, -113.5050
 KX = 111320.0 * math.cos(math.radians(LAT0))
 KY = 110574.0

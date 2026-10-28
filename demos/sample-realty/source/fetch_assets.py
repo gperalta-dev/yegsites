@@ -6,7 +6,7 @@ import urllib.request
 from pathlib import Path
 
 DL = Path(sys.argv[1])
-UA = {"User-Agent": "WhyteWebDemo/1.0"}
+UA = {"User-Agent": "SouthsitesDemo/1.0"}
 MODELS = ["tree_small_02", "island_tree_02", "fir_sapling_medium", "pine_sapling_small", "searsia_lucida", "grass_medium_01"]
 MODELS_1K = ["jacaranda_tree", "fir_sapling"]  # big or distant-only trees: 1k textures are plenty
 TEXTURES = ["grey_roof_01", "exterior_wall_cladding_03", "castle_wall_slates", "concrete_pavement", "asphalt_02", "leafy_grass",

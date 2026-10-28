@@ -1,4 +1,4 @@
-"""Whyte Web Sample Realty demo: golden hour over central Edmonton (real OSM footprints and heights, real terrain), across
+"""Southsites Sample Realty demo: golden hour over central Edmonton (real OSM footprints and heights, real terrain), across
 the river and down into a made-up suburb, ending on a detailed house and a walk around it.
 
 blender -b -P main.py -- --dl <assets/dl> --geo <assets/geo/out> --out <dir> [--frames 0,60] [--res 1600x900]
