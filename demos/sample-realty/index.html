@@ -40,13 +40,16 @@
   .brand { font: 400 30px/1 var(--serif); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; text-shadow: 0 1px 12px rgba(0, 0, 0, .4); }
 
   /* scroll story: a sticky canvas scrubs the rendered flight while the chapters scroll past */
-  .story { position: relative; height: 1016vh; }
+  .story { position: relative; height: 1688vh; }
   .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #1b1f26; }
   canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 10, 14, .62) 0%, rgba(8, 10, 14, .25) 34%, rgba(8, 10, 14, 0) 48%, rgba(8, 10, 14, 0) 55%, rgba(8, 10, 14, .7) 100%); pointer-events: none; }
   .chapters { position: absolute; inset: 0; pointer-events: none; }
   .ch { position: absolute; left: max(20px, calc((100vw - 1120px) / 2)); bottom: 12vh; max-width: 560px; opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s cubic-bezier(.2, .7, .2, 1); }
   .ch.on { opacity: 1; transform: none; }
+  /* the AI rooms are bright: a soft shadow behind each chapter keeps the label and text readable */
+  .ch { isolation: isolate; }
+  .ch::before { content: ""; position: absolute; z-index: -1; inset: -70px -90px -60px -70px; background: radial-gradient(closest-side, rgba(8, 10, 14, .55), rgba(8, 10, 14, .3) 60%, rgba(8, 10, 14, 0)); pointer-events: none; }
   .ch small { display: block; font: 700 14px var(--sans); color: #f3d6a4; margin-bottom: 10px; text-shadow: 0 1px 10px rgba(0, 0, 0, .7); }
   .ch h2 { font: 400 clamp(44px, 6.4vw, 92px)/.95 var(--serif); margin: 0 0 14px; text-shadow: 0 2px 24px rgba(0, 0, 0, .45); }
   .ch p { margin: 0; font-size: 19px; color: #ece6dc; max-width: 36ch; text-shadow: 0 1px 12px rgba(0, 0, 0, .6); }
@@ -92,10 +95,13 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .story { height: auto; }
-    .stage { position: relative; height: 70vh; }
+    .stage { position: relative; height: auto; overflow: visible; background: none; }
+    canvas { position: relative; height: 70vh; }
+    .shade { bottom: auto; height: 70vh; }
     .chapters { position: static; padding: 40px 0; }
     .ch { position: static; opacity: 1; transform: none; margin: 0 auto 48px; padding: 0 20px; }
     .ch h2, .ch p { text-shadow: none; }
+    .ch::before { display: none; }
     .meter { display: none; }
   }
 </style>
@@ -107,18 +113,22 @@
 <main>
 <div class="story" id="story">
   <div class="stage">
-    <canvas id="film" aria-label="3D flight from downtown Edmonton across the river valley to a two-storey home in the suburbs, then around the house" role="img"></canvas>
+    <canvas id="film" aria-label="3D flight from downtown Edmonton across the river valley to a two-storey home in the suburbs, around the house, then an AI-made walk inside: kitchen, main bedroom, ensuite, second bedroom, kids' room and bonus room" role="img"></canvas>
     <div class="shade"></div>
     <div class="meter" aria-hidden="true"><i id="meter"></i></div>
     <div class="loading" id="loading" aria-hidden="true">Loading the flight</div>
     <div class="chapters">
-      <div class="ch first on" data-from="0.000" data-to="0.082"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
-      <div class="ch" data-from="0.107" data-to="0.227"><small>The river valley</small><h2>Cross the river.</h2><p>Trails, trees and the bridges between downtown and the south side.</p></div>
-      <div class="ch" data-from="0.265" data-to="0.353"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
-      <div class="ch" data-from="0.378" data-to="0.453"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
-      <div class="ch" data-from="0.492" data-to="0.627"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.655" data-to="0.831"><small>Sample interior, made with AI</small><h2>Step inside.</h2><p>The entry, the living room and the kitchen. This interior was generated with AI from our render of the front door. It is not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.855" data-to="1.01"><small>Sample interior, made with AI</small><h2>Down the hall.</h2><p>Past the kitchen to the main bedroom, with the trees right outside the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch first on" data-from="0.000" data-to="0.049"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
+      <div class="ch" data-from="0.065" data-to="0.137"><small>The river valley</small><h2>Cross the river.</h2><p>Trails, trees and the bridges between downtown and the south side.</p></div>
+      <div class="ch" data-from="0.159" data-to="0.213"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
+      <div class="ch" data-from="0.228" data-to="0.273"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
+      <div class="ch" data-from="0.296" data-to="0.377"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.394" data-to="0.500"><small>Sample interior, made with AI</small><h2>Step inside.</h2><p>The entry, the living room and the kitchen. This interior was generated with AI from our render of the front door. It is not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.515" data-to="0.599"><small>Sample interior, made with AI</small><h2>Down the hall.</h2><p>Past the kitchen to the main bedroom, with the trees right outside the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.616" data-to="0.699"><small>Sample interior, made with AI</small><h2>The ensuite.</h2><p>Off the main bedroom: a soaker tub under the window, a glass shower and a double vanity. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.718" data-to="0.797"><small>Sample interior, made with AI</small><h2>Up the hall.</h2><p>Past the railing to the second bedroom, with the maple right outside. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.819" data-to="0.896"><small>Sample interior, made with AI</small><h2>The kids' room.</h2><p>A bed, a desk for homework and a shelf of picture books, down the hall from the stairs. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.920" data-to="1.01"><small>Sample interior, made with AI</small><h2>The bonus room.</h2><p>Over the garage, with space for a sectional, a TV and a desk by the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
     </div>
   </div>
 </div>
@@ -159,68 +169,135 @@
 <footer><div class="wrap"><span>Sample Realty is a concept demo, not a client. Built by Southsites.</span><span>3D flight rendered in Blender (Cycles). Downtown, the river and the valley follow real building footprints, heights and aerial photos. The suburb and the house are made up.</span><span class="credits">Ground and roof imagery: City of Edmonton Orthophoto 2024. Contains information licensed under the <a href="https://data.edmonton.ca/">Open Government Licence (City of Edmonton)</a>, via <a href="https://source.coop/dataforcanada/d4c-datapkg-orthoimagery">Data for Canada</a>. Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Elevation from Terrain Tiles on AWS, including data from Natural Resources Canada (Open Government Licence, Canada). Trees, plants, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). Interior walk-through generated with Google Veo from our render of the front door.</span></div></footer>
 
 <script>
-  // scroll-scrubbed flight: frames load sparse first (every 8th), then fill in, and the canvas shows the nearest loaded one.
+  // scroll-scrubbed flight. scrolling sets a goal frame; every display frame the picture eases toward it, blending the
+  // two nearest frames while it moves slowly, so wheels, trackpads and touch all scrub smoothly at 60 or 120 Hz. when
+  // scrolling stops it settles on a whole frame. frames load six at a time: the ones on screen first, a sparse every-8th pass, then
+  // whatever is closest to where you are. the frames just ahead are kept decoded so drawing never waits on a decode,
+  // and the canvas never has more pixels than the frames (no 2x canvases on retina laptops).
   // portrait screens get a lighter centre-cropped set (456x810), wider screens the 1440x810 set.
   // frames 0-239 are the rendered flight, 240 on the AI walk inside
-  const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
-  const COUNT = 381, canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
+  const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd', IW = SET === 'm' ? 456 : 1440, IH = 810;
+  const COUNT = 633, canvas = document.getElementById('film'), ctx = canvas.getContext('2d', { alpha: false });
   const story = document.getElementById('story'), meter = document.getElementById('meter'), loading = document.getElementById('loading');
   const chapters = [...document.querySelectorAll('.ch')];
   const frames = new Array(COUNT), still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let want = 0, shown = -1, loaded = 0;
+  const AHEAD = 14, BEHIND = 6, MAX = 6;
+  let cur = 0, speed = 0, warmed = -1, drawn = null, loaded = 0, inflight = 0, raf = 0, last = 0, settled = true, idle = 0, order = [];
 
-  function load(i) {
-    if (frames[i]) return frames[i].ready;
+  function start(i) {
     const img = new Image();
     img.decoding = 'async';
     img.src = `frames/${SET}/f${String(i).padStart(3, '0')}.webp`;
-    frames[i] = img;
-    img.ready = img.decode().then(() => { img.ok = true; loaded++; if (loaded > 30) loading.classList.add('done'); draw(); }).catch(() => {});
-    return img.ready;
+    frames[i] = img; inflight++;
+    img.decode().then(() => {
+      img.ok = true;
+      if (++loaded > 30) loading.classList.add('done');
+      if (Math.abs(i - cur) <= AHEAD) warm(Math.round(cur), true);
+      if (still) paint(); else kick();
+    }).catch(() => {}).finally(() => { inflight--; pump(); });
   }
-  function nearest(i) {
+  function next() {
+    while (order.length) { const i = order.shift(); if (!frames[i]) return i; }
+    const c = Math.round(cur);
     for (let d = 0; d < COUNT; d++) {
-      if (frames[i - d] && frames[i - d].ok) return frames[i - d];
-      if (frames[i + d] && frames[i + d].ok) return frames[i + d];
+      if (c + d < COUNT && !frames[c + d]) return c + d;
+      if (c - d >= 0 && !frames[c - d]) return c - d;
     }
-    return null;
+    return -1;
   }
-  function size() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = canvas.clientWidth * dpr; canvas.height = canvas.clientHeight * dpr; shown = -1; draw();
+  function pump() {
+    while (inflight < MAX) { const i = next(); if (i < 0) return; start(i); }
   }
-  function draw() {
-    const img = nearest(want);
-    if (!img || (img === frames[shown] && shown === want)) return;
-    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-    const w = img.naturalWidth * s, h = img.naturalHeight * s;
-    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-    shown = frames.indexOf(img);
+
+  // ask the browser to keep the frames just ahead decoded, so drawing never waits on a decode. decode() is a no-op for
+  // frames that still are. (copying them into ImageBitmaps was slower: each draw re-uploaded them to the GPU)
+  function warm(c, force) {
+    if (c === warmed && !force) return;
+    warmed = c;
+    for (let i = Math.max(0, c - BEHIND); i <= Math.min(COUNT - 1, c + AHEAD); i++) if (frames[i] && frames[i].ok) frames[i].decode().catch(() => {});
   }
+  function pic(i) { return frames[i] && frames[i].ok ? frames[i] : null; }
+  function nearest(c) {
+    for (let d = 0; d < COUNT; d++) {
+      if (pic(c - d)) return c - d;
+      if (pic(c + d)) return c + d;
+    }
+    return -1;
+  }
+
+  function cover(img, alpha) {
+    const W = canvas.width, H = canvas.height, s = Math.max(W / IW, H / IH), w = IW * s, h = IH * s;
+    ctx.globalAlpha = alpha;
+    ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+    ctx.globalAlpha = 1;
+  }
+  function paint() {
+    // blend only while scrubbing slowly, where single frames would visibly step. moving faster, every display frame
+    // already shows a new frame, so one draw is enough
+    const i = Math.floor(cur), f = speed < 0.35 ? Math.round((cur - i) * 8) / 8 : Math.round(cur - i);
+    const a = pic(i), b = f > 0 ? pic(i + 1) : null;
+    if (a && (b || f === 0)) {
+      const key = i + f;
+      if (key === drawn) return;
+      drawn = key;
+      if (f === 1) cover(b, 1); else { cover(a, 1); if (b) cover(b, f); }
+      return;
+    }
+    const n = nearest(Math.round(cur));
+    if (n < 0 || drawn === n) return;
+    drawn = n; cover(pic(n), 1);
+  }
+
   function progress() {
     const r = story.getBoundingClientRect(), span = story.offsetHeight - innerHeight;
     return Math.min(1, Math.max(0, -r.top / span));
   }
-  function tick() {
+  function render(t) {
+    raf = 0;
     const p = progress();
-    want = Math.round(p * (COUNT - 1));
+    const goal = settled ? Math.round(p * (COUNT - 1)) : p * (COUNT - 1);
     meter.style.transform = `scaleY(${p})`;
     chapters.forEach((c) => c.classList.toggle('on', p >= +c.dataset.from && p < +c.dataset.to));
-    draw();
+    const dt = last ? Math.min(64, t - last) : 16.7;
+    last = t;
+    const d = goal - cur, was = cur;
+    cur = Math.abs(d) < 0.004 ? goal : cur + d * (1 - Math.pow(0.75, dt / 16.7));
+    speed = Math.abs(cur - was) * 16.7 / dt;
+    warm(Math.round(cur));
+    paint();
+    if (cur !== goal) raf = requestAnimationFrame(render); else last = 0;
+  }
+  function kick() { if (!raf && !still) raf = requestAnimationFrame(render); }
+  function onScroll() {
+    settled = false;
+    clearTimeout(idle);
+    idle = setTimeout(() => { settled = true; kick(); }, 140);
+    kick();
+  }
+  function size() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    const dpr = Math.min(devicePixelRatio || 1, 2, Math.max(1, Math.min(IW / w, IH / h)));
+    const W = Math.round(w * dpr), H = Math.round(h * dpr);
+    if (W === canvas.width && H === canvas.height) return;
+    canvas.width = W; canvas.height = H;
+    ctx.fillStyle = '#1b1f26'; ctx.fillRect(0, 0, W, H);
+    drawn = null; paint();
   }
 
   if (still) {
-    want = 239;  // reduced motion keeps the house, the last rendered frame
-    load(239);
+    cur = 239;  // reduced motion keeps the house, the last rendered frame
+    order = [239]; pump();
     loading.classList.add('done');
   } else {
-    load(0);
-    for (let i = 8; i < COUNT; i += 8) load(i);
-    for (let i = 1; i < COUNT; i++) if (i % 8) setTimeout(() => load(i), 400 + i * 12);
-    addEventListener('scroll', tick, { passive: true });
+    cur = Math.round(progress() * (COUNT - 1));
+    for (let i = cur; i < Math.min(COUNT, cur + 9); i++) order.push(i);
+    order.push(0);
+    for (let i = 8; i < COUNT; i += 8) order.push(i);
+    pump();
+    addEventListener('scroll', onScroll, { passive: true });
   }
   addEventListener('resize', size);
-  size(); tick();
+  size();
 </script>
 </body>
 </html>

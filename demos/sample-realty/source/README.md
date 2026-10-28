@@ -13,6 +13,10 @@ Blender 5.2, Cycles on the GPU. 240 frames, 1600x900, then `pack.py` makes the w
    pushes in on the porch while it dissolves into the clip, adds frames 240 to 317 and the sixth chapter.
 7. The second clip starts on the first clip's last frame (kitchen to hallway to bedroom).
    `py add_interior_more.py clip2.mp4 .. 64 40 "Down the hall." "..."` appends frames 318 to 380 and a chapter.
+8. Four more clips, each made in Gemini (Veo) from the previous clip's last frame, appended the same way. Every prompt
+   names the same house (2,250 sq ft, two storeys, 4 bedrooms, 3.5 baths) and the same finishes so rooms stay in scale:
+   ensuite 381 to 443, upstairs hall and second bedroom 444 to 506, kids' room 507 to 569, bonus room over the garage 570 to 632.
+   The stairs down, the back door and the yard are still to do.
 
 What is real: downtown footprints and heights, the river, bridges, roads, parks and terrain. What is made up: the
 suburb on the south side, the house, the listing and the interior (made with AI). Credits: Map data (c) OpenStreetMap contributors (ODbL).
