@@ -20,10 +20,10 @@ It swaps the name and domain in every page, demo, 404, sitemap, robots and this 
 ## Right now (Oct 28)
 
 - Steps 1 to 4 are done: southsites.ca DNS, contact@southsites.ca forward, Pages on southsites.ca with HTTPS, and
-  yegsites.com 301 to https://southsites.ca. Still open: Gmail "Send mail as" (step 2, you) and the SPF/DMARC update
-  below (waits on your OK).
-- SPF for sending as contact@southsites.ca from Gmail: change the southsites.ca TXT to
-  `v=spf1 include:_spf.porkbun.com include:_spf.google.com ~all` and add `_dmarc` TXT
+  yegsites.com 301 to https://southsites.ca, SPF (Porkbun + Google) and DMARC p=none. Still open: Gmail "Send mail as"
+  (step 2, you).
+- Done Oct 28: southsites.ca TXT is
+  `v=spf1 include:_spf.porkbun.com include:_spf.google.com ~all`, `_dmarc` TXT is
   `v=DMARC1; p=none; rua=mailto:contact@southsites.ca`.
 
 ## 1. DNS for southsites.ca (5 min)
