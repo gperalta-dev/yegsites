@@ -40,7 +40,7 @@
   .brand { font: 400 30px/1 var(--serif); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; text-shadow: 0 1px 12px rgba(0, 0, 0, .4); }
 
   /* scroll story: a sticky canvas scrubs the rendered flight while the chapters scroll past */
-  .story { position: relative; height: 640vh; }
+  .story { position: relative; height: 848vh; }
   .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #1b1f26; }
   canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 10, 14, .62) 0%, rgba(8, 10, 14, .25) 34%, rgba(8, 10, 14, 0) 48%, rgba(8, 10, 14, 0) 55%, rgba(8, 10, 14, .7) 100%); pointer-events: none; }
@@ -112,11 +112,12 @@
     <div class="meter" aria-hidden="true"><i id="meter"></i></div>
     <div class="loading" id="loading" aria-hidden="true">Loading the flight</div>
     <div class="chapters">
-      <div class="ch first on" data-from="0" data-to="0.13"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
-      <div class="ch" data-from="0.17" data-to="0.36"><small>The river valley</small><h2>Cross the river.</h2><p>Trails, trees and the bridges between downtown and the south side.</p></div>
-      <div class="ch" data-from="0.42" data-to="0.56"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
-      <div class="ch" data-from="0.6" data-to="0.72"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
-      <div class="ch" data-from="0.78" data-to="1.01"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch first on" data-from="0.000" data-to="0.098"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
+      <div class="ch" data-from="0.128" data-to="0.272"><small>The river valley</small><h2>Cross the river.</h2><p>Trails, trees and the bridges between downtown and the south side.</p></div>
+      <div class="ch" data-from="0.317" data-to="0.423"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
+      <div class="ch" data-from="0.453" data-to="0.543"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
+      <div class="ch" data-from="0.589" data-to="0.751"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.785" data-to="1.01"><small>Sample interior, made with AI</small><h2>Step inside.</h2><p>The entry, the living room and the kitchen. This interior was generated with AI from our render of the front door. It is not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
     </div>
   </div>
 </div>
@@ -154,13 +155,14 @@
 </section>
 </main>
 
-<footer><div class="wrap"><span>Sample Realty is a concept demo, not a client. Built by Southsites.</span><span>3D flight rendered in Blender (Cycles). Downtown, the river and the valley follow real building footprints, heights and aerial photos. The suburb and the house are made up.</span><span class="credits">Ground and roof imagery: City of Edmonton Orthophoto 2024. Contains information licensed under the <a href="https://data.edmonton.ca/">Open Government Licence (City of Edmonton)</a>, via <a href="https://source.coop/dataforcanada/d4c-datapkg-orthoimagery">Data for Canada</a>. Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Elevation from Terrain Tiles on AWS, including data from Natural Resources Canada (Open Government Licence, Canada). Trees, plants, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0).</span></div></footer>
+<footer><div class="wrap"><span>Sample Realty is a concept demo, not a client. Built by Southsites.</span><span>3D flight rendered in Blender (Cycles). Downtown, the river and the valley follow real building footprints, heights and aerial photos. The suburb and the house are made up.</span><span class="credits">Ground and roof imagery: City of Edmonton Orthophoto 2024. Contains information licensed under the <a href="https://data.edmonton.ca/">Open Government Licence (City of Edmonton)</a>, via <a href="https://source.coop/dataforcanada/d4c-datapkg-orthoimagery">Data for Canada</a>. Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Elevation from Terrain Tiles on AWS, including data from Natural Resources Canada (Open Government Licence, Canada). Trees, plants, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). Interior walk-through generated with Google Veo from our render of the front door.</span></div></footer>
 
 <script>
   // scroll-scrubbed flight: frames load sparse first (every 8th), then fill in, and the canvas shows the nearest loaded one.
-  // portrait screens get a lighter centre-cropped set (506x900), wider screens the 1600x900 set
+  // portrait screens get a lighter centre-cropped set (456x810), wider screens the 1440x810 set.
+  // frames 0-239 are the rendered flight, 240 on the AI walk inside
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
-  const COUNT = 240, canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
+  const COUNT = 318, canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
   const story = document.getElementById('story'), meter = document.getElementById('meter'), loading = document.getElementById('loading');
   const chapters = [...document.querySelectorAll('.ch')];
   const frames = new Array(COUNT), still = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -207,8 +209,8 @@
   }
 
   if (still) {
-    want = COUNT - 1;
-    load(COUNT - 1);
+    want = 239;  // reduced motion keeps the house, the last rendered frame
+    load(239);
     loading.classList.add('done');
   } else {
     load(0);

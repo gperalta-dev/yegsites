@@ -135,8 +135,16 @@
   .r-card p { margin: 0 0 14px; font: 500 15px var(--body); color: #d9d2c6; }
   .r-card .price { font-size: 34px; color: #d8b47a; margin: 0 0 2px; }
   .r-card .pnote { font: 500 13px var(--body); color: #b9b2a6; margin: 0 0 16px; }
+  .realty.inside .r-card { opacity: 0; transform: translateY(16px); pointer-events: none; }
+  .r-card { transition: opacity .4s, transform .4s; }
+  .r-in { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 9vh; max-width: 520px; opacity: 0; transform: translateY(16px); transition: opacity .4s, transform .4s; color: #f4efe6; }
+  .realty.inside .r-in { opacity: 1; transform: none; }
+  .realty::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; opacity: 0; transition: opacity .4s; background: linear-gradient(180deg, rgba(8, 10, 14, 0), rgba(8, 10, 14, .72)); pointer-events: none; }
+  .realty.inside::before { opacity: 1; }
+  .r-in h3 { font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1; margin: 0 0 10px; text-shadow: 0 2px 24px rgba(0, 0, 0, .5); }
+  .r-in p { margin: 0; font: 500 16px var(--body); color: #ece6dc; text-shadow: 0 1px 12px rgba(0, 0, 0, .7); max-width: 40ch; }
   .r-tag { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 96px; font: 700 13px var(--body); background: rgba(8, 10, 14, .7); padding: 8px 12px; border-radius: 99px; color: #f3d6a4; }
-  .fly-track { height: 250vh; }
+  .fly-track { height: 355vh; }
 
   /* sticky call to action, after the first screen */
   .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .82); backdrop-filter: blur(10px); border: 1px solid var(--line); transform: translateY(130%); opacity: 0; transition: transform .35s, opacity .35s; }
@@ -145,7 +153,7 @@
   .dock .ic { width: 44px; padding: 0; }
 
   /* "or what about": live sample sites slide in and scroll themselves */
-  .morph { position: relative; height: 220vh; }
+  .morph { position: relative; height: 200vh; }
   .m-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 30%, #1b1f26, var(--bg) 70%); }
   .m-title { position: absolute; top: 9vh; left: 0; right: 0; text-align: center; font: 900 clamp(44px, 8vw, 120px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0; padding: 0 20px; transition: opacity .3s; }
   .m-title span { color: var(--accent); }
@@ -160,7 +168,7 @@
   .m-links a { font-size: 15px; font-weight: 600; color: var(--muted); text-underline-offset: 4px; padding: 10px 4px; }
 
   /* real work */
-  .real { position: relative; height: 140vh; }
+  .real { position: relative; height: 130vh; }
   .r-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
   .r-stage .wrap { height: 100%; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 48px; align-items: center; }
   .real h2 { font: 900 clamp(44px, 6vw, 88px)/.9 var(--display); font-stretch: 64%; text-transform: uppercase; margin: 0 0 18px; }
@@ -267,8 +275,9 @@
     .win { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 30px; opacity: 1 !important; }
     .m-links { position: static; }
     .r-stage { height: auto; padding: 80px 0; }
-    .stills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 40px 0; }
+    .stills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 40px 0; }
     .stills img { width: 100%; height: auto; border-radius: 12px; display: block; }
+    .stills p { grid-column: 1 / -1; margin: 0; font-size: 15px; color: var(--muted); }
     .dock, .cap { transition: none; }
   }
 </style>
@@ -296,7 +305,7 @@
 <main id="main">
 <div class="fly" id="fly">
   <div class="stage" id="stage">
-    <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, across the river valley, down a suburban street to one house and around it"></canvas>
+    <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, across the river valley, down a suburban street to one house, then through its front door into a sample interior made with AI"></canvas>
     <div class="veil" id="veil"></div>
     <div class="cap" id="cap1"><h2>Here's what a site can feel like.</h2><p>Keep scrolling. This is a sample we made for a made-up realtor.</p></div>
     <div class="realty" id="realty" aria-hidden="true">
@@ -309,6 +318,7 @@
         <p class="pnote">Sample price for this concept demo.</p>
         <a class="r-btn" href="demos/sample-realty/" tabindex="-1">See the full sample site</a>
       </div>
+      <div class="r-in"><h3>Step inside.</h3><p>The entry, the living room and the kitchen. This interior was made with AI from our render of the front door. It is not a real home.</p></div>
       <span class="r-tag">Sample site by Southsites. Sample Realty is made up.</span>
     </div>
   </div>
@@ -359,6 +369,8 @@
     <img src="demos/sample-realty/frames/d/f000.webp" alt="Downtown Edmonton from the air at sunset" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f120.webp" alt="A new suburb with autumn trees" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f172.webp" alt="A two-storey house with a double garage" loading="lazy" width="1440" height="810">
+    <img src="demos/sample-realty/frames/d/f310.webp" alt="An open-plan kitchen with a white island, made with AI" loading="lazy" width="1440" height="810">
+    <p>Sample Realty and the house are made up. The kitchen was made with AI and is not a real home.</p>
   </div>
 </div>
 
@@ -439,7 +451,7 @@
 <footer>
   <div class="wrap">
     <div class="row"><span>Jan Gabriel, Southsites, Edmonton</span><span><a href="tel:+18254615061">825-461-5061</a> &nbsp; <a href="mailto:contact@southsites.ca">contact@southsites.ca</a></span></div>
-    <span>Sample Realty, Sample Barber Co. and Sample Bake House are made-up businesses built as samples. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>.</span>
+    <span>Sample Realty, Sample Barber Co. and Sample Bake House are made-up businesses built as samples. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). The walk-through inside the house was generated with Google Veo (AI) from our render of the front door, and is not a real home. Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>.</span>
   </div>
 </footer>
 
@@ -505,17 +517,18 @@
   // ---------------------------------------------------------------- the scroll story
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd';
-  const N = 120;                       // every second frame of the 240-frame flight
+  const EXT = 120, IN = 78;          // every second frame of the 240-frame flight, then the walk inside
+  const N = EXT + IN;
   const AI = [];                       // frame numbers that have an AI-polished version in story/ (none yet)
   const pad = (i) => String(i).padStart(3, '0');
-  const src = (k) => { const i = k * 2; return AI.includes(i) ? `story/${SET}/f${pad(i)}.webp` : `demos/sample-realty/frames/${SET}/f${pad(i)}.webp`; };
+  const src = (k) => { if (k >= EXT) return `demos/sample-realty/frames/${SET}/f${pad(240 + k - EXT)}.webp`; const i = k * 2; return AI.includes(i) ? `story/${SET}/f${pad(i)}.webp` : `demos/sample-realty/frames/${SET}/f${pad(i)}.webp`; };
   const canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
   const stage = document.getElementById('stage'), veil = document.getElementById('veil'), track = document.getElementById('track');
   const cap1 = document.getElementById('cap1'), realty = document.getElementById('realty'), dock = document.getElementById('dock');
   const hero = document.getElementById('top');
   stage.style.backgroundImage = `url(${src(0)})`;
   const frames = new Array(N);
-  let want = 0, shown = -1, doorImg = null, doorA = 0;
+  let want = 0, shown = -1;
 
   function load(k) {
     if (frames[k]) return;
@@ -541,10 +554,8 @@
     const img = nearest(want);
     if (!img) return;
     const k = frames.indexOf(img);
-    if (!force && k === shown && !doorA) return;
-    ctx.globalAlpha = 1;
+    if (!force && k === shown) return;
     cover(img);
-    if (doorA > 0 && doorImg && doorImg.ok) { ctx.globalAlpha = doorA; cover(doorImg); ctx.globalAlpha = 1; }
     shown = k;
   }
   function size() {
@@ -578,9 +589,9 @@
     const fly = stage.parentElement, start = fly.offsetTop + hero.offsetHeight * 0.85, end = fly.offsetTop + fly.offsetHeight - vh;
     const p = clamp((y - start) / Math.max(1, end - start));
     want = Math.round(p * (N - 1));
-    doorA = ramp(p, 0.93, 1);
     cap1.classList.toggle('on', heroOut > 0.85 && p < 0.22);
-    realty.classList.toggle('on', p > 0.56 && p < 0.995);
+    realty.classList.toggle('on', want >= 67 && p < 0.995);
+    realty.classList.toggle('inside', want >= EXT);
     draw();
     dock.classList.toggle('on', y > hero.offsetHeight * 0.8);
     // or what about
@@ -602,7 +613,7 @@
   }
 
   if (still) {
-    load(0); load(N - 1);
+    load(0);
     dock.classList.add('on');
   } else {
     load(0);
@@ -612,7 +623,6 @@
     addEventListener('load', () => setTimeout(sparse, 200), { once: true });
     addEventListener('scroll', () => { sparse(); rest(); }, { once: true, passive: true });
     setTimeout(rest, 4000);
-    doorImg = new Image(); doorImg.src = `story/${SET}/door.webp`; doorImg.decode().then(() => { doorImg.ok = true; }).catch(() => {});
     addEventListener('scroll', tick, { passive: true });
   }
   addEventListener('resize', () => { size(); if (!still) tick(); });

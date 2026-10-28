@@ -9,8 +9,10 @@ Blender 5.2, Cycles on the GPU. 240 frames, 1600x900, then `pack.py` makes the w
 4. `blender -b -P main.py -- --dl assets/dl --geo assets/geo/out --out frames --res 1600x900 --samples 80` renders.
    Add `--frames 0,120,172 --res 960x540 --samples 32` for quick test stills.
 5. `py pack.py frames ../frames 55` writes `frames/d` (desktop) and `frames/m` (portrait phones).
+6. The walk inside is a 10 second Google Veo clip made from a render of the front door. `py add_interior.py clip.mp4 frames/f239.png .. 64 40`
+   pushes in on the porch while it dissolves into the clip, adds frames 240 to 317 and the sixth chapter.
 
 What is real: downtown footprints and heights, the river, bridges, roads, parks and terrain. What is made up: the
-suburb on the south side, the house and the listing. Credits: Map data (c) OpenStreetMap contributors (ODbL).
+suburb on the south side, the house, the listing and the interior (made with AI). Credits: Map data (c) OpenStreetMap contributors (ODbL).
 Elevation: Terrain Tiles on AWS, including Natural Resources Canada data (Open Government Licence, Canada).
 Poly Haven assets are CC0.
