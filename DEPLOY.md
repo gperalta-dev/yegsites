@@ -19,8 +19,12 @@ It swaps the name and domain in every page, demo, 404, sitemap, robots and this 
 
 ## Right now (Oct 28)
 
-- The page is pushed with the Southsites brand, but `CNAME` is still `yegsites.com`, so it is live on https://yegsites.com
-  until southsites.ca has DNS. Pushing `CNAME` = southsites.ca before DNS exists would take the page offline.
+- Steps 1 to 4 are done: southsites.ca DNS, contact@southsites.ca forward, Pages on southsites.ca with HTTPS, and
+  yegsites.com 301 to https://southsites.ca. Still open: Gmail "Send mail as" (step 2, you) and the SPF/DMARC update
+  below (waits on your OK).
+- SPF for sending as contact@southsites.ca from Gmail: change the southsites.ca TXT to
+  `v=spf1 include:_spf.porkbun.com include:_spf.google.com ~all` and add `_dmarc` TXT
+  `v=DMARC1; p=none; rua=mailto:contact@southsites.ca`.
 
 ## 1. DNS for southsites.ca (5 min)
 
