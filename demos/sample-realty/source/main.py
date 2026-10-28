@@ -128,13 +128,20 @@ H = hero_m.translation.copy()
 HX, HY = Vector(hero_m.col[0][:3]), Vector(hero_m.col[1][:3])
 print("hero house at", tuple(round(v, 1) for v in H), "front faces", tuple(round(-v, 2) for v in HY[:2]))
 
-city.terrain(col)
+terr = city.terrain(col)
 city.far_ground(col)
 mats, cdata = city.buildings(col)
+if (Path(arg("--geo")) / "ortho.json").exists() and "--noortho" not in ARGS:
+    import ortho
+    ortho.load(arg("--geo"))
+    ortho.assign(terr, keep_disk=(SUB[0], SUB[1], SUB[2] + 40))
+    ortho.assign(bpy.data.objects["city houses"], only={city.M_OLDROOF})
+    ortho.assign(bpy.data.objects["city buildings"], only={city.M_GRAVEL}, max_z=30.0)
 city.water(col, mats, cdata)
 city.bridges(col, mats, cdata)
 trees = city.tree_points()
-city.gn_scatter("city trees", trees, {0: plants.PROTO["tree"], 1: plants.PROTO["spruce"], 2: plants.PROTO["tree2"]}, col)
+city.gn_scatter("city trees", trees, {0: plants.PROTO["tree"], 1: plants.PROTO["spruce"], 2: plants.PROTO["tree2"],
+                                      3: plants.PROTO["tree3"], 4: plants.PROTO["sapling"]}, col)
 # suburb park strips and back-lot trees: a ring of trees between the collector and the back fences
 rng = np.random.default_rng(11)
 extra = []
@@ -142,8 +149,10 @@ for k in range(1400):
     a = rng.uniform(0, 2 * math.pi)
     r = edge_r(a) - rng.uniform(-12, 30)
     x, y = SUB[0] + r * math.cos(a), SUB[1] + r * math.sin(a)
-    extra.append((x, y, 0.0, 0 if rng.random() < 0.7 else 1, rng.uniform(1.6, 2.6), rng.uniform(0, 6.28)))
-city.gn_scatter("suburb edge trees", np.array(extra, np.float32), {0: plants.PROTO["tree"], 1: plants.PROTO["spruce"]}, col)
+    k_ = 0 if rng.random() < 0.55 else (1 if rng.random() < 0.5 else 3)
+    extra.append((x, y, 0.0, k_, rng.uniform(1.6, 2.6) if k_ < 3 else rng.uniform(0.45, 0.7), rng.uniform(0, 6.28)))
+city.gn_scatter("suburb edge trees", np.array(extra, np.float32), {0: plants.PROTO["tree"], 1: plants.PROTO["spruce"],
+                                                                     3: plants.PROTO["tree3"]}, col)
 HDRI = arg("--hdri", "kloppenheim_06_puresky")
 look.sky(common.DL / "hdri" / f"{HDRI}_8k.hdr", common.DL / "hdri" / f"{HDRI}_1k.hdr", sun_phi_deg=SUN_PHI, sun_el_deg=SUN_EL,
          strength=1.0)
@@ -245,11 +254,35 @@ for o in list(col.objects):
 for o in cut:
     bpy.data.objects.remove(o)
 print("cleared", len(cut), "plants from the camera path")
-look.render_settings(RES, SAMPLES, threshold=0.015, persistent=True, motion_blur=0.05)
-look.grade(mist_start=300, mist_depth=10000, haze_color=(0.88, 0.80, 0.70), haze=0.55, bloom=0.08, falloff="LINEAR")
+look.render_settings(RES, SAMPLES, threshold=0.012, persistent=True, motion_blur=0.0)
+hz = look.HORIZON
+look.grade(start=250, length=float(arg("--haze-len", "30000")), haze_color=tuple(hz),
+           near_len=4000.0, near_amt=float(arg("--near", "0.18")), near_color=(hz[0] * 1.06, hz[1] * 1.0, hz[2] * 0.9), bloom=0.08)
 scene.frame_start, scene.frame_end = 0, FRAME_END
 if arg("--save"):
     bpy.ops.wm.save_as_mainfile(filepath=str(Path(arg("--save")).resolve()))
+if "--probe" in ARGS:  # lot edges next to the listing, in the listing's frame
+    inv = hero_m.inverted()
+    for o in col.objects:
+        if o.type == "MESH" and o.name.split(".")[0] in ("lot", "hero lot") and (o.matrix_world.translation - H).length < 40:
+            xs = [(inv @ (o.matrix_world @ v.co)).x for v in o.data.vertices]
+            ys = [(inv @ (o.matrix_world @ v.co)).y for v in o.data.vertices]
+            print("PROBE", o.name, "x", round(min(xs), 2), round(max(xs), 2), "y", round(min(ys), 1), round(max(ys), 1))
+if arg("--still"):
+    x, y, z, tx, ty, tz, lens = (float(v) for v in arg("--still").split(","))
+    co = scene.camera
+    co.animation_data_clear()
+    co.data.animation_data_clear()
+    co.location = hl(x, y, z)
+    co.rotation_euler = (hl(tx, ty, tz) - co.location).to_track_quat("-Z", "Y").to_euler()
+    co.data.lens = lens
+    co.data.dof.use_dof = False
+    OUT.mkdir(parents=True, exist_ok=True)
+    scene.render.filepath = str(OUT / arg("--still-name", "still.png"))
+    bpy.ops.render.render(write_still=True)
+    raise SystemExit(0)
+if "--norender" in ARGS:
+    raise SystemExit(0)
 OUT.mkdir(parents=True, exist_ok=True)
 frames = [int(f) for f in arg("--frames").split(",")] if arg("--frames") else range(FRAME_END + 1)
 for f in frames:

@@ -75,7 +75,7 @@ def concrete_mat(name="driveway concrete", joint=3.0):
 
 def lawn_mat():
     """mown lawn seen from a distance: leafy grass photo pushed green, with mowing stripes and patchy variation"""
-    m = pbr("mown lawn", "leafy_grass", 2.0, tint=(0.40, 0.62, 0.20), sat=1.6, value=0.75, rough=(0.75, 1.0), bump=0.8)
+    m = pbr("mown lawn", "leafy_grass", 2.0, tint=(0.46, 0.60, 0.24), sat=1.3, value=0.75, rough=(0.75, 1.0), bump=0.8)
     nt = m.node_tree
     p = nt.nodes.get("Principled BSDF")
     src = p.inputs["Base Color"].links[0].from_socket

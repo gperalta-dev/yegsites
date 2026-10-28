@@ -19,11 +19,96 @@ MODELS = {
     "conifer": ("pine_sapling_small", ["pine_sapling_small_a", "pine_sapling_small_b", "pine_sapling_small_c"]),
     "shrub": ("searsia_lucida", ["searsia_lucida_a_LOD0", "searsia_lucida_b_LOD0", "searsia_lucida_c_LOD0"]),
     "grass": ("grass_medium_01", ["grass_medium_01_tall_a_LOD0", "grass_medium_01_tall_b_LOD0", "grass_medium_01_tall_c_LOD0"]),
+    "tree3": ("jacaranda_tree", ["jacaranda_tree_LOD0"]),
+    "sapling": ("fir_sapling", ["fir_sapling_a", "fir_sapling_b", "fir_sapling_c"]),
 }
+BROADLEAF = ("tree", "tree2", "tree3")
 PROTO = {}
 
 
-def _leafify(mat, hue_var=0.04, val_var=0.18, translucent=0.35):
+def _autumn(nt, color_out, oi):
+    """late October: most broadleaf crowns gold, orange or rust, a few still green, colour picked per tree"""
+    pick = N(nt, "ShaderNodeMath", -100, 900, operation="FRACT")
+    m1 = N(nt, "ShaderNodeMath", -250, 900, operation="MULTIPLY")
+    m1.inputs[1].default_value = 7.13
+    nt.links.new(oi.outputs["Random"], m1.inputs[0])
+    nt.links.new(m1.outputs[0], pick.inputs[0])
+    ramp = N(nt, "ShaderNodeValToRGB", 50, 900)
+    cr = ramp.color_ramp
+    cr.elements[0].position, cr.elements[0].color = 0.0, (0.95, 0.66, 0.13, 1)
+    cr.elements[1].position, cr.elements[1].color = 1.0, (0.42, 0.27, 0.11, 1)
+    for pos, col in ((0.3, (0.98, 0.54, 0.09, 1)), (0.55, (0.80, 0.32, 0.07, 1)), (0.75, (0.72, 0.64, 0.17, 1))):
+        e = cr.elements.new(pos)
+        e.color = col
+    nt.links.new(pick.outputs[0], ramp.inputs["Fac"])
+    bw = N(nt, "ShaderNodeRGBToBW", 50, 700)
+    nt.links.new(color_out, bw.inputs["Color"])
+    sc = N(nt, "ShaderNodeMath", 200, 700, operation="MULTIPLY")
+    sc.inputs[1].default_value = 4.4
+    nt.links.new(bw.outputs["Val"], sc.inputs[0])
+    tinted = N(nt, "ShaderNodeMix", 350, 800, data_type="RGBA", blend_type="MULTIPLY")
+    tinted.inputs["Factor"].default_value = 1.0
+    nt.links.new(ramp.outputs["Color"], tinted.inputs["A"])
+    cc = N(nt, "ShaderNodeCombineColor", 200, 600)
+    for k in ("Red", "Green", "Blue"):
+        nt.links.new(sc.outputs[0], cc.inputs[k])
+    nt.links.new(cc.outputs["Color"], tinted.inputs["B"])
+    turned = N(nt, "ShaderNodeMath", -100, 1100, operation="FRACT")
+    m2 = N(nt, "ShaderNodeMath", -250, 1100, operation="MULTIPLY")
+    m2.inputs[1].default_value = 3.71
+    nt.links.new(oi.outputs["Random"], m2.inputs[0])
+    nt.links.new(m2.outputs[0], turned.inputs[0])
+    f = N(nt, "ShaderNodeMapRange", 50, 1100)
+    f.inputs["From Min"].default_value, f.inputs["From Max"].default_value = 0.1, 0.3
+    f.inputs["To Min"].default_value, f.inputs["To Max"].default_value = 0.0, 0.95
+    nt.links.new(turned.outputs[0], f.inputs["Value"])
+    mix = N(nt, "ShaderNodeMix", 500, 700, data_type="RGBA")
+    nt.links.new(f.outputs["Result"], mix.inputs["Factor"])
+    nt.links.new(color_out, mix.inputs["A"])
+    nt.links.new(tinted.outputs["Result"], mix.inputs["B"])
+    return mix.outputs["Result"], f.outputs["Result"]
+
+
+def _thin(nt, alpha_src, turned, oi):
+    """turned trees have dropped some leaves: cut out patches of the crown"""
+    tc = N(nt, "ShaderNodeTexCoord", -400, 1300)
+    off = N(nt, "ShaderNodeVectorMath", -250, 1300, operation="ADD")
+    nt.links.new(tc.outputs["Object"], off.inputs[0])
+    cmb = N(nt, "ShaderNodeCombineXYZ", -400, 1450)
+    m = N(nt, "ShaderNodeMath", -550, 1450, operation="MULTIPLY")
+    m.inputs[1].default_value = 173.0
+    nt.links.new(oi.outputs["Random"], m.inputs[0])
+    for k in ("X", "Y", "Z"):
+        nt.links.new(m.outputs[0], cmb.inputs[k])
+    nt.links.new(cmb.outputs["Vector"], off.inputs[1])
+    nz = N(nt, "ShaderNodeTexNoise", -100, 1300)
+    nz.inputs["Scale"].default_value = 1.4
+    nz.inputs["Detail"].default_value = 3.0
+    nt.links.new(off.outputs["Vector"], nz.inputs["Vector"])
+    rt = N(nt, "ShaderNodeMath", -100, 1600, operation="FRACT")
+    rm = N(nt, "ShaderNodeMath", -250, 1600, operation="MULTIPLY")
+    rm.inputs[1].default_value = 11.3
+    nt.links.new(oi.outputs["Random"], rm.inputs[0])
+    nt.links.new(rm.outputs[0], rt.inputs[0])
+    tw = N(nt, "ShaderNodeMath", 50, 1600, operation="MULTIPLY")
+    nt.links.new(turned, tw.inputs[0])
+    nt.links.new(rt.outputs[0], tw.inputs[1])
+    thr = N(nt, "ShaderNodeMath", 50, 1450, operation="MULTIPLY")
+    thr.inputs[1].default_value = 0.42
+    nt.links.new(tw.outputs[0], thr.inputs[0])
+    thr2 = N(nt, "ShaderNodeMath", 200, 1450, operation="ADD")
+    thr2.inputs[1].default_value = 0.06
+    nt.links.new(thr.outputs[0], thr2.inputs[0])
+    keep = N(nt, "ShaderNodeMath", 350, 1300, operation="GREATER_THAN")
+    nt.links.new(nz.outputs["Fac"], keep.inputs[0])
+    nt.links.new(thr2.outputs[0], keep.inputs[1])
+    a = N(nt, "ShaderNodeMath", 500, 1300, operation="MULTIPLY")
+    nt.links.new(alpha_src, a.inputs[0])
+    nt.links.new(keep.outputs[0], a.inputs[1])
+    return a.outputs[0]
+
+
+def _leafify(mat, hue_var=0.04, val_var=0.18, translucent=0.35, autumn=False):
     nt = mat.node_tree
     p = next((n for n in nt.nodes if n.bl_idname == "ShaderNodeBsdfPrincipled"), None)
     out = next((n for n in nt.nodes if n.bl_idname == "ShaderNodeOutputMaterial"), None)
@@ -43,10 +128,17 @@ def _leafify(mat, hue_var=0.04, val_var=0.18, translucent=0.35):
         nt.links.new(oi.outputs["Random"], mv.inputs["Value"])
         nt.links.new(mv.outputs["Result"], hsv.inputs["Value"])
         nt.links.new(src, hsv.inputs["Color"])
-        nt.links.new(hsv.outputs["Color"], base)
+        leaf_col = hsv.outputs["Color"]
+        turned = None
+        if autumn:
+            leaf_col, turned = _autumn(nt, leaf_col, oi)
+        nt.links.new(leaf_col, base)
+        if turned is not None and p.inputs["Alpha"].links:
+            a_src = p.inputs["Alpha"].links[0].from_socket
+            nt.links.new(_thin(nt, a_src, turned, oi), p.inputs["Alpha"])
         if translucent > 0 and "bark" not in mat.name and "trunk" not in mat.name:
             tl = N(nt, "ShaderNodeBsdfTranslucent", 0, -400)
-            nt.links.new(hsv.outputs["Color"], tl.inputs["Color"])
+            nt.links.new(leaf_col, tl.inputs["Color"])
             surf = out.inputs["Surface"].links[0].from_socket
             mx = N(nt, "ShaderNodeMixShader", 250, -200)
             mx.inputs["Fac"].default_value = translucent
@@ -102,7 +194,8 @@ def load_prototypes(keys=None):
             protos.append(o)
             for m in me.materials:
                 if m and not m.get("leafified"):
-                    _leafify(m, translucent=0.0 if key == "grass" else 0.3)
+                    _leafify(m, translucent=0.0 if key == "grass" else 0.3,
+                             autumn=key in BROADLEAF and ("lea" in m.name.lower() or "branch" in m.name.lower()))
                     m["leafified"] = True
         PROTO[key] = protos
         print("prototype", key, [(p.name, round(p.dimensions.z, 2), len(p.data.polygons)) for p in protos])

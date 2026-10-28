@@ -9,7 +9,10 @@ from mathutils import Vector
 from common import DL, N, link
 
 
-def sky(hdri_8k, hdri_1k, sun_phi_deg, sun_el_deg=None, strength=1.0, sun_mult=1.0):
+HORIZON = [0.8, 0.78, 0.76]
+
+
+def sky(hdri_8k, hdri_1k, sun_phi_deg, sun_el_deg=None, strength=1.0, sun_mult=1.0, horizon_phi=(-80, 40)):
     """camera rays see the 8k sky, lighting comes from the 1k. the HDRI's own sun is clamped out of both and replaced by
     a sun lamp at the same direction (or at sun_el_deg if given), so shadows are crisp and noise free.
     sun_phi_deg is the map angle toward the sun: 0 east, 90 north, 180 west."""
@@ -32,6 +35,7 @@ def sky(hdri_8k, hdri_1k, sun_phi_deg, sun_el_deg=None, strength=1.0, sun_mult=1
         px = px.reshape(im.size[1], im.size[0], 4)
         lum = px[..., :3] @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
         if key == "lo":
+            info["lo_px"] = px
             y, x = np.unravel_index(np.argmax(lum), lum.shape)
             info["u"], info["v"] = (x + 0.5) / im.size[0], (y + 0.5) / im.size[1]  # v from the bottom row
             hot = lum > np.percentile(lum, 99.97)
@@ -72,6 +76,20 @@ def sky(hdri_8k, hdri_1k, sun_phi_deg, sun_el_deg=None, strength=1.0, sun_mult=1
     hdri_phi = (0.5 - info["u"]) * 360.0
     hdri_el = (info["v"] - 0.5) * 180.0
     rot = math.radians(hdri_phi - sun_phi_deg)
+    # sky colour just above the horizon, averaged over the directions the camera mostly faces (away from the sun)
+    lo = info["lo_px"]
+    hh, ww = lo.shape[:2]
+    cols = []
+    for ph in range(int(horizon_phi[0]), int(horizon_phi[1]) + 1, 2):
+        u = (0.5 - (math.radians(ph) + rot) / (2 * math.pi)) % 1.0
+        for el in (4.0, 5.5, 7.0):
+            v = 0.5 + el / 180.0
+            cols.append(lo[min(hh - 1, int(v * hh)), min(ww - 1, int(u * ww)), :3])
+    meas = np.mean(cols, axis=0) * strength
+    lum = float(meas.mean()) * 1.06
+    # the measured horizon is a little blue next to the creamy sky the camera sees above it: meet halfway
+    HORIZON[:] = [float(0.4 * meas[k] + 0.6 * lum * w) for k, w in enumerate((1.03, 0.98, 0.92))]
+    print("horizon colour", tuple(round(c, 3) for c in HORIZON))
     tc = N(nt, "ShaderNodeTexCoord", -1200, 0)
     mp = N(nt, "ShaderNodeMapping", -1000, 0)
     mp.inputs["Rotation"].default_value = (0, 0, rot)
@@ -114,7 +132,14 @@ def sky(hdri_8k, hdri_1k, sun_phi_deg, sun_el_deg=None, strength=1.0, sun_mult=1
     mix = N(nt, "ShaderNodeMix", -250, 0, data_type="RGBA")
     nt.links.new(lp.outputs["Is Camera Ray"], mix.inputs["Factor"])
     nt.links.new(env["lo"].outputs["Color"], mix.inputs["A"])
-    nt.links.new(env["hi"].outputs["Color"], mix.inputs["B"])
+    below = N(nt, "ShaderNodeMapRange", 50, 500)
+    below.inputs["From Min"].default_value, below.inputs["From Max"].default_value = 0.012, -0.002
+    nt.links.new(sx.outputs["Z"], below.inputs["Value"])
+    hz = N(nt, "ShaderNodeMix", 200, 350, data_type="RGBA")
+    nt.links.new(below.outputs["Result"], hz.inputs["Factor"])
+    nt.links.new(env["hi"].outputs["Color"], hz.inputs["A"])
+    hz.inputs["B"].default_value = (*HORIZON, 1)
+    nt.links.new(hz.outputs["Result"], mix.inputs["B"])
     nt.links.new(mix.outputs["Result"], bg.inputs["Color"])
     bg.inputs["Strength"].default_value = strength
     el = sun_el_deg if sun_el_deg is not None else hdri_el
@@ -204,15 +229,14 @@ def render_settings(res=(1600, 900), samples=128, threshold=0.015, persistent=Tr
     vs.exposure = 0.45
 
 
-def grade(mist_start=150.0, mist_depth=6000.0, haze_color=(0.80, 0.78, 0.80), haze=0.55, bloom=0.12, falloff="QUADRATIC"):
-    """compositor (Blender 5 node group): distance haze from the mist pass (aerial perspective) and a soft bloom"""
+def grade(start=250.0, length=30000.0, haze_color=(0.86, 0.80, 0.72), near_len=4000.0, near_amt=0.18,
+          near_color=(0.9, 0.82, 0.72), bloom=0.08, **_):
+    """compositor (Blender 5 node group): aerial perspective from the depth pass, haze = max * (1 - exp(-d / length)),
+    applied to land and buildings only (the sky keeps its own colour, so there is no grey band at the horizon), plus a
+    soft bloom"""
     scene = bpy.context.scene
     vl = scene.view_layers[0]
-    vl.use_pass_mist = True
-    w = scene.world
-    w.mist_settings.start = mist_start
-    w.mist_settings.depth = mist_depth
-    w.mist_settings.falloff = falloff
+    vl.use_pass_z = True
     tree = bpy.data.node_groups.new("grade", "CompositorNodeTree")
     tree.interface.new_socket("Image", in_out="OUTPUT", socket_type="NodeSocketColor")
     scene.compositing_node_group = tree
@@ -220,16 +244,35 @@ def grade(mist_start=150.0, mist_depth=6000.0, haze_color=(0.80, 0.78, 0.80), ha
     rl = tree.nodes.new("CompositorNodeRLayers")
     rl.scene = scene
     L = tree.links.new
-    mul = tree.nodes.new("ShaderNodeMath")
-    mul.operation = "MULTIPLY"
-    mul.inputs[1].default_value = haze
-    L(rl.outputs["Mist"], mul.inputs[0])
+    depth = rl.outputs.get("Depth") or rl.outputs.get("Z")
+
+    def M(op, a, b=None):
+        n = tree.nodes.new("ShaderNodeMath")
+        n.operation = op
+        for k, x in enumerate((a, b)):
+            if x is None:
+                continue
+            if isinstance(x, (int, float)):
+                n.inputs[k].default_value = x
+            else:
+                L(x, n.inputs[k])
+        return n.outputs[0]
+
+    d = M("MAXIMUM", M("SUBTRACT", depth, start), 0.0)
+    land = M("LESS_THAN", depth, 200000.0)
+    near = M("MULTIPLY", M("MULTIPLY", M("SUBTRACT", 1.0, M("EXPONENT", M("DIVIDE", d, -near_len))), near_amt), land)
+    far = M("MULTIPLY", M("SUBTRACT", 1.0, M("EXPONENT", M("DIVIDE", d, -length))), land)
     mix = tree.nodes.new("ShaderNodeMix")
     mix.data_type = "RGBA"
-    L(mul.outputs[0], mix.inputs["Factor"])
+    L(near, mix.inputs["Factor"])
     L(rl.outputs["Image"], mix.inputs["A"])
-    mix.inputs["B"].default_value = (*haze_color, 1)
-    img = mix.outputs["Result"]
+    mix.inputs["B"].default_value = (*near_color, 1)
+    mix2 = tree.nodes.new("ShaderNodeMix")
+    mix2.data_type = "RGBA"
+    L(far, mix2.inputs["Factor"])
+    L(mix.outputs["Result"], mix2.inputs["A"])
+    mix2.inputs["B"].default_value = (*haze_color, 1)
+    img = mix2.outputs["Result"]
     if bloom > 0:
         g = tree.nodes.new("CompositorNodeGlare")
         g.inputs["Type"].default_value = "Bloom"

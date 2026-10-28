@@ -104,7 +104,8 @@ class Kit:
     @staticmethod
     def _add_lawn_base(lmb, li, info):
         lw = li["lw"]
-        lmb.face([(-lw / 2, li["pl"], 0.0), (lw / 2, li["pl"], 0.0), (lw / 2, li["back"], 0.0), (-lw / 2, li["back"], 0.0)], lot.M_LAWN)
+        e = lw / 2 + 0.6  # overlaps the next lot a little: lots on a curve fan out and would leave a strip of bare ground
+        lmb.face([(-e, li["pl"], 0.0), (e, li["pl"], 0.0), (e, li["back"], 0.0), (-e, li["back"], 0.0)], lot.M_LAWN)
 
 
 LOT_MATS = None
@@ -185,6 +186,7 @@ def build(streets, hero_street, hero_s, col, lit_radius=160.0, hair=True, rng=No
                 m = lot_matrix(pth, s + lw / 2, side, k.info["gp"], 0.0 if is_hero else rng.uniform(-1.1, 0.0))
                 if not is_hero and keep is not None and not keep(m):
                     continue
+                m.translation.z = 0.003 if is_hero else rng.uniform(0.0, 0.006)  # overlapping lawns never coincide
                 if is_hero:
                     hero_m, hero_info = m, k
                     hero_lot(k, m, col, hair, rng)
