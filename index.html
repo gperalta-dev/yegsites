@@ -167,7 +167,40 @@
   .r-in h3 { font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1; margin: 0 0 10px; text-shadow: 0 2px 24px rgba(0, 0, 0, .5); }
   .r-in p { margin: 0; font: 500 16px var(--body); color: #ece6dc; text-shadow: 0 1px 12px rgba(0, 0, 0, .7); max-width: 40ch; }
   .r-tag { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 96px; font: 700 13px var(--body); background: rgba(8, 10, 14, .7); padding: 8px 12px; border-radius: 99px; color: #f3d6a4; }
-  .fly-track { height: 610vh; }
+  .fly-track { height: 470vh; }
+
+  /* the sample realtor, beside the listing */
+  .r-agent { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); top: 50%; width: 250px; padding: 18px; border-radius: 18px; background: rgba(13, 17, 23, .9); border: 1px solid rgba(255, 255, 255, .14); color: #f4efe6; transform: translate3d(16px, -50%, 0); opacity: 0; transition: opacity .45s, transform .45s cubic-bezier(.2, .8, .2, 1); }
+  .realty.on .r-agent { opacity: 1; transform: translate3d(0, -50%, 0); }
+  .r-agent .who { display: flex; align-items: center; gap: 12px; }
+  .r-face { flex: none; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #d8b47a, #8a6a3a); color: #1d1407; }
+  .r-face svg { width: 28px; height: 28px; }
+  .r-agent b { display: block; font-size: 19px; font-weight: 400; }
+  .r-agent .who span { display: block; font: 600 13px var(--body); color: #cfc7b9; }
+  .r-agent .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 10px; }
+  .r-pill { display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, .22); font: 700 13.5px var(--body); color: #f4efe6; text-decoration: none; }
+  .r-pill.gold { background: #d8b47a; border-color: #d8b47a; color: #1d1407; }
+  .r-agent small { display: block; font: 500 12.5px var(--body); color: #b9b2a6; }
+
+  /* a closer look: the photos slide past as you scroll, the room list follows */
+  .look { position: relative; height: 600vh; background: #0b0d10; }
+  .look-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; align-items: center; padding: 0 max(20px, calc((100vw - 1180px) / 2)); }
+  .look-view { position: relative; height: min(66svh, 620px); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+  .lp { position: absolute; top: 0; bottom: 0; left: 8%; right: 8%; margin: 0; border-radius: 18px; overflow: hidden; background: #15181d; will-change: transform, opacity; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .8); }
+  .lp img { width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform; }
+  .look-side { font-family: Georgia, "Times New Roman", serif; color: #f4efe6; }
+  .look-kicker { display: block; font: 700 13px var(--body); color: #d8b47a; margin-bottom: 12px; }
+  .look-side h3 { font-size: clamp(32px, 3.4vw, 46px); font-weight: 400; line-height: 1.02; margin: 0 0 10px; }
+  .look-side p { font: 500 16px/1.5 var(--body); color: #d9d2c6; margin: 0 0 22px; min-height: 48px; }
+  .look-side h3, .look-side p { transition: opacity .2s, transform .2s; }
+  .look-side.swap h3, .look-side.swap p { opacity: 0; transform: translateY(6px); }
+  .look-list { list-style: none; margin: 0 0 18px; padding: 0; counter-reset: lk; font: 600 14.5px var(--body); }
+  .look-list li { counter-increment: lk; display: flex; gap: 12px; padding: 7px 0; color: #7f858e; border-top: 1px solid rgba(255, 255, 255, .07); transition: color .25s; }
+  .look-list li::before { content: counter(lk, decimal-leading-zero); color: #575d66; font-variant-numeric: tabular-nums; transition: color .25s; }
+  .look-list li.on { color: #f4efe6; }
+  .look-list li.on::before { color: #d8b47a; }
+  .look-dots { display: none; }
+  .look-note { display: block; font: 500 12.5px var(--body); color: #8f949c; }
 
   /* sticky call to action, after the first screen */
   .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .94); border: 1px solid var(--line); box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .9); transform: translateY(130%); opacity: 0; transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
@@ -344,6 +377,26 @@
     .dock, .cap { transition: none; }
     .progress { display: none; }
   }
+
+  @media (max-width: 760px) {
+    .r-agent { top: 128px; right: 20px; width: auto; padding: 8px 14px 8px 8px; border-radius: 99px; transform: translate3d(0, -8px, 0); }
+    .realty.on .r-agent { transform: none; }
+    .realty.inside .r-agent { opacity: 0; }
+    .r-agent .who { gap: 8px; }
+    .r-face { width: 36px; height: 36px; }
+    .r-face svg { width: 20px; height: 20px; }
+    .r-agent b { font-size: 15px; }
+    .r-agent .who span, .r-agent .acts, .r-agent small { display: none; }
+    .look-stage { grid-template-columns: 1fr; align-content: center; gap: 18px; padding: 70px 20px calc(96px + env(safe-area-inset-bottom)); }
+    .look-view { height: min(54svh, 118vw); }
+    .look-list { display: none; }
+    .look-note { margin-top: 12px; font-size: 12px; }
+    .look-side p { margin-bottom: 14px; min-height: 0; }
+    .look-dots { display: flex; gap: 6px; }
+    .look-dots i { width: 6px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .22); transition: width .25s, background .25s; }
+    .look-dots i.on { width: 20px; background: #d8b47a; }
+  }
+  @media (prefers-reduced-motion: reduce) { .look { display: none; } }
 </style>
 </head>
 <body>
@@ -409,6 +462,11 @@
       </div>
       <div class="r-in"><h3 id="room">Step inside.</h3><p id="room-p">The entry, the living room and the kitchen. Made with AI from our render of the front door. It is not a real home.</p></div>
       <span class="r-tag">Sample site by Southsites. Sample Realty is made up.</span>
+      <div class="r-agent">
+        <div class="who"><div class="r-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4"/></svg></div><div><b>Sample agent</b><span>Sample Realty, Edmonton</span></div></div>
+        <div class="acts"><a class="r-pill" tabindex="-1">Call</a><a class="r-pill gold" href="demos/sample-realty/#showing" tabindex="-1">Book a tour</a></div>
+        <small>Your photo, name and number go here.</small>
+      </div>
     </div>
   </div>
 
@@ -466,6 +524,42 @@
     <p>Sample Realty and the house are made up. The rooms inside were made with AI and are not a real home.</p>
   </div>
 </div>
+
+<section class="look" id="look" aria-label="A closer look at the sample house">
+  <div class="look-stage">
+    <div class="look-view" id="look-view">
+      <figure class="lp" data-h="The front" data-p="Two storeys on a quiet street, with a double garage."><img data-src="demos/sample-realty/frames/d/f172.webp" alt="A two-storey house with a double garage, rendered" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="From above" data-p="A fenced backyard with room for a deck and a garden."><img data-src="demos/sample-realty/frames/d/f205.webp" alt="The house and its fenced backyard from above, rendered" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="The kitchen" data-p="A white island, pendant lights and an open living room."><img data-src="demos/sample-realty/frames/d/f300.webp" alt="An open kitchen with a white island, made with AI" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="Main bedroom" data-p="Big windows onto the autumn trees."><img data-src="demos/sample-realty/frames/d/f381.webp" alt="A bright main bedroom with autumn trees outside, made with AI" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="The ensuite" data-p="A soaker tub, a glass shower and a double vanity."><img data-src="demos/sample-realty/frames/d/f420.webp" alt="An ensuite with a freestanding tub and glass shower, made with AI" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="Second bedroom" data-p="Upstairs, past the railing, with the maple outside."><img data-src="demos/sample-realty/frames/d/f480.webp" alt="A second bedroom upstairs, made with AI" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="The kids' room" data-p="A bed, a desk for homework and a shelf of picture books."><img data-src="demos/sample-realty/frames/d/f540.webp" alt="A kids' room with a bed and a desk, made with AI" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="The bonus room" data-p="Over the garage, with room for a sectional, a TV and a desk."><img data-src="demos/sample-realty/frames/d/f630.webp" alt="A bonus room with a sectional and a TV, made with AI" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="The stairs" data-p="Back down to the open kitchen and living room."><img data-src="demos/sample-realty/frames/d/f670.webp" alt="A staircase with a white railing, made with AI" decoding="async" width="1440" height="810"></figure>
+      <figure class="lp" data-h="The backyard" data-p="A wood deck and a fenced yard with autumn trees."><img data-src="demos/sample-realty/frames/d/f740.webp" alt="A wood deck and fenced backyard, made with AI" decoding="async" width="1440" height="810"></figure>
+    </div>
+    <aside class="look-side" id="look-side">
+      <small class="look-kicker">Sample Realty, a closer look</small>
+      <h3 id="look-h">The front</h3>
+      <p id="look-p">Two storeys on a quiet street, with a double garage.</p>
+      <ol class="look-list" id="look-list">
+        <li>The front</li>
+        <li>From above</li>
+        <li>The kitchen</li>
+        <li>Main bedroom</li>
+        <li>The ensuite</li>
+        <li>Second bedroom</li>
+        <li>The kids' room</li>
+        <li>The bonus room</li>
+        <li>The stairs</li>
+        <li>The backyard</li>
+      </ol>
+      <div class="look-dots" id="look-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <span class="look-note">Outside rendered in Blender. The rooms were made with AI. Sample Realty and the house are made up.</span>
+    </aside>
+  </div>
+</section>
 
 <section class="samples" id="samples" aria-label="Sample sites">
   <div class="sx" data-name="Saltbox Plumbing">
@@ -651,10 +745,10 @@
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const touch = matchMedia('(pointer: coarse)').matches, narrow = innerWidth < 700;
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd', IW = SET === 'm' ? 456 : 1440, IH = 810;
-  const EXT = 120, IN = 260;          // every second frame of the 240-frame flight, then every second frame of the walk inside (f240-f758)
+  const EXT = 120, IN = 173;          // every second frame of the 240-frame flight, then every third frame of the walk inside (f240-f756): a quick pass
   const N = EXT + IN;
   const pad = (i) => String(i).padStart(3, '0');
-  const src = (k) => `demos/sample-realty/frames/${SET}/f${pad(k >= EXT ? 240 + (k - EXT) * 2 : k * 2)}.webp`;
+  const src = (k) => `demos/sample-realty/frames/${SET}/f${pad(k >= EXT ? 240 + (k - EXT) * 3 : k * 2)}.webp`;
   const stage = document.getElementById('stage'), veil = document.getElementById('veil'), fly = document.getElementById('fly');
   const cap1 = document.getElementById('cap1'), realty = document.getElementById('realty'), dock = document.getElementById('dock');
   const hero = document.getElementById('top'), bar = document.getElementById('progress');
@@ -727,6 +821,11 @@
   const sx = [...document.querySelectorAll('.sx')].map((el) => ({ el, name: el.dataset.name, win: el.querySelector('.sx-win'), frame: el.querySelector('iframe'),
     title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0, px: -1, top: 0, h: 0 }));
   const real = document.getElementById('work'), ek = document.getElementById('ek');
+  // a closer look: photos of the sample house slide past as you scroll, with the room list beside them
+  const look = document.getElementById('look'), lookView = document.getElementById('look-view'), lookSide = document.getElementById('look-side');
+  const lps = [...lookView.querySelectorAll('.lp')].map((el) => ({ el, img: el.querySelector('img') }));
+  const lookItems = [...document.querySelectorAll('#look-list li')], lookDots = [...document.querySelectorAll('#look-dots i')];
+  const lookH = document.getElementById('look-h'), lookP = document.getElementById('look-p');
   // every position the scroll needs, read once here (on load and resize) instead of on every scroll frame
   const L = { vh: stage.clientHeight || innerHeight };
   const docTop = (el) => el.getBoundingClientRect().top + scrollY;
@@ -737,6 +836,7 @@
     L.start = ft + L.hero * 0.85; L.end = ft + fly.offsetHeight - L.vh;
     for (const s of sx) { s.top = docTop(s.el); s.h = s.el.offsetHeight; }
     L.real = docTop(real); L.realH = real.offsetHeight;
+    L.look = docTop(look); L.lookH = look.offsetHeight; L.lookW = lps[0].el.offsetWidth;
     L.ek = Math.max(0, ek.offsetHeight - (ek.parentElement.clientHeight - 36));
     L.doc = Math.max(1, document.documentElement.scrollHeight - innerHeight);
   }
@@ -802,6 +902,49 @@
   ];
   const roomH = document.getElementById('room'), roomP = document.getElementById('room-p');
   let room = 0;
+  // the photos ease toward the scroll position (same feel as the flight); only the ones near the middle are touched
+  let lookCur = 0, lookGoal = 0, lookRun = false, lookLast = 0, lookIdx = -1, lookTimer = 0;
+  function lookPaint() {
+    const W = L.lookW, step = W * 1.04;
+    for (let i = 0; i < lps.length; i++) {
+      const d = i - lookCur, a = Math.abs(d), it = lps[i];
+      if (a > 2.2) { put(it.el, 'opacity', '0'); continue; }
+      const k = Math.min(a, 1);
+      put(it.el, 'transform', `translate3d(${(d * step).toFixed(1)}px, 0, 0) scale(${(1 - k * 0.12).toFixed(4)})`);
+      put(it.el, 'opacity', Math.max(0, 1 - a * 0.6).toFixed(3));
+      put(it.img, 'transform', `translate3d(${(-d * W * 0.12).toFixed(1)}px, 0, 0) scale(${(1.14 - k * 0.04).toFixed(4)})`);
+    }
+    const idx = Math.min(lps.length - 1, Math.max(0, Math.round(lookCur)));
+    if (idx !== lookIdx) {
+      const first = lookIdx < 0;
+      lookIdx = idx;
+      lookItems.forEach((li, i) => li.classList.toggle('on', i === idx));
+      lookDots.forEach((dot, i) => dot.classList.toggle('on', i === idx));
+      const swap = () => { lookH.textContent = lps[idx].el.dataset.h; lookP.textContent = lps[idx].el.dataset.p; lookSide.classList.remove('swap'); };
+      clearTimeout(lookTimer);
+      if (first) swap(); else { lookSide.classList.add('swap'); lookTimer = setTimeout(swap, 150); }
+    }
+  }
+  function lookStep(now) {
+    const d = lookGoal - lookCur;
+    lookCur = Math.abs(d) < 0.002 ? lookGoal : lookCur + d * ease(Math.min(50, now - lookLast));
+    lookLast = now;
+    lookPaint();
+    if (lookCur !== lookGoal) requestAnimationFrame(lookStep); else lookRun = false;
+  }
+  let lookLoaded = false;
+  function lookTick(y) {
+    const vh = L.vh;
+    // the photos load a couple of screens before they're needed, not with the first screen
+    if (!lookLoaded && y > L.look - vh * 3) { lookLoaded = true; lps.forEach((it) => { it.img.src = it.img.dataset.src; }); }
+    if (y < L.look - vh * 1.2 || y > L.look + L.lookH) return;
+    // the first photo holds for a moment, the last one too
+    const t = clamp((y - L.look - vh * 0.15) / Math.max(1, L.lookH - vh * 1.3));
+    lookGoal = t * (lps.length - 1);
+    if (Math.abs(lookGoal - lookCur) > 3) { lookCur = lookGoal; lookPaint(); }
+    if (!lookRun && lookGoal !== lookCur) { lookRun = true; lookLast = performance.now(); requestAnimationFrame(lookStep); }
+  }
+
   const likeTab = document.getElementById('likeit'), like = document.getElementById('like');
   function tick() {
     const y = scrollY, vh = L.vh;
@@ -815,12 +958,13 @@
     realty.classList.toggle('on', f >= 67 && p < 0.995);
     realty.classList.toggle('inside', f >= EXT);
     if (f >= EXT) {
-      const fr = 240 + (f - EXT) * 2;
+      const fr = 240 + (f - EXT) * 3;
       let r = 0;
       while (r + 1 < ROOMS.length && fr >= ROOMS[r + 1][0]) r++;
       if (r !== room) { room = r; roomH.textContent = ROOMS[r][1]; roomP.textContent = `${ROOMS[r][2]} Made with AI, not a real home.`; }
     }
     dock.classList.toggle('on', y > L.hero * 0.8);
+    lookTick(y);
     // or what about: the samples grow to full screen and their pages glide
     current = 'The realty flight';
     samples(y);
@@ -868,7 +1012,7 @@
     if (!still) tick();
   });
   size();
-  if (!still) tick();
+  if (!still) { lookPaint(); tick(); }
 </script>
 </body>
 </html>
