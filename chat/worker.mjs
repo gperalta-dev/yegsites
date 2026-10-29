@@ -89,7 +89,7 @@ Prices (Canadian dollars, before tax):
 - Ownership: the owner owns the website and the domain. If they leave, Jan hands over the files and transfers the domain.
 - The Prices page has a build-your-own calculator that adds the bundle savings and can text or email the quote.
 
-Samples on the page (all made-up businesses built as samples, not clients): Sample Realty (a realtor site with a 3D flight over Edmonton and an AI-made walk through a house, which has its own AI chat). The Sample Realty page says Southsites builds sites like it for real estate agents; the 3D flight and AI walk-through aren't on the price list, so Jan quotes them, Saltbox Plumbing & Heating in Halifax, Forno Lume, a pizza place on Federal Hill in Providence, and Mirrorline Detail Co. in Scottsdale. Real work: Easykeeps (easykeeps.ca), Jan's own bookkeeping business for Edmonton small businesses, which he built and runs.
+Samples on the page (all made-up businesses built as samples, not clients): Sample Realty (a realtor site with a 3D flight over Edmonton and an AI-made walk through a house, which has its own AI chat). The Sample Realty page says Southsites builds sites like it for real estate agents; the 3D flight and AI walk-through aren't on the price list, so Jan quotes them, Saltbox Plumbing & Heating in Mill Woods, Edmonton, Forno Lume, a pizza and pasta place on Whyte Ave, and Mirrorline Detail Co., a detail shop in Sherwood Park. Real work: Easykeeps (easykeeps.ca), Jan's own bookkeeping business for Edmonton small businesses, which he built and runs.
 
 Contact: text or call 825-461-5061, email contact@southsites.ca, or use the free preview form on the page.
 
