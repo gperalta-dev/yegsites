@@ -103,6 +103,14 @@
   .facts { display: flex; flex-wrap: wrap; gap: 14px 34px; margin: 30px 0 0; padding: 0; list-style: none; }
   .facts b { display: block; font: 850 38px/1 var(--display); font-stretch: 80%; }
   .facts span { font-size: 14.5px; color: var(--muted); }
+  /* prices: free in green, the founding price in yellow, the regular price struck through in red */
+  .free { color: var(--ok); }
+  .now { color: var(--accent); }
+  .facts s, .close s { color: var(--err); text-decoration-thickness: 2px; }
+  .facts s { font-size: .62em; margin-right: 5px; vertical-align: .32em; }
+  .close p b { color: var(--ink); }
+  .close p b.free { color: var(--ok); }
+  .close p b.now { color: var(--accent); }
   .hero-ctas { display: none; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
 
   /* form */
@@ -402,8 +410,8 @@
         <p class="lead">Look at it first, then decide. Free preview from your Google listing. Like it? $150, then $20 a month.</p>
         <div class="hero-ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a></div>
         <ul class="facts" aria-label="Prices">
-          <li><b>$0</b><span>to see your preview</span></li>
-          <li><b>$150</b><span>once, to keep it (normally $200)</span></li>
+          <li><b class="free">$0</b><span>to see your preview</span></li>
+          <li><b class="now"><s><span class="sr">Regular price </span>$200</s><span class="sr">, founding price </span>$150</b><span>once, to keep it. Founding price, first 3 clients</span></li>
           <li><b>$20</b><span>a month, hosting and edits</span></li>
         </ul>
       </div>
@@ -521,7 +529,7 @@
     <div class="wrap grid">
       <div>
         <h3>Your preview is free. Ask for one.</h3>
-        <p>$0 to see it. $150 once to keep it (founding price for the first 3 clients, normally $200). $20 a month covers hosting and small edits like hours and photos. Cancel any month.</p>
+        <p><b class="free">$0</b> to see it. <s><span class="sr">Regular price </span>$200</s> <b class="now">$150</b> once to keep it (founding price for the first 3 clients). <b>$20</b> a month covers hosting and small edits like hours and photos. Cancel any month.</p>
         <div class="ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a><a class="btn btn-line" href="mailto:contact@southsites.ca">contact@southsites.ca</a></div>
       </div>
       <div>
