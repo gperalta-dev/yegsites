@@ -20,6 +20,12 @@ them together with `MODEL`.
 
 ## Deploy (Cloudflare Workers free plan)
 
+Live since Oct 29 2026 at https://sample-realty-chat.southsites.workers.dev (Gabriel's Cloudflare account, workers.dev
+name `southsites`, key from `CLAUDE_API_KEY_FOR_AGENTS`). After a change to `worker.mjs` or `wrangler.toml`, run
+`npx --yes wrangler@4 deploy` in this folder. The page waits 5 seconds for the first words, then uses its built-in answer.
+
+First time on a new account:
+
 1. A Cloudflare account. Open Workers & Pages once so it gets a workers.dev address.
 2. Optional: a separate Claude API key for the chat, `REALTY_CHAT_API_KEY=...` in Money Town's `.env`, so its spending
    shows on its own in the Console. Without it the script uses `CLAUDE_API_KEY_FOR_AGENTS`.

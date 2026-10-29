@@ -698,7 +698,7 @@
   // chat. with CHAT_URL set, Claude answers through the chat server in chat-worker/ (it holds the key and the listing facts
   // and caps the spending). without it, or when the server is busy, off or out of today's budget, the built-in answers
   // below reply from this listing and the pricing numbers above, and nothing typed leaves the page.
-  const CHAT_URL = '';
+  const CHAT_URL = 'https://sample-realty-chat.southsites.workers.dev/chat';
   // each topic lists the words that point to it (4+ letters also match longer words: "bedroom" finds "bedrooms").
   // the topic with the most matches answers; on a tie the earlier topic wins, so the specific ones come first (a payment question that names a down payment is about the payment).
   const showing = 'Want to <a href="#showing">book a showing</a>?';
@@ -769,15 +769,17 @@
     const m = add('bot ai', TYPING);
     msgs.setAttribute('aria-busy', 'true');  // screen readers get the reply once it's whole, not word by word
     let raw = '';
+    const stop = new AbortController(), slow = setTimeout(() => stop.abort(), 5000);  // no first words in 5 s: the built-in answer takes over
     try {
       // sent as plain text (the server reads it as JSON) so the browser doesn't spend a round trip asking permission first
-      const r = await fetch(CHAT_URL, { method: 'POST',
+      const r = await fetch(CHAT_URL, { method: 'POST', signal: stop.signal,
         body: JSON.stringify({ messages: [...hist, { role: 'user', content: text }].slice(-11), rate: cost.rate, years: cost.years, per: cost.per }) });
       if (r.status === 429 || r.status === 503) live = false;  // out of today's budget, too many questions this hour, or switched off
       if (!r.ok || !r.body) throw new Error(r.status);
       const rd = r.body.pipeThrough(new TextDecoderStream()).getReader();
-      for (let c; !(c = await rd.read()).done;) { raw += c.value; if (raw.trim()) show(m, raw, false); }
+      for (let c; !(c = await rd.read()).done;) { clearTimeout(slow); raw += c.value; if (raw.trim()) show(m, raw, false); }
     } catch (e) {}  // whatever it managed to say stays; with nothing, the built-in answer takes over
+    clearTimeout(slow);
     msgs.removeAttribute('aria-busy');
     if (!raw.trim()) { m.remove(); return false; }
     show(m, raw, true);
