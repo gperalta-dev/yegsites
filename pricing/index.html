@@ -65,7 +65,25 @@
   /* bundles */
   .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
   .plan { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px 24px 22px; }
-  .plan.pick { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 30px 60px -40px rgba(255, 200, 61, .5); background: linear-gradient(180deg, rgba(255, 200, 61, .07), var(--surface) 40%); }
+  .plan.pick { color: #15171b; border: 0; isolation: isolate; overflow: hidden;
+    background: linear-gradient(135deg, #f6f7f8 0%, #d7dadf 18%, #f3f4f6 34%, #bfc3ca 52%, #eceef1 68%, #b6bac2 86%, #e6e8eb 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 30px 60px -28px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .25); }
+  .plan.pick::after { content: ""; position: absolute; top: -40%; bottom: -40%; left: -60%; width: 45%; z-index: -1; background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .75), transparent); transform: rotate(8deg); }
+  @media (prefers-reduced-motion: no-preference) { .plan.pick::after { animation: sheen 7s cubic-bezier(.4, 0, .2, 1) infinite; } }
+  @keyframes sheen { 0%, 55% { transform: translate3d(0, 0, 0) rotate(8deg); } 100% { transform: translate3d(420%, 0, 0) rotate(8deg); } }
+  .plan.pick .for, .plan.pick .price span, .plan.pick .monthly { color: #3c4048; }
+  .plan.pick .price b, .plan.pick h2 { color: #15171b; }
+  .plan.pick .price s { color: #b4382a; }
+  .plan.pick .save { color: #0f7a4b; }
+  .plan.pick ul { border-top-color: rgba(21, 23, 27, .14); color: #23262c; }
+  .plan.pick li svg { color: #0f7a4b; }
+  .plan.pick li.plus { color: #4a4f57; }
+  .plan.pick .tag { background: #15171b; color: var(--accent); border-color: #15171b; }
+  .plan.pick .btn-main { background: #15171b; color: var(--accent); box-shadow: none; }
+  .guar { display: flex; gap: 14px; align-items: center; margin-top: 18px; padding: 16px 20px; border-radius: var(--r-md); background: rgba(87, 212, 145, .08); border: 1px solid rgba(87, 212, 145, .3); }
+  .guar svg { flex: none; width: 32px; height: 32px; color: var(--ok); }
+  .guar b { display: block; color: var(--ok); font-size: 17px; }
+  .guar span { color: #cfd3d8; font-size: 15px; }
   .tag { position: absolute; top: 20px; right: 20px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font-size: 12.5px; font-weight: 700; }
   .plan h2 { margin: 0 0 4px; font: 800 24px/1.1 var(--display); font-stretch: 85%; }
   .plan .for { margin: 0 0 18px; color: var(--muted); font-size: 15px; min-height: 48px; }
@@ -221,10 +239,11 @@
       <p class="monthly">then <b>$29 a month</b></p>
       <p class="save"></p>
       <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Custom-made for your business</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Your own domain, first year included</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Your hours, and open now or closed</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>One-tap call and directions</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Your Google reviews up front</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Made for phones</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Hosting and small edits (hours, photos, prices)</li>
       </ul>
       <a class="btn btn-line" href="#build" data-bundle="found">Start with Get found</a>
@@ -258,6 +277,7 @@
       <a class="btn btn-line" href="#build" data-bundle="never">Start with this one</a>
     </article>
   </div>
+  <div class="guar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M8.8 12.2l2.3 2.3 4.3-4.6"/></svg><div><b>Happy or it doesn't go live.</b><span>Every site is custom-made for your business. I don't publish it, or charge you, until you say it's right.</span></div></div>
   <p class="after">Founding prices for my first 3 shops. After that, the one-time price is $150 more. Third-party plans (a booking app, a phone number) are quoted first and billed to you directly.</p>
 
   <div class="custom">
@@ -273,7 +293,7 @@
     <div class="items" id="items">
       <div class="item locked">
         <input type="checkbox" data-id="site" checked disabled aria-label="Your website (always included)">
-        <div><b>Your website</b><small>Made from your Google listing: hours, call button, directions, reviews. Hosting and small edits are in the monthly price.</small>
+        <div><b>Your website</b><small>Custom-made from your Google listing: hours, call button, directions, reviews. Your own domain, first year included (I suggest a few names, you pick). Hosting and small edits are in the monthly price.</small>
           <div class="opts" role="radiogroup" aria-label="Where it's built">
             <label><input type="radio" name="where" value="me" checked> Built and hosted by me</label>
             <label><input type="radio" name="where" value="sq"> In your own Squarespace account</label>
@@ -329,6 +349,8 @@
 <section class="wrap" aria-labelledby="faq-h">
   <h2 class="sec" id="faq-h">Questions</h2>
   <details><summary>Do I pay anything to see my preview?</summary><p>No. I build it from your Google listing and send you the link. You look at it on your phone, ask for changes, or say no thanks. You pay only if you keep it.</p></details>
+  <details><summary>Is the domain included?</summary><p>Yes. The first year of your own domain is included in the one-time price: I suggest a few names, you pick. After that, the renewal is covered by your monthly plan, and the domain is yours. If you ever leave, I transfer it to you.</p></details>
+  <details><summary>What if I don't like it?</summary><p>Then it doesn't go live and you don't pay. I change it until you say it's right, and only then does it get published.</p></details>
   <details><summary>What does the monthly price cover?</summary><p>Hosting, and small edits when you need them: new hours, photos, prices, a holiday notice. Add-ons with a monthly price (review texts, missed-call text back, the chat assistant) are on top. You can cancel any month.</p></details>
   <details><summary>I already use Square, Fresha or Squarespace. Does that work?</summary><p>Yes. Online booking hooks up to the app you already use, so your calendar stays where it is. If you'd rather edit the site yourself, I can build it in your own Squarespace account instead, for the same price.</p></details>
   <details><summary>Who owns the website?</summary><p>You do. If you ever leave, I hand over the files, or the Squarespace account if it's built there.</p></details>
@@ -432,7 +454,7 @@
   }));
 
   // compare table from the same bundle list
-  const ROWS = [['Website from your Google listing', 'site'], ['Hosting and small edits', 'site'], ['Online booking', 'booking'],
+  const ROWS = [['Website from your Google listing', 'site'], ['Your own domain, first year included', 'site'], ['Hosting and small edits', 'site'], ['Online booking', 'booking'],
     ['Google listing fix-up', 'listing'], ['Review request texts', 'reviews'], ['Missed-call text back', 'textback'], ['AI chat assistant', 'chat']];
   const tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Included"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
   const order = ['found', 'booked', 'never'].map((id) => BUNDLES.find((b) => b.id === id));
