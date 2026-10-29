@@ -160,7 +160,7 @@
   .r-card .pnote { font: 500 13px var(--body); color: #b9b2a6; margin: 0 0 16px; }
   .realty.inside .r-card { opacity: 0; transform: translateY(16px); pointer-events: none; }
   .r-card { transition: opacity .4s, transform .4s; }
-  .r-in { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 9vh; max-width: 520px; opacity: 0; transform: translateY(16px); transition: opacity .4s, transform .4s; color: #f4efe6; }
+  .r-in { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 9vh; max-width: 520px; opacity: 0; transform: translateY(16px); transition: opacity .4s, transform .4s; color: #f4efe6; pointer-events: none; }
   .realty.inside .r-in { opacity: 1; transform: none; }
   .realty::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; opacity: 0; transition: opacity .4s; background: linear-gradient(180deg, rgba(8, 10, 14, 0), rgba(8, 10, 14, .72)); pointer-events: none; }
   .realty.inside::before { opacity: 1; }
@@ -174,7 +174,7 @@
   .realty.on .r-agent { opacity: 1; transform: translate3d(0, -50%, 0); }
   .r-agent .who { display: flex; align-items: center; gap: 12px; }
   .r-face { flex: none; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #d8b47a, #8a6a3a); color: #1d1407; }
-  .r-face svg { width: 28px; height: 28px; }
+  img.r-face { object-fit: cover; }
   .r-agent b { display: block; font-size: 19px; font-weight: 400; }
   .r-agent .who span { display: block; font: 600 13px var(--body); color: #cfc7b9; }
   .r-agent .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 10px; }
@@ -182,25 +182,50 @@
   .r-pill.gold { background: #d8b47a; border-color: #d8b47a; color: #1d1407; }
   .r-agent small { display: block; font: 500 12.5px var(--body); color: #b9b2a6; }
 
-  /* a closer look: the photos slide past as you scroll, the room list follows */
-  .look { position: relative; height: 600vh; background: #0b0d10; }
-  .look-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; align-items: center; padding: 0 max(20px, calc((100vw - 1180px) / 2)); }
-  .look-view { position: relative; height: min(66svh, 620px); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-  .lp { position: absolute; top: 0; bottom: 0; left: 8%; right: 8%; margin: 0; border-radius: 18px; overflow: hidden; background: #15181d; will-change: transform, opacity; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .8); }
+  /* a closer look: a different site, on purpose. white, like the realtor's own; photos slide past as you scroll */
+  .look { position: relative; height: 560vh; background: #f7f5f1; color: #1d1b18; }
+  .look-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; padding: 0 max(20px, calc((100vw - 1180px) / 2)) 14px; }
+  .look-bar { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; border-bottom: 1px solid #e4dfd6; font-family: Georgia, "Times New Roman", serif; }
+  .look-brand { font-size: 26px; }
+  .look-nav { display: flex; gap: 24px; font: 600 14.5px var(--body); color: #5d574e; }
+  .look-btn { display: inline-flex; align-items: center; min-height: 42px; padding: 0 18px; border-radius: 99px; background: #1d1b18; color: #f7f5f1; font: 700 14px var(--body); text-decoration: none; }
+  .look-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 36px; align-items: center; padding: 18px 0 8px; }
+  .look-main { min-width: 0; width: min(100%, calc((100svh - 340px) * 1.5)); justify-self: end; }
+  .look-view { position: relative; width: 100%; aspect-ratio: 3 / 2; border-radius: 16px; overflow: hidden; background: #e9e4dc; box-shadow: 0 24px 50px -30px rgba(40, 30, 10, .45); }
+  .lp { position: absolute; inset: 0; margin: 0; overflow: hidden; background: #e9e4dc; will-change: transform, opacity; }
   .lp img { width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform; }
-  .look-side { font-family: Georgia, "Times New Roman", serif; color: #f4efe6; }
-  .look-kicker { display: block; font: 700 13px var(--body); color: #d8b47a; margin-bottom: 12px; }
-  .look-side h3 { font-size: clamp(32px, 3.4vw, 46px); font-weight: 400; line-height: 1.02; margin: 0 0 10px; }
-  .look-side p { font: 500 16px/1.5 var(--body); color: #d9d2c6; margin: 0 0 22px; min-height: 48px; }
-  .look-side h3, .look-side p { transition: opacity .2s, transform .2s; }
-  .look-side.swap h3, .look-side.swap p { opacity: 0; transform: translateY(6px); }
-  .look-list { list-style: none; margin: 0 0 18px; padding: 0; counter-reset: lk; font: 600 14.5px var(--body); }
-  .look-list li { counter-increment: lk; display: flex; gap: 12px; padding: 7px 0; color: #7f858e; border-top: 1px solid rgba(255, 255, 255, .07); transition: color .25s; }
-  .look-list li::before { content: counter(lk, decimal-leading-zero); color: #575d66; font-variant-numeric: tabular-nums; transition: color .25s; }
-  .look-list li.on { color: #f4efe6; }
-  .look-list li.on::before { color: #d8b47a; }
-  .look-dots { display: none; }
-  .look-note { display: block; font: 500 12.5px var(--body); color: #8f949c; }
+  .look-meta { display: flex; align-items: center; gap: 14px; margin: 14px 0 6px; font: 600 14px var(--body); color: #8a8377; }
+  .look-count b { color: #1d1b18; }
+  .look-prog { flex: 1; height: 2px; background: #e4dfd6; border-radius: 2px; overflow: hidden; }
+  .look-prog i { display: block; height: 100%; background: #b88a3e; transform-origin: 0 50%; transform: scaleX(0); }
+  .look-cap h3 { font: 400 clamp(26px, 2.6vw, 36px)/1.05 Georgia, "Times New Roman", serif; margin: 0 0 4px; }
+  .look-cap p { margin: 0; font: 500 16px/1.45 var(--body); color: #5d574e; }
+  .look-chips { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .look-chips li { padding: 5px 11px; border-radius: 999px; background: #fff; border: 1px solid #e4dfd6; font: 600 13px var(--body); color: #5d574e; }
+  .look-cap h3, .look-cap p, .look-chips { transition: opacity .2s, transform .2s; }
+  .look-cap.swap h3, .look-cap.swap p, .look-cap.swap .look-chips { opacity: 0; transform: translateY(6px); }
+  .look-aside { display: grid; gap: 14px; align-content: center; }
+  .look-price { padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid #e4dfd6; }
+  .look-price small { display: block; font: 700 12.5px var(--body); color: #b88a3e; }
+  .look-price > b { display: block; font: 400 34px/1.1 Georgia, "Times New Roman", serif; margin: 4px 0 2px; }
+  .look-price > span { font: 500 14.5px var(--body); color: #5d574e; }
+  .look-facts { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid #ece7df; display: flex; gap: 14px; flex-wrap: wrap; font: 500 13.5px var(--body); color: #5d574e; }
+  .look-facts li { display: flex; flex-direction: column; line-height: 1.25; }
+  .look-facts b { color: #1d1b18; font: 400 22px/1.1 Georgia, "Times New Roman", serif; }
+  .look-agent { display: grid; grid-template-columns: 56px 1fr; gap: 4px 12px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #fff; border: 1px solid #e4dfd6; }
+  .look-agent img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; grid-row: span 1; }
+  .look-agent b { display: block; font: 400 19px Georgia, "Times New Roman", serif; }
+  .look-agent span { font: 600 12.5px var(--body); color: #8a8377; }
+  .look-acts { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .look-acts a { display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 99px; border: 1px solid #d9d2c6; font: 700 13.5px var(--body); color: #1d1b18; text-decoration: none; }
+  .look-acts a:first-child { background: #b88a3e; border-color: #b88a3e; color: #fff; }
+  .look-list { list-style: none; margin: 0; padding: 0; counter-reset: lk; font: 600 14px var(--body); }
+  .look-list li { counter-increment: lk; display: flex; gap: 12px; padding: 5px 0; color: #a59d90; transition: color .25s; }
+  .look-list li::before { content: counter(lk, decimal-leading-zero); color: #c9c1b4; font-variant-numeric: tabular-nums; transition: color .25s; }
+  .look-list li.on { color: #1d1b18; }
+  .look-list li.on::before { color: #b88a3e; }
+  .look-note { flex: none; margin: 0; font: 500 12px var(--body); color: #8a8377; }
+  @media (max-height: 760px) and (min-width: 761px) { .look-list li { padding: 3px 0; font-size: 13px; } .look-price b { font-size: 28px; } }
 
   /* sticky call to action, after the first screen */
   .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .94); border: 1px solid var(--line); box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .9); transform: translateY(130%); opacity: 0; transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
@@ -267,6 +292,59 @@
   .credit { font-size: 13px; color: var(--faint); margin: 56px 0 0; }
   .close { padding: 80px 0 100px; border-top: 1px solid var(--line); margin-top: 60px; }
   .close .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .close .lede { font-size: 18px; color: #d9dce1; max-width: 46ch; }
+
+  /* the price, on a platinum card: brushed metal, dark ink, a slow sheen */
+  .plat { position: relative; overflow: hidden; isolation: isolate; border-radius: 22px; padding: 24px 26px 20px; margin: 0 0 18px; color: #15171b;
+    background: linear-gradient(135deg, #f6f7f8 0%, #d7dadf 18%, #f3f4f6 34%, #bfc3ca 52%, #eceef1 68%, #b6bac2 86%, #e6e8eb 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), inset 0 -1px 0 rgba(0, 0, 0, .12), 0 30px 60px -28px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .25); }
+  .plat::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .18; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 1px, rgba(0, 0, 0, .025) 1px 3px); }
+  .plat::after { content: ""; position: absolute; top: -40%; bottom: -40%; left: -60%; width: 45%; z-index: -1; background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .75), transparent); transform: translate3d(0, 0, 0) rotate(8deg); }
+  @media (prefers-reduced-motion: no-preference) { .plat::after { animation: sheen 7s cubic-bezier(.4, 0, .2, 1) infinite; } }
+  @keyframes sheen { 0%, 55% { transform: translate3d(0, 0, 0) rotate(8deg); } 100% { transform: translate3d(420%, 0, 0) rotate(8deg); } }
+  .plat-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+  .plat-logo { display: inline-flex; align-items: center; gap: 8px; font: 850 18px/1 var(--display); font-stretch: 90%; }
+  .plat-logo i { width: 14px; height: 14px; border-radius: 4px; background: #15171b; box-shadow: inset 0 0 0 3px #ffc83d; }
+  .plat-tag { padding: 5px 11px; border-radius: 999px; background: #15171b; color: #ffc83d; font: 700 12.5px var(--body); }
+  .plat-price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .plat-price s { color: #b4382a; font-weight: 700; font-size: 20px; text-decoration-thickness: 2px; }
+  .plat-price b { font: 900 68px/1 var(--display); font-stretch: 80%; letter-spacing: -.015em; color: #15171b; }
+  .plat-price span { color: #4a4f57; font-weight: 600; }
+  .plat-mo { margin: 6px 0 16px; color: #3c4048; font-size: 15.5px; }
+  .plat-mo b { color: #15171b; font-weight: 800; }
+  .plat-inc { list-style: none; margin: 0 0 16px; padding: 14px 0 0; border-top: 1px solid rgba(21, 23, 27, .14); display: grid; gap: 8px; font-size: 15px; color: #23262c; }
+  .plat-inc li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
+  .plat-inc svg { width: 18px; height: 18px; margin-top: 2px; color: #0f7a4b; }
+  .plat-inc b { color: #8a5a00; }
+  .plat-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid rgba(21, 23, 27, .14); font-size: 13.5px; color: #4a4f57; font-weight: 600; }
+  .plat-foot b { color: #0f7a4b; }
+  .guarantee.in-side { margin: 22px 0 0; }
+  .guarantee { display: flex; gap: 14px; align-items: center; margin: 0 0 22px; padding: 14px 16px; border-radius: 14px; background: rgba(87, 212, 145, .08); border: 1px solid rgba(87, 212, 145, .3); }
+  .guarantee svg { flex: none; width: 30px; height: 30px; color: var(--ok); }
+  .guarantee b { display: block; color: var(--ok); }
+  .guarantee span { color: #cfd3d8; font-size: 15px; }
+
+  /* bundles, the same three as /pricing */
+  .bundles { margin-top: 56px; }
+  .b-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+  .b-head h4, .close .addons h4 { font: 850 28px/1 var(--display); font-stretch: 80%; margin: 0; }
+  .b-head a { color: var(--accent); font-weight: 700; text-underline-offset: 3px; }
+  .b-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .b-card { display: flex; flex-direction: column; gap: 4px; padding: 20px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; transition: transform .2s cubic-bezier(.2, .8, .2, 1), border-color .2s; }
+  .b-card small { font-weight: 700; font-size: 14.5px; color: var(--muted); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .b-card small i { font-style: normal; font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid currentColor; }
+  .b-card b { font: 900 46px/1 var(--display); font-stretch: 80%; color: var(--ink); margin-top: 8px; }
+  .b-card span { color: var(--accent); font-weight: 700; }
+  .b-card em { font-style: normal; color: var(--muted); font-size: 14.5px; margin-top: 8px; }
+  .b-card.pick { border-color: rgba(255, 200, 61, .6); background: linear-gradient(180deg, rgba(255, 200, 61, .1), var(--surface) 70%); }
+  .b-card.pick small { color: var(--accent); }
+  .b-card:active { transform: scale(.98); }
+  @media (hover: hover) { .b-card:hover { transform: translateY(-2px); border-color: var(--line-strong); } .b-card.pick:hover { border-color: var(--accent); } }
+  .close .addons { margin-top: 56px; }
+  .close .addons h4 { margin-bottom: 8px; }
+  .close .addons ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .close .addons .plans-link { width: auto; margin: 10px 0 14px; }
+  @media (max-width: 860px) { .b-grid, .close .addons ul { grid-template-columns: 1fr; } .plat-price b { font-size: 58px; } }
   .close h3 { font: 850 clamp(34px, 4vw, 52px)/.95 var(--display); font-stretch: 72%; margin: 0 0 16px; }
   .close p { color: var(--muted); margin: 0 0 22px; }
   .close .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -283,7 +361,6 @@
   .addons li span { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
   .addons li em { font-style: normal; font-weight: 700; color: var(--accent); white-space: nowrap; text-align: right; }
   .addons .note { font-size: 14px; color: var(--faint); margin: 0; }
-  .addons .plans-link { width: 100%; margin: 4px 0 14px; }
   @media (max-width: 520px) { .addons li { grid-template-columns: 1fr; } .addons li em { text-align: left; } }
   details { border-bottom: 1px solid var(--line); }
   summary { cursor: pointer; list-style: none; padding: 16px 0; font-weight: 700; min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: color .15s; }
@@ -384,17 +461,36 @@
     .realty.inside .r-agent { opacity: 0; }
     .r-agent .who { gap: 8px; }
     .r-face { width: 36px; height: 36px; }
-    .r-face svg { width: 20px; height: 20px; }
     .r-agent b { font-size: 15px; }
     .r-agent .who span, .r-agent .acts, .r-agent small { display: none; }
-    .look-stage { grid-template-columns: 1fr; align-content: center; gap: 18px; padding: 70px 20px calc(96px + env(safe-area-inset-bottom)); }
-    .look-view { height: min(54svh, 118vw); }
+    .look-stage { padding: 0 16px calc(84px + env(safe-area-inset-bottom)); }
+    .look-bar { height: 56px; }
+    .look-brand { font-size: 22px; }
+    .look-nav { display: none; }
+    .look-btn { min-height: 38px; padding: 0 14px; font-size: 13px; }
+    .look-body { grid-template-columns: 1fr; gap: 10px; align-content: start; padding-top: 12px; }
+    .look-main { width: 100%; }
+    .look-view { aspect-ratio: 4 / 3; max-height: 34svh; }
+    .look-chips li { font-size: 12px; padding: 4px 9px; }
+    .look-meta { margin: 10px 0 4px; }
+    .look-cap p { font-size: 15px; }
+    .look-aside { gap: 10px; }
+    .look-price { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 0 10px; padding: 12px 14px; }
+    .look-price small { grid-column: 1 / -1; }
+    .look-price > b { font-size: 26px; margin: 2px 0 0; }
+    .look-price > span { font-size: 13.5px; }
+    .look-facts { grid-column: 1 / -1; margin-top: 8px; padding-top: 8px; gap: 12px; font-size: 13px; }
+    .look-agent { grid-template-columns: 44px 1fr auto; padding: 10px 12px; }
+    .look-agent img { width: 44px; height: 44px; }
+    .look-agent b { font-size: 16px; }
+    .look-acts { grid-column: auto; grid-template-columns: 1fr; margin: 0; }
+    .look-acts a:last-child { display: none; }
+    .look-acts a { min-height: 38px; padding: 0 14px; }
     .look-list { display: none; }
-    .look-note { margin-top: 12px; font-size: 12px; }
-    .look-side p { margin-bottom: 14px; min-height: 0; }
-    .look-dots { display: flex; gap: 6px; }
-    .look-dots i { width: 6px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .22); transition: width .25s, background .25s; }
-    .look-dots i.on { width: 20px; background: #d8b47a; }
+    .look-note { font-size: 11px; }
+  }
+  @media (max-width: 760px) and (max-height: 740px) {
+    .look-chips, .look-price > span, .look-facts { display: none; }
   }
   @media (prefers-reduced-motion: reduce) { .look { display: none; } }
 </style>
@@ -463,7 +559,7 @@
       <div class="r-in"><h3 id="room">Step inside.</h3><p id="room-p">The entry, the living room and the kitchen. Made with AI from our render of the front door. It is not a real home.</p></div>
       <span class="r-tag">Sample site by Southsites. Sample Realty is made up.</span>
       <div class="r-agent">
-        <div class="who"><div class="r-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4"/></svg></div><div><b>Sample agent</b><span>Sample Realty, Edmonton</span></div></div>
+        <div class="who"><img class="r-face" src="https://images.unsplash.com/photo-1780733064206-4f200e41daa8?w=480&h=480&fit=crop&crop=faces&q=80&auto=format" alt="" width="54" height="54"><div><b>Avery Lindqvist</b><span>Sample agent, stock photo</span></div></div>
         <div class="acts"><a class="r-pill" tabindex="-1">Call</a><a class="r-pill gold" href="demos/sample-realty/#showing" tabindex="-1">Book a tour</a></div>
         <small>Your photo, name and number go here.</small>
       </div>
@@ -525,39 +621,45 @@
   </div>
 </div>
 
-<section class="look" id="look" aria-label="A closer look at the sample house">
+<section class="look" id="look" aria-label="Sample Realty: a closer look at the sample listing">
   <div class="look-stage">
-    <div class="look-view" id="look-view">
-      <figure class="lp" data-h="The front" data-p="Two storeys on a quiet street, with a double garage."><img data-src="demos/sample-realty/frames/d/f172.webp" alt="A two-storey house with a double garage, rendered" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="From above" data-p="A fenced backyard with room for a deck and a garden."><img data-src="demos/sample-realty/frames/d/f205.webp" alt="The house and its fenced backyard from above, rendered" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="The kitchen" data-p="A white island, pendant lights and an open living room."><img data-src="demos/sample-realty/frames/d/f300.webp" alt="An open kitchen with a white island, made with AI" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="Main bedroom" data-p="Big windows onto the autumn trees."><img data-src="demos/sample-realty/frames/d/f381.webp" alt="A bright main bedroom with autumn trees outside, made with AI" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="The ensuite" data-p="A soaker tub, a glass shower and a double vanity."><img data-src="demos/sample-realty/frames/d/f420.webp" alt="An ensuite with a freestanding tub and glass shower, made with AI" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="Second bedroom" data-p="Upstairs, past the railing, with the maple outside."><img data-src="demos/sample-realty/frames/d/f480.webp" alt="A second bedroom upstairs, made with AI" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="The kids' room" data-p="A bed, a desk for homework and a shelf of picture books."><img data-src="demos/sample-realty/frames/d/f540.webp" alt="A kids' room with a bed and a desk, made with AI" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="The bonus room" data-p="Over the garage, with room for a sectional, a TV and a desk."><img data-src="demos/sample-realty/frames/d/f630.webp" alt="A bonus room with a sectional and a TV, made with AI" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="The stairs" data-p="Back down to the open kitchen and living room."><img data-src="demos/sample-realty/frames/d/f670.webp" alt="A staircase with a white railing, made with AI" decoding="async" width="1440" height="810"></figure>
-      <figure class="lp" data-h="The backyard" data-p="A wood deck and a fenced yard with autumn trees."><img data-src="demos/sample-realty/frames/d/f740.webp" alt="A wood deck and fenced backyard, made with AI" decoding="async" width="1440" height="810"></figure>
+    <div class="look-bar"><span class="look-brand">Sample Realty</span><span class="look-nav"><span>Listings</span><span>Neighbourhoods</span><span>About</span></span><a class="look-btn" href="demos/sample-realty/#showing">Book a showing</a></div>
+    <div class="look-body">
+      <div class="look-main">
+        <div class="look-view" id="look-view">
+        <figure class="lp" data-h="The front" data-p="Two storeys with a covered front porch, stone along the base and a wide front lawn with mature trees." data-c="Covered porch|Stone accents|Big front lawn"><img data-src="https://images.unsplash.com/photo-1773427621086-1f8511c78e39?w=1200&q=72&auto=format&fit=crop" alt="A two-storey house with a covered porch and a wide lawn" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="The porch" data-p="A covered porch with a hanging porch swing, wide front steps and a flowering magnolia beside them." data-c="Porch swing|Wide steps|Mature trees"><img data-src="https://images.unsplash.com/photo-1714836982299-7a3b6930e2f5?w=1200&q=72&auto=format&fit=crop" alt="A covered front porch with a swing and wide steps" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="Living room" data-p="A gas fireplace with a wood mantel, a bay window, hardwood floors and room for a sectional." data-c="Gas fireplace|Bay window|Hardwood floors"><img data-src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=1200&q=72&auto=format&fit=crop" alt="A living room with a gas fireplace, a bay window and hardwood floors" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="The kitchen" data-p="White shaker cabinets, quartz counters with a waterfall edge, a herringbone tile backsplash and a pot filler over the cooktop. The island has drawers on both sides." data-c="Quartz counters|Pot filler|Big island|Vaulted ceiling"><img data-src="https://images.unsplash.com/photo-1682888818650-0a7cbb35287d?w=1200&q=72&auto=format&fit=crop" alt="A white kitchen with quartz counters, a herringbone backsplash and an island" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="Dining room" data-p="Three tall windows onto the yard, a solid wood table with bentwood chairs and a bench. Seats six to eight." data-c="Tall windows|Seats 6 to 8|Yard view"><img data-src="https://images.unsplash.com/photo-1696986296905-e631802befb0?w=1200&q=72&auto=format&fit=crop" alt="A bright dining room with tall windows and a wood table" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="Main bedroom" data-p="Room for a king bed and two nightstands, a big window with drapes, hardwood floors and a reading chair in the corner." data-c="King-size room|Hardwood floors|Reading corner"><img data-src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1200&q=72&auto=format&fit=crop" alt="A main bedroom with a king bed, hardwood floors and a big window" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="The ensuite" data-p="A walk-in shower in marble-look tile with its own window, a wood vanity with a marble top, brass fixtures and a round mirror." data-c="Walk-in shower|Marble-look tile|Brass fixtures"><img data-src="https://images.unsplash.com/photo-1771681278369-e2a5480b8c29?w=1200&q=72&auto=format&fit=crop" alt="An ensuite with a tiled walk-in shower and a wood vanity" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="Second bedroom" data-p="Fits a queen bed with two nightstands, a window onto the street and space for an accent chair." data-c="Queen-size room|Street-facing window|Bright walls"><img data-src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=1200&q=72&auto=format&fit=crop" alt="A bright second bedroom with a queen bed" decoding="async" width="1200" height="800"></figure>
+        <figure class="lp" data-h="The deck" data-p="A wood deck off the back door with room for a barbecue and a table for six, backing onto tall trees." data-c="Barbecue space|Table for six|Backs onto trees"><img data-src="https://images.unsplash.com/photo-1716904519810-349244919824?w=1200&q=72&auto=format&fit=crop" alt="A wood deck with a barbecue and a table for six" decoding="async" width="1200" height="800"></figure>
+        </div>
+        <div class="look-meta"><span class="look-count"><b id="look-n">01</b> / 09</span><span class="look-prog"><i id="look-prog"></i></span></div>
+        <div class="look-cap" id="look-side"><h3 id="look-h">The front</h3><p id="look-p">Two storeys with a covered front porch, stone along the base and a wide front lawn with mature trees.</p><ul class="look-chips" id="look-c"><li>Covered porch</li><li>Stone accents</li><li>Big front lawn</li></ul></div>
+      </div>
+      <aside class="look-aside">
+        <div class="look-price"><small>Sample listing, Edmonton</small><b>$649,900</b><span>Two storeys on a quiet street</span>
+          <ul class="look-facts"><li><b>4</b> bed</li><li><b>3.5</b> bath</li><li><b>2,250</b> sq ft</li><li><b>2</b> car garage</li></ul></div>
+        <div class="look-agent"><img src="https://images.unsplash.com/photo-1780733064206-4f200e41daa8?w=480&h=480&fit=crop&crop=faces&q=80&auto=format" alt="Sample agent (stock photo)" width="120" height="120" loading="lazy">
+          <div><b>Avery Lindqvist</b><span>Sample agent, stock photo</span></div>
+          <div class="look-acts"><a href="demos/sample-realty/#showing">Book a tour</a><a href="demos/sample-realty/">Full listing</a></div></div>
+        <ol class="look-list" id="look-list">
+          <li>The front</li>
+          <li>The porch</li>
+          <li>Living room</li>
+          <li>The kitchen</li>
+          <li>Dining room</li>
+          <li>Main bedroom</li>
+          <li>The ensuite</li>
+          <li>Second bedroom</li>
+          <li>The deck</li>
+        </ol>
+      </aside>
     </div>
-    <aside class="look-side" id="look-side">
-      <small class="look-kicker">Sample Realty, a closer look</small>
-      <h3 id="look-h">The front</h3>
-      <p id="look-p">Two storeys on a quiet street, with a double garage.</p>
-      <ol class="look-list" id="look-list">
-        <li>The front</li>
-        <li>From above</li>
-        <li>The kitchen</li>
-        <li>Main bedroom</li>
-        <li>The ensuite</li>
-        <li>Second bedroom</li>
-        <li>The kids' room</li>
-        <li>The bonus room</li>
-        <li>The stairs</li>
-        <li>The backyard</li>
-      </ol>
-      <div class="look-dots" id="look-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <span class="look-note">Outside rendered in Blender. The rooms were made with AI. Sample Realty and the house are made up.</span>
-    </aside>
+    <p class="look-note">Sample site by Southsites. Sample Realty, this listing and the agent are made up. Stock photos from Unsplash.</p>
   </div>
 </section>
 
@@ -634,21 +736,49 @@
   </div>
 
   <div class="close" id="prices">
-    <div class="wrap grid">
-      <div>
-        <h3>Your preview is free. Ask for one.</h3>
-        <p><b class="free">$0</b> to see it. <s><span class="sr">Price after the first 3 clients </span>$399</s> <b class="now">$249</b> once to keep it (founding price for the first 3 clients, $399 after that). <b>$29</b> a month covers hosting and small edits like hours and photos. Cancel any month.</p>
-        <div class="ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a><a class="btn btn-line" href="mailto:contact@southsites.ca">contact@southsites.ca</a></div>
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <h3>Your preview is free. Ask for one.</h3>
+          <p class="lede">Custom-made for your business: your name, your services, your photos and your reviews. Nothing goes live until you're happy with it.</p>
+          <div class="plat">
+            <div class="plat-top"><span class="plat-logo"><i aria-hidden="true"></i>Southsites</span><span class="plat-tag">Founding price</span></div>
+            <div class="plat-price"><s><span class="sr">Price after the first 3 clients </span>$399</s><b>$249</b><span>once, to keep it</span></div>
+            <div class="plat-mo"><b>$29</b> a month for hosting and small edits. Cancel any month.</div>
+            <ul class="plat-inc">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Your own domain, <b>first year included</b>. I suggest a few names, you pick.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Hosting, plus small edits like hours, photos and prices</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Custom-made for your business, made for phones</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>You own it</span></li>
+            </ul>
+            <div class="plat-foot"><span><b>$0</b> to see your preview</span><span>For my first 3 Edmonton shops, $399 after</span></div>
+          </div>
+          <div class="ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a><a class="btn btn-line" href="mailto:contact@southsites.ca">contact@southsites.ca</a></div>
+        </div>
+        <div>
+          <ol class="steps">
+            <li><div><b>I build a preview</b><span>From your Google listing: hours, reviews, services, map and a call button.</span></div></li>
+            <li><div><b>You look at it</b><span>On your own phone. Ask for changes, swap in photos, or say no thanks.</span></div></li>
+            <li><div><b>Keep it if you like it</b><span>$249 and it goes live on your own domain. You own it.</span></div></li>
+          </ol>
+          <details><summary>Who builds it?</summary><p>Me, Jan Gabriel, a computer systems student in Edmonton. You deal with me directly, from the first look to the small edits later.</p></details>
+          <details><summary>What about the domain after the first year?</summary><p>The first year is included in the $249. After that, the renewal is covered by your monthly plan. The domain is yours: if you ever leave, I transfer it to you.</p></details>
+          <div class="guarantee in-side"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M8.8 12.2l2.3 2.3 4.3-4.6"/></svg><div><b>Happy or it doesn't go live.</b><span>I don't publish your site, or charge you, until you say it's right.</span></div></div>
+        </div>
       </div>
-      <div>
-        <ol class="steps">
-          <li><div><b>I build a preview</b><span>From your Google listing: hours, reviews, services, map and a call button.</span></div></li>
-          <li><div><b>You look at it</b><span>On your own phone. Ask for changes, swap in photos, or say no thanks.</span></div></li>
-          <li><div><b>Keep it if you like it</b><span>$249 and it goes live. You own it.</span></div></li>
-        </ol>
-        <div class="addons">
-          <h4>Add-ons, only if you want them</h4>
-          <ul>
+
+      <div class="bundles">
+        <div class="b-head"><h4>Or pick a bundle</h4><a href="/pricing/">Compare them all</a></div>
+        <div class="b-grid">
+          <a class="b-card" href="/pricing/#build"><small>Get found</small><b>$249</b><span>+ $29 a month</span><em>The website, your domain and hosting</em></a>
+          <a class="b-card pick" href="/pricing/#build"><small>Get booked <i>Recommended</i></small><b>$349</b><span>+ $49 a month</span><em>Plus online booking, a Google listing fix-up and review texts</em></a>
+          <a class="b-card" href="/pricing/#build"><small>Never miss a customer</small><b>$449</b><span>+ $119 a month</span><em>Plus missed-call text back and an AI chat assistant</em></a>
+        </div>
+      </div>
+
+      <div class="addons">
+        <h4>Add-ons, only if you want them</h4>
+        <ul>
             <li><div><b>AI chat assistant</b><span>Answers questions about your hours, services and prices, day and night, and takes a name and number when it can't.</span></div><em>$99 setup, $39 a month</em></li>
             <li><div><b>Missed-call text back</b><span>When you can't pick up, the caller gets a text right away, so they don't call the next shop.</span></div><em>$49 a month</em></li>
             <li><div><b>AI phone receptionist</b><span>Answers your calls, books or takes messages, and texts you a summary.</span></div><em>From $149 a month</em></li>
@@ -657,11 +787,9 @@
             <li><div><b>Google listing fix-up</b><span>Hours, photos, services and a working website link on your Google listing.</span></div><em>$49 once</em></li>
             <li><div><b>Squarespace instead</b><span>Rather edit it yourself? I build it in your own Squarespace account. You pay Squarespace's plan directly.</span></div><em>Same price as a site</em></li>
             <li><div><b>Extra pages</b><span>A menu, a price list, a gallery or a page per service.</span></div><em>$49 a page</em></li>
-          </ul>
-          <a class="btn btn-main plans-link" href="/pricing/">See plans and build your price</a>
-          <p class="note">Every add-on is set up and shown to you before you pay. If one needs a third-party plan (a booking app, a phone number), I tell you its price first and it's billed to you directly.</p>
-        </div>
-        <details><summary>Who builds it?</summary><p>Me, Jan Gabriel, a computer systems student in Edmonton. You deal with me directly, from the first look to the small edits later.</p></details>
+        </ul>
+        <a class="btn btn-main plans-link" href="/pricing/">See plans and build your price</a>
+        <p class="note">Every add-on is set up and shown to you before you pay. If one needs a third-party plan (a booking app, a phone number), I tell you its price first and it's billed to you directly.</p>
       </div>
     </div>
   </div>
@@ -671,7 +799,7 @@
 <footer>
   <div class="wrap">
     <div class="row"><span>Jan Gabriel, Southsites, Edmonton</span><span><a href="tel:+18254615061">825-461-5061</a> &nbsp; <a href="mailto:contact@southsites.ca">contact@southsites.ca</a></span></div>
-    <span>Sample Realty, Saltbox Plumbing &amp; Heating, Forno Lume and Mirrorline Detail Co. are made-up businesses built as samples, and each sample credits its own photos. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). The walk-through inside the house was generated with Google Veo (AI) from our render of the front door, and is not a real home. The Mirrorline wash was made with Google Gemini and Veo from a Pexels photo by Tima Miroshnichenko. Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>.</span>
+    <span>Sample Realty, Saltbox Plumbing &amp; Heating, Forno Lume and Mirrorline Detail Co. are made-up businesses built as samples, and each sample credits its own photos. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). The walk-through inside the house was generated with Google Veo (AI) from our render of the front door, and is not a real home. The Mirrorline wash was made with Google Gemini and Veo from a Pexels photo by Tima Miroshnichenko. Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>. The closer look and the sample agent use stock photos from <a href="https://unsplash.com/license">Unsplash</a> by Clay Banks, Francesca Tosolini, Lotus Design N Print, Md Ishak Rahman, Roger Starnes Sr and Zac Gudakov; they show other homes and a model, not the sample house or a real agent.</span>
   </div>
 </footer>
 
@@ -824,8 +952,8 @@
   // a closer look: photos of the sample house slide past as you scroll, with the room list beside them
   const look = document.getElementById('look'), lookView = document.getElementById('look-view'), lookSide = document.getElementById('look-side');
   const lps = [...lookView.querySelectorAll('.lp')].map((el) => ({ el, img: el.querySelector('img') }));
-  const lookItems = [...document.querySelectorAll('#look-list li')], lookDots = [...document.querySelectorAll('#look-dots i')];
-  const lookH = document.getElementById('look-h'), lookP = document.getElementById('look-p');
+  const lookItems = [...document.querySelectorAll('#look-list li')], lookN = document.getElementById('look-n'), lookProg = document.getElementById('look-prog');
+  const lookH = document.getElementById('look-h'), lookP = document.getElementById('look-p'), lookC = document.getElementById('look-c');
   // every position the scroll needs, read once here (on load and resize) instead of on every scroll frame
   const L = { vh: stage.clientHeight || innerHeight };
   const docTop = (el) => el.getBoundingClientRect().top + scrollY;
@@ -905,7 +1033,7 @@
   // the photos ease toward the scroll position (same feel as the flight); only the ones near the middle are touched
   let lookCur = 0, lookGoal = 0, lookRun = false, lookLast = 0, lookIdx = -1, lookTimer = 0;
   function lookPaint() {
-    const W = L.lookW, step = W * 1.04;
+    const W = L.lookW, step = W * 1.02;
     for (let i = 0; i < lps.length; i++) {
       const d = i - lookCur, a = Math.abs(d), it = lps[i];
       if (a > 2.2) { put(it.el, 'opacity', '0'); continue; }
@@ -914,13 +1042,14 @@
       put(it.el, 'opacity', Math.max(0, 1 - a * 0.6).toFixed(3));
       put(it.img, 'transform', `translate3d(${(-d * W * 0.12).toFixed(1)}px, 0, 0) scale(${(1.14 - k * 0.04).toFixed(4)})`);
     }
+    put(lookProg, 'transform', `scaleX(${(lookCur / (lps.length - 1)).toFixed(4)})`);
     const idx = Math.min(lps.length - 1, Math.max(0, Math.round(lookCur)));
     if (idx !== lookIdx) {
       const first = lookIdx < 0;
       lookIdx = idx;
       lookItems.forEach((li, i) => li.classList.toggle('on', i === idx));
-      lookDots.forEach((dot, i) => dot.classList.toggle('on', i === idx));
-      const swap = () => { lookH.textContent = lps[idx].el.dataset.h; lookP.textContent = lps[idx].el.dataset.p; lookSide.classList.remove('swap'); };
+      lookN.textContent = String(idx + 1).padStart(2, '0');
+      const swap = () => { lookH.textContent = lps[idx].el.dataset.h; lookP.textContent = lps[idx].el.dataset.p; lookC.innerHTML = lps[idx].el.dataset.c.split('|').map((c) => `<li>${c}</li>`).join(''); lookSide.classList.remove('swap'); };
       clearTimeout(lookTimer);
       if (first) swap(); else { lookSide.classList.add('swap'); lookTimer = setTimeout(swap, 150); }
     }
@@ -936,7 +1065,7 @@
   function lookTick(y) {
     const vh = L.vh;
     // the photos load a couple of screens before they're needed, not with the first screen
-    if (!lookLoaded && y > L.look - vh * 3) { lookLoaded = true; lps.forEach((it) => { it.img.src = it.img.dataset.src; }); }
+    if (!lookLoaded && y > Math.min(L.look - vh * 3, L.start + (L.end - L.start) * 0.5)) { lookLoaded = true; lps.forEach((it) => { it.img.src = narrow ? it.img.dataset.src.replace('w=1200', 'w=760') : it.img.dataset.src; }); }
     if (y < L.look - vh * 1.2 || y > L.look + L.lookH) return;
     // the first photo holds for a moment, the last one too
     const t = clamp((y - L.look - vh * 0.15) / Math.max(1, L.lookH - vh * 1.3));
