@@ -695,7 +695,7 @@
   panel.querySelector('[data-close]').addEventListener('click', () => panel.close());
   panel.addEventListener('click', (e) => { if (e.target === panel) panel.close(); });
 
-  // chat. with CHAT_URL set, Claude answers through the chat server in chat-worker/ (it holds the key and the listing facts
+  // chat. with CHAT_URL set, Claude answers through the chat server in /chat (it holds the key and the listing facts
   // and caps the spending). without it, or when the server is busy, off or out of today's budget, the built-in answers
   // below reply from this listing and the pricing numbers above, and nothing typed leaves the page.
   const CHAT_URL = 'https://sample-realty-chat.southsites.workers.dev/chat';

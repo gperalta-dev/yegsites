@@ -1,4 +1,4 @@
-# Puts the chat server on Cloudflare and points the realty demo's chat at it.  Run: pwsh -File deploy.ps1
+# Puts the chat server on Cloudflare (both chats: the realty demo and the landing page).  Run: pwsh -File deploy.ps1
 # The first run downloads wrangler (Cloudflare's tool) and opens the browser to log in to Cloudflare.
 # The Claude API key comes from the .env file and is piped to Cloudflare as a secret, never printed or saved here.
 param(
@@ -27,10 +27,7 @@ $key | npx --yes wrangler@4 secret put ANTHROPIC_API_KEY
 Remove-Variable key
 if ($LASTEXITCODE) { Write-Host 'The key did not go in. Run this again.'; exit 1 }
 
-$page = (Resolve-Path (Join-Path $PSScriptRoot '..\index.html')).Path
-$html = [IO.File]::ReadAllText($page) -replace "const CHAT_URL = '[^']*';", "const CHAT_URL = '$url/chat';"
-[IO.File]::WriteAllText($page, $html)
-Write-Host "The demo's chat now points at $url/chat"
+Write-Host "Live at $url/chat. If that address changed, put it in CHAT_URL in demos/sample-realty/index.html and chat/southsites.js"
 
 Write-Host 'Asking it one question...'
 Start-Sleep -Seconds 5

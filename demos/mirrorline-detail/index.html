@@ -109,6 +109,13 @@
   .find .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: stretch; }
   .map { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); min-height: 380px; }
   .map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; filter: invert(.9) hue-rotate(180deg) saturate(.6) brightness(.95); }
+  /* the map scrolls with the page until it's tapped, so a swipe over it never gets stuck */
+  .map { position: relative; }
+  .map iframe { pointer-events: none; }
+  .map.live iframe { pointer-events: auto; }
+  .map-use { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 16px; border: 0; background: transparent; cursor: pointer; font: inherit; }
+  .map-use span { min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 99px; background: rgba(12, 12, 14, .78); color: #fff; font-weight: 700; font-size: 15px; }
+  .map.live .map-use { display: none; }
   .find p { color: var(--muted); margin: 0 0 20px; }
   table.hours { width: 100%; border-collapse: collapse; font-size: 16px; }
   table.hours td { padding: 10px 0; border-bottom: 1px solid var(--line); }
@@ -249,7 +256,7 @@
 
 <section class="block find" id="find">
   <div class="wrap">
-    <div class="map"><iframe title="Map of Scottsdale, Arizona" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-111.985%2C33.45%2C-111.855%2C33.53&amp;layer=mapnik"></iframe></div>
+    <div class="map"><iframe title="Map of Scottsdale, Arizona" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-111.985%2C33.45%2C-111.855%2C33.53&amp;layer=mapnik"></iframe><button class="map-use" type="button"><span>Move the map</span></button></div>
     <div>
       <h2>Find us</h2>
       <p>In south Scottsdale, minutes from Old Town. Shaded bays, a cold drink while you wait, and a ride to work if you need one.</p>
@@ -381,6 +388,12 @@
   measure();
   size();
   if (!still) tick();
+  // the map moves only after a tap, and goes back to scrolling with the page once it's off screen or the mouse leaves
+  document.querySelectorAll('.map').forEach((m) => {
+    m.querySelector('.map-use').addEventListener('click', () => m.classList.add('live'));
+    m.addEventListener('mouseleave', () => m.classList.remove('live'));
+    new IntersectionObserver(([e]) => { if (!e.isIntersecting) m.classList.remove('live'); }).observe(m);
+  });
 </script>
 </body>
 </html>

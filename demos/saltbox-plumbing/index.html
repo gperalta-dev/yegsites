@@ -97,6 +97,13 @@
   .areas .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 40px; align-items: stretch; }
   .map { border-radius: 20px; overflow: hidden; border: 1px solid var(--line); min-height: 380px; background: var(--sky); }
   .map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
+  /* the map scrolls with the page until it's tapped, so a swipe over it never gets stuck */
+  .map { position: relative; }
+  .map iframe { pointer-events: none; }
+  .map.live iframe { pointer-events: auto; }
+  .map-use { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 16px; border: 0; background: transparent; cursor: pointer; font: inherit; }
+  .map-use span { min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 99px; background: rgba(12, 12, 14, .78); color: #fff; font-weight: 700; font-size: 15px; }
+  .map.live .map-use { display: none; }
   .areas h2 { font-size: clamp(34px, 4vw, 50px); color: var(--navy); margin-bottom: 14px; }
   .areas p { color: var(--muted); margin: 0 0 18px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; }
@@ -243,7 +250,7 @@
 
 <section class="block areas" id="areas">
   <div class="wrap">
-    <div class="map"><iframe title="Map of Halifax, Dartmouth and Bedford" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-63.78%2C44.58%2C-63.46%2C44.76&amp;layer=mapnik"></iframe></div>
+    <div class="map"><iframe title="Map of Halifax, Dartmouth and Bedford" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-63.78%2C44.58%2C-63.46%2C44.76&amp;layer=mapnik"></iframe><button class="map-use" type="button"><span>Move the map</span></button></div>
     <div>
       <h2>Where we work</h2>
       <p>Halifax and the towns around the harbour. Not sure if you're in? Call and ask.</p>
@@ -290,6 +297,12 @@
   // sample site: the form never sends anything, it just says so
   const f = document.getElementById('f');
   f.addEventListener('submit', (e) => { e.preventDefault(); f.classList.add('done'); f.querySelector('.sent').focus?.(); });
+  // the map moves only after a tap, and goes back to scrolling with the page once it's off screen or the mouse leaves
+  document.querySelectorAll('.map').forEach((m) => {
+    m.querySelector('.map-use').addEventListener('click', () => m.classList.add('live'));
+    m.addEventListener('mouseleave', () => m.classList.remove('live'));
+    new IntersectionObserver(([e]) => { if (!e.isIntersecting) m.classList.remove('live'); }).observe(m);
+  });
 </script>
 </body>
 </html>

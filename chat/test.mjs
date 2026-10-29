@@ -68,6 +68,18 @@ await test('the reply is counted against the daily cap at its real cost', async 
   assert.ok(Math.abs(spent() - (200 * 0.10 + 1300 * 0.01 + 40 * 0.50) / 1e6) < 1e-12, String(spent()));
 });
 
+await test('the landing page gets the Southsites prompt and no pricing block', async () => {
+  await (await post({ ...q('How much is a site?'), bot: 'southsites' }, { ip: '3.3.3.3' })).text();
+  assert.equal(sent.system.length, 1);
+  assert.ok(sent.system[0].text.includes('$249 once, then $29 a month'));
+  assert.deepEqual(sent.system[0].cache_control, { type: 'ephemeral', ttl: '1h' });
+  next = () => reply([], 'refusal');
+  assert.match(await (await post({ ...q('something off topic'), bot: 'southsites' }, { ip: '3.3.3.3' })).text(), /prices, the free preview/);
+  next = () => reply(['Yes, ', 'the yard is fenced. [[showing]]']);
+  await (await post(q('Is the yard fenced?'), { ip: '3.3.3.3' })).text();
+  assert.equal(sent.system.length, 2);  // no bot: the realty listing, as before
+});
+
 await test('odd rates and terms fall back to the page defaults', async () => {
   await (await post(q('payment?', { rate: 99, years: 12, per: 'x' }))).text();
   assert.ok(sent.system[1].text.startsWith("The visitor's Pricing section shows right now: a 4.50% rate, paid off over 25 years, payments a month."));

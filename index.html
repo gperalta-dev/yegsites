@@ -242,6 +242,9 @@
   .sx-win { position: absolute; inset: 0; transform-origin: 50% 100%; will-change: transform, opacity; opacity: 0; }
   .sx-win .frame { position: absolute; inset: 0; overflow: hidden; border-radius: 0 0 var(--rad, 0px) var(--rad, 0px); background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); }
   .sx-win iframe { display: block; width: 100%; height: 100%; border: 0; pointer-events: none; background: #fff; }
+  .sx-win .shots, .sx-win .shots-head { position: absolute; left: 0; top: 0; width: 100%; will-change: transform; }
+  .sx-win .shots img, .sx-win .shots-head { display: block; width: 100%; height: auto; }
+  .sx-win .shots img + img { margin-top: -1px; }  /* strips overlap a hair so no seam shows between them */
   .sx-win .wbar { position: absolute; left: 0; right: 0; bottom: 100%; height: 42px; background: #e9e6df; display: flex; align-items: center; gap: 9px; padding: 0 18px; border-radius: var(--rad, 0px) var(--rad, 0px) 0 0; }
   .sx-win .wbar i { width: 13px; height: 13px; border-radius: 50%; background: #cfc9bd; }
   .sx-win .wbar b { margin-left: 12px; flex: 1; max-width: 480px; background: #fff; border-radius: 99px; font: 600 15px var(--body); color: #55524b; padding: 6px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -946,6 +949,12 @@
   // samples: each made-up business grows from a card to full screen, then its own page scrolls, slowly
   // px of the sample's page per px of ours, and how much of each sample page to show before moving on
   const RATIO = narrow ? 2.2 : 1.5, SHOW = 0.74;
+  // on phones the plumber and the pizza place are stills of their pages at 390 px wide (demos/<name>/phone/, strips 800 px
+  // tall), moved with transform: smoother than scrolling a live page in a frame. head: the sticky header, shot on its own
+  const PHONE = {
+    'Saltbox Plumbing': { dir: 'demos/saltbox-plumbing/phone', h: [...Array(10).fill(800), 347], head: { top: 79, h: 67 } },
+    'Forno Lume': { dir: 'demos/forno-lume/phone', h: [...Array(9).fill(800), 215] },
+  };
   const sx = [...document.querySelectorAll('.sx')].map((el) => ({ el, name: el.dataset.name, win: el.querySelector('.sx-win'), frame: el.querySelector('iframe'),
     title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0, px: -1, top: 0, h: 0 }));
   const real = document.getElementById('work'), ek = document.getElementById('ek');
@@ -970,13 +979,25 @@
   }
   function dims(s) {
     const vh = L.vh;
-    try { const d = s.frame.contentDocument; if (d && d.documentElement && s.frame.getAttribute('src')) s.max = Math.max(0, d.documentElement.scrollHeight - s.frame.clientHeight); } catch (e) {}
+    if (s.shots) { const k = s.shots.clientWidth / 390; s.headTop = s.phone.head ? s.phone.head.top * k : 0; s.max = Math.max(0, s.shots.offsetHeight - s.shots.parentElement.clientHeight); }
+    else try { const d = s.frame.contentDocument; if (d && d.documentElement && s.frame.getAttribute('src')) s.max = Math.max(0, d.documentElement.scrollHeight - s.frame.clientHeight); } catch (e) {}
     s.enter = vh * 0.3; s.grow = vh * 0.45; s.run = (s.max * SHOW || vh * 3) / RATIO; s.hold = vh * 0.15;
     if (!still) s.el.style.height = `${Math.round(vh + s.enter + s.grow + s.run + s.hold)}px`;
   }
   function loadSamples() {
     sx.forEach((s) => {
-      if (s.frame.getAttribute('src')) return;
+      if (s.frame.getAttribute('src') || s.shots) return;
+      const p = narrow && !still && PHONE[s.name];
+      if (p) {
+        // the strips stacked in one box; only the box moves, so nothing is laid out or painted again while it glides
+        const box = document.createElement('div');
+        box.className = 'shots'; box.setAttribute('role', 'img'); box.setAttribute('aria-label', s.frame.title);
+        p.h.forEach((h, i) => { const im = new Image(390, h); im.alt = ''; im.decoding = 'async'; im.src = `${p.dir}/m${i}.webp`; box.append(im); });
+        if (p.head) { const hd = new Image(390, p.head.h); hd.alt = ''; hd.className = 'shots-head'; hd.src = `${p.dir}/head.webp`; s.frame.parentElement.append(hd); s.head = hd; }
+        s.frame.replaceWith(box); s.shots = box; s.phone = p;
+        dims(s);
+        return;
+      }
       s.frame.addEventListener('load', () => { dims(s); setTimeout(() => dims(s), 1500); });
       if (!still) s.frame.loading = 'eager';
       s.frame.src = s.frame.dataset.src;
@@ -1011,6 +1032,11 @@
       if (!d) continue;
       s.cur = Math.abs(d) < 0.5 ? s.goal : s.cur + d * a;
       if (s.cur !== s.goal) moving = true;
+      if (s.shots) {
+        put(s.shots, 'transform', `translate3d(0, ${(-s.cur).toFixed(1)}px, 0)`);
+        if (s.head) put(s.head, 'transform', `translate3d(0, ${Math.max(0, s.headTop - s.cur).toFixed(1)}px, 0)`);  // sticks at the top, like the real header
+        continue;
+      }
       const px = Math.round(s.cur);
       if (px !== s.px) { s.px = px; try { s.frame.contentWindow.scrollTo(0, px); } catch (e) {} }
     }
@@ -1143,5 +1169,6 @@
   size();
   if (!still) { lookPaint(); tick(); }
 </script>
+<script src="chat/southsites.js" defer></script>
 </body>
 </html>
