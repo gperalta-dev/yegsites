@@ -194,7 +194,7 @@
   .look-main { min-width: 0; width: min(100%, calc((100svh - 340px) * 1.5)); justify-self: end; }
   .look-view { position: relative; width: 100%; aspect-ratio: 3 / 2; border-radius: 16px; overflow: hidden; background: #e9e4dc; box-shadow: 0 24px 50px -30px rgba(40, 30, 10, .45); }
   .lp { position: absolute; inset: 0; margin: 0; overflow: hidden; background: #e9e4dc; will-change: transform, opacity; }
-  .lp img { width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform; }
+  .lp img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .look-meta { display: flex; align-items: center; gap: 14px; margin: 14px 0 6px; font: 600 14px var(--body); color: #8a8377; }
   .look-count b { color: #1d1b18; }
   .look-prog { flex: 1; height: 2px; background: #e4dfd6; border-radius: 2px; overflow: hidden; }
@@ -302,8 +302,8 @@
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), inset 0 -1px 0 rgba(0, 0, 0, .12), 0 30px 60px -28px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .25); }
   .plat::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .18; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 1px, rgba(0, 0, 0, .025) 1px 3px); }
   .plat::after { content: ""; position: absolute; top: -40%; bottom: -40%; left: -60%; width: 45%; z-index: -1; background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .75), transparent); transform: translate3d(0, 0, 0) rotate(8deg); }
-  @media (prefers-reduced-motion: no-preference) { .plat::after { animation: sheen 7s cubic-bezier(.4, 0, .2, 1) infinite; } }
-  @keyframes sheen { 0%, 55% { transform: translate3d(0, 0, 0) rotate(8deg); } 100% { transform: translate3d(420%, 0, 0) rotate(8deg); } }
+  @media (prefers-reduced-motion: no-preference) { .plat.shine::after { animation: sheen 2.4s cubic-bezier(.4, 0, .2, 1) 1 both; } }
+  @keyframes sheen { 0% { transform: translate3d(0, 0, 0) rotate(8deg); } 100% { transform: translate3d(420%, 0, 0) rotate(8deg); } }
   .plat-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
   .plat-logo { display: inline-flex; align-items: center; gap: 8px; font: 850 18px/1 var(--display); font-stretch: 90%; }
   .plat-logo i { width: 14px; height: 14px; border-radius: 4px; background: #15171b; box-shadow: inset 0 0 0 3px #ffc83d; }
@@ -976,8 +976,21 @@
     paint();
     if (pos !== want) requestAnimationFrame(step); else running = false;
   }
+  // only the frames near the playhead stay decoded (plus every 12th, for jumps). a phone can't hold 293 decoded frames
+  // (about 430 MB): it would throw them away and decode them again mid-swipe, which is the stutter. the files stay in
+  // the browser's cache, so a frame that's needed again comes back fast and decodes off the main thread
+  const BEHIND = 14, AHEAD = 34, SPARSE = 12;
+  let winAt = -99;
+  function windowAt(c) {
+    if (Math.abs(c - winAt) < 3) return;
+    winAt = c;
+    for (let k = Math.max(0, c - 4); k <= Math.min(N - 1, c + AHEAD); k++) load(k);
+    for (let k = Math.max(0, c - BEHIND); k < c - 4; k++) load(k);
+    for (let k = 0; k < N; k++) if (frames[k] && k % SPARSE && (k < c - BEHIND - 4 || k > c + AHEAD + 4)) frames[k] = undefined;
+  }
   function seek(t) {
     want = t;
+    windowAt(Math.round(t));
     if (Math.abs(t - pos) > 40) { pos = t; paint(); }  // a jump (a link, a reload mid-page) cuts instead of racing through
     if (!running && pos !== want) { running = true; last = performance.now(); requestAnimationFrame(step); }
   }
@@ -985,12 +998,13 @@
   // samples: each made-up business grows from a card to full screen, then its own page scrolls, slowly
   // px of the sample's page per px of ours, and how much of each sample page to show before moving on
   const RATIO = narrow ? 2.2 : 1.5, SHOW = 0.74;
-  // on phones the plumber and the pizza place are stills of their pages at 390 px wide (demos/<name>/phone/, strips 800 px
+  // on phones the plumber, the pizza place and the detail shop are stills of their pages at 390 px wide (demos/<name>/phone/, strips 800 px
   // tall), drawn on one canvas like the flight: a phone never repaints a giant layer or a live page while they glide.
   // head: the sticky header, shot on its own. their pages also move closer to the thumb's speed (1.6x) and show a bit less
   const PHONE = {
     'Saltbox Plumbing': { dir: 'demos/saltbox-plumbing/phone', h: [...Array(10).fill(800), 347], head: { top: 79, h: 67 } },
     'Forno Lume': { dir: 'demos/forno-lume/phone', h: [...Array(9).fill(800), 215] },
+    'Mirrorline Detail': { dir: 'demos/mirrorline-detail/phone', h: [...Array(7).fill(800), 294] },
   };
   const sx = [...document.querySelectorAll('.sx')].map((el) => ({ el, name: el.dataset.name, win: el.querySelector('.sx-win'), frame: el.querySelector('iframe'),
     title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0, px: -1, top: 0, h: 0, ratio: RATIO, show: SHOW }));
@@ -1044,7 +1058,8 @@
         s.frame.replaceWith(c); s.shots = c; s.ctx = c.getContext('2d', { alpha: false });
         // each strip is decoded before it's drawn, so drawing it never stalls a frame
         const get = (file) => { const im = new Image(); im.decoding = 'async'; im.src = `${p.dir}/${file}`; im.decode().then(() => { im.ok = true; drawShots(s); }).catch(() => {}); return im; };
-        s.strips = p.h.map((h, i) => get(`m${i}.webp`));
+        s.get = get;
+        s.strips = p.h.map(() => null);  // loaded as they come near (drawShots), let go once they're well past
         if (p.head) s.head = get('head.webp');
         dims(s);
         return;
@@ -1059,7 +1074,13 @@
     const vh = L.vh, s0 = narrow ? 0.66 : 0.6;
     for (const s of sx) {
       const r = y - s.top;
-      if (r < -vh * 1.2 || r > s.h + vh * 0.2) continue;  // far away: nothing on screen to move
+      if (r < -vh * 1.2 || r > s.h + vh * 0.2) {   // far away: nothing on screen to move, nothing to keep in memory
+        put(s.win, 'visibility', 'hidden');
+        if (s.strips && s.strips.some(Boolean)) s.strips.fill(null);
+        continue;
+      }
+      put(s.win, 'visibility', 'visible');
+      if (s.shots && !s.strips.some(Boolean)) drawShots(s);
       const e = ramp(r, -vh * 0.4, s.enter), g = ramp(r, s.enter, s.enter + s.grow), t = ramp(r, s.enter + s.grow, s.enter + s.grow + s.run);
       const k = g * g * (3 - 2 * g), sc = s0 + (1 - s0) * k;
       put(s.win, 'transform', `translate3d(0, ${((1 - e) * 34 - (1 - k) * 5).toFixed(2)}vh, 0) scale(${sc.toFixed(4)})`);
@@ -1099,7 +1120,10 @@
     let top = 0;
     s.strips.forEach((im, i) => {
       const h = s.phone.h[i] * q, y = top - y0;
-      if (im.ok && y < c.height && y + h > 0) x.drawImage(im, 0, Math.floor(y), c.width, Math.ceil(h) + 1);
+      const near = y < c.height * 2.5 && y + h > -c.height;   // on screen, the next two screens, one screen back
+      if (near && !im) s.strips[i] = im = s.get(`m${i}.webp`);
+      else if (!near && im) s.strips[i] = im = null;
+      if (im && im.ok && y < c.height && y + h > 0) x.drawImage(im, 0, Math.floor(y), c.width, Math.ceil(h) + 1);
       top += h;
     });
     if (s.head && s.head.ok) x.drawImage(s.head, 0, Math.round(Math.max(0, s.headTop * s.dpr - y0)), c.width, Math.round(s.phone.head.h * q));
@@ -1125,7 +1149,8 @@
     const W = L.lookW, step = W * 1.02;
     for (let i = 0; i < lps.length; i++) {
       const d = i - lookCur, a = Math.abs(d), it = lps[i];
-      if (a > 2.2) { put(it.el, 'opacity', '0'); continue; }
+      if (a > 2.2) { put(it.el, 'visibility', 'hidden'); continue; }
+      put(it.el, 'visibility', 'visible');
       const k = Math.min(a, 1);
       put(it.el, 'transform', `translate3d(${(d * step).toFixed(1)}px, 0, 0) scale(${(1 - k * 0.12).toFixed(4)})`);
       put(it.el, 'opacity', Math.max(0, 1 - a * 0.6).toFixed(3));
@@ -1210,13 +1235,10 @@
     loadSamples();
   } else {
     load(0);
-    // the first screen is instant; the flight loads just behind it, sparse first, the rest when the visitor starts moving
-    const sparse = () => { for (let k = 6; k < N; k += 6) load(k); };
-    let queued = false;
-    const rest = () => { if (queued) return; queued = true; for (let k = 1; k < N; k++) setTimeout(() => load(k), k * 14); };
-    addEventListener('load', () => { setTimeout(sparse, 200); setTimeout(loadSamples, 2500); }, { once: true });
-    addEventListener('scroll', () => { sparse(); rest(); }, { once: true, passive: true });
-    setTimeout(rest, 4000);
+    // the first screen is instant; the opening of the flight and every 12th frame load just behind it, and from then on
+    // the frames around wherever the visitor is (windowAt)
+    const sparse = () => { for (let k = SPARSE; k < N; k += SPARSE) load(k); };
+    addEventListener('load', () => { setTimeout(() => { windowAt(0); sparse(); }, 200); setTimeout(loadSamples, 2500); }, { once: true });
     addEventListener('scroll', tick, { passive: true });
     // anything that changes the page's height (a sample loading, a font, an image) re-measures
     const ro = new ResizeObserver(() => { measure(); tick(); });
@@ -1231,6 +1253,12 @@
   });
   size();
   if (!still) { lookPaint(); tick(); }
+
+  // the platinum card's sheen passes once when it comes on screen
+  if ('IntersectionObserver' in window) document.querySelectorAll('.plat').forEach((el) => {
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('shine'); io.disconnect(); } }, { threshold: 0.6 });
+    io.observe(el);
+  });
 
   // plans side by side on a phone: swipe sideways, or tap the arrows. starts on the recommended one
   document.querySelectorAll('[data-car]').forEach((car) => {

@@ -156,7 +156,7 @@
   @media (prefers-reduced-motion: reduce) {
     .wash { height: auto; }
     .stage { position: relative; height: 92vh; }
-    .beat { position: relative; left: auto; bottom: auto; opacity: 1; transform: none; transition: none; }
+    .beat { position: relative; left: auto; right: auto; top: auto; bottom: auto; margin: 0 max(16px, calc((100vw - 1180px) / 2)); opacity: 1; transform: none; transition: none; }
     .beats { position: absolute; inset: auto 0 10vh 0; }
     .beat:not(.last) { display: none; }
     .meter { display: none; }
