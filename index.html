@@ -167,7 +167,7 @@
   .r-in h3 { font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1; margin: 0 0 10px; text-shadow: 0 2px 24px rgba(0, 0, 0, .5); }
   .r-in p { margin: 0; font: 500 16px var(--body); color: #ece6dc; text-shadow: 0 1px 12px rgba(0, 0, 0, .7); max-width: 40ch; }
   .r-tag { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 96px; font: 700 13px var(--body); background: rgba(8, 10, 14, .7); padding: 8px 12px; border-radius: 99px; color: #f3d6a4; }
-  .fly-track { height: 419vh; }
+  .fly-track { height: 509vh; }
 
   /* sticky call to action, after the first screen */
   .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .94); border: 1px solid var(--line); box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .9); transform: translateY(130%); opacity: 0; transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
@@ -384,7 +384,7 @@
 <main id="main">
 <div class="fly" id="fly">
   <div class="stage" id="stage">
-    <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, across the river valley, down a suburban street to one house, then through its front door into a sample interior made with AI"></canvas>
+    <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, across the river valley, down a suburban street to one house, then through its front door and room by room through a sample interior made with AI: kitchen, main bedroom, ensuite, the upstairs hall, a second bedroom, the kids' room and the bonus room"></canvas>
     <div class="veil" id="veil"></div>
     <div class="cap" id="cap1"><h2>Here's what a site can feel like.</h2><p>Keep scrolling. This is a sample we made for a made-up realtor.</p></div>
     <div class="realty" id="realty" aria-hidden="true">
@@ -397,7 +397,7 @@
         <p class="pnote">Sample price for this concept demo.</p>
         <a class="r-btn" href="demos/sample-realty/" tabindex="-1">See the full sample site</a>
       </div>
-      <div class="r-in"><h3>Step inside.</h3><p>The entry, the living room, the kitchen and down the hall to the main bedroom. Made with AI from our render of the front door. It is not a real home.</p></div>
+      <div class="r-in"><h3 id="room">Step inside.</h3><p id="room-p">The entry, the living room and the kitchen. Made with AI from our render of the front door. It is not a real home.</p></div>
       <span class="r-tag">Sample site by Southsites. Sample Realty is made up.</span>
     </div>
   </div>
@@ -449,7 +449,9 @@
     <img src="demos/sample-realty/frames/d/f172.webp" alt="A two-storey house with a double garage" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f310.webp" alt="An open-plan kitchen with a white island, made with AI" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f376.webp" alt="A bright bedroom with autumn trees outside the window, made with AI" loading="lazy" width="1440" height="810">
-    <p>Sample Realty and the house are made up. The kitchen and bedroom were made with AI and are not a real home.</p>
+    <img src="demos/sample-realty/frames/d/f420.webp" alt="An ensuite with a freestanding tub, a glass shower and a double vanity, made with AI" loading="lazy" width="1440" height="810">
+    <img src="demos/sample-realty/frames/d/f630.webp" alt="A bonus room with a sectional, a TV and a desk by the window, made with AI" loading="lazy" width="1440" height="810">
+    <p>Sample Realty and the house are made up. The rooms inside were made with AI and are not a real home.</p>
   </div>
 </div>
 
@@ -623,10 +625,10 @@
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const touch = matchMedia('(pointer: coarse)').matches, narrow = innerWidth < 700;
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd', IW = SET === 'm' ? 456 : 1440, IH = 810;
-  const EXT = 120, IN = 141;          // every second frame of the 240-frame flight, then the walk inside
+  const EXT = 120, IN = 197;          // every second frame of the 240-frame flight, then every second frame of the walk inside (f240-f632)
   const N = EXT + IN;
   const pad = (i) => String(i).padStart(3, '0');
-  const src = (k) => `demos/sample-realty/frames/${SET}/f${pad(k >= EXT ? 240 + k - EXT : k * 2)}.webp`;
+  const src = (k) => `demos/sample-realty/frames/${SET}/f${pad(k >= EXT ? 240 + (k - EXT) * 2 : k * 2)}.webp`;
   const stage = document.getElementById('stage'), veil = document.getElementById('veil'), fly = document.getElementById('fly');
   const cap1 = document.getElementById('cap1'), realty = document.getElementById('realty'), dock = document.getElementById('dock');
   const hero = document.getElementById('top'), bar = document.getElementById('progress');
@@ -641,8 +643,8 @@
   if (!touch) addEventListener('wheel', (e) => { TAU = e.deltaMode || Math.abs(e.deltaY) >= 50 ? 95 : 55; }, { passive: true });
   const ease = (dt) => 1 - Math.exp(-dt / TAU);
 
-  // the flight: an image sequence on a canvas. it eases toward the scroll position and blends the two nearest frames,
-  // so a wheel notch or a flick never shows as a jump
+  // the flight: an image sequence on a canvas. it eases toward the scroll position, so a wheel notch or a flick glides
+  // instead of jumping. it always shows one whole frame: blending two neighbours looked like motion blur (a double image)
   const canvas = document.getElementById('film'), ctx = canvas.getContext('2d', { alpha: false });
   const frames = new Array(N);
   let want = 0, pos = 0, painted = '', running = false, last = 0, geo = null;
@@ -673,14 +675,11 @@
   }
   function paint() {
     if (!geo) return;
-    let a = Math.floor(pos), A = ready(a), B = null;
-    const f = pos - a;
-    if (A && f > 0.02) B = ready(a + 1);
-    if (!A) { a = nearest(Math.round(pos)); if (a < 0) return; A = frames[a]; }
-    const key = B ? `${a}+${f.toFixed(2)}` : String(a);
+    const a = nearest(Math.round(pos));
+    if (a < 0) return;
+    const key = String(a);
     if (key === painted) return;
-    ctx.globalAlpha = 1; ctx.drawImage(A, ...geo);
-    if (B) { ctx.globalAlpha = f; ctx.drawImage(B, ...geo); ctx.globalAlpha = 1; }
+    ctx.drawImage(frames[a], ...geo);
     painted = key;
   }
   function step(now) {
@@ -764,6 +763,17 @@
     if (moving) requestAnimationFrame(glide); else gliding = false;
   }
 
+  // the walk inside: the caption follows the room on screen (first source frame of each room)
+  const ROOMS = [
+    [240, 'Step inside.', 'The entry, the living room and the kitchen.'],
+    [335, 'Down the hall.', 'To the main bedroom, with the trees right outside the window.'],
+    [395, 'The ensuite.', 'A soaker tub under the window, a glass shower and a double vanity.'],
+    [444, 'Upstairs.', 'Past the railing to the second bedroom.'],
+    [510, "The kids' room.", 'A bed, a desk for homework and a shelf of picture books.'],
+    [575, 'The bonus room.', 'Over the garage, with room for a sectional, a TV and a desk.'],
+  ];
+  const roomH = document.getElementById('room'), roomP = document.getElementById('room-p');
+  let room = 0;
   const likeTab = document.getElementById('likeit'), like = document.getElementById('like');
   function tick() {
     const y = scrollY, vh = L.vh;
@@ -776,6 +786,12 @@
     cap1.classList.toggle('on', heroOut > 0.85 && p < 0.22);
     realty.classList.toggle('on', f >= 67 && p < 0.995);
     realty.classList.toggle('inside', f >= EXT);
+    if (f >= EXT) {
+      const fr = 240 + (f - EXT) * 2;
+      let r = 0;
+      while (r + 1 < ROOMS.length && fr >= ROOMS[r + 1][0]) r++;
+      if (r !== room) { room = r; roomH.textContent = ROOMS[r][1]; roomP.textContent = `${ROOMS[r][2]} Made with AI, not a real home.`; }
+    }
     dock.classList.toggle('on', y > L.hero * 0.8);
     // or what about: the samples grow to full screen and their pages glide
     current = 'The realty flight';
