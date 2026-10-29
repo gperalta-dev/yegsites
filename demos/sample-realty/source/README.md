@@ -16,7 +16,7 @@ Blender 5.2, Cycles on the GPU. 240 frames, 1600x900, then `pack.py` makes the w
 8. Four more clips, each made in Gemini (Veo) from the previous clip's last frame, appended the same way. Every prompt
    names the same house (2,250 sq ft, two storeys, 4 bedrooms, 3.5 baths) and the same finishes so rooms stay in scale:
    ensuite 381 to 443, upstairs hall and second bedroom 444 to 506, kids' room 507 to 569, bonus room over the garage 570 to 632.
-   The stairs down, the back door and the yard are still to do.
+   Then down the stairs to the main floor, 633 to 695, and out the back door to the deck and the fenced yard, 696 on.
 9. Sunset re-render (now the `main.py` defaults): Blender's physical sky (multiple scattering) drawn for a sun 2.5 degrees
    up, the sun lamp at 9 degrees from the west-south-west so it still clears the neighbours' roofs, three times as many
    lit windows. The flight drops into the river valley west of the bridges, flies east along the river over the High

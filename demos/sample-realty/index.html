@@ -40,7 +40,7 @@
   .brand { font: 400 30px/1 var(--serif); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; text-shadow: 0 1px 12px rgba(0, 0, 0, .4); }
 
   /* scroll story: a sticky canvas scrubs the rendered flight while the chapters scroll past */
-  .story { position: relative; height: 1688vh; }
+  .story { position: relative; height: 2024vh; }
   .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #1b1f26; }
   canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 10, 14, .62) 0%, rgba(8, 10, 14, .25) 34%, rgba(8, 10, 14, 0) 48%, rgba(8, 10, 14, 0) 55%, rgba(8, 10, 14, .7) 100%); pointer-events: none; }
@@ -113,22 +113,24 @@
 <main>
 <div class="story" id="story">
   <div class="stage">
-    <canvas id="film" aria-label="3D flight from downtown Edmonton across the river valley to a two-storey home in the suburbs, around the house, then an AI-made walk inside: kitchen, main bedroom, ensuite, second bedroom, kids' room and bonus room" role="img"></canvas>
+    <canvas id="film" aria-label="3D flight at sunset from downtown Edmonton down the river valley, over the High Level Bridge and past the Walterdale Bridge, to a two-storey home in the suburbs, around the house, then an AI-made walk inside: kitchen, main bedroom, ensuite, second bedroom, kids' room, bonus room, down the stairs and out to the backyard" role="img"></canvas>
     <div class="shade"></div>
     <div class="meter" aria-hidden="true"><i id="meter"></i></div>
     <div class="loading" id="loading" aria-hidden="true">Loading the flight</div>
     <div class="chapters">
-      <div class="ch first on" data-from="0.000" data-to="0.049"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
-      <div class="ch" data-from="0.070" data-to="0.177"><small>The river valley</small><h2>Cross the river.</h2><p>Over the High Level Bridge and past the white arches of the Walterdale, to the south side.</p></div>
-      <div class="ch" data-from="0.214" data-to="0.245"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
-      <div class="ch" data-from="0.250" data-to="0.276"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
-      <div class="ch" data-from="0.296" data-to="0.377"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.394" data-to="0.500"><small>Sample interior, made with AI</small><h2>Step inside.</h2><p>The entry, the living room and the kitchen. This interior was generated with AI from our render of the front door. It is not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.515" data-to="0.599"><small>Sample interior, made with AI</small><h2>Down the hall.</h2><p>Past the kitchen to the main bedroom, with the trees right outside the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.616" data-to="0.699"><small>Sample interior, made with AI</small><h2>The ensuite.</h2><p>Off the main bedroom: a soaker tub under the window, a glass shower and a double vanity. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.718" data-to="0.797"><small>Sample interior, made with AI</small><h2>Up the hall.</h2><p>Past the railing to the second bedroom, with the maple right outside. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.819" data-to="0.896"><small>Sample interior, made with AI</small><h2>The kids' room.</h2><p>A bed, a desk for homework and a shelf of picture books, down the hall from the stairs. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
-      <div class="ch" data-from="0.920" data-to="1.01"><small>Sample interior, made with AI</small><h2>The bonus room.</h2><p>Over the garage, with space for a sectional, a TV and a desk by the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch first on" data-from="0.000" data-to="0.041"><small>Edmonton, Alberta</small><h2>Start with the whole city.</h2><p>Downtown, the river valley and the neighbourhoods around it. Scroll to fly in.</p></div>
+      <div class="ch" data-from="0.059" data-to="0.148"><small>The river valley</small><h2>Cross the river.</h2><p>Over the High Level Bridge and past the white arches of the Walterdale, to the south side.</p></div>
+      <div class="ch" data-from="0.179" data-to="0.204"><small>The neighbourhood</small><h2>Find your street.</h2><p>Quiet winding streets, young trees and fenced backyards.</p></div>
+      <div class="ch" data-from="0.208" data-to="0.230"><small>Sample listing</small><h2>Then the home.</h2><p>Four bedrooms, a double garage and a fenced backyard.</p></div>
+      <div class="ch" data-from="0.247" data-to="0.315"><small>Before you visit</small><h2>Walk all the way around it.</h2><p>See the yard, the deck and the street before you book a showing.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.328" data-to="0.417"><small>Sample interior, made with AI</small><h2>Step inside.</h2><p>The entry, the living room and the kitchen. This interior was generated with AI from our render of the front door. It is not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.429" data-to="0.500"><small>Sample interior, made with AI</small><h2>Down the hall.</h2><p>Past the kitchen to the main bedroom, with the trees right outside the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.514" data-to="0.583"><small>Sample interior, made with AI</small><h2>The ensuite.</h2><p>Off the main bedroom: a soaker tub under the window, a glass shower and a double vanity. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.599" data-to="0.665"><small>Sample interior, made with AI</small><h2>Up the hall.</h2><p>Past the railing to the second bedroom, with the maple right outside. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.683" data-to="0.747"><small>Sample interior, made with AI</small><h2>The kids' room.</h2><p>A bed, a desk for homework and a shelf of picture books, down the hall from the stairs. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.768" data-to="0.830"><small>Sample interior, made with AI</small><h2>The bonus room.</h2><p>Over the garage, with space for a sectional, a TV and a desk by the window. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.852" data-to="0.913"><small>Sample interior, made with AI</small><h2>Down the stairs.</h2><p>Out of the bonus room, past the railing and down to the open kitchen and living room. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
+      <div class="ch" data-from="0.937" data-to="1.01"><small>Sample interior, made with AI</small><h2>The backyard.</h2><p>Out the back door onto the deck and into the fenced yard. Made with AI, not a real home.</p><a class="btn btn-main" href="#showing">Book a showing</a></div>
     </div>
   </div>
 </div>
@@ -177,7 +179,7 @@
   // portrait screens get a lighter centre-cropped set (456x810), wider screens the 1440x810 set.
   // frames 0-239 are the rendered flight, 240 on the AI walk inside
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd', IW = SET === 'm' ? 456 : 1440, IH = 810;
-  const COUNT = 633, canvas = document.getElementById('film'), ctx = canvas.getContext('2d', { alpha: false });
+  const COUNT = 759, canvas = document.getElementById('film'), ctx = canvas.getContext('2d', { alpha: false });
   const story = document.getElementById('story'), meter = document.getElementById('meter'), loading = document.getElementById('loading');
   const chapters = [...document.querySelectorAll('.ch')];
   const frames = new Array(COUNT), still = matchMedia('(prefers-reduced-motion: reduce)').matches;
