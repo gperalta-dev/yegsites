@@ -770,7 +770,8 @@
     msgs.setAttribute('aria-busy', 'true');  // screen readers get the reply once it's whole, not word by word
     let raw = '';
     try {
-      const r = await fetch(CHAT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      // sent as plain text (the server reads it as JSON) so the browser doesn't spend a round trip asking permission first
+      const r = await fetch(CHAT_URL, { method: 'POST',
         body: JSON.stringify({ messages: [...hist, { role: 'user', content: text }].slice(-11), rate: cost.rate, years: cost.years, per: cost.per }) });
       if (r.status === 429 || r.status === 503) live = false;  // out of today's budget, too many questions this hour, or switched off
       if (!r.ok || !r.body) throw new Error(r.status);
@@ -784,25 +785,26 @@
     return true;
   }
 
-  async function ask(text) {
+  // the chips have their answers ready on the page, so they reply at once; typed questions go to the AI
+  async function ask(text, quick) {
     text = text.trim().slice(0, 500);
     if (!text || busy) return;
     busy = true;
     add('me', text);
-    const tried = live;
-    if (live && await askLive(text)) { busy = false; return; }
+    if (live && !quick && await askLive(text)) { busy = false; return; }
     let reply = answer(text);
     hist.push({ role: 'user', content: text }, { role: 'assistant', content: plain(reply) });
-    if (CHAT_URL) { reply += `<small class="from">${live || told ? 'Built-in answer' : 'The live AI is resting for now, so this is a built-in answer.'}</small>`; told ||= !live; }
-    if (still || reduce || tried) { add('bot', reply); busy = false; return; }
-    const t = add('bot', TYPING);
-    setTimeout(() => { t.innerHTML = reply; msgs.scrollTop = msgs.scrollHeight; busy = false; }, 550);
+    if (CHAT_URL && !quick) { reply += `<small class="from">${live || told ? 'Built-in answer' : 'The live AI is resting for now, so this is a built-in answer.'}</small>`; told ||= !live; }
+    add('bot', reply);
+    busy = false;
   }
   function openChat() {
     if (!msgs.childElementCount) {
       add('bot', CHAT_URL ? 'Hi! I\'m an AI assistant for this sample listing. Ask me about the rooms, the yard, the price or buying in Alberta. What you type goes to Anthropic\'s Claude to answer, so leave out personal details.'
         : 'Hi! I can answer questions about this home: the rooms, the yard, the price and what it costs to buy in Alberta.');
-      CHIPS.forEach((c) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = () => ask(c); chipBox.append(b); });
+      CHIPS.forEach((c) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = () => ask(c, true); chipBox.append(b); });
+      // open the connection to the chat server now, so the first typed question doesn't wait for it
+      if (CHAT_URL) { const l = document.createElement('link'); l.rel = 'preconnect'; l.href = new URL(CHAT_URL).origin; l.crossOrigin = ''; document.head.append(l); }
     }
     chat.hidden = false; chatBtn.hidden = true; chatBtn.setAttribute('aria-expanded', 'true');
     q.focus();

@@ -57,7 +57,8 @@ await test('streams only the reply text and asks Haiku the right way', async () 
   assert.equal(sent.model, 'claude-haiku-5-5');
   assert.equal(sent.stream, true);
   assert.equal(sent.output_config.effort, 'low');
-  assert.deepEqual(sent.system[0].cache_control, { type: 'ephemeral' });
+  assert.deepEqual(sent.thinking, { type: 'disabled' });
+  assert.deepEqual(sent.system[0].cache_control, { type: 'ephemeral', ttl: '1h' });
   assert.ok(sent.system[1].text.includes('$3,511 a month'));
   assert.equal(sentHeaders['x-api-key'], 'test-key');
   assert.equal(sentHeaders['anthropic-version'], '2026-10-21');
