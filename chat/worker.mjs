@@ -82,12 +82,11 @@ Prices (Canadian dollars, before tax):
   - Missed-call text back: $49 a month. When the owner can't pick up, the caller gets a text right away.
   - AI phone receptionist: from $149 a month, quoted for each shop. Answers calls, books or takes messages, and texts a summary.
   - Review request texts: $29 a month. After each visit, a short text asks happy customers for a Google review.
-  - Online booking: $79 once. Hooked up to the app the shop uses: Square Appointments, Fresha, Booksy or Squarespace Scheduling.
+  - Online booking: $79 once. Hooked up to the app the shop uses: Square Appointments, Fresha or Booksy.
   - Google listing fix-up: $49 once. Hours, photos, services and a working website link on the Google listing.
   - Extra pages (a menu, a price list, a gallery, a page per service): $49 a page, once.
-  - Squarespace instead: Jan builds it in the owner's own Squarespace account for the same price as a site, the owner pays Squarespace's plan directly and can edit it any time.
 - Every add-on is set up and shown before the owner pays. Third-party plans (a booking app, a phone number) are quoted first and billed to the owner directly. Add-ons with a monthly price are on top of the $29.
-- Ownership: the owner owns the website and the domain. If they leave, Jan hands over the files (or the Squarespace account if it was built there) and transfers the domain.
+- Ownership: the owner owns the website and the domain. If they leave, Jan hands over the files and transfers the domain.
 - The Prices page has a build-your-own calculator that adds the bundle savings and can text or email the quote.
 
 Samples on the page (all made-up businesses built as samples, not clients): Sample Realty (a realtor site with a 3D flight over Edmonton and an AI-made walk through a house, which has its own AI chat). The Sample Realty page says Southsites builds sites like it for real estate agents; the 3D flight and AI walk-through aren't on the price list, so Jan quotes them, Saltbox Plumbing & Heating in Halifax, Forno Lume, a pizza place on Federal Hill in Providence, and Mirrorline Detail Co. in Scottsdale. Real work: Easykeeps (easykeeps.ca), Jan's own bookkeeping business for Edmonton small businesses, which he built and runs.

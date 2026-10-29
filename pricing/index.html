@@ -320,11 +320,6 @@
       <div class="item locked">
         <input type="checkbox" data-id="site" checked disabled aria-label="Your website (always included)">
         <div><b>Your website</b><small>Custom-made from your Google listing: hours, call button, directions, reviews. Your own domain, first year included (I suggest a few names, you pick). Hosting and small edits are in the monthly price.</small>
-          <div class="opts" role="radiogroup" aria-label="Where it's built">
-            <label><input type="radio" name="where" value="me" checked> Built and hosted by me</label>
-            <label><input type="radio" name="where" value="sq"> In your own Squarespace account</label>
-          </div>
-          <small id="sq-note" hidden>You pay Squarespace's plan directly, and you can edit it yourself any time.</small>
         </div>
         <div class="cost"><s>$399</s>$249<span>+ $29 a month</span></div>
       </div>
@@ -335,7 +330,7 @@
         </div>
         <div class="cost">$49<span>a page, once</span></div>
       </div>
-      <label class="item"><input type="checkbox" data-id="booking"><div><b>Online booking</b><small>Customers pick a time on your site. Hooked up to the app you use or choose: Square Appointments, Fresha, Booksy or Squarespace Scheduling.</small></div><div class="cost">$79<span>once</span></div></label>
+      <label class="item"><input type="checkbox" data-id="booking"><div><b>Online booking</b><small>Customers pick a time on your site. Hooked up to the app you use or choose: Square Appointments, Fresha or Booksy.</small></div><div class="cost">$79<span>once</span></div></label>
       <label class="item"><input type="checkbox" data-id="listing"><div><b>Google listing fix-up</b><small>Hours, photos, services and a working website link on your Google listing.</small></div><div class="cost">$49<span>once</span></div></label>
       <label class="item"><input type="checkbox" data-id="reviews"><div><b>Review request texts</b><small>After each visit, a short text asks happy customers for a Google review.</small></div><div class="cost">$29<span>a month</span></div></label>
       <label class="item"><input type="checkbox" data-id="textback"><div><b>Missed-call text back</b><small>When you can't pick up, the caller gets a text right away, so they don't call the next shop.</small></div><div class="cost">$49<span>a month</span></div></label>
@@ -378,8 +373,8 @@
   <details><summary>Is the domain included?</summary><p>Yes. The first year of your own domain is included in the one-time price: I suggest a few names, you pick. After that, the renewal is covered by your monthly plan, and the domain is yours. If you ever leave, I transfer it to you.</p></details>
   <details><summary>What if I don't like it?</summary><p>Then it doesn't go live and you don't pay. I change it until you say it's right, and only then does it get published.</p></details>
   <details><summary>What does the monthly price cover?</summary><p>Hosting, and small edits when you need them: new hours, photos, prices, a holiday notice. Add-ons with a monthly price (review texts, missed-call text back, the chat assistant) are on top. You can cancel any month.</p></details>
-  <details><summary>I already use Square, Fresha or Squarespace. Does that work?</summary><p>Yes. Online booking hooks up to the app you already use, so your calendar stays where it is. If you'd rather edit the site yourself, I can build it in your own Squarespace account instead, for the same price.</p></details>
-  <details><summary>Who owns the website?</summary><p>You do. If you ever leave, I hand over the files, or the Squarespace account if it's built there.</p></details>
+  <details><summary>I already use Square, Fresha or Booksy. Does that work?</summary><p>Yes. Online booking hooks up to the app you already use, so your calendar stays where it is.</p></details>
+  <details><summary>Who owns the website?</summary><p>You do. If you ever leave, I hand over the files and transfer the domain to you.</p></details>
   <details><summary>Are taxes included?</summary><p>No. Prices are in Canadian dollars, before tax.</p></details>
 </section>
 
@@ -425,13 +420,12 @@
 
   function quote() {
     const on = boxes.filter((b) => b.checked).map((b) => b.dataset.id);
-    const sq = document.querySelector('input[name=where]:checked').value === 'sq';
     let once = 0, month = 0, from = false;
     const lines = [];
     for (const id of on) {
       const it = ITEMS[id];
       once += it.once; month += it.month; from = from || !!it.from;
-      const label = id === 'site' && sq ? 'Website (in my own Squarespace)' : it.name;
+      const label = it.name;
       lines.push([label, [it.once ? money(it.once) : '', it.month ? (it.from ? 'from ' : '') + money(it.month) + '/mo' : ''].filter(Boolean).join(' + ')]);
     }
     if (pages) { once += pages * PAGE; lines.push([`${pages} extra page${pages > 1 ? 's' : ''}`, money(pages * PAGE)]); }
@@ -444,7 +438,7 @@
       if (!deal || save[0] + save[1] * 12 > deal.save[0] + deal.save[1] * 12) deal = { b, save };
     }
     if (deal) { once -= deal.save[0]; month -= deal.save[1]; }
-    return { on, sq, once, month, from, lines, deal };
+    return { on, once, month, from, lines, deal };
   }
 
   function render() {
@@ -457,7 +451,6 @@
     $('#month').textContent = (q.from ? 'from ' : '') + money(q.month);
     $('#bar-once').textContent = money(q.once);
     $('#bar-month').textContent = `then ${q.from ? 'from ' : ''}${money(q.month)} a month`;
-    $('#sq-note').hidden = !q.sq;
     const list = q.lines.map(([a, b]) => `- ${a}: ${b}`).join('\n');
     const msg = `Hi Jan, I'm interested in this:\n${list}${q.deal ? `\n(${q.deal.b.name} bundle)` : ''}\nTotal: ${money(q.once)} once, then ${q.from ? 'from ' : ''}${money(q.month)} a month.\nMy shop: `;
     const sms = 'sms:+18254615061?&body=' + encodeURIComponent(msg);
@@ -466,7 +459,6 @@
   }
 
   boxes.forEach((b) => b.addEventListener('change', render));
-  document.querySelectorAll('input[name=where]').forEach((r) => r.addEventListener('change', render));
   document.querySelectorAll('.stepper button').forEach((b) => b.addEventListener('click', () => {
     pages = Math.max(0, Math.min(10, pages + +b.dataset.step));
     $('#pages').textContent = pages;
