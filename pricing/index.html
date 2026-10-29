@@ -184,15 +184,24 @@
   /* phone: the total rides along at the bottom */
   .bar { display: none; }
   @media (max-width: 980px) {
-    .plans { grid-template-columns: 1fr; }
     .plan .for { min-height: 0; }
     .build { grid-template-columns: 1fr; }
     .total { position: static; }
     .custom { flex-direction: column; align-items: flex-start; }
   }
   @media (max-width: 760px) {
-    nav.top .links a:not(.btn) { display: none; }
-    nav.top .btn { white-space: nowrap; }
+
+    nav.top .wrap { flex-wrap: wrap; height: auto; padding: 10px 0 6px; row-gap: 6px; }
+    nav.top .links { display: contents; }
+    nav.top .logo { flex: 1; order: 0; }
+    nav.top .links .btn { order: 1; white-space: nowrap; }
+    nav.top .wrap::after { content: ""; order: 2; flex-basis: 100%; }
+    nav.top .wrap { justify-content: flex-start; column-gap: 8px; }
+    nav.top .links .btn { min-height: 40px; padding: 0 12px; font-size: 14px; gap: 8px; }
+    nav.top .links a:not(.btn) { min-height: 34px; padding: 0 12px; font-size: 13.5px; }
+    nav.top .links a:not(.btn) { display: inline-flex; order: 3; align-items: center; min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: rgba(14, 16, 19, .55); color: var(--ink); font-size: 14px; }
+    nav.top .links a:not(.btn)::after { display: none; }
+    nav.top .links a[aria-current] { border-color: var(--accent); color: var(--accent); box-shadow: none; }
     .head { padding: 20px 0 26px; }
     section { padding-top: 60px; }
     .item { grid-template-columns: 28px minmax(0, 1fr); }
@@ -206,6 +215,23 @@
     .bar b { font: 900 22px var(--display); font-stretch: 85%; }
     .bar span { display: block; color: var(--muted); font-size: 13px; }
     .bar .btn { min-height: 46px; padding: 0 16px; font-size: 15px; }
+  }
+
+  .car { position: relative; }
+  .car-btn, .car-dots { display: none; }
+  @media (max-width: 979px) {
+    .plans { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin-inline: -16px; padding: 6px 16px 10px; scroll-padding-inline: 16px; scrollbar-width: none; overscroll-behavior-x: contain; position: relative; }
+    .plans::-webkit-scrollbar { display: none; }
+    .plans > .plan { flex: 0 0 84%; scroll-snap-align: center; }
+    .car-btn { display: grid; place-items: center; position: absolute; top: 50%; z-index: 3; width: 42px; height: 42px; margin-top: -21px; border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(14, 16, 19, .92); color: var(--ink); cursor: pointer; box-shadow: 0 8px 20px rgba(0, 0, 0, .45); transition: opacity .2s, transform .15s; }
+    .car-btn svg { width: 18px; height: 18px; }
+    .car-btn:active { transform: scale(.92); }
+    .car-btn[disabled] { opacity: 0; pointer-events: none; }
+    .car-prev { left: -8px; }
+    .car-next { right: -8px; }
+    .car-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
+    .car-dots i { width: 7px; height: 7px; border-radius: 4px; background: var(--line-strong); transition: width .25s, background .25s; }
+    .car-dots i.on { width: 22px; background: var(--accent); }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -231,7 +257,7 @@
 </header>
 
 <div class="wrap">
-  <div class="plans">
+  <div class="car" data-car><button class="car-btn car-prev" type="button" aria-label="Previous plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="car-btn car-next" type="button" aria-label="Next plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><div class="plans car-track">
     <article class="plan">
       <h2>Get found</h2>
       <p class="for">A website made from your Google listing, kept up to date.</p>
@@ -276,7 +302,7 @@
       </ul>
       <a class="btn btn-line" href="#build" data-bundle="never">Start with this one</a>
     </article>
-  </div>
+  </div><div class="car-dots" aria-hidden="true"></div></div>
   <div class="guar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M8.8 12.2l2.3 2.3 4.3-4.6"/></svg><div><b>Happy or it doesn't go live.</b><span>Every site is custom-made for your business. I don't publish it, or charge you, until you say it's right.</span></div></div>
   <p class="after">Founding prices for my first 3 shops. After that, the one-time price is $150 more. Third-party plans (a booking app, a phone number) are quoted first and billed to you directly.</p>
 
@@ -466,6 +492,24 @@
     new IntersectionObserver(([e]) => bar.classList.toggle('on', e.isIntersecting), { rootMargin: '0px 0px -40% 0px' }).observe(build);
   }
   render();
+
+  // plans side by side on a phone: swipe sideways, or tap the arrows. starts on the recommended one
+  document.querySelectorAll('[data-car]').forEach((car) => {
+    const track = car.querySelector('.car-track'), items = [...track.children], prev = car.querySelector('.car-prev'), next = car.querySelector('.car-next');
+    const dots = car.querySelector('.car-dots');
+    dots.innerHTML = items.map(() => '<i></i>').join('');
+    const ds = [...dots.children];
+    const at = () => { const c = track.scrollLeft + track.clientWidth / 2; let best = 0, bd = Infinity; items.forEach((it, i) => { const d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - c); if (d < bd) { bd = d; best = i; } }); return best; };
+    const to = (i, smooth) => { const it = items[i]; track.scrollTo({ left: it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2, behavior: smooth ? 'smooth' : 'auto' }); };
+    let raf = 0;
+    const sync = () => { raf = 0; const i = at(); ds.forEach((d, k) => d.classList.toggle('on', k === i)); prev.disabled = i === 0; next.disabled = i === items.length - 1; };
+    track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(sync); }, { passive: true });
+    prev.addEventListener('click', () => to(Math.max(0, at() - 1), true));
+    next.addEventListener('click', () => to(Math.min(items.length - 1, at() + 1), true));
+    const start = items.findIndex((it) => it.classList.contains('pick'));
+    if (start > 0 && track.scrollWidth > track.clientWidth + 4) to(start, false);
+    sync();
+  });
 </script>
 </body>
 </html>

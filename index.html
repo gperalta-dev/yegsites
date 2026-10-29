@@ -108,6 +108,7 @@
   .now { color: var(--accent); }
   .facts s, .close s { color: var(--err); text-decoration-thickness: 2px; }
   .facts s { font-size: .62em; margin-right: 5px; vertical-align: .32em; }
+  .facts .facts-note { display: none; }
   .close p b { color: var(--ink); }
   .close p b.free { color: var(--ok); }
   .close p b.now { color: var(--accent); }
@@ -347,7 +348,23 @@
   .close .addons h4 { margin-bottom: 8px; }
   .close .addons ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
   .close .addons .plans-link { width: auto; margin: 10px 0 14px; }
-  @media (max-width: 860px) { .b-grid, .close .addons ul { grid-template-columns: 1fr; } .plat-price b { font-size: 58px; } }
+  @media (max-width: 860px) { .close .addons ul { grid-template-columns: 1fr; } .plat-price b { font-size: 58px; } }
+  .car { position: relative; }
+  .car-btn, .car-dots { display: none; }
+  @media (max-width: 860px) {
+    .b-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -16px; padding: 6px 16px 10px; scroll-padding-inline: 16px; scrollbar-width: none; overscroll-behavior-x: contain; position: relative; }
+    .b-grid::-webkit-scrollbar { display: none; }
+    .b-grid > .b-card { flex: 0 0 84%; scroll-snap-align: center; }
+    .car-btn { display: grid; place-items: center; position: absolute; top: 50%; z-index: 3; width: 42px; height: 42px; margin-top: -21px; border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(14, 16, 19, .92); color: var(--ink); cursor: pointer; box-shadow: 0 8px 20px rgba(0, 0, 0, .45); transition: opacity .2s, transform .15s; }
+    .car-btn svg { width: 18px; height: 18px; }
+    .car-btn:active { transform: scale(.92); }
+    .car-btn[disabled] { opacity: 0; pointer-events: none; }
+    .car-prev { left: -8px; }
+    .car-next { right: -8px; }
+    .car-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
+    .car-dots i { width: 7px; height: 7px; border-radius: 4px; background: var(--line-strong); transition: width .25s, background .25s; }
+    .car-dots i.on { width: 22px; background: var(--accent); }
+  }
   .close h3 { font: 850 clamp(34px, 4vw, 52px)/.95 var(--display); font-stretch: 72%; margin: 0 0 16px; }
   .close p { color: var(--muted); margin: 0 0 22px; }
   .close .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -394,7 +411,28 @@
   @media (max-width: 700px) {
     body { font-size: 16.5px; }
     .wrap { width: calc(100% - 32px); }
-    nav.top .links a:not(.btn) { display: none; }
+
+    nav.top .wrap { flex-wrap: wrap; height: auto; padding: 10px 0 6px; row-gap: 6px; }
+    nav.top .links { display: contents; }
+    nav.top .logo { flex: 1; order: 0; }
+    nav.top .links .btn { order: 1; white-space: nowrap; }
+    nav.top .wrap::after { content: ""; order: 2; flex-basis: 100%; }
+    nav.top .links a:not(.btn) { display: inline-flex; order: 3; align-items: center; min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: rgba(14, 16, 19, .55); color: var(--ink); font-size: 14px; }
+    nav.top .links a:not(.btn)::after { display: none; }
+    nav.top .links a[aria-current] { border-color: var(--accent); color: var(--accent); box-shadow: none; }
+    nav.top .wrap { justify-content: flex-start; column-gap: 8px; }
+    nav.top .links .btn { min-height: 40px; padding: 0 12px; font-size: 14px; gap: 8px; }
+    nav.top .links a:not(.btn) { min-height: 34px; padding: 0 12px; font-size: 13.5px; }
+    .lead-price, .hero-text { display: none; }
+    .hero-ctas .btn-main { flex: 1; }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 20px; padding: 14px 4px 12px; border-radius: 16px; background: rgba(14, 16, 19, .72); border: 1px solid var(--line); }
+    .facts li { padding: 0 10px; border-left: 1px solid var(--line); }
+    .facts li:first-child { border-left: 0; }
+    .facts b { font-size: 28px; }
+    .facts span { font-size: 13px; line-height: 1.35; display: block; margin-top: 4px; }
+    .facts s { display: block; font-size: 15px; margin: 0 0 2px; vertical-align: 0; }
+    .facts .fact-more { display: none; }
+    .facts .facts-note { display: block; grid-column: 1 / -1; border: 0; margin-top: 12px; padding: 10px 10px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
     .veil { background: linear-gradient(180deg, rgba(10, 12, 15, .86) 0%, rgba(10, 12, 15, .7) 60%, rgba(10, 12, 15, .82) 100%); }
     .lead { font-size: 18px; }
     .facts b { font-size: 32px; }
@@ -420,9 +458,9 @@
     .sx-tag { left: 12px; bottom: calc(84px + env(safe-area-inset-bottom)); }
     .likeit { padding: 13px 9px; font-size: 14px; }
     .people { padding-top: 80px; }
-    .hero .wrap { padding-top: 84px; gap: 22px; }
+    .hero .wrap { padding-top: 124px; gap: 22px; }
     h1 { margin-bottom: 18px; }
-    .hero-ctas { display: grid; grid-template-columns: 1fr 1fr; margin-top: 20px; }
+    .hero-ctas { display: flex; margin-top: 20px; }
     .hero-ctas .btn { padding: 0 10px; font-size: 15px; }
     .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
     .facts b { font-size: 28px; }
@@ -574,12 +612,13 @@
       <div class="copy">
         <p class="where">Websites for Edmonton small businesses</p>
         <h1>Your site is already built.</h1>
-        <p class="lead">Look at it first, then decide. Free preview from your Google listing. Like it? $249, then $29 a month.</p>
-        <div class="hero-ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a></div>
+        <p class="lead">Look at it first, then decide. Free preview from your Google listing.<span class="lead-price"> Like it? $249, then $29 a month.</span></p>
+        <div class="hero-ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line hero-text" href="sms:+18254615061">Text 825-461-5061</a></div>
         <ul class="facts" aria-label="Prices">
           <li><b class="free">$0</b><span>to see your preview</span></li>
-          <li><b class="now"><s><span class="sr">Price after the first 3 clients </span>$399</s><span class="sr">, founding price </span>$249</b><span>once, to keep it. Founding price, first 3 clients</span></li>
+          <li><b class="now"><s><span class="sr">Price after the first 3 clients </span>$399</s><span class="sr">, founding price </span>$249</b><span>once, to keep it<span class="fact-more">. Founding price, first 3 clients</span></span></li>
           <li><b>$29</b><span>a month, hosting and edits</span></li>
+          <li class="facts-note">Founding price for my first 3 shops. Your own domain included.</li>
         </ul>
       </div>
 
@@ -772,11 +811,11 @@
 
       <div class="bundles">
         <div class="b-head"><h4>Or pick a bundle</h4><a href="/pricing/">Compare them all</a></div>
-        <div class="b-grid">
+        <div class="car" data-car><button class="car-btn car-prev" type="button" aria-label="Previous plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="car-btn car-next" type="button" aria-label="Next plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><div class="b-grid car-track">
           <a class="b-card" href="/pricing/#build"><small>Get found</small><b>$249</b><span>+ $29 a month</span><em>The website, your domain and hosting</em></a>
           <a class="b-card pick" href="/pricing/#build"><small>Get booked <i>Recommended</i></small><b>$349</b><span>+ $49 a month</span><em>Plus online booking, a Google listing fix-up and review texts</em></a>
           <a class="b-card" href="/pricing/#build"><small>Never miss a customer</small><b>$449</b><span>+ $119 a month</span><em>Plus missed-call text back and an AI chat assistant</em></a>
-        </div>
+        </div><div class="car-dots" aria-hidden="true"></div></div>
       </div>
 
       <div class="addons">
@@ -1168,6 +1207,24 @@
   });
   size();
   if (!still) { lookPaint(); tick(); }
+
+  // plans side by side on a phone: swipe sideways, or tap the arrows. starts on the recommended one
+  document.querySelectorAll('[data-car]').forEach((car) => {
+    const track = car.querySelector('.car-track'), items = [...track.children], prev = car.querySelector('.car-prev'), next = car.querySelector('.car-next');
+    const dots = car.querySelector('.car-dots');
+    dots.innerHTML = items.map(() => '<i></i>').join('');
+    const ds = [...dots.children];
+    const at = () => { const c = track.scrollLeft + track.clientWidth / 2; let best = 0, bd = Infinity; items.forEach((it, i) => { const d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - c); if (d < bd) { bd = d; best = i; } }); return best; };
+    const to = (i, smooth) => { const it = items[i]; track.scrollTo({ left: it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2, behavior: smooth ? 'smooth' : 'auto' }); };
+    let raf = 0;
+    const sync = () => { raf = 0; const i = at(); ds.forEach((d, k) => d.classList.toggle('on', k === i)); prev.disabled = i === 0; next.disabled = i === items.length - 1; };
+    track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(sync); }, { passive: true });
+    prev.addEventListener('click', () => to(Math.max(0, at() - 1), true));
+    next.addEventListener('click', () => to(Math.min(items.length - 1, at() + 1), true));
+    const start = items.findIndex((it) => it.classList.contains('pick'));
+    if (start > 0 && track.scrollWidth > track.clientWidth + 4) to(start, false);
+    sync();
+  });
 </script>
 <script src="chat/southsites.js" defer></script>
 </body>
