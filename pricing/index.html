@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prices | Southsites, Edmonton websites</title>
+<meta name="description" content="Southsites prices: a website from your Google listing for $249 (founding price) and $29 a month, plus bundles and add-ons like online booking, review texts and an AI chat assistant. Build your own price.">
+<meta name="theme-color" content="#0e1013">
+<meta property="og:title" content="Southsites prices: build your own">
+<meta property="og:description" content="Your preview is free. Pick a bundle or tick what you want and see the total.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://southsites.ca/pricing/">
+<meta property="og:image" content="https://southsites.ca/og.png">
+<link rel="canonical" href="https://southsites.ca/pricing/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1013'/%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%23ffc83d'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1013; --surface: #16191e; --surface-2: #1d2128; --field: #111419;
+    --line: rgba(255, 255, 255, 0.1); --line-strong: rgba(255, 255, 255, 0.2);
+    --ink: #f2efe6; --muted: #b8bcc3; --faint: #8f949c;
+    --accent: #ffc83d; --accent-hover: #ffd76b; --accent-ink: #1a1405;
+    --ok: #57d491; --err: #ff9d8c;
+    --display: "Archivo", "Arial Narrow", system-ui, sans-serif; --body: "Figtree", system-ui, sans-serif;
+    --r-lg: 22px; --r-md: 14px; --r-sm: 10px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  a, button, summary, input, label { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 12px; font: 700 16px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; transition: transform .15s cubic-bezier(.2, .8, .2, 1), background .15s, border-color .15s, box-shadow .2s; }
+  .btn:active { transform: scale(.96); transition-duration: .05s; }
+  .btn-main { background: var(--accent); color: var(--accent-ink); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 6px 18px -10px rgba(255, 200, 61, .6); }
+  .btn-line { border: 1.5px solid var(--line-strong); color: var(--ink); background: transparent; }
+  @media (hover: hover) {
+    .btn-main:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-line:hover { border-color: var(--ink); transform: translateY(-1px); }
+  }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 76px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font: 850 23px/1 var(--display); font-stretch: 90%; letter-spacing: -0.01em; text-decoration: none; min-height: 44px; }
+  .logo i { width: 18px; height: 18px; border-radius: 4px; background: var(--accent); display: block; }
+  nav.top .links { display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 600; }
+  nav.top .links a:not(.btn) { text-decoration: none; color: var(--muted); padding: 10px 0; }
+  nav.top .links a[aria-current] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+  nav.top .btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+
+  /* hero */
+  .head { text-align: center; padding: 40px 0 34px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(255, 200, 61, .1); border: 1px solid rgba(255, 200, 61, .3); color: var(--accent); font-size: 14px; font-weight: 700; }
+  h1 { font: 900 clamp(42px, 6.4vw, 80px)/.92 var(--display); font-stretch: 66%; text-transform: uppercase; margin: 18px 0 14px; text-wrap: balance; }
+  .head p { margin: 0 auto; max-width: 52ch; color: var(--muted); font-size: 18px; }
+
+  /* bundles */
+  .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+  .plan { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px 24px 22px; }
+  .plan.pick { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 30px 60px -40px rgba(255, 200, 61, .5); background: linear-gradient(180deg, rgba(255, 200, 61, .07), var(--surface) 40%); }
+  .tag { position: absolute; top: 20px; right: 20px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font-size: 12.5px; font-weight: 700; }
+  .plan h2 { margin: 0 0 4px; font: 800 24px/1.1 var(--display); font-stretch: 85%; }
+  .plan .for { margin: 0 0 18px; color: var(--muted); font-size: 15px; min-height: 48px; }
+  .price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .price b { font: 900 52px/1 var(--display); font-stretch: 80%; letter-spacing: -.01em; }
+  .price s { color: var(--err); font-weight: 700; font-size: 17px; }
+  .price span { color: var(--muted); font-size: 15px; }
+  .monthly { margin: 6px 0 4px; font-size: 16px; }
+  .monthly b { font-weight: 800; }
+  .save { min-height: 26px; color: var(--ok); font-size: 14px; font-weight: 700; margin: 0 0 16px; }
+  .plan ul { list-style: none; margin: 0 0 22px; padding: 18px 0 0; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 15.5px; }
+  .plan li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
+  .plan li svg { width: 18px; height: 18px; margin-top: 3px; color: var(--ok); }
+  .plan li.plus { color: var(--muted); font-weight: 600; grid-template-columns: 1fr; }
+  .plan .btn { margin-top: auto; width: 100%; }
+  .after { text-align: center; color: var(--faint); font-size: 14px; margin: 16px 0 0; }
+
+  .custom { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 22px; padding: 22px 24px; border-radius: var(--r-md); border: 1px dashed var(--line-strong); }
+  .custom h3 { margin: 0 0 4px; font-size: 19px; }
+  .custom p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .custom .btn { flex: none; }
+
+  section { padding: 76px 0 0; }
+  h2.sec { font: 900 clamp(34px, 4.6vw, 54px)/.95 var(--display); font-stretch: 70%; text-transform: uppercase; margin: 0 0 10px; }
+  .sec-sub { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
+
+  /* build your own */
+  .build { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 28px; align-items: start; }
+  .items { display: grid; gap: 10px; }
+  .item { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 18px 18px; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s, background .15s; }
+  .item:has(input:checked) { border-color: rgba(255, 200, 61, .55); background: linear-gradient(180deg, rgba(255, 200, 61, .06), var(--surface)); }
+  @media (hover: hover) { .item:hover { border-color: var(--line-strong); } }
+  .item input[type=checkbox] { appearance: none; width: 24px; height: 24px; margin: 2px 0 0; border-radius: 7px; border: 2px solid var(--line-strong); display: grid; place-items: center; cursor: pointer; transition: background .15s, border-color .15s; }
+  .item input[type=checkbox]::after { content: ""; width: 6px; height: 11px; border: solid var(--accent-ink); border-width: 0 3px 3px 0; transform: rotate(45deg) translate(-1px, -1px) scale(0); transition: transform .15s; }
+  .item input:checked { background: var(--accent); border-color: var(--accent); }
+  .item input:checked::after { transform: rotate(45deg) translate(-1px, -1px) scale(1); }
+  .item input:disabled { cursor: default; }
+  .item.locked { cursor: default; }
+  .item b { display: block; font-size: 17px; }
+  .item small { display: block; color: var(--muted); font-size: 14.5px; line-height: 1.45; margin-top: 3px; }
+  .item .cost { text-align: right; font-weight: 800; white-space: nowrap; font-size: 15.5px; }
+  .item .cost s { color: var(--err); font-weight: 700; margin-right: 4px; }
+  .item .cost span { display: block; color: var(--muted); font-weight: 600; font-size: 13.5px; }
+  .opts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .opts label { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; font-weight: 600; cursor: pointer; }
+  .opts label:has(input:checked) { border-color: var(--accent); color: var(--accent); }
+  .opts input { accent-color: var(--accent); margin: 0; }
+  .stepper { display: inline-flex; align-items: center; gap: 4px; margin-top: 12px; border: 1px solid var(--line-strong); border-radius: 10px; }
+  .stepper button { width: 44px; height: 40px; border: 0; background: none; color: var(--ink); font: 700 20px/1 var(--body); cursor: pointer; border-radius: 9px; }
+  .stepper button:active { background: var(--surface-2); }
+  .stepper output { min-width: 28px; text-align: center; font-weight: 800; }
+
+  .total { position: sticky; top: 20px; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: var(--r-lg); padding: 24px; }
+  .total h3 { margin: 0 0 14px; font: 800 20px var(--display); font-stretch: 90%; }
+  .lines { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; font-size: 14.5px; color: var(--muted); max-height: 220px; overflow: auto; }
+  .lines li { display: flex; justify-content: space-between; gap: 12px; }
+  .lines li span:last-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  .deal { display: none; margin: 0 0 14px; padding: 10px 12px; border-radius: 10px; background: rgba(87, 212, 145, .1); border: 1px solid rgba(87, 212, 145, .35); color: var(--ok); font-size: 14.5px; font-weight: 700; }
+  .deal.on { display: block; }
+  .sum { display: grid; gap: 10px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+  .sum div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .sum span { color: var(--muted); font-size: 15px; }
+  .sum b { font: 900 34px/1 var(--display); font-stretch: 85%; }
+  .sum b.mo { font-size: 26px; }
+  .total .btn { width: 100%; margin-bottom: 10px; }
+  .total .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .total .row2 .btn { margin: 0; }
+  .total .fine { margin: 12px 0 0; color: var(--faint); font-size: 13.5px; }
+
+  /* compare */
+  .cmp { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  .cmp th, .cmp td { padding: 14px 12px; border-bottom: 1px solid var(--line); text-align: center; }
+  .cmp th:first-child, .cmp td:first-child { text-align: left; }
+  .cmp thead th { font: 800 17px var(--display); font-stretch: 90%; vertical-align: bottom; }
+  .cmp thead th small { display: block; color: var(--muted); font: 600 13.5px var(--body); margin-top: 2px; }
+  .cmp thead th.pick { color: var(--accent); }
+  .cmp td svg { width: 20px; height: 20px; color: var(--ok); }
+  .cmp td.no { color: var(--faint); }
+  .cmp-wrap { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 6px 14px; background: var(--surface); }
+
+  /* faq + end */
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  summary::after { content: ""; flex: none; width: 12px; height: 12px; margin-right: 4px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: translateY(-3px) rotate(45deg); transition: transform .25s cubic-bezier(.2, .8, .2, 1); }
+  details[open] summary::after { transform: translateY(3px) rotate(-135deg); }
+  summary::-webkit-details-marker { display: none; }
+  details p { margin: 0 0 18px; color: var(--muted); max-width: 70ch; }
+  .end { margin: 76px 0 0; padding: 48px 28px; border-radius: var(--r-lg); background: var(--accent); color: var(--accent-ink); text-align: center; }
+  .end h2 { font: 900 clamp(34px, 5vw, 60px)/.92 var(--display); font-stretch: 66%; text-transform: uppercase; margin: 0 0 10px; }
+  .end p { margin: 0 auto 22px; max-width: 46ch; font-weight: 600; }
+  .end .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .end .btn-dark { background: #0e1013; color: var(--ink); }
+  .end .btn-ghost { border: 1.5px solid rgba(26, 20, 5, .45); color: var(--accent-ink); }
+  footer { padding: 46px 0 120px; color: var(--faint); font-size: 14px; }
+  footer .row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; color: var(--muted); }
+  footer a { color: var(--ink); text-decoration: none; font-weight: 600; }
+
+  /* phone: the total rides along at the bottom */
+  .bar { display: none; }
+  @media (max-width: 980px) {
+    .plans { grid-template-columns: 1fr; }
+    .plan .for { min-height: 0; }
+    .build { grid-template-columns: 1fr; }
+    .total { position: static; }
+    .custom { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 760px) {
+    nav.top .links a:not(.btn) { display: none; }
+    nav.top .btn { white-space: nowrap; }
+    .head { padding: 20px 0 26px; }
+    section { padding-top: 60px; }
+    .item { grid-template-columns: 28px minmax(0, 1fr); }
+    .item .cost { grid-column: 2; text-align: left; }
+    .item .cost span { display: inline; margin-left: 6px; }
+    .cmp { font-size: 14px; }
+    .cmp th, .cmp td { padding: 12px 6px; }
+    .bar { position: fixed; z-index: 20; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 16px; border-radius: 16px; background: rgba(29, 33, 40, .97); border: 1px solid var(--line-strong); box-shadow: 0 14px 40px rgba(0, 0, 0, .5); transform: translateY(140%); transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+    .bar.on { transform: none; }
+    .bar div { line-height: 1.2; }
+    .bar b { font: 900 22px var(--display); font-stretch: 85%; }
+    .bar span { display: block; color: var(--muted); font-size: 13px; }
+    .bar .btn { min-height: 46px; padding: 0 16px; font-size: 15px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Southsites home"><i aria-hidden="true"></i>Southsites</a>
+    <div class="links">
+      <a href="/#samples">Samples</a>
+      <a href="/#work">Real work</a>
+      <a class="keep" href="/pricing/" aria-current="page">Prices</a>
+      <a class="btn btn-main" href="tel:+18254615061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>825-461-5061</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<header class="head wrap">
+  <span class="pill">Founding price for my first 3 Edmonton shops</span>
+  <h1>Pick a plan, or build your own.</h1>
+  <p>Your preview is free. You only pay if you keep it, and the monthly part cancels any month.</p>
+</header>
+
+<div class="wrap">
+  <div class="plans">
+    <article class="plan">
+      <h2>Get found</h2>
+      <p class="for">A website made from your Google listing, kept up to date.</p>
+      <div class="price"><s>$399</s><b>$249</b><span>once</span></div>
+      <p class="monthly">then <b>$29 a month</b></p>
+      <p class="save"></p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Your hours, and open now or closed</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>One-tap call and directions</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Your Google reviews up front</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Made for phones</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Hosting and small edits (hours, photos, prices)</li>
+      </ul>
+      <a class="btn btn-line" href="#build" data-bundle="found">Start with Get found</a>
+    </article>
+    <article class="plan pick">
+      <span class="tag">Recommended</span>
+      <h2>Get booked</h2>
+      <p class="for">Everything in Get found, plus bookings and more 5-star reviews.</p>
+      <div class="price"><s>$499</s><b>$349</b><span>once</span></div>
+      <p class="monthly">then <b>$49 a month</b></p>
+      <p class="save">Save $28 and $9 a month vs. one by one</p>
+      <ul>
+        <li class="plus">Everything in Get found, plus:</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Online booking on your site</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Google listing fix-up</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Review request texts after each visit</li>
+      </ul>
+      <a class="btn btn-main" href="#build" data-bundle="booked">Start with Get booked</a>
+    </article>
+    <article class="plan">
+      <h2>Never miss a customer</h2>
+      <p class="for">Everything in Get booked, plus help when you can't pick up.</p>
+      <div class="price"><s>$599</s><b>$449</b><span>once</span></div>
+      <p class="monthly">then <b>$119 a month</b></p>
+      <p class="save">Save $27 and $27 a month vs. one by one</p>
+      <ul>
+        <li class="plus">Everything in Get booked, plus:</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Missed-call text back</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>AI chat assistant that answers day and night</li>
+      </ul>
+      <a class="btn btn-line" href="#build" data-bundle="never">Start with this one</a>
+    </article>
+  </div>
+  <p class="after">Founding prices for my first 3 shops. After that, the one-time price is $150 more. Third-party plans (a booking app, a phone number) are quoted first and billed to you directly.</p>
+
+  <div class="custom">
+    <div><h3>Need something bigger?</h3><p>An AI phone receptionist (from $149 a month), a full menu, a price list per service, or something else. Tell me what you need and I'll quote it before you agree.</p></div>
+    <a class="btn btn-line" href="sms:+18254615061?body=Hi%20Jan%2C%20I%20need%20something%20custom%3A%20">Text me what you need</a>
+  </div>
+</div>
+
+<section id="build" class="wrap" aria-labelledby="build-h">
+  <h2 class="sec" id="build-h">Build your own price</h2>
+  <p class="sec-sub">Tick what you want. The total updates as you go, and bundle savings apply on their own.</p>
+  <div class="build">
+    <div class="items" id="items">
+      <div class="item locked">
+        <input type="checkbox" data-id="site" checked disabled aria-label="Your website (always included)">
+        <div><b>Your website</b><small>Made from your Google listing: hours, call button, directions, reviews. Hosting and small edits are in the monthly price.</small>
+          <div class="opts" role="radiogroup" aria-label="Where it's built">
+            <label><input type="radio" name="where" value="me" checked> Built and hosted by me</label>
+            <label><input type="radio" name="where" value="sq"> In your own Squarespace account</label>
+          </div>
+          <small id="sq-note" hidden>You pay Squarespace's plan directly, and you can edit it yourself any time.</small>
+        </div>
+        <div class="cost"><s>$399</s>$249<span>+ $29 a month</span></div>
+      </div>
+      <div class="item locked" data-id="pages">
+        <span></span>
+        <div><b>Extra pages</b><small>A menu, a price list, a gallery, or a page for each service.</small>
+          <div class="stepper"><button type="button" data-step="-1" aria-label="One page fewer">&minus;</button><output id="pages" aria-live="polite">0</output><button type="button" data-step="1" aria-label="One page more">+</button></div>
+        </div>
+        <div class="cost">$49<span>a page, once</span></div>
+      </div>
+      <label class="item"><input type="checkbox" data-id="booking"><div><b>Online booking</b><small>Customers pick a time on your site. Hooked up to the app you use or choose: Square Appointments, Fresha, Booksy or Squarespace Scheduling.</small></div><div class="cost">$79<span>once</span></div></label>
+      <label class="item"><input type="checkbox" data-id="listing"><div><b>Google listing fix-up</b><small>Hours, photos, services and a working website link on your Google listing.</small></div><div class="cost">$49<span>once</span></div></label>
+      <label class="item"><input type="checkbox" data-id="reviews"><div><b>Review request texts</b><small>After each visit, a short text asks happy customers for a Google review.</small></div><div class="cost">$29<span>a month</span></div></label>
+      <label class="item"><input type="checkbox" data-id="textback"><div><b>Missed-call text back</b><small>When you can't pick up, the caller gets a text right away, so they don't call the next shop.</small></div><div class="cost">$49<span>a month</span></div></label>
+      <label class="item"><input type="checkbox" data-id="chat"><div><b>AI chat assistant</b><small>Answers questions about your hours, services and prices, and takes a name and number when it can't.</small></div><div class="cost">$99<span>setup + $39 a month</span></div></label>
+      <label class="item"><input type="checkbox" data-id="phone"><div><b>AI phone receptionist</b><small>Answers your calls, books or takes messages, and texts you a summary. Quoted for your shop.</small></div><div class="cost">from $149<span>a month</span></div></label>
+    </div>
+
+    <aside class="total" aria-labelledby="total-h">
+      <h3 id="total-h">Your total</h3>
+      <ul class="lines" id="lines"></ul>
+      <p class="deal" id="deal"></p>
+      <div class="sum">
+        <div><span>Once, if you keep it</span><b id="once">$249</b></div>
+        <div><span>Then each month</span><b class="mo" id="month">$29</b></div>
+      </div>
+      <a class="btn btn-main" id="text-quote" href="sms:+18254615061">Interested? Text me this quote</a>
+      <div class="row2">
+        <a class="btn btn-line" href="tel:+18254615061">Call now</a>
+        <a class="btn btn-line" id="mail-quote" href="mailto:contact@southsites.ca">Email it</a>
+      </div>
+      <p class="fine">$0 to see your preview. Founding price for my first 3 shops. Taxes not included.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="cmp-h">
+  <h2 class="sec" id="cmp-h">Compare the bundles</h2>
+  <p class="sec-sub">Same website in all three. The difference is how much of the busy work it takes off your hands.</p>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <thead><tr><th scope="col"><span class="sr">Feature</span></th><th scope="col">Get found<small>$249 + $29/mo</small></th><th scope="col" class="pick">Get booked<small>$349 + $49/mo</small></th><th scope="col">Never miss<small>$449 + $119/mo</small></th></tr></thead>
+      <tbody id="cmp"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="faq-h">
+  <h2 class="sec" id="faq-h">Questions</h2>
+  <details><summary>Do I pay anything to see my preview?</summary><p>No. I build it from your Google listing and send you the link. You look at it on your phone, ask for changes, or say no thanks. You pay only if you keep it.</p></details>
+  <details><summary>What does the monthly price cover?</summary><p>Hosting, and small edits when you need them: new hours, photos, prices, a holiday notice. Add-ons with a monthly price (review texts, missed-call text back, the chat assistant) are on top. You can cancel any month.</p></details>
+  <details><summary>I already use Square, Fresha or Squarespace. Does that work?</summary><p>Yes. Online booking hooks up to the app you already use, so your calendar stays where it is. If you'd rather edit the site yourself, I can build it in your own Squarespace account instead, for the same price.</p></details>
+  <details><summary>Who owns the website?</summary><p>You do. If you ever leave, I hand over the files, or the Squarespace account if it's built there.</p></details>
+  <details><summary>Are taxes included?</summary><p>No. Prices are in Canadian dollars, before tax.</p></details>
+</section>
+
+<div class="wrap">
+  <div class="end">
+    <h2>Want to see yours first?</h2>
+    <p>Text me your shop name. I'll build a free preview from your Google listing and send you the link.</p>
+    <div class="ctas"><a class="btn btn-dark" href="sms:+18254615061?body=Hi%20Jan%2C%20I%27d%20like%20a%20free%20preview%20for%20my%20shop%3A%20">Text 825-461-5061</a><a class="btn btn-ghost" href="tel:+18254615061">Call now</a><a class="btn btn-ghost" href="/#samples">See sample sites</a></div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row"><span>Jan Gabriel, Southsites, Edmonton</span><span><a href="tel:+18254615061">825-461-5061</a> &nbsp; <a href="mailto:contact@southsites.ca">contact@southsites.ca</a></span></div>
+    <span>Prices in Canadian dollars, before tax. Founding prices apply to my first 3 shops.</span>
+  </div>
+</footer>
+
+<div class="bar" id="bar" aria-hidden="true"><div><b id="bar-once">$249</b><span id="bar-month">then $29 a month</span></div><a class="btn btn-main" id="bar-text" href="sms:+18254615061" tabindex="-1">Text me this quote</a></div>
+
+<script>
+  // prices in one place. bundles apply when every item they hold is ticked; the biggest saving wins
+  const ITEMS = {
+    site: { name: 'Website', once: 249, month: 29 },
+    booking: { name: 'Online booking', once: 79, month: 0 },
+    listing: { name: 'Google listing fix-up', once: 49, month: 0 },
+    reviews: { name: 'Review request texts', once: 0, month: 29 },
+    textback: { name: 'Missed-call text back', once: 0, month: 49 },
+    chat: { name: 'AI chat assistant', once: 99, month: 39 },
+    phone: { name: 'AI phone receptionist', once: 0, month: 149, from: true },
+  };
+  const PAGE = 49;
+  const BUNDLES = [
+    { id: 'never', name: 'Never miss a customer', has: ['site', 'booking', 'listing', 'reviews', 'textback', 'chat'], once: 449, month: 119 },
+    { id: 'booked', name: 'Get booked', has: ['site', 'booking', 'listing', 'reviews'], once: 349, month: 49 },
+    { id: 'found', name: 'Get found', has: ['site'], once: 249, month: 29 },
+  ];
+  const $ = (s) => document.querySelector(s);
+  const boxes = [...document.querySelectorAll('#items input[type=checkbox]')];
+  const money = (n) => '$' + n.toLocaleString('en-CA');
+  let pages = 0;
+
+  function quote() {
+    const on = boxes.filter((b) => b.checked).map((b) => b.dataset.id);
+    const sq = document.querySelector('input[name=where]:checked').value === 'sq';
+    let once = 0, month = 0, from = false;
+    const lines = [];
+    for (const id of on) {
+      const it = ITEMS[id];
+      once += it.once; month += it.month; from = from || !!it.from;
+      const label = id === 'site' && sq ? 'Website (in my own Squarespace)' : it.name;
+      lines.push([label, [it.once ? money(it.once) : '', it.month ? (it.from ? 'from ' : '') + money(it.month) + '/mo' : ''].filter(Boolean).join(' + ')]);
+    }
+    if (pages) { once += pages * PAGE; lines.push([`${pages} extra page${pages > 1 ? 's' : ''}`, money(pages * PAGE)]); }
+    // the best bundle that fits what's ticked
+    let deal = null;
+    for (const b of BUNDLES) {
+      if (b.id === 'found' || !b.has.every((id) => on.includes(id))) continue;
+      const parts = b.has.reduce((a, id) => [a[0] + ITEMS[id].once, a[1] + ITEMS[id].month], [0, 0]);
+      const save = [parts[0] - b.once, parts[1] - b.month];
+      if (!deal || save[0] + save[1] * 12 > deal.save[0] + deal.save[1] * 12) deal = { b, save };
+    }
+    if (deal) { once -= deal.save[0]; month -= deal.save[1]; }
+    return { on, sq, once, month, from, lines, deal };
+  }
+
+  function render() {
+    const q = quote();
+    $('#lines').innerHTML = q.lines.map(([a, b]) => `<li><span>${a}</span><span>${b}</span></li>`).join('');
+    const deal = $('#deal');
+    deal.classList.toggle('on', !!q.deal);
+    deal.textContent = q.deal ? `${q.deal.b.name} bundle: you save ${money(q.deal.save[0])} and ${money(q.deal.save[1])} a month` : '';
+    $('#once').textContent = money(q.once);
+    $('#month').textContent = (q.from ? 'from ' : '') + money(q.month);
+    $('#bar-once').textContent = money(q.once);
+    $('#bar-month').textContent = `then ${q.from ? 'from ' : ''}${money(q.month)} a month`;
+    $('#sq-note').hidden = !q.sq;
+    const list = q.lines.map(([a, b]) => `- ${a}: ${b}`).join('\n');
+    const msg = `Hi Jan, I'm interested in this:\n${list}${q.deal ? `\n(${q.deal.b.name} bundle)` : ''}\nTotal: ${money(q.once)} once, then ${q.from ? 'from ' : ''}${money(q.month)} a month.\nMy shop: `;
+    const sms = 'sms:+18254615061?&body=' + encodeURIComponent(msg);
+    $('#text-quote').href = sms; $('#bar-text').href = sms;
+    $('#mail-quote').href = 'mailto:contact@southsites.ca?subject=' + encodeURIComponent('My Southsites quote') + '&body=' + encodeURIComponent(msg);
+  }
+
+  boxes.forEach((b) => b.addEventListener('change', render));
+  document.querySelectorAll('input[name=where]').forEach((r) => r.addEventListener('change', render));
+  document.querySelectorAll('.stepper button').forEach((b) => b.addEventListener('click', () => {
+    pages = Math.max(0, Math.min(10, pages + +b.dataset.step));
+    $('#pages').textContent = pages;
+    render();
+  }));
+  // "start with" on a bundle ticks exactly its items
+  document.querySelectorAll('[data-bundle]').forEach((a) => a.addEventListener('click', () => {
+    const b = BUNDLES.find((x) => x.id === a.dataset.bundle);
+    boxes.forEach((x) => { if (!x.disabled) x.checked = b.has.includes(x.dataset.id); });
+    render();
+  }));
+
+  // compare table from the same bundle list
+  const ROWS = [['Website from your Google listing', 'site'], ['Hosting and small edits', 'site'], ['Online booking', 'booking'],
+    ['Google listing fix-up', 'listing'], ['Review request texts', 'reviews'], ['Missed-call text back', 'textback'], ['AI chat assistant', 'chat']];
+  const tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Included"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+  const order = ['found', 'booked', 'never'].map((id) => BUNDLES.find((b) => b.id === id));
+  $('#cmp').innerHTML = ROWS.map(([label, id]) => `<tr><th scope="row">${label}</th>${order.map((b) => b.has.includes(id) ? `<td>${tick}</td>` : '<td class="no"><span aria-label="Not included">&middot;</span></td>').join('')}</tr>`).join('');
+
+  // on a phone, the total follows you while you're building
+  const bar = $('#bar'), build = $('#build');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => bar.classList.toggle('on', e.isIntersecting), { rootMargin: '0px 0px -40% 0px' }).observe(build);
+  }
+  render();
+</script>
+</body>
+</html>
