@@ -167,7 +167,7 @@
   .r-in h3 { font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1; margin: 0 0 10px; text-shadow: 0 2px 24px rgba(0, 0, 0, .5); }
   .r-in p { margin: 0; font: 500 16px var(--body); color: #ece6dc; text-shadow: 0 1px 12px rgba(0, 0, 0, .7); max-width: 40ch; }
   .r-tag { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 96px; font: 700 13px var(--body); background: rgba(8, 10, 14, .7); padding: 8px 12px; border-radius: 99px; color: #f3d6a4; }
-  .fly-track { height: 509vh; }
+  .fly-track { height: 610vh; }
 
   /* sticky call to action, after the first screen */
   .dock { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; padding: 6px; border-radius: 16px; background: rgba(14, 16, 19, .94); border: 1px solid var(--line); box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .9); transform: translateY(130%); opacity: 0; transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
@@ -384,7 +384,7 @@
 <main id="main">
 <div class="fly" id="fly">
   <div class="stage" id="stage">
-    <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, across the river valley, down a suburban street to one house, then through its front door and room by room through a sample interior made with AI: kitchen, main bedroom, ensuite, the upstairs hall, a second bedroom, the kids' room and the bonus room"></canvas>
+    <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, along the river over the High Level and Walterdale bridges, down a suburban street to one house, then through its front door and room by room through a sample interior made with AI: kitchen, main bedroom, ensuite, the upstairs hall, a second bedroom, the kids' room, the bonus room, down the stairs and out the back door to the deck and the fenced yard"></canvas>
     <div class="veil" id="veil"></div>
     <div class="cap" id="cap1"><h2>Here's what a site can feel like.</h2><p>Keep scrolling. This is a sample we made for a made-up realtor.</p></div>
     <div class="realty" id="realty" aria-hidden="true">
@@ -451,6 +451,8 @@
     <img src="demos/sample-realty/frames/d/f376.webp" alt="A bright bedroom with autumn trees outside the window, made with AI" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f420.webp" alt="An ensuite with a freestanding tub, a glass shower and a double vanity, made with AI" loading="lazy" width="1440" height="810">
     <img src="demos/sample-realty/frames/d/f630.webp" alt="A bonus room with a sectional, a TV and a desk by the window, made with AI" loading="lazy" width="1440" height="810">
+    <img src="demos/sample-realty/frames/d/f670.webp" alt="A staircase with a white railing down to the main floor, made with AI" loading="lazy" width="1440" height="810">
+    <img src="demos/sample-realty/frames/d/f740.webp" alt="A wood deck and a fenced backyard with autumn trees, made with AI" loading="lazy" width="1440" height="810">
     <p>Sample Realty and the house are made up. The rooms inside were made with AI and are not a real home.</p>
   </div>
 </div>
@@ -625,7 +627,7 @@
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const touch = matchMedia('(pointer: coarse)').matches, narrow = innerWidth < 700;
   const SET = innerWidth / innerHeight < 0.9 ? 'm' : 'd', IW = SET === 'm' ? 456 : 1440, IH = 810;
-  const EXT = 120, IN = 197;          // every second frame of the 240-frame flight, then every second frame of the walk inside (f240-f632)
+  const EXT = 120, IN = 260;          // every second frame of the 240-frame flight, then every second frame of the walk inside (f240-f758)
   const N = EXT + IN;
   const pad = (i) => String(i).padStart(3, '0');
   const src = (k) => `demos/sample-realty/frames/${SET}/f${pad(k >= EXT ? 240 + (k - EXT) * 2 : k * 2)}.webp`;
@@ -771,6 +773,8 @@
     [444, 'Upstairs.', 'Past the railing to the second bedroom.'],
     [510, "The kids' room.", 'A bed, a desk for homework and a shelf of picture books.'],
     [575, 'The bonus room.', 'Over the garage, with room for a sectional, a TV and a desk.'],
+    [633, 'Down the stairs.', 'Back down to the open kitchen and living room.'],
+    [696, 'The backyard.', 'Past the dining table, out the back door to the deck and the fenced yard.'],
   ];
   const roomH = document.getElementById('room'), roomP = document.getElementById('room-p');
   let room = 0;
