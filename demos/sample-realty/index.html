@@ -169,9 +169,9 @@
 <footer><div class="wrap"><span>Sample Realty is a concept demo, not a client. Built by Southsites.</span><span>3D flight rendered in Blender (Cycles). Downtown, the river and the valley follow real building footprints, heights and aerial photos. The suburb and the house are made up.</span><span class="credits">Ground and roof imagery: City of Edmonton Orthophoto 2024. Contains information licensed under the <a href="https://data.edmonton.ca/">Open Government Licence (City of Edmonton)</a>, via <a href="https://source.coop/dataforcanada/d4c-datapkg-orthoimagery">Data for Canada</a>. Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Elevation from Terrain Tiles on AWS, including data from Natural Resources Canada (Open Government Licence, Canada). Trees, plants, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). Interior walk-through generated with Google Veo from our render of the front door.</span></div></footer>
 
 <script>
-  // scroll-scrubbed flight. scrolling sets a goal frame; every display frame the picture eases toward it, blending the
-  // two nearest frames while it moves slowly, so wheels, trackpads and touch all scrub smoothly at 60 or 120 Hz. when
-  // scrolling stops it settles on a whole frame. frames load six at a time: the ones on screen first, a sparse every-8th pass, then
+  // scroll-scrubbed flight. scrolling sets a goal frame; every display frame the picture eases toward it, so wheels,
+  // trackpads and touch all glide at 60 or 120 Hz. it always shows one whole frame: blending two neighbours looked like
+  // motion blur (a double image). frames load six at a time: the ones on screen first, a sparse every-8th pass, then
   // whatever is closest to where you are. the frames just ahead are kept decoded so drawing never waits on a decode,
   // and the canvas never has more pixels than the frames (no 2x canvases on retina laptops).
   // portrait screens get a lighter centre-cropped set (456x810), wider screens the 1440x810 set.
@@ -182,7 +182,7 @@
   const chapters = [...document.querySelectorAll('.ch')];
   const frames = new Array(COUNT), still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const AHEAD = 14, BEHIND = 6, MAX = 6;
-  let cur = 0, speed = 0, warmed = -1, drawn = null, loaded = 0, inflight = 0, raf = 0, last = 0, settled = true, idle = 0, order = [];
+  let cur = 0, warmed = -1, drawn = null, loaded = 0, inflight = 0, raf = 0, last = 0, settled = true, idle = 0, order = [];
 
   function start(i) {
     const img = new Image();
@@ -225,27 +225,14 @@
     return -1;
   }
 
-  function cover(img, alpha) {
+  function cover(img) {
     const W = canvas.width, H = canvas.height, s = Math.max(W / IW, H / IH), w = IW * s, h = IH * s;
-    ctx.globalAlpha = alpha;
     ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
-    ctx.globalAlpha = 1;
   }
   function paint() {
-    // blend only while scrubbing slowly, where single frames would visibly step. moving faster, every display frame
-    // already shows a new frame, so one draw is enough
-    const i = Math.floor(cur), f = speed < 0.35 ? Math.round((cur - i) * 8) / 8 : Math.round(cur - i);
-    const a = pic(i), b = f > 0 ? pic(i + 1) : null;
-    if (a && (b || f === 0)) {
-      const key = i + f;
-      if (key === drawn) return;
-      drawn = key;
-      if (f === 1) cover(b, 1); else { cover(a, 1); if (b) cover(b, f); }
-      return;
-    }
     const n = nearest(Math.round(cur));
     if (n < 0 || drawn === n) return;
-    drawn = n; cover(pic(n), 1);
+    drawn = n; cover(pic(n));
   }
 
   function progress() {
@@ -260,9 +247,8 @@
     chapters.forEach((c) => c.classList.toggle('on', p >= +c.dataset.from && p < +c.dataset.to));
     const dt = last ? Math.min(64, t - last) : 16.7;
     last = t;
-    const d = goal - cur, was = cur;
+    const d = goal - cur;
     cur = Math.abs(d) < 0.004 ? goal : cur + d * (1 - Math.pow(0.75, dt / 16.7));
-    speed = Math.abs(cur - was) * 16.7 / dt;
     warm(Math.round(cur));
     paint();
     if (cur !== goal) raf = requestAnimationFrame(render); else last = 0;
