@@ -201,6 +201,9 @@
   .msg.bot { align-self: flex-start; background: var(--panel); border: 1px solid var(--line); border-bottom-left-radius: 6px; }
   .msg.me { align-self: flex-end; background: var(--brass); color: var(--brass-ink); font-weight: 600; border-bottom-right-radius: 6px; }
   .msg a { color: var(--gold); }
+  .msg.ai { white-space: pre-line; }
+  .msg .go { display: inline-block; margin-top: 4px; font-weight: 600; }
+  .msg .from { display: block; margin-top: 4px; font-size: .8rem; color: var(--muted); }
   .typing { display: inline-flex; gap: 5px; padding: 6px 2px; }
   .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: dot 1s infinite ease-in-out; }
   .typing i:nth-child(2) { animation-delay: .15s; }
@@ -414,7 +417,7 @@
       </div>
       <div class="qa" id="q-demo" role="tabpanel" aria-labelledby="t-demo" hidden>
         <details><summary>Is this a real home?<svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></summary><p>No. Sample Realty and this listing are made up. Downtown, the river valley and both bridges follow real Edmonton data. The suburb and the house are 3D renders, and the rooms inside were made with AI.</p></details>
-        <details><summary>Is the chat a real AI?<svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></summary><p>Not in this demo. It answers from this listing and the numbers in Pricing, and nothing you type leaves the page. On a real site it can be a live AI assistant that knows your listings and passes buyers' questions to you.</p></details>
+        <details><summary>Is the chat a real AI?<svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></summary><p data-demo>Not in this demo. It answers from this listing and the numbers in Pricing, and nothing you type leaves the page. On a real site it can be a live AI assistant that knows your listings and passes buyers' questions to you.</p><p data-live hidden>Yes. It's Claude, an AI by Anthropic, and it only knows this listing and the numbers in Pricing, so it can still get things wrong. What you type is sent to Anthropic to answer and isn't kept by this site. If the AI is busy, the chat answers from the listing by itself.</p></details>
         <details><summary>Can I get a site like this?<svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></summary><p>Yes. Southsites builds sites like this for real estate agents. <a href="/#quote">Ask for yours</a>.</p></details>
       </div>
     </div>
@@ -462,7 +465,7 @@
   <div class="chat-top"><span class="avatar" aria-hidden="true">S</span><div class="who"><b id="chat-h">Ask about this home</b><small>Demo chat: answers from this listing only, not a live AI</small></div><button class="x" type="button" data-close aria-label="Close chat"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
   <div class="msgs" id="msgs" role="log" aria-live="polite"></div>
   <div class="chips" id="chips"></div>
-  <form class="ask" id="ask"><label class="sr" for="q">Your question</label><input id="q" autocomplete="off" enterkeyhint="send" placeholder="Ask about the rooms, the price, buying"><button type="submit" aria-label="Send"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg></button></form>
+  <form class="ask" id="ask"><label class="sr" for="q">Your question</label><input id="q" autocomplete="off" enterkeyhint="send" maxlength="500" placeholder="Ask about the rooms, the price, buying"><button type="submit" aria-label="Send"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg></button></form>
 </div>
 
 <svg width="0" height="0" style="position: absolute" aria-hidden="true">
@@ -692,7 +695,10 @@
   panel.querySelector('[data-close]').addEventListener('click', () => panel.close());
   panel.addEventListener('click', (e) => { if (e.target === panel) panel.close(); });
 
-  // chat. a demo: it answers from this listing and the pricing numbers above, and nothing typed leaves the page.
+  // chat. with CHAT_URL set, Claude answers through the chat server in chat-worker/ (it holds the key and the listing facts
+  // and caps the spending). without it, or when the server is busy, off or out of today's budget, the built-in answers
+  // below reply from this listing and the pricing numbers above, and nothing typed leaves the page.
+  const CHAT_URL = '';
   // each topic lists the words that point to it (4+ letters also match longer words: "bedroom" finds "bedrooms").
   // the topic with the most matches answers; on a tie the earlier topic wins, so the specific ones come first (a payment question that names a down payment is about the payment).
   const showing = 'Want to <a href="#showing">book a showing</a>?';
@@ -721,7 +727,7 @@
     ['where location address neighbourhood neighborhood area downtown commute street crescent edmonton river bridge park parks', () => 'This listing is made up. The tour flies from downtown Edmonton, over the High Level Bridge and past the Walterdale, to a made-up suburb on the south side, with a park a short walk away. Downtown and the river valley are across the bridge.'],
     ['basement furnace heating heat air conditioning cooling built year old age roof windows appliances solar', () => `The listing doesn't say. On a real site I'd pass that question to the agent. ${showing}`],
     ['showing visit tour see book viewing appointment open', () => 'On a real site you\'d pick a time right here. This is a demo, so the number is fictional: <a href="#showing">see how a showing would work</a>.'],
-    ['real fake ai made generated render actual photos pictures video true', () => 'No, it\'s not real. Sample Realty and this home are made up. The flight follows real Edmonton data, the suburb and the house are 3D renders, and the rooms inside were made with AI. This chat is a demo too: it answers from the listing, not a live AI.'],
+    ['real fake ai made generated render actual photos pictures video true', () => 'No, it\'s not real. Sample Realty and this home are made up. The flight follows real Edmonton data, the suburb and the house are 3D renders, and the rooms inside were made with AI.' + (CHAT_URL ? '' : ' This chat is a demo too: it answers from the listing, not a live AI.')],
     ['agent realtor call phone contact email text talk', () => 'On a real site this reaches the agent. Here the number is fictional: (780) 555-0100.'],
     ['website site southsites build page demo', () => 'This is a concept demo by Southsites. <a href="/#quote">Get a site like this</a> for your listings.'],
   ].map(([w, a]) => ({ w: w.split(' '), a }));
@@ -745,18 +751,57 @@
     msgs.append(m); msgs.scrollTop = msgs.scrollHeight;
     return m;
   }
-  function ask(text) {
-    text = text.trim();
-    if (!text) return;
+  const TYPING = '<span class="typing" aria-label="Typing"><i></i><i></i><i></i></span>';
+  const plain = (html) => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+
+  // the live AI. hist is what it sees: the visitor's questions and the replies so far, as plain text
+  const hist = [], GO = { showing: ['#showing', 'Book a showing'], pricing: ['#pricing', 'See Pricing'], quote: ['/#quote', 'Get a site like this'] };
+  let live = !!CHAT_URL, busy = false, told = false;
+  function show(m, raw, done) {
+    // its reply goes in as text, never HTML. a [[tag]] at the end becomes a button and a half-arrived one stays hidden;
+    // markdown stars and dashes are tidied away
+    m.textContent = raw.replace(/\[\[\w+\]\]/g, '').replace(/\[\[?\w*\]?$/, '').replace(/\*\*?/g, '')
+      .replace(/(\d)\s*[–—]\s*(\d)/g, '$1-$2').replace(/\s*[–—]\s*/g, ', ').trim();
+    if (done) for (const [, k] of raw.matchAll(/\[\[(\w+)\]\]/g)) if (GO[k]) { const a = document.createElement('a'); a.className = 'go'; [a.href, a.textContent] = GO[k]; m.append('\n', a); }
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+  async function askLive(text) {
+    const m = add('bot ai', TYPING);
+    msgs.setAttribute('aria-busy', 'true');  // screen readers get the reply once it's whole, not word by word
+    let raw = '';
+    try {
+      const r = await fetch(CHAT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [...hist, { role: 'user', content: text }].slice(-11), rate: cost.rate, years: cost.years, per: cost.per }) });
+      if (r.status === 429 || r.status === 503) live = false;  // out of today's budget, too many questions this hour, or switched off
+      if (!r.ok || !r.body) throw new Error(r.status);
+      const rd = r.body.pipeThrough(new TextDecoderStream()).getReader();
+      for (let c; !(c = await rd.read()).done;) { raw += c.value; if (raw.trim()) show(m, raw, false); }
+    } catch (e) {}  // whatever it managed to say stays; with nothing, the built-in answer takes over
+    msgs.removeAttribute('aria-busy');
+    if (!raw.trim()) { m.remove(); return false; }
+    show(m, raw, true);
+    hist.push({ role: 'user', content: text }, { role: 'assistant', content: raw.trim() });
+    return true;
+  }
+
+  async function ask(text) {
+    text = text.trim().slice(0, 500);
+    if (!text || busy) return;
+    busy = true;
     add('me', text);
-    const reply = answer(text);
-    if (still || reduce) { add('bot', reply); return; }
-    const t = add('bot', '<span class="typing" aria-label="Typing"><i></i><i></i><i></i></span>');
-    setTimeout(() => { t.innerHTML = reply; msgs.scrollTop = msgs.scrollHeight; }, 550);
+    const tried = live;
+    if (live && await askLive(text)) { busy = false; return; }
+    let reply = answer(text);
+    hist.push({ role: 'user', content: text }, { role: 'assistant', content: plain(reply) });
+    if (CHAT_URL) { reply += `<small class="from">${live || told ? 'Built-in answer' : 'The live AI is resting for now, so this is a built-in answer.'}</small>`; told ||= !live; }
+    if (still || reduce || tried) { add('bot', reply); busy = false; return; }
+    const t = add('bot', TYPING);
+    setTimeout(() => { t.innerHTML = reply; msgs.scrollTop = msgs.scrollHeight; busy = false; }, 550);
   }
   function openChat() {
     if (!msgs.childElementCount) {
-      add('bot', 'Hi! I can answer questions about this home: the rooms, the yard, the price and what it costs to buy in Alberta.');
+      add('bot', CHAT_URL ? 'Hi! I\'m an AI assistant for this sample listing. Ask me about the rooms, the yard, the price or buying in Alberta. What you type goes to Anthropic\'s Claude to answer, so leave out personal details.'
+        : 'Hi! I can answer questions about this home: the rooms, the yard, the price and what it costs to buy in Alberta.');
       CHIPS.forEach((c) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = () => ask(c); chipBox.append(b); });
     }
     chat.hidden = false; chatBtn.hidden = true; chatBtn.setAttribute('aria-expanded', 'true');
@@ -769,7 +814,12 @@
   chatBtn.addEventListener('click', openChat);
   chat.querySelector('[data-close]').addEventListener('click', closeChat);
   chat.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeChat(); });
-  form.addEventListener('submit', (e) => { e.preventDefault(); ask(q.value); q.value = ''; });
+  form.addEventListener('submit', (e) => { e.preventDefault(); if (busy) return; ask(q.value); q.value = ''; });
+  if (CHAT_URL) {
+    chat.querySelector('.who small').textContent = 'AI assistant (Claude). Answers can be wrong.';
+    document.querySelectorAll('[data-live]').forEach((e) => { e.hidden = false; });
+    document.querySelectorAll('[data-demo]').forEach((e) => { e.hidden = true; });
+  }
   // links in a reply take you to that part of the page, so the chat steps out of the way
   msgs.addEventListener('click', (e) => { const a = e.target.closest('a[href^="#"]'); if (a) { chat.hidden = true; chatBtn.hidden = false; chatBtn.setAttribute('aria-expanded', 'false'); } });
 </script>

@@ -1,0 +1,21 @@
+name = "sample-realty-chat"
+main = "worker.mjs"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[vars]
+MODEL = "claude-haiku-5-5"
+# the most the chat spends in a UTC day, in US dollars (about $9 a month at most), and questions per visitor per hour
+DAILY_CAP_USD = "0.30"
+PER_IP_HOUR = "30"
+ALLOWED_ORIGINS = "https://southsites.ca,https://www.southsites.ca,http://localhost:3300"
+# set to "1" to switch the live AI off; the page then answers from the listing by itself
+CHAT_OFF = ""
+
+[[durable_objects.bindings]]
+name = "BUDGET"
+class_name = "Budget"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Budget"]
