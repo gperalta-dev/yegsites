@@ -243,9 +243,7 @@
   .sx-win { position: absolute; inset: 0; transform-origin: 50% 100%; will-change: transform, opacity; opacity: 0; }
   .sx-win .frame { position: absolute; inset: 0; overflow: hidden; border-radius: 0 0 var(--rad, 0px) var(--rad, 0px); background: #fff; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .12); }
   .sx-win iframe { display: block; width: 100%; height: 100%; border: 0; pointer-events: none; background: #fff; }
-  .sx-win .shots, .sx-win .shots-head { position: absolute; left: 0; top: 0; width: 100%; will-change: transform; }
-  .sx-win .shots img, .sx-win .shots-head { display: block; width: 100%; height: auto; }
-  .sx-win .shots img + img { margin-top: -1px; }  /* strips overlap a hair so no seam shows between them */
+  .sx-win .shots { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
   .sx-win .wbar { position: absolute; left: 0; right: 0; bottom: 100%; height: 42px; background: #e9e6df; display: flex; align-items: center; gap: 9px; padding: 0 18px; border-radius: var(--rad, 0px) var(--rad, 0px) 0 0; }
   .sx-win .wbar i { width: 13px; height: 13px; border-radius: 50%; background: #cfc9bd; }
   .sx-win .wbar b { margin-left: 12px; flex: 1; max-width: 480px; background: #fff; border-radius: 99px; font: 600 15px var(--body); color: #55524b; padding: 6px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -989,13 +987,17 @@
   // px of the sample's page per px of ours, and how much of each sample page to show before moving on
   const RATIO = narrow ? 2.2 : 1.5, SHOW = 0.74;
   // on phones the plumber and the pizza place are stills of their pages at 390 px wide (demos/<name>/phone/, strips 800 px
-  // tall), moved with transform: smoother than scrolling a live page in a frame. head: the sticky header, shot on its own
+  // tall), drawn on one canvas like the flight: a phone never repaints a giant layer or a live page while they glide.
+  // head: the sticky header, shot on its own. their pages also move closer to the thumb's speed (1.6x) and show a bit less
   const PHONE = {
     'Saltbox Plumbing': { dir: 'demos/saltbox-plumbing/phone', h: [...Array(10).fill(800), 347], head: { top: 79, h: 67 } },
     'Forno Lume': { dir: 'demos/forno-lume/phone', h: [...Array(9).fill(800), 215] },
   };
   const sx = [...document.querySelectorAll('.sx')].map((el) => ({ el, name: el.dataset.name, win: el.querySelector('.sx-win'), frame: el.querySelector('iframe'),
-    title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0, px: -1, top: 0, h: 0 }));
+    title: el.querySelector('.sx-title'), sub: el.querySelector('.sx-sub'), tag: el.querySelector('.sx-tag'), max: 0, cur: 0, goal: 0, px: -1, top: 0, h: 0, ratio: RATIO, show: SHOW }));
+  sx.forEach((s) => { const p = narrow && !still && PHONE[s.name]; if (p) Object.assign(s, { phone: p, ratio: 1.6, show: 0.55 }); });
+  // once a sample fills the screen, tapping it opens it, like its "Open it" button
+  sx.forEach((s) => s.win.addEventListener('click', () => { if (s.tag.classList.contains('on')) location.href = s.tag.querySelector('a').href; }));
   const real = document.getElementById('work'), ek = document.getElementById('ek');
   // a closer look: photos of the sample house slide past as you scroll, with the room list beside them
   const look = document.getElementById('look'), lookView = document.getElementById('look-view'), lookSide = document.getElementById('look-side');
@@ -1018,22 +1020,33 @@
   }
   function dims(s) {
     const vh = L.vh;
-    if (s.shots) { const k = s.shots.clientWidth / 390; s.headTop = s.phone.head ? s.phone.head.top * k : 0; s.max = Math.max(0, s.shots.offsetHeight - s.shots.parentElement.clientHeight); }
-    else try { const d = s.frame.contentDocument; if (d && d.documentElement && s.frame.getAttribute('src')) s.max = Math.max(0, d.documentElement.scrollHeight - s.frame.clientHeight); } catch (e) {}
-    s.enter = vh * 0.3; s.grow = vh * 0.45; s.run = (s.max * SHOW || vh * 3) / RATIO; s.hold = vh * 0.15;
+    if (s.phone) {
+      // known from the strip heights before anything loads, so the section never changes height under the thumb
+      const fr = (s.shots || s.frame).parentElement, w = fr.clientWidth, h = fr.clientHeight, k = w / 390;
+      s.headTop = s.phone.head ? s.phone.head.top * k : 0;
+      s.max = Math.max(0, s.phone.h.reduce((a, b) => a + b, 0) * k - h);
+      if (s.shots) {
+        s.dpr = Math.min(devicePixelRatio || 1, 2);
+        const cw = Math.round(w * s.dpr), ch = Math.round(h * s.dpr);
+        if (s.shots.width !== cw || s.shots.height !== ch) { s.shots.width = cw; s.shots.height = ch; }
+        drawShots(s);
+      }
+    } else try { const d = s.frame.contentDocument; if (d && d.documentElement && s.frame.getAttribute('src')) s.max = Math.max(0, d.documentElement.scrollHeight - s.frame.clientHeight); } catch (e) {}
+    s.enter = vh * 0.3; s.grow = vh * 0.45; s.run = (s.max * s.show || vh * 3) / s.ratio; s.hold = vh * 0.15;
     if (!still) s.el.style.height = `${Math.round(vh + s.enter + s.grow + s.run + s.hold)}px`;
   }
   function loadSamples() {
     sx.forEach((s) => {
       if (s.frame.getAttribute('src') || s.shots) return;
-      const p = narrow && !still && PHONE[s.name];
+      const p = s.phone;
       if (p) {
-        // the strips stacked in one box; only the box moves, so nothing is laid out or painted again while it glides
-        const box = document.createElement('div');
-        box.className = 'shots'; box.setAttribute('role', 'img'); box.setAttribute('aria-label', s.frame.title);
-        p.h.forEach((h, i) => { const im = new Image(390, h); im.alt = ''; im.decoding = 'async'; im.src = `${p.dir}/m${i}.webp`; box.append(im); });
-        if (p.head) { const hd = new Image(390, p.head.h); hd.alt = ''; hd.className = 'shots-head'; hd.src = `${p.dir}/head.webp`; s.frame.parentElement.append(hd); s.head = hd; }
-        s.frame.replaceWith(box); s.shots = box; s.phone = p;
+        const c = document.createElement('canvas');
+        c.className = 'shots'; c.setAttribute('role', 'img'); c.setAttribute('aria-label', s.frame.title);
+        s.frame.replaceWith(c); s.shots = c; s.ctx = c.getContext('2d', { alpha: false });
+        // each strip is decoded before it's drawn, so drawing it never stalls a frame
+        const get = (file) => { const im = new Image(); im.decoding = 'async'; im.src = `${p.dir}/${file}`; im.decode().then(() => { im.ok = true; drawShots(s); }).catch(() => {}); return im; };
+        s.strips = p.h.map((h, i) => get(`m${i}.webp`));
+        if (p.head) s.head = get('head.webp');
         dims(s);
         return;
       }
@@ -1056,7 +1069,7 @@
       const head = (1 - ramp(g, 0, 0.45)).toFixed(3);
       put(s.title, 'opacity', head); put(s.sub, 'opacity', head);
       s.tag.classList.toggle('on', k > 0.98 && r < s.h - vh);
-      s.goal = t * s.max * SHOW;
+      s.goal = t * s.max * s.show;
       if (r > -vh * 0.5 && r < s.h - vh * 0.5) current = s.name;
     }
   }
@@ -1071,15 +1084,27 @@
       if (!d) continue;
       s.cur = Math.abs(d) < 0.5 ? s.goal : s.cur + d * a;
       if (s.cur !== s.goal) moving = true;
-      if (s.shots) {
-        put(s.shots, 'transform', `translate3d(0, ${(-s.cur).toFixed(1)}px, 0)`);
-        if (s.head) put(s.head, 'transform', `translate3d(0, ${Math.max(0, s.headTop - s.cur).toFixed(1)}px, 0)`);  // sticks at the top, like the real header
-        continue;
-      }
+      if (s.shots) { drawShots(s); continue; }
       const px = Math.round(s.cur);
       if (px !== s.px) { s.px = px; try { s.frame.contentWindow.scrollTo(0, px); } catch (e) {} }
     }
     if (moving) requestAnimationFrame(glide); else gliding = false;
+  }
+  // a phone still: the strips on screen drawn at the glide's position (a pixel of overlap hides the seams), then the
+  // sticky header, which stops at the top like the real one
+  function drawShots(s) {
+    const c = s.shots, x = s.ctx;
+    if (!c.width || !s.strips) return;
+    const q = c.width / 390, y0 = s.cur * s.dpr;
+    x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+    let top = 0;
+    s.strips.forEach((im, i) => {
+      const h = s.phone.h[i] * q, y = top - y0;
+      if (im.ok && y < c.height && y + h > 0) x.drawImage(im, 0, Math.floor(y), c.width, Math.ceil(h) + 1);
+      top += h;
+    });
+    if (s.head && s.head.ok) x.drawImage(s.head, 0, Math.round(Math.max(0, s.headTop * s.dpr - y0)), c.width, Math.round(s.phone.head.h * q));
+    c._y = s.cur;
   }
 
   // the walk inside: the caption follows the room on screen (first source frame of each room)
