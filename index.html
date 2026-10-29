@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://southsites.ca/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Southsites: Your site is already built. Websites for Edmonton small businesses.">
+<meta property="og:image:alt" content="Southsites: website design for Edmonton small businesses. See your site before you pay.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Southsites | See your website before you pay">
 <meta name="twitter:description" content="Free website preview for Edmonton small businesses. $249 to keep it (founding price), $29 a month for hosting and edits.">
@@ -30,7 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Southsites","description":"Websites for Edmonton small businesses","telephone":"+1-825-461-5061","email":"contact@southsites.ca","url":"https://southsites.ca/","image":"https://southsites.ca/og.png","priceRange":"$249 to $399","address":{"@type":"PostalAddress","addressLocality":"Edmonton","addressRegion":"AB","addressCountry":"CA"},"areaServed":"Edmonton, Alberta","founder":"Jan Gabriel"}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Southsites","description":"Websites for Edmonton small businesses","telephone":"+1-825-461-5061","email":"contact@southsites.ca","url":"https://southsites.ca/","image":"https://southsites.ca/og.png","priceRange":"$249 to $599","address":{"@type":"PostalAddress","addressLocality":"Edmonton","addressRegion":"AB","addressCountry":"CA"},"areaServed":"Edmonton, Alberta","founder":{"@type":"Person","name":"Jan Gabriel"}}
 </script>
 <style>
   :root {
@@ -121,11 +121,11 @@
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .field { display: grid; gap: 6px; align-content: start; }
   .field label { font-size: 14px; font-weight: 600; }
-  input, select { width: 100%; min-height: 48px; background: var(--field); border: 1.5px solid #2c323c; border-radius: var(--r-sm); color: var(--ink); font: 400 16px var(--body); padding: 10px 14px; }
+  input, select { width: 100%; min-height: 48px; background: var(--field); border: 1.5px solid #66707f; border-radius: var(--r-sm); color: var(--ink); font: 400 16px var(--body); padding: 10px 14px; }
   select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23b0b4bb' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
   input, select { transition: border-color .15s, box-shadow .15s; }
-  input:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(255, 200, 61, .16); }
-  @media (hover: hover) { input:hover:not(:focus), select:hover:not(:focus) { border-color: #3d4552; } }
+  input:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(255, 200, 61, .45); }
+  @media (hover: hover) { input:hover:not(:focus), select:hover:not(:focus) { border-color: #8a93a0; } }
   input::placeholder { color: #8a909a; }
   .field.bad input { border-color: var(--err); }
   .err { display: none; font-size: 13.5px; color: var(--err); font-weight: 600; }
@@ -141,6 +141,13 @@
   .small { font-size: 13.5px; color: var(--faint); margin: 0; text-align: center; }
   .small a { color: var(--ink); text-underline-offset: 3px; }
   form.quote.done .hide-done { display: none; }
+  .who { margin: 22px 0 0; max-width: 46ch; font-size: 15.5px; color: #cfd3d8; }
+  .mini { list-style: none; margin: 4px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line); display: grid; gap: 8px; font-size: 14.5px; color: #cfd3d8; }
+  .mini li { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; }
+  .mini b { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 200, 61, .14); color: var(--accent); font: 800 13px var(--body); }
+  .mini-g { margin: 0; padding: 10px 12px; border-radius: 12px; background: rgba(87, 212, 145, .08); border: 1px solid rgba(87, 212, 145, .3); font-size: 14px; color: #cfd3d8; }
+  .mini-g b { color: var(--ok); }
+  @media (max-width: 699px) { button.likeit { display: none; } }
 
   /* over the flight: first line, then a realtor's site fades in */
   .cap { position: absolute; left: max(20px, calc((100vw - 1180px) / 2)); bottom: 11vh; max-width: 620px; opacity: 0; transform: translateY(20px); transition: opacity .45s, transform .45s; pointer-events: none; }
@@ -195,10 +202,10 @@
   .look-view { position: relative; width: 100%; aspect-ratio: 3 / 2; border-radius: 16px; overflow: hidden; background: #e9e4dc; box-shadow: 0 24px 50px -30px rgba(40, 30, 10, .45); }
   .lp { position: absolute; inset: 0; margin: 0; overflow: hidden; background: #e9e4dc; will-change: transform, opacity; }
   .lp img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .look-meta { display: flex; align-items: center; gap: 14px; margin: 14px 0 6px; font: 600 14px var(--body); color: #8a8377; }
+  .look-meta { display: flex; align-items: center; gap: 14px; margin: 14px 0 6px; font: 600 14px var(--body); color: #6b655b; }
   .look-count b { color: #1d1b18; }
   .look-prog { flex: 1; height: 2px; background: #e4dfd6; border-radius: 2px; overflow: hidden; }
-  .look-prog i { display: block; height: 100%; background: #b88a3e; transform-origin: 0 50%; transform: scaleX(0); }
+  .look-prog i { display: block; height: 100%; background: #8a6424; transform-origin: 0 50%; transform: scaleX(0); }
   .look-cap h3 { font: 400 clamp(26px, 2.6vw, 36px)/1.05 Georgia, "Times New Roman", serif; margin: 0 0 4px; }
   .look-cap p { margin: 0; font: 500 16px/1.45 var(--body); color: #5d574e; }
   .look-chips { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -207,7 +214,7 @@
   .look-cap.swap h3, .look-cap.swap p, .look-cap.swap .look-chips { opacity: 0; transform: translateY(6px); }
   .look-aside { display: grid; gap: 14px; align-content: center; }
   .look-price { padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid #e4dfd6; }
-  .look-price small { display: block; font: 700 12.5px var(--body); color: #b88a3e; }
+  .look-price small { display: block; font: 700 12.5px var(--body); color: #8a6424; }
   .look-price > b { display: block; font: 400 34px/1.1 Georgia, "Times New Roman", serif; margin: 4px 0 2px; }
   .look-price > span { font: 500 14.5px var(--body); color: #5d574e; }
   .look-facts { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid #ece7df; display: flex; gap: 14px; flex-wrap: wrap; font: 500 13.5px var(--body); color: #5d574e; }
@@ -216,16 +223,16 @@
   .look-agent { display: grid; grid-template-columns: 56px 1fr; gap: 4px 12px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #fff; border: 1px solid #e4dfd6; }
   .look-agent img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; grid-row: span 1; }
   .look-agent b { display: block; font: 400 19px Georgia, "Times New Roman", serif; }
-  .look-agent span { font: 600 12.5px var(--body); color: #8a8377; }
+  .look-agent span { font: 600 12.5px var(--body); color: #6b655b; }
   .look-acts { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
   .look-acts a { display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 99px; border: 1px solid #d9d2c6; font: 700 13.5px var(--body); color: #1d1b18; text-decoration: none; }
-  .look-acts a:first-child { background: #b88a3e; border-color: #b88a3e; color: #fff; }
+  .look-acts a:first-child { background: #8a6424; border-color: #8a6424; color: #fff; }
   .look-list { list-style: none; margin: 0; padding: 0; counter-reset: lk; font: 600 14px var(--body); }
   .look-list li { counter-increment: lk; display: flex; gap: 12px; padding: 5px 0; color: #a59d90; transition: color .25s; }
   .look-list li::before { content: counter(lk, decimal-leading-zero); color: #c9c1b4; font-variant-numeric: tabular-nums; transition: color .25s; }
   .look-list li.on { color: #1d1b18; }
-  .look-list li.on::before { color: #b88a3e; }
-  .look-note { flex: none; margin: 0; font: 500 12px var(--body); color: #8a8377; }
+  .look-list li.on::before { color: #8a6424; }
+  .look-note { flex: none; margin: 0; font: 500 12px var(--body); color: #6b655b; }
   @media (max-height: 760px) and (min-width: 761px) { .look-list li { padding: 3px 0; font-size: 13px; } .look-price b { font-size: 28px; } }
 
   /* sticky call to action, after the first screen */
@@ -549,7 +556,7 @@
   </div>
 </nav>
 
-<div class="dock" id="dock" aria-label="Get a free preview">
+<div class="dock" id="dock" aria-label="Get a free preview" inert>
   <a class="btn btn-main" href="#quote" data-focus>Get my free preview</a>
   <a class="btn btn-line ic" href="sms:+18254615061" aria-label="Text 825-461-5061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></a>
   <a class="btn btn-line ic" href="tel:+18254615061" aria-label="Call 825-461-5061"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
@@ -569,9 +576,9 @@
       <div class="field"><label for="l-name">Your name</label><input id="l-name" name="name" required autocomplete="name"><span class="err">Add your name so I know who to reply to.</span></div>
       <div class="field"><label for="l-biz">Business name</label><input id="l-biz" name="business" required autocomplete="organization"><span class="err">Add your business name.</span></div>
     </div>
-    <div class="field hide-done"><label for="l-contact">Phone or email</label><input id="l-contact" name="contact" required autocomplete="tel" inputmode="email" placeholder="So I can send you the link"><span class="err">Add a phone number with area code, or an email.</span></div>
+    <div class="field hide-done"><label for="l-contact">Phone or email</label><input id="l-contact" name="contact" required autocomplete="tel" placeholder="So I can send you the link"><span class="err">Add a phone number with area code, or an email.</span></div>
     <div class="field hide-done"><label for="l-liked">Which sample caught your eye?</label>
-      <select id="l-liked" name="liked"><option>The realty flight</option><option>Saltbox Plumbing</option><option>Forno Lume</option><option>Mirrorline Detail</option><option>Just looking around</option></select>
+      <select id="l-liked" name="liked"><option value="The realty flight">The house tour (realtor)</option><option value="Saltbox Plumbing">The plumber</option><option value="Forno Lume">The pizza place</option><option value="Mirrorline Detail">The detail shop</option><option value="Just looking around">Just looking</option></select>
     </div>
     <button class="btn btn-main hide-done" type="submit"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
     <div class="status" role="status" aria-live="polite"></div>
@@ -584,9 +591,9 @@
   <div class="stage" id="stage">
     <canvas id="film" role="img" aria-label="A drone flight over downtown Edmonton at sunset, along the river over the High Level and Walterdale bridges, down a suburban street to one house, then through its front door and room by room through a sample interior made with AI: kitchen, main bedroom, ensuite, the upstairs hall, a second bedroom, the kids' room, the bonus room, down the stairs and out the back door to the deck and the fenced yard"></canvas>
     <div class="veil" id="veil"></div>
-    <div class="cap" id="cap1"><h2>Here's what a site can feel like.</h2><p>Keep scrolling. This is a sample we made for a made-up realtor.</p></div>
+    <div class="cap" id="cap1"><h2>Here's what a site can feel like.</h2><p>Keep scrolling. This is a sample I made for a made-up Edmonton realtor.</p></div>
     <div class="realty" id="realty" aria-hidden="true">
-      <div class="r-bar"><span class="r-brand">Sample Realty</span><div class="r-nav"><a>Listings</a><a>Neighbourhoods</a><a>About</a><a class="r-btn" href="demos/sample-realty/#showing" tabindex="-1">Book a showing</a></div></div>
+      <div class="r-bar"><span class="r-brand">Sample Realty</span><div class="r-nav"><a href="demos/sample-realty/#listing" tabindex="-1">Listings</a><a href="demos/sample-realty/" tabindex="-1">Neighbourhoods</a><a href="demos/sample-realty/#faq" tabindex="-1">About</a><a class="r-btn" href="demos/sample-realty/#showing" tabindex="-1">Book a showing</a></div></div>
       <div class="r-card">
         <small>Sample listing, not a real home</small>
         <h3>Two storeys on a quiet street.</h3>
@@ -595,11 +602,11 @@
         <p class="pnote">Sample price for this concept demo.</p>
         <a class="r-btn" href="demos/sample-realty/" tabindex="-1">See the full sample site</a>
       </div>
-      <div class="r-in"><h3 id="room">Step inside.</h3><p id="room-p">The entry, the living room and the kitchen. Made with AI from our render of the front door. It is not a real home.</p></div>
+      <div class="r-in"><h3 id="room">Step inside.</h3><p id="room-p">The entry, the living room and the kitchen. Made with AI from my render of the front door. It is not a real home.</p></div>
       <span class="r-tag">Sample site by Southsites. Sample Realty is made up.</span>
       <div class="r-agent">
         <div class="who"><img class="r-face" src="https://images.unsplash.com/photo-1780733064206-4f200e41daa8?w=480&h=480&fit=crop&crop=faces&q=80&auto=format" alt="" width="54" height="54"><div><b>Avery Lindqvist</b><span>Sample agent, stock photo</span></div></div>
-        <div class="acts"><a class="r-pill" tabindex="-1">Call</a><a class="r-pill gold" href="demos/sample-realty/#showing" tabindex="-1">Book a tour</a></div>
+        <div class="acts"><a class="r-pill" href="demos/sample-realty/#showing" tabindex="-1">Call</a><a class="r-pill gold" href="demos/sample-realty/#showing" tabindex="-1">Book a tour</a></div>
         <small>Your photo, name and number go here.</small>
       </div>
     </div>
@@ -608,16 +615,17 @@
   <header class="hero" id="top">
     <div class="wrap">
       <div class="copy">
-        <p class="where">Websites for Edmonton small businesses</p>
-        <h1>Your site is already built.</h1>
-        <p class="lead">Look at it first, then decide. Free preview from your Google listing.<span class="lead-price"> Like it? $249, then $29 a month.</span></p>
+        <p class="where">Website design for Edmonton small businesses</p>
+        <h1>See your site before you pay.</h1>
+        <p class="lead">I build a free preview from your Google listing and send you the link.<span class="lead-price"> Like it? $249, then $29 a month.</span></p>
         <div class="hero-ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line hero-text" href="sms:+18254615061">Text 825-461-5061</a></div>
         <ul class="facts" aria-label="Prices">
           <li><b class="free">$0</b><span>to see your preview</span></li>
-          <li><b class="now"><s><span class="sr">Price after the first 3 clients </span>$399</s><span class="sr">, founding price </span>$249</b><span>once, to keep it<span class="fact-more">. Founding price, first 3 clients</span></span></li>
+          <li><b class="now"><s><span class="sr">Regular price </span>$399</s><span class="sr">. Founding price </span>$249</b><span>once, to keep it<span class="fact-more">. Founding price for my first 3 clients</span></span></li>
           <li><b>$29</b><span>a month, hosting and edits</span></li>
-          <li class="facts-note">Founding price for my first 3 shops. Your own domain included.</li>
+          <li class="facts-note">Founding price for my first 3 clients (3 of 3 spots left). Your own domain included.</li>
         </ul>
+        <p class="who">Hi, I'm Jan, a computer systems student in Edmonton. I build every site myself, and you deal with me from start to finish.</p>
       </div>
 
       <form class="quote" id="quote" action="https://api.web3forms.com/submit" method="POST" novalidate>
@@ -632,7 +640,7 @@
           <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name" aria-describedby="e-name"><span class="err" id="e-name">Add your name so I know who to reply to.</span></div>
           <div class="field"><label for="f-biz">Business name</label><input id="f-biz" name="business" required autocomplete="organization" aria-describedby="e-biz"><span class="err" id="e-biz">Add your business name.</span></div>
         </div>
-        <div class="field hide-done"><label for="f-contact">Phone or email</label><input id="f-contact" name="contact" required autocomplete="tel" inputmode="email" placeholder="So I can send you the link" aria-describedby="e-contact"><span class="err" id="e-contact">Add a phone number with area code, or an email.</span></div>
+        <div class="field hide-done"><label for="f-contact">Phone or email</label><input id="f-contact" name="contact" required autocomplete="tel" placeholder="So I can send you the link" aria-describedby="e-contact"><span class="err" id="e-contact">Add a phone number with area code, or an email.</span></div>
         <div class="field hide-done"><label for="f-need">What do you need?</label>
           <select id="f-need" name="need">
             <option>A new website</option>
@@ -644,6 +652,8 @@
         <button class="btn btn-main hide-done" type="submit" id="send"><span class="spin" aria-hidden="true"></span><span class="label">Send my request</span></button>
         <div class="status" id="status" role="status" aria-live="polite"></div>
         <p class="small hide-done how-sent" id="how-sent">Free and no obligation. I only use your details to reply.</p>
+        <ol class="mini hide-done" aria-label="How it works"><li><b>1</b><span>I build a preview from your Google listing.</span></li><li><b>2</b><span>You check it on your phone and ask for changes.</span></li><li><b>3</b><span>Keep it for $249, or say no and pay nothing.</span></li></ol>
+        <p class="mini-g hide-done"><b>Happy or it doesn't go live.</b> I don't publish your site, or charge you, until you say it's right.</p>
       </form>
     </div>
   </header>
@@ -707,7 +717,7 @@
   <div class="sx" data-name="Saltbox Plumbing">
     <div class="sx-stage">
       <h2 class="sx-title">Or what about <span>a plumber?</span></h2>
-      <p class="sx-sub">Saltbox Plumbing &amp; Heating in Halifax. A made-up business with a finished site.</p>
+      <p class="sx-sub">Saltbox Plumbing &amp; Heating in Mill Woods. A made-up business with a finished site.</p>
       <div class="sx-win">
         <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/saltbox-plumbing</b></div>
         <div class="frame"><iframe data-src="demos/saltbox-plumbing/" title="Saltbox Plumbing and Heating, a made-up plumber's site" tabindex="-1" loading="lazy"></iframe></div>
@@ -718,7 +728,7 @@
   <div class="sx" data-name="Forno Lume">
     <div class="sx-stage">
       <h2 class="sx-title">Or <span>a pizza place?</span></h2>
-      <p class="sx-sub">Forno Lume on Federal Hill, Providence. Made up, from the menu to the map.</p>
+      <p class="sx-sub">Forno Lume on Whyte Ave. Made up, from the menu to the map.</p>
       <div class="sx-win">
         <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/forno-lume</b></div>
         <div class="frame"><iframe data-src="demos/forno-lume/" title="Forno Lume, a made-up restaurant's site" tabindex="-1" loading="lazy"></iframe></div>
@@ -729,7 +739,7 @@
   <div class="sx" data-name="Mirrorline Detail">
     <div class="sx-stage">
       <h2 class="sx-title">Or <span>a detail shop?</span></h2>
-      <p class="sx-sub">Mirrorline Detail Co. in Scottsdale. Keep scrolling and the car gets cleaner.</p>
+      <p class="sx-sub">Mirrorline Detail Co. in Sherwood Park. Made up, from the packages to the map.</p>
       <div class="sx-win">
         <div class="wbar" aria-hidden="true"><i></i><i></i><i></i><b>southsites.ca/demos/mirrorline-detail</b></div>
         <div class="frame"><iframe data-src="demos/mirrorline-detail/" title="Mirrorline Detail Co., a made-up detail shop's site" tabindex="-1" loading="lazy"></iframe></div>
@@ -763,7 +773,7 @@
 
 <section class="people" id="people">
   <div class="wrap">
-    <h2>Do what you do. <span>We'll do the dot-ca.</span></h2>
+    <h2>Do what you do. <span>I'll do the dot-ca.</span></h2>
     <p class="intro">You'd rather be working. I'll handle the website: built from your Google listing, checked on your own phone, live when you say so.</p>
     <ul class="faces">
       <li><img src="story/people/barber.webp" width="720" height="900" loading="lazy" decoding="async" alt="A barber trimming a customer's beard"><span>Barber</span></li>
@@ -772,18 +782,18 @@
       <li><img src="story/people/electrician.webp" width="720" height="900" loading="lazy" decoding="async" alt="An electrician working on a panel"><span>Electrician</span></li>
       <li><img src="story/people/nails.webp" width="720" height="900" loading="lazy" decoding="async" alt="A nail technician at work"><span>Nail tech</span></li>
     </ul>
-    <p class="credit">Stock photos from Pexels, free licence: Antoni Shkraba, Gustavo Fring, Tima Miroshnichenko, ranjeet, Mehmet Turgut Kirkgoz. These are not our clients.</p>
+    <p class="credit">Stock photos from Pexels, free licence: Antoni Shkraba, Gustavo Fring, Tima Miroshnichenko, ranjeet, Mehmet Turgut Kirkgoz. These are not my clients.</p>
   </div>
 
   <div class="close" id="prices">
     <div class="wrap">
       <div class="grid">
         <div>
-          <h3>Your preview is free. Ask for one.</h3>
+          <h3>Free website preview for Edmonton small businesses</h3>
           <p class="lede">Custom-made for your business: your name, your services, your photos and your reviews. Nothing goes live until you're happy with it.</p>
           <div class="plat">
             <div class="plat-top"><span class="plat-logo"><i aria-hidden="true"></i>Southsites</span><span class="plat-tag">Founding price</span></div>
-            <div class="plat-price"><s><span class="sr">Price after the first 3 clients </span>$399</s><b>$249</b><span>once, to keep it</span></div>
+            <div class="plat-price"><s><span class="sr">Regular price </span>$399</s><b><span class="sr">Founding price </span>$249</b><span>once, to keep it</span></div>
             <div class="plat-mo"><b>$29</b> a month for hosting and small edits. Cancel any month.</div>
             <ul class="plat-inc">
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Your own domain, <b>first year included</b>. I suggest a few names, you pick.</span></li>
@@ -791,7 +801,7 @@
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Custom-made for your business, made for phones</span></li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>You own it</span></li>
             </ul>
-            <div class="plat-foot"><span><b>$0</b> to see your preview</span><span>For my first 3 Edmonton shops, $399 after</span></div>
+            <div class="plat-foot"><span><b>$0</b> to see your preview</span><span>Founding price for my first 3 clients, 3 spots left. $399 after.</span></div>
           </div>
           <div class="ctas"><a class="btn btn-main" href="#quote" data-focus>Get my free preview</a><a class="btn btn-line" href="sms:+18254615061">Text 825-461-5061</a><a class="btn btn-line" href="mailto:contact@southsites.ca">contact@southsites.ca</a></div>
         </div>
@@ -838,7 +848,7 @@
 <footer>
   <div class="wrap">
     <div class="row"><span>Jan Gabriel, Southsites, Edmonton</span><span><a href="tel:+18254615061">825-461-5061</a> &nbsp; <a href="mailto:contact@southsites.ca">contact@southsites.ca</a></span></div>
-    <span>Sample Realty, Saltbox Plumbing &amp; Heating, Forno Lume and Mirrorline Detail Co. are made-up businesses built as samples, and each sample credits its own photos. Easykeeps is my own business. The realty flight is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). The walk-through inside the house was generated with Google Veo (AI) from our render of the front door, and is not a real home. The Mirrorline wash was made with Google Gemini and Veo from a Pexels photo by Tima Miroshnichenko. Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>. The closer look and the sample agent use stock photos from <a href="https://unsplash.com/license">Unsplash</a> by Clay Banks, Francesca Tosolini, Lotus Design N Print, Md Ishak Rahman, Roger Starnes Sr and Zac Gudakov; they show other homes and a model, not the sample house or a real agent.</span>
+    <span>Sample Realty, Saltbox Plumbing &amp; Heating, Forno Lume and Mirrorline Detail Co. are made-up businesses built as samples, and each sample credits its own photos. Easykeeps is my own business. The realtor house tour is a Blender render: ground and roof imagery from the City of Edmonton Orthophoto 2024 (contains information licensed under the Open Government Licence (City of Edmonton), via Data for Canada), map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, elevation from Terrain Tiles on AWS including Natural Resources Canada data, trees, textures and sky from <a href="https://polyhaven.com">Poly Haven</a> (CC0). The walk-through inside the house was generated with Google Veo (AI) from my render of the front door, and is not a real home. The Mirrorline wash was made with Google Gemini and Veo from a Pexels photo by Tima Miroshnichenko. Photos of people from <a href="https://www.pexels.com/license/">Pexels</a>. The closer look and the sample agent use stock photos from <a href="https://unsplash.com/license">Unsplash</a> by Clay Banks, Francesca Tosolini, Lotus Design N Print, Md Ishak Rahman, Roger Starnes Sr and Zac Gudakov; they show other homes and a model, not the sample house or a real agent.</span>
   </div>
 </footer>
 
@@ -854,7 +864,7 @@
     // no Web3Forms key yet: say plainly that the button hands off to the visitor's messages app
     if (!KEY) {
       label.textContent = 'Continue in Messages';
-      f.querySelector('.how-sent').innerHTML = 'Opens a text to Gabriel with your details filled in. Rather email? <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>';
+      f.querySelector('.how-sent').innerHTML = 'Opens a text to Jan with your details filled in. Rather email? <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>';
     }
     const say = (kind, html) => { status.className = 'status show ' + kind; status.innerHTML = html; };
     function check() {
@@ -899,8 +909,8 @@
       }
     });
   }
-  wire(form, (d) => `Hi Gabriel, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}. You can reach me at ${d.contact}.`);
-  wire(likeForm, (d) => `Hi Gabriel, I'm ${d.name} from ${d.business}. I liked the ${d.liked} sample and I'd like a free preview. You can reach me at ${d.contact}.`);
+  wire(form, (d) => `Hi Jan, I'm ${d.name} from ${d.business}. I'm interested in: ${d.need}. You can reach me at ${d.contact}.`);
+  wire(likeForm, (d) => `Hi Jan, I'm ${d.name} from ${d.business}. I liked your sample: ${likeForm.elements.liked.selectedOptions[0].text}, and I'd like a free preview. You can reach me at ${d.contact}.`);
   // anything that jumps to the form puts the cursor in the first field
   document.querySelectorAll('[data-focus]').forEach((a) => a.addEventListener('click', (e) => {
     e.preventDefault();
@@ -1002,8 +1012,8 @@
   // tall), drawn on one canvas like the flight: a phone never repaints a giant layer or a live page while they glide.
   // head: the sticky header, shot on its own. their pages also move closer to the thumb's speed (1.6x) and show a bit less
   const PHONE = {
-    'Saltbox Plumbing': { dir: 'demos/saltbox-plumbing/phone', h: [...Array(10).fill(800), 347], head: { top: 79, h: 67 } },
-    'Forno Lume': { dir: 'demos/forno-lume/phone', h: [...Array(9).fill(800), 215] },
+    'Saltbox Plumbing': { dir: 'demos/saltbox-plumbing/phone', h: [...Array(10).fill(800), 373], head: { top: 79, h: 67 } },
+    'Forno Lume': { dir: 'demos/forno-lume/phone', h: [...Array(9).fill(800), 191] },
     'Mirrorline Detail': { dir: 'demos/mirrorline-detail/phone', h: [...Array(7).fill(800), 294] },
   };
   const sx = [...document.querySelectorAll('.sx')].map((el) => ({ el, name: el.dataset.name, win: el.querySelector('.sx-win'), frame: el.querySelector('iframe'),
@@ -1049,6 +1059,8 @@
     if (!still) s.el.style.height = `${Math.round(vh + s.enter + s.grow + s.run + s.hold)}px`;
   }
   function loadSamples() {
+    // the Easykeeps page too, so its window isn't blank while the picture downloads
+    ek.querySelector('img').loading = 'eager';
     sx.forEach((s) => {
       if (s.frame.getAttribute('src') || s.shots) return;
       const p = s.phone;
@@ -1206,7 +1218,8 @@
       while (r + 1 < ROOMS.length && fr >= ROOMS[r + 1][0]) r++;
       if (r !== room) { room = r; roomH.textContent = ROOMS[r][1]; roomP.textContent = `${ROOMS[r][2]} Made with AI, not a real home.`; }
     }
-    dock.classList.toggle('on', y > L.hero * 0.8);
+    const docked = y > L.hero * 0.8;
+    dock.classList.toggle('on', docked); dock.inert = !docked;
     lookTick(y);
     // or what about: the samples grow to full screen and their pages glide
     current = 'The realty flight';
@@ -1230,7 +1243,7 @@
 
   if (still) {
     load(0);
-    dock.classList.add('on');
+    dock.classList.add('on'); dock.inert = false;
     likeTab.classList.add('on');
     loadSamples();
   } else {

@@ -10,14 +10,24 @@
 <meta property="og:description" content="Your preview is free. Pick a bundle or tick what you want and see the total.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://southsites.ca/pricing/">
+<meta property="og:site_name" content="Southsites">
+<meta property="og:locale" content="en_CA">
 <meta property="og:image" content="https://southsites.ca/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Southsites prices: build your own">
+<meta name="twitter:description" content="Your preview is free. Pick a bundle or tick what you want and see the total.">
+<meta name="twitter:image" content="https://southsites.ca/og.png">
 <link rel="canonical" href="https://southsites.ca/pricing/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1013'/%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%23ffc83d'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1013'/%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%23ffc83d'/%3E%3Cpath d='M20.6 11.6c-.9-1.5-2.6-2.4-4.6-2.4-2.6 0-4.4 1.4-4.4 3.3 0 4.5 9.4 2.5 9.4 7.3 0 2-1.9 3.4-4.7 3.4-2.2 0-4-.9-5-2.6' fill='none' stroke='%231a1405' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Southsites","description":"Websites for Edmonton small businesses","telephone":"+1-825-461-5061","email":"contact@southsites.ca","url":"https://southsites.ca/","image":"https://southsites.ca/og.png","priceRange":"$249 to $599","address":{"@type":"PostalAddress","addressLocality":"Edmonton","addressRegion":"AB","addressCountry":"CA"},"areaServed":"Edmonton, Alberta","founder":{"@type":"Person","name":"Jan Gabriel"}}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  [hidden] { display: none !important; }
   :root {
     --bg: #0e1013; --surface: #16191e; --surface-2: #1d2128; --field: #111419;
     --line: rgba(255, 255, 255, 0.1); --line-strong: rgba(255, 255, 255, 0.2);
@@ -60,6 +70,7 @@
   .head { text-align: center; padding: 40px 0 34px; }
   .pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(255, 200, 61, .1); border: 1px solid rgba(255, 200, 61, .3); color: var(--accent); font-size: 14px; font-weight: 700; }
   h1 { font: 900 clamp(42px, 6.4vw, 80px)/.92 var(--display); font-stretch: 66%; text-transform: uppercase; margin: 18px 0 14px; text-wrap: balance; }
+  .head .head-cta { margin-top: 20px; }
   .head p { margin: 0 auto; max-width: 52ch; color: var(--muted); font-size: 18px; }
 
   /* bundles */
@@ -93,6 +104,8 @@
   .price span { color: var(--muted); font-size: 15px; }
   .monthly { margin: 6px 0 4px; font-size: 16px; }
   .monthly b { font-weight: 800; }
+  .year { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+  .plan.pick .year { color: #3c4048; }
   .save { min-height: 26px; color: var(--ok); font-size: 14px; font-weight: 700; margin: 0 0 16px; }
   .plan ul { list-style: none; margin: 0 0 22px; padding: 18px 0 0; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 15.5px; }
   .plan li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
@@ -251,9 +264,10 @@
 
 <main>
 <header class="head wrap">
-  <span class="pill">Founding price for my first 3 Edmonton shops</span>
-  <h1>Pick a plan, or build your own.</h1>
-  <p>Your preview is free. You only pay if you keep it, and the monthly part cancels any month.</p>
+  <span class="pill">Founding price: 3 of 3 spots left</span>
+  <h1>Edmonton website prices.</h1>
+  <p>Pick a plan or build your own. Sites start at $249 once and $29 a month, the preview is free, and the monthly part cancels any month.</p>
+  <a class="btn btn-main head-cta" href="/#quote">Get my free preview</a>
 </header>
 
 <div class="wrap">
@@ -263,6 +277,7 @@
       <p class="for">A website made from your Google listing, kept up to date.</p>
       <div class="price"><s>$399</s><b>$249</b><span>once</span></div>
       <p class="monthly">then <b>$29 a month</b></p>
+      <p class="year">Year one: $597 all in</p>
       <p class="save"></p>
       <ul>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Custom-made for your business</li>
@@ -280,7 +295,8 @@
       <p class="for">Everything in Get found, plus bookings and more 5-star reviews.</p>
       <div class="price"><s>$499</s><b>$349</b><span>once</span></div>
       <p class="monthly">then <b>$49 a month</b></p>
-      <p class="save">Save $28 and $9 a month vs. one by one</p>
+      <p class="year">Year one: $937 all in</p>
+      <p class="save">Saves you $28 up front and $9 every month vs. adding these one at a time.</p>
       <ul>
         <li class="plus">Everything in Get found, plus:</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Online booking on your site</li>
@@ -294,7 +310,8 @@
       <p class="for">Everything in Get booked, plus help when you can't pick up.</p>
       <div class="price"><s>$599</s><b>$449</b><span>once</span></div>
       <p class="monthly">then <b>$119 a month</b></p>
-      <p class="save">Save $27 and $27 a month vs. one by one</p>
+      <p class="year">Year one: $1,877 all in</p>
+      <p class="save">Saves you $27 up front and $27 every month vs. adding these one at a time.</p>
       <ul>
         <li class="plus">Everything in Get booked, plus:</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Missed-call text back</li>
@@ -304,7 +321,7 @@
     </article>
   </div><div class="car-dots" aria-hidden="true"></div></div>
   <div class="guar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M8.8 12.2l2.3 2.3 4.3-4.6"/></svg><div><b>Happy or it doesn't go live.</b><span>Every site is custom-made for your business. I don't publish it, or charge you, until you say it's right.</span></div></div>
-  <p class="after">Founding prices for my first 3 shops. After that, the one-time price is $150 more. Third-party plans (a booking app, a phone number) are quoted first and billed to you directly.</p>
+  <p class="after">Founding prices for my first 3 clients. After that, each one-time price goes up $150, to $399, $499 or $599. Third-party plans (a booking app, a phone number) are quoted first and billed to you directly.</p>
 
   <div class="custom">
     <div><h3>Need something bigger?</h3><p>An AI phone receptionist (from $149 a month), a full menu, a price list per service, or something else. Tell me what you need and I'll quote it before you agree.</p></div>
@@ -345,13 +362,15 @@
       <div class="sum">
         <div><span>Once, if you keep it</span><b id="once">$249</b></div>
         <div><span>Then each month</span><b class="mo" id="month">$29</b></div>
+        <p class="year" id="year">Year one: $597 all in</p>
       </div>
-      <a class="btn btn-main" id="text-quote" href="sms:+18254615061">Interested? Text me this quote</a>
+      <a class="btn btn-main" href="/#quote">Get my free preview first</a>
+      <a class="btn btn-line" id="text-quote" href="sms:+18254615061">Text me this quote</a>
       <div class="row2">
         <a class="btn btn-line" href="tel:+18254615061">Call now</a>
         <a class="btn btn-line" id="mail-quote" href="mailto:contact@southsites.ca">Email it</a>
       </div>
-      <p class="fine">$0 to see your preview. Founding price for my first 3 shops. Taxes not included.</p>
+      <p class="fine">$0 to see your preview. Founding price for my first 3 clients. Taxes not included.</p>
     </aside>
   </div>
 </section>
@@ -382,7 +401,7 @@
   <div class="end">
     <h2>Want to see yours first?</h2>
     <p>Text me your shop name. I'll build a free preview from your Google listing and send you the link.</p>
-    <div class="ctas"><a class="btn btn-dark" href="sms:+18254615061?body=Hi%20Jan%2C%20I%27d%20like%20a%20free%20preview%20for%20my%20shop%3A%20">Text 825-461-5061</a><a class="btn btn-ghost" href="tel:+18254615061">Call now</a><a class="btn btn-ghost" href="/#samples">See sample sites</a></div>
+    <div class="ctas"><a class="btn btn-dark" href="/#quote">Get my free preview</a><a class="btn btn-ghost" href="sms:+18254615061?body=Hi%20Jan%2C%20I%27d%20like%20a%20free%20preview%20for%20my%20shop%3A%20">Text 825-461-5061</a><a class="btn btn-ghost" href="tel:+18254615061">Call now</a><a class="btn btn-ghost" href="/#samples">See sample sites</a></div>
   </div>
 </div>
 </main>
@@ -390,7 +409,7 @@
 <footer>
   <div class="wrap">
     <div class="row"><span>Jan Gabriel, Southsites, Edmonton</span><span><a href="tel:+18254615061">825-461-5061</a> &nbsp; <a href="mailto:contact@southsites.ca">contact@southsites.ca</a></span></div>
-    <span>Prices in Canadian dollars, before tax. Founding prices apply to my first 3 shops.</span>
+    <span>Prices in Canadian dollars, before tax. Founding prices apply to my first 3 clients.</span>
   </div>
 </footer>
 
@@ -446,9 +465,10 @@
     $('#lines').innerHTML = q.lines.map(([a, b]) => `<li><span>${a}</span><span>${b}</span></li>`).join('');
     const deal = $('#deal');
     deal.classList.toggle('on', !!q.deal);
-    deal.textContent = q.deal ? `${q.deal.b.name} bundle: you save ${money(q.deal.save[0])} and ${money(q.deal.save[1])} a month` : '';
+    deal.textContent = q.deal ? `The ${q.deal.b.name} bundle saves you ${money(q.deal.save[0])} up front and ${money(q.deal.save[1])} every month.` : '';
     $('#once').textContent = money(q.once);
     $('#month').textContent = (q.from ? 'from ' : '') + money(q.month);
+    $('#year').textContent = `Year one: ${q.from ? 'from ' : ''}${money(q.once + q.month * 12)} all in`;
     $('#bar-once').textContent = money(q.once);
     $('#bar-month').textContent = `then ${q.from ? 'from ' : ''}${money(q.month)} a month`;
     const list = q.lines.map(([a, b]) => `- ${a}: ${b}`).join('\n');
