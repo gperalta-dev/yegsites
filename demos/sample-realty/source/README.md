@@ -17,6 +17,15 @@ Blender 5.2, Cycles on the GPU. 240 frames, 1600x900, then `pack.py` makes the w
    names the same house (2,250 sq ft, two storeys, 4 bedrooms, 3.5 baths) and the same finishes so rooms stay in scale:
    ensuite 381 to 443, upstairs hall and second bedroom 444 to 506, kids' room 507 to 569, bonus room over the garage 570 to 632.
    The stairs down, the back door and the yard are still to do.
+9. Sunset re-render (now the `main.py` defaults): Blender's physical sky (multiple scattering) drawn for a sun 2.5 degrees
+   up, the sun lamp at 9 degrees from the west-south-west so it still clears the neighbours' roofs, three times as many
+   lit windows. The flight drops into the river valley west of the bridges, flies east along the river over the High
+   Level Bridge and past the Walterdale, then climbs over the south side to the suburb; its speed follows its height
+   over the ground. `landmarks.py` builds both bridges from their published dimensions: the High Level (black steel,
+   777 m, a Pratt truss with the road inside and the streetcar on top about 47 m over the river, concrete piers in the
+   river, steel towers on the approaches) and the Walterdale (two white arches 54 m tall over a 206 m span, leaning
+   13.5 degrees toward each other, 16 hangers each). After a re-render, `py add_interior.py <clip 1> <new f239.png> .. 64 40 --fade-only`
+   redoes the dissolve into the walk inside without touching the clip frames or the page.
 
 What is real: downtown footprints and heights, the river, bridges, roads, parks and terrain. What is made up: the
 suburb on the south side, the house, the listing and the interior (made with AI). Credits: Map data (c) OpenStreetMap contributors (ODbL).

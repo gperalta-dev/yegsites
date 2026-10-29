@@ -20,6 +20,7 @@ G = None
 DEM = None
 DM = None
 Z_REF = 0.0
+LIT, EMIT = 1.0, 1.0  # more lit windows, and brighter ones, for the sunset render
 SUB = (0.0, 0.0, 0.0)
 
 
@@ -246,7 +247,7 @@ def facade_mat(name, wall_color, glass_tint, fh0, mw0, ww0, wh0, refl0=0.1, lit=
     wf.noise_dimensions = "3D"
     L(flr.outputs["Vector"], wf.inputs["Vector"])
     busy = M("MULTIPLY_ADD", M("GREATER_THAN", wf.outputs["Value"], 0.72), 4.0, 0.35)
-    lit_m = M("MULTIPLY", M("LESS_THAN", wn.outputs["Value"], M("MULTIPLY", busy, lit)), win_up)
+    lit_m = M("MULTIPLY", M("LESS_THAN", wn.outputs["Value"], M("MULTIPLY", busy, lit * LIT)), win_up)
     sep_c = N(nt, "ShaderNodeSeparateColor", -900, -800)
     L(wn.outputs["Color"], sep_c.inputs["Color"])
     lc = N(nt, "ShaderNodeMix", -700, -800, data_type="RGBA")
@@ -264,7 +265,7 @@ def facade_mat(name, wall_color, glass_tint, fh0, mw0, ww0, wh0, refl0=0.1, lit=
     L(ic.outputs["Color"], inner.inputs["Base Color"])
     inner.inputs["Roughness"].default_value = 0.9
     L(lc.outputs["Result"], inner.inputs["Emission Color"])
-    L(M("MULTIPLY", lit_m, M("MULTIPLY_ADD", wn.outputs["Value"], 2.0, 0.4)), inner.inputs["Emission Strength"])
+    L(M("MULTIPLY", lit_m, M("MULTIPLY_ADD", wn.outputs["Value"], 2.0 * EMIT, 0.4 * EMIT)), inner.inputs["Emission Strength"])
     gl = N(nt, "ShaderNodeBsdfGlossy", -400, -200)
     gl.inputs["Color"].default_value = (*glass_tint, 1)
     L(M("MULTIPLY_ADD", r5, 0.05, 0.01), gl.inputs["Roughness"])
@@ -347,7 +348,7 @@ def city_mats():
                    rough_wall=0.75, storefront=False),
         pbr("old roofs", "grey_roof_01", 6.0, value=0.75, sat=0.5, rough=(0.65, 0.95)),
         flat("bridge steel", (0.045, 0.048, 0.05), rough=0.65, metal=0.3, noise=0.2),
-        flat("bridge concrete", (0.48, 0.46, 0.43), rough=0.85, noise=0.25, bump=0.3),
+        flat("bridge concrete", (0.38, 0.365, 0.34), rough=0.85, noise=0.25, bump=0.3),
         water_mat(),
         facade_mat("ribbon office", (0.55, 0.54, 0.52), (0.60, 0.68, 0.74), 3.9, 6.0, 0.985, 0.46, refl0=0.18, lit=0.04,
                    wall_tex="concrete_wall_008", tex_size=2.71),

@@ -1,7 +1,8 @@
 """append the interior walk-through (AI video) after the 240 exterior frames: crossfade from the last exterior frame into
 the clip (a push-in toward the porch while it dissolves), extract frames with ffmpeg, write desktop (1440x810) and mobile (456x810) WebP, update the demo page.
 
-py add_interior.py <clip.mp4> <last exterior png> <site demo dir> <n frames> <quality>
+py add_interior.py <clip.mp4> <last exterior png> <site demo dir> <n frames> <quality> [--fade-only]
+--fade-only rewrites just the dissolve frames (after the flight is re-rendered) and leaves the clip frames and the page alone
 """
 import re
 import subprocess
@@ -47,7 +48,9 @@ seq = []
 for k in range(FADE):
     t = (k + 1) / (FADE + 1)
     seq.append(Image.blend(push(t), first, ease(min(1, max(0, (t - 0.2) / 0.8)))))
-seq += [Image.open(p).convert("RGB") for p in clip_frames]
+FADE_ONLY = "--fade-only" in sys.argv
+if not FADE_ONLY:
+    seq += [Image.open(p).convert("RGB") for p in clip_frames]
 fd, fm = site / "frames" / "d", site / "frames" / "m"
 tot_d = tot_m = 0
 for k, im in enumerate(seq):
@@ -58,6 +61,9 @@ for k, im in enumerate(seq):
     tot_d += (fd / name).stat().st_size
     tot_m += (fm / name).stat().st_size
 total = EXT + len(seq)
+if FADE_ONLY:
+    print("dissolve frames", len(seq), "rewritten, f240 to", f"f{EXT + len(seq) - 1:03d}")
+    raise SystemExit(0)
 print("interior frames", len(seq), "desktop", round(tot_d / 1e6, 2), "MB mobile", round(tot_m / 1e6, 2), "MB; total frames", total)
 
 # page: more frames, a sixth chapter, story height grows with the frame count so the first five beats keep their pace

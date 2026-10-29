@@ -25,6 +25,7 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 import common
 common.set_dl(arg("--dl"))
 import city
+import landmarks
 import look
 import plants
 import suburb
@@ -34,7 +35,8 @@ OUT = Path(arg("--out", "frames")).resolve()
 RES = tuple(int(v) for v in arg("--res", "1600x900").split("x"))
 SAMPLES = int(arg("--samples", "160"))
 FRAME_END = 239
-SUN_PHI, SUN_EL = -160.0, 15.0
+# sunset: the sun low in the west-south-west (late October), behind the camera as it flies east down the valley
+SUN_PHI, SUN_EL = float(arg("--sun-phi", "-160")), float(arg("--sun-el", "9"))
 # the made-up suburb: a disk on the south side, the hero street a crescent whose houses face south-west (into the sun)
 SUB = (-150.0, -1850.0, 520.0)
 FRONT = Vector((-math.sin(math.radians(40)), -math.cos(math.radians(40))))  # from house to street, azimuth 220
@@ -130,6 +132,7 @@ print("hero house at", tuple(round(v, 1) for v in H), "front faces", tuple(round
 
 terr = city.terrain(col)
 city.far_ground(col)
+city.LIT, city.EMIT = float(arg("--lit", "3.0")), float(arg("--emit", "1.6"))
 mats, cdata = city.buildings(col)
 if (Path(arg("--geo")) / "ortho.json").exists() and "--noortho" not in ARGS:
     import ortho
@@ -138,7 +141,7 @@ if (Path(arg("--geo")) / "ortho.json").exists() and "--noortho" not in ARGS:
     ortho.assign(bpy.data.objects["city houses"], only={city.M_OLDROOF})
     ortho.assign(bpy.data.objects["city buildings"], only={city.M_GRAVEL}, max_z=30.0)
 city.water(col, mats, cdata)
-city.bridges(col, mats, cdata)
+landmarks.bridges(col, mats, cdata)
 trees = city.tree_points()
 city.gn_scatter("city trees", trees, {0: plants.PROTO["tree"], 1: plants.PROTO["spruce"], 2: plants.PROTO["tree2"],
                                       3: plants.PROTO["tree3"], 4: plants.PROTO["sapling"]}, col)
@@ -153,9 +156,17 @@ for k in range(1400):
     extra.append((x, y, 0.0, k_, rng.uniform(1.6, 2.6) if k_ < 3 else rng.uniform(0.45, 0.7), rng.uniform(0, 6.28)))
 city.gn_scatter("suburb edge trees", np.array(extra, np.float32), {0: plants.PROTO["tree"], 1: plants.PROTO["spruce"],
                                                                      3: plants.PROTO["tree3"]}, col)
-HDRI = arg("--hdri", "kloppenheim_06_puresky")
-look.sky(common.DL / "hdri" / f"{HDRI}_8k.hdr", common.DL / "hdri" / f"{HDRI}_1k.hdr", sun_phi_deg=SUN_PHI, sun_el_deg=SUN_EL,
-         strength=1.0)
+if arg("--sky", "sunset") == "sunset":
+    # the sky is drawn for a sun just above the horizon (orange toward it, rose away from it); the lamp sits a little
+    # higher, so the low sun still clears the neighbours' roofs and lights the front of the house
+    sc_ = tuple(float(v) for v in arg("--sun-col", "1.0,0.58,0.32").split(","))
+    hz_ = tuple(float(v) for v in arg("--haze", "1.1,0.8,0.62").split(","))
+    look.phys_sky(SUN_PHI, SUN_EL, strength=float(arg("--sky-str", "0.22")), sun_energy=float(arg("--sun-e", "5.5")),
+                  dust=float(arg("--dust", "3.0")), sky_el_deg=float(arg("--sky-el", "2.5")), sun_color=sc_, haze=hz_)
+else:
+    HDRI = arg("--hdri", "kloppenheim_06_puresky")
+    look.sky(common.DL / "hdri" / f"{HDRI}_8k.hdr", common.DL / "hdri" / f"{HDRI}_1k.hdr", sun_phi_deg=SUN_PHI,
+             sun_el_deg=SUN_EL, strength=1.0)
 print("scene built in", round(time.time() - T0, 1), "s")
 
 
@@ -183,18 +194,39 @@ def hl(x, y, z):
 DOWNTOWN = Vector((640.0, 1300.0, 70.0))
 FLY_END = 172
 ORBIT_R, ORBIT_Z = 30.0, 30.0
-# north bank looking east at downtown (sun behind), across the river west of the High Level Bridge, south over Garneau,
-# hook round the west side of the suburb and come in to the front of the house from the street
-fly_pos = [Vector((-950, 1800, 265)), Vector((-760, 1240, 250)), Vector((-600, 90, 228)), Vector((-430, -950, 200)),
+# north bank looking east at downtown (sun behind), then down into the river valley west of the bridges: east along the
+# river, over the High Level Bridge (streetcar deck about -7, the camera 18 m above it), past the Walterdale Bridge's
+# arches, up over the south side, hook round the west side of the suburb and come in to the front of the house.
+# the river is at about -55 here, the bank tops at -15 to -30
+fly_pos = [Vector((-950, 1800, 265)), Vector((-1150, 1050, 150)), Vector((-1300, 190, 0)), Vector((-750, 100, 8)),
+           Vector((-300, 20, 12)), Vector((40, -110, -8)), Vector((240, -360, 40)), Vector((-150, -1000, 170)),
            hl(-230, -40, 140), hl(-120, -110, 70), hl(-45, -42, 24), hl(-8, -27, 7.5)]
-fly_tgt = [DOWNTOWN, DOWNTOWN + Vector((-80, -260, -20)), Vector((-200, -700, 0)), hl(-40, -60, 0),
+fly_tgt = [DOWNTOWN, Vector((200, 800, -10)), Vector((-380, 200, -15)), Vector((0, -60, -30)),
+           Vector((215, -170, -25)), Vector((215, -190, -20)), Vector((60, -900, 0)), hl(-40, -60, 0),
            hl(0, -30, 0), hl(0, -12, 2), hl(0, -6, 3), hl(0.3, -2.5, 3.4)]
 lens_keys = [(0, 30), (60, 28), (120, 30), (FLY_END, 30), (FRAME_END, 34)]
 
 
+def flight_timing(n=3000):
+    """the flight's speed grows with its height over the ground, so it is quick high over the city and slow low down by
+    the river and at the house. returns spline parameter samples and the share of the flight's time reached at each"""
+    us = np.linspace(0.0, 1.0, n + 1)
+    pts = [catmull(fly_pos, u) for u in us]
+    acc_t = [0.0]
+    for a, b in zip(pts, pts[1:]):
+        m = (a + b) / 2
+        h = max(4.0, m.z - city.z_at(m.x, m.y))
+        acc_t.append(acc_t[-1] + (b - a).length / (h + 12.0) ** 0.75)
+    return us, np.array(acc_t) / acc_t[-1]
+
+
+FLY_U, FLY_T = flight_timing()
+
+
 def cam_at(f):
     if f <= FLY_END:
-        t = ease(f / FLY_END) * 0.6 + (f / FLY_END) * 0.4
+        x = f / FLY_END
+        t = float(np.interp(x * 0.75 + ease(x) * 0.25, FLY_T, FLY_U))  # a gentle start
         return catmull(fly_pos, t), catmull(fly_tgt, t)
     u = ease((f - FLY_END) / (FRAME_END - FLY_END))
     p_end = fly_pos[-1]
@@ -242,6 +274,9 @@ def camera():
 
 
 camera()
+for f in range(0, FLY_END + 1, 6):
+    p, _ = cam_at(f)
+    print(f"PATH f{f:03d} ({p.x:.0f}, {p.y:.0f}, {p.z:.0f}) {p.z - city.z_at(p.x, p.y):.0f} m over the ground")
 # keep the low part of the flight clear: no yard tree crowns where the camera passes under 20 m
 cam_pts = [cam_at(f)[0] for f in range(90, FRAME_END + 1)]
 cut = []
@@ -256,8 +291,19 @@ for o in cut:
 print("cleared", len(cut), "plants from the camera path")
 look.render_settings(RES, SAMPLES, threshold=0.012, persistent=True, motion_blur=0.0)
 hz = look.HORIZON
-look.grade(start=250, length=float(arg("--haze-len", "30000")), haze_color=tuple(hz),
-           near_len=4000.0, near_amt=float(arg("--near", "0.18")), near_color=(hz[0] * 1.06, hz[1] * 1.0, hz[2] * 0.9), bloom=0.08)
+tree = look.grade(start=250, length=float(arg("--haze-len", "30000")), haze_color=tuple(hz),
+                  near_len=4000.0, near_amt=float(arg("--near", "0.18")), near_color=(hz[0] * 1.06, hz[1] * 1.0, hz[2] * 0.9), bloom=0.08)
+if arg("--sky", "sunset") == "sunset":
+    # the far haze takes the sky's own horizon colour in the direction the camera faces, frame by frame, so the hazy
+    # ground melts into the glow instead of meeting it at a line
+    table = look.horizon_table()
+    far = tree.nodes["far haze"]
+    for f in range(FRAME_END + 1):
+        p, q = cam_at(f)
+        c = look.horizon_toward(table, math.degrees(math.atan2(q.y - p.y, q.x - p.x))) * float(arg("--haze-match", "0.97"))
+        far.inputs["B"].default_value = (*[float(v) for v in c], 1)
+        far.inputs["B"].keyframe_insert("default_value", frame=f)
+    print("far haze follows the horizon: f0", tuple(round(float(v), 3) for v in look.horizon_toward(table, 0)))
 scene.frame_start, scene.frame_end = 0, FRAME_END
 if arg("--save"):
     bpy.ops.wm.save_as_mainfile(filepath=str(Path(arg("--save")).resolve()))
@@ -268,13 +314,14 @@ if "--probe" in ARGS:  # lot edges next to the listing, in the listing's frame
             xs = [(inv @ (o.matrix_world @ v.co)).x for v in o.data.vertices]
             ys = [(inv @ (o.matrix_world @ v.co)).y for v in o.data.vertices]
             print("PROBE", o.name, "x", round(min(xs), 2), round(max(xs), 2), "y", round(min(ys), 1), round(max(ys), 1))
-if arg("--still"):
-    x, y, z, tx, ty, tz, lens = (float(v) for v in arg("--still").split(","))
+if arg("--still") or arg("--look"):  # --still in the house's frame, --look in world metres
+    x, y, z, tx, ty, tz, lens = (float(v) for v in (arg("--still") or arg("--look")).split(","))
     co = scene.camera
     co.animation_data_clear()
     co.data.animation_data_clear()
-    co.location = hl(x, y, z)
-    co.rotation_euler = (hl(tx, ty, tz) - co.location).to_track_quat("-Z", "Y").to_euler()
+    to = hl if arg("--still") else (lambda a, b, c: Vector((a, b, c)))
+    co.location = to(x, y, z)
+    co.rotation_euler = (to(tx, ty, tz) - co.location).to_track_quat("-Z", "Y").to_euler()
     co.data.lens = lens
     co.data.dof.use_dof = False
     OUT.mkdir(parents=True, exist_ok=True)

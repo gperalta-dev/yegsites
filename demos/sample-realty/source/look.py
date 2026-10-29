@@ -161,6 +161,104 @@ def sky(hdri_8k, hdri_1k, sun_phi_deg, sun_el_deg=None, strength=1.0, sun_mult=1
     return so, d
 
 
+def phys_sky(sun_phi_deg, sun_el_deg, strength=0.18, sun_energy=4.0, sun_color=(1.0, 0.66, 0.40), haze=(1.08, 0.86, 0.66),
+             dust=2.0, sky_el_deg=None):
+    """sunset: Blender's physical sky (multiple scattering), so the horizon glows orange toward the sun and fades to rose
+    and blue away from it, with no sun disc in it. a sun lamp at the same direction gives the direct light.
+    sun_phi_deg is the map angle toward the sun: 0 east, 90 north, 180 west. the sky node's own sun sits at
+    90 - rotation, measured with a panorama render."""
+    scene = bpy.context.scene
+    w = bpy.data.worlds.new("sunset")
+    scene.world = w
+    try:
+        w.use_nodes = True
+    except Exception:
+        pass
+    nt = w.node_tree
+    bg = nt.nodes.get("Background")
+    s = N(nt, "ShaderNodeTexSky", -400, 0)
+    s.sky_type = "MULTIPLE_SCATTERING"
+    s.sun_disc = False
+    s.sun_elevation = math.radians(sun_el_deg if sky_el_deg is None else sky_el_deg)
+    s.sun_rotation = math.radians(90.0 - sun_phi_deg) % (2 * math.pi)
+    s.altitude = 670.0
+    s.aerosol_density = dust
+    # the far ground stops a hair under the true horizon: look up the sky just above it there, so no dark band of
+    # below-the-horizon sky shows between the hazy ground and the glow
+    tc = N(nt, "ShaderNodeTexCoord", -1100, 0)
+    sx = N(nt, "ShaderNodeSeparateXYZ", -900, 0)
+    nt.links.new(tc.outputs["Generated"], sx.inputs["Vector"])
+    zc = N(nt, "ShaderNodeMath", -750, -100, operation="MAXIMUM")
+    nt.links.new(sx.outputs["Z"], zc.inputs[0])
+    zc.inputs[1].default_value = 0.004
+    cb = N(nt, "ShaderNodeCombineXYZ", -600, 0)
+    nt.links.new(sx.outputs["X"], cb.inputs["X"])
+    nt.links.new(sx.outputs["Y"], cb.inputs["Y"])
+    nt.links.new(zc.outputs[0], cb.inputs["Z"])
+    nm = N(nt, "ShaderNodeVectorMath", -500, 0, operation="NORMALIZE")
+    nt.links.new(cb.outputs["Vector"], nm.inputs[0])
+    nt.links.new(nm.outputs["Vector"], s.inputs["Vector"])
+    nt.links.new(s.outputs["Color"], bg.inputs["Color"])
+    bg.inputs["Strength"].default_value = strength
+    HORIZON[:] = list(haze)
+    sun = bpy.data.lights.new("sun", "SUN")
+    sun.color = sun_color
+    sun.energy = sun_energy
+    sun.angle = math.radians(0.55)
+    so = link(bpy.data.objects.new("sun", sun))
+    ph, e_ = math.radians(sun_phi_deg), math.radians(sun_el_deg)
+    d = Vector((math.cos(e_) * math.cos(ph), math.cos(e_) * math.sin(ph), math.sin(e_)))
+    so.rotation_euler = (-d).to_track_quat("-Z", "Y").to_euler()
+    print("sunset sky: sun phi", sun_phi_deg, "el", sun_el_deg, "strength", strength, "sun", sun_energy, sun_color)
+    return so, d
+
+
+def horizon_table(res=360):
+    """the world's colour just above the horizon all the way round: renders the world alone as a tiny equirectangular
+    panorama in a throwaway scene. returns map angles (0 east, 90 north) and linear RGB, in the render's own units"""
+    main = bpy.context.scene
+    sc = bpy.data.scenes.new("horizon probe")
+    sc.world = main.world
+    cd = bpy.data.cameras.new("probe")
+    cd.type = "PANO"
+    try:
+        cd.panorama_type = "EQUIRECTANGULAR"
+    except Exception:
+        cd.cycles.panorama_type = "EQUIRECTANGULAR"
+    co = bpy.data.objects.new("probe", cd)
+    sc.collection.objects.link(co)
+    sc.camera = co
+    co.rotation_euler = (math.radians(90), 0, math.radians(-90))  # forward along +X (east), in the middle column
+    sc.render.engine = "CYCLES"
+    sc.cycles.samples = 16
+    sc.cycles.device = "CPU"
+    sc.render.resolution_x, sc.render.resolution_y = res, res // 2
+    sc.render.resolution_percentage = 100
+    sc.render.image_settings.file_format = "OPEN_EXR"
+    sc.render.image_settings.color_depth = "32"
+    sc.view_settings.view_transform = "Standard"
+    path = Path(bpy.app.tempdir or ".") / "horizon_probe.exr"
+    sc.render.filepath = str(path)
+    bpy.ops.render.render(write_still=True, scene=sc.name)
+    im = bpy.data.images.load(str(path))
+    px = np.array(im.pixels[:], dtype=np.float32).reshape(res // 2, res, 4)
+    row = px[res // 4 + 1, :, :3].copy()  # one row (one degree) above the horizon; rows count from the bottom
+    bpy.data.images.remove(im)
+    bpy.data.objects.remove(co)
+    bpy.data.cameras.remove(cd)
+    bpy.data.scenes.remove(sc)
+    phis = (res / 2 - (np.arange(res) + 0.5)) / res * 360.0  # left of the middle is counter-clockwise
+    return phis, row
+
+
+def horizon_toward(table, phi_deg, spread=32.0):
+    """average horizon colour across the view, centred on the map angle the camera faces"""
+    phis, row = table
+    d = (phis - phi_deg + 180.0) % 360.0 - 180.0
+    w = np.exp(-0.5 * (d / spread) ** 2)
+    return (row * w[:, None]).sum(0) / w.sum()
+
+
 def render_settings(res=(1600, 900), samples=128, threshold=0.015, persistent=True, motion_blur=0.0):
     scene = bpy.context.scene
     r = scene.render
@@ -268,6 +366,7 @@ def grade(start=250.0, length=30000.0, haze_color=(0.86, 0.80, 0.72), near_len=4
     L(rl.outputs["Image"], mix.inputs["A"])
     mix.inputs["B"].default_value = (*near_color, 1)
     mix2 = tree.nodes.new("ShaderNodeMix")
+    mix2.name = "far haze"
     mix2.data_type = "RGBA"
     L(far, mix2.inputs["Factor"])
     L(mix.outputs["Result"], mix2.inputs["A"])
