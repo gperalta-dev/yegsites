@@ -159,7 +159,18 @@ h2 .tone { font-size: .62em; line-height: 1.2; margin-top: 8px; }
 
 nav.top .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw; }
 @media (max-width: 760px) { nav.top .name { font-size: 16px; max-width: 52vw; } nav.top .brand .mark { width: 34px; height: 34px; } }
-@keyframes ringpulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 16px transparent; } }
+nav.n-minimal .ring::after, .cb-fab .call::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--accent); pointer-events: none;
+  animation: ringpulse 2.6s ease-out infinite; }
+@keyframes ringpulse { from { transform: scale(1); opacity: .6; } 70%, to { transform: scale(1.55); opacity: 0; } }
+/* phones: no full-screen grain blend, no frosted-glass blur on the fixed bars, no moving blurred backgrounds (they made scrolling slow) */
+@media (max-width: 760px), (hover: none) {
+  body::after { display: none; }
+  nav.top, nav.top .brand, nav.top .links, .k-callbar, .h-overlay .status, .h-slides .status { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  nav.n-capsule .brand, nav.n-capsule .links { background: var(--surface); }
+  nav.n-center, nav.n-minimal.scrolled { background: var(--bg); }
+  .k-callbar.cb-pill { background: var(--dark); }
+  body::before, .h-center .mesh { animation: none !important; }
+}
 
 nav.n-capsule { top: 10px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; pointer-events: none; }
 nav.n-capsule .wrap { min-height: 60px; }
@@ -173,7 +184,7 @@ nav.n-capsule .links .btn { border-radius: 999px; min-height: 40px; }
 
 .k-callbar.cb-fab { display: flex; align-items: center; gap: 10px; position: fixed; left: auto; right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 40; background: none; box-shadow: none; }
 .cb-fab a { box-shadow: 0 14px 30px -10px rgba(0,0,0,.5); text-decoration: none; }
-.cb-fab .call { width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); animation: ringpulse 2.6s infinite; }
+.cb-fab .call { position: relative; width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); }
 .cb-fab .dir { display: inline-flex; align-items: center; gap: 6px; min-height: 46px; padding: 0 16px; border-radius: 999px; background: var(--dark); color: var(--on-dark); font-weight: 700; font-size: 14.5px; }
 body { padding-bottom: 90px; }
 main .label { padding: 8px 14px; border: 1px solid color-mix(in srgb, currentColor 45%, transparent); border-radius: 999px; letter-spacing: .14em; }

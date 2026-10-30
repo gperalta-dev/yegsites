@@ -180,7 +180,18 @@ h2 .tone { font-size: .62em; line-height: 1.2; margin-top: 8px; }
 
 nav.top .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw; }
 @media (max-width: 760px) { nav.top .name { font-size: 16px; max-width: 52vw; } nav.top .brand .mark { width: 34px; height: 34px; } }
-@keyframes ringpulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 16px transparent; } }
+nav.n-minimal .ring::after, .cb-fab .call::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--accent); pointer-events: none;
+  animation: ringpulse 2.6s ease-out infinite; }
+@keyframes ringpulse { from { transform: scale(1); opacity: .6; } 70%, to { transform: scale(1.55); opacity: 0; } }
+/* phones: no full-screen grain blend, no frosted-glass blur on the fixed bars, no moving blurred backgrounds (they made scrolling slow) */
+@media (max-width: 760px), (hover: none) {
+  body::after { display: none; }
+  nav.top, nav.top .brand, nav.top .links, .k-callbar, .h-overlay .status, .h-slides .status { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  nav.n-capsule .brand, nav.n-capsule .links { background: var(--surface); }
+  nav.n-center, nav.n-minimal.scrolled { background: var(--bg); }
+  .k-callbar.cb-pill { background: var(--dark); }
+  body::before, .h-center .mesh { animation: none !important; }
+}
 
 nav.n-center { border-bottom: 1px solid var(--line); }
 nav.n-center .wrap { display: grid; grid-template-columns: 1fr auto 1fr; }

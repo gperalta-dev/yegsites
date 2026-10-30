@@ -167,7 +167,18 @@ h2 .tone { font-size: .62em; line-height: 1.2; margin-top: 8px; }
 
 nav.top .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw; }
 @media (max-width: 760px) { nav.top .name { font-size: 16px; max-width: 52vw; } nav.top .brand .mark { width: 34px; height: 34px; } }
-@keyframes ringpulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 16px transparent; } }
+nav.n-minimal .ring::after, .cb-fab .call::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--accent); pointer-events: none;
+  animation: ringpulse 2.6s ease-out infinite; }
+@keyframes ringpulse { from { transform: scale(1); opacity: .6; } 70%, to { transform: scale(1.55); opacity: 0; } }
+/* phones: no full-screen grain blend, no frosted-glass blur on the fixed bars, no moving blurred backgrounds (they made scrolling slow) */
+@media (max-width: 760px), (hover: none) {
+  body::after { display: none; }
+  nav.top, nav.top .brand, nav.top .links, .k-callbar, .h-overlay .status, .h-slides .status { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  nav.n-capsule .brand, nav.n-capsule .links { background: var(--surface); }
+  nav.n-center, nav.n-minimal.scrolled { background: var(--bg); }
+  .k-callbar.cb-pill { background: var(--dark); }
+  body::before, .h-center .mesh { animation: none !important; }
+}
 
 nav.n-center { border-bottom: 1px solid var(--line); }
 nav.n-center .wrap { display: grid; grid-template-columns: 1fr auto 1fr; }
@@ -195,7 +206,7 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
 :is(.h-split .ph, .h-bp .pin, .h-poster .shot, .h-collage .stack, .h-center .fanrow, .h-stripe figure) { animation: rise 1.3s cubic-bezier(.2,.7,.2,1) .25s both; }
 
 .ribbon { overflow: hidden; }
-.ribbon .track { display: flex; width: max-content; animation: ribbon 42s linear infinite; }
+.ribbon .track { display: flex; width: max-content; animation: ribbon 42s linear infinite; will-change: transform; }
 .ribbon .half { display: flex; align-items: center; gap: 30px; padding: 18px 30px 18px 0; font: var(--hw, 700) clamp(18px, 2.2vw, 24px)/1 var(--display);
   text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
 .ribbon .ic { opacity: .75; }
@@ -207,11 +218,12 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
 .r-tape .band.b { rotate: 2.4deg; translate: 0 -22%; background: var(--dark); color: var(--on-dark); }
 .r-tape .band.b .track { animation-direction: reverse; animation-duration: 50s; }
 .r-outline { padding: clamp(14px, 2.4vw, 28px) 0; border-block: 1px solid var(--line); }
-.r-outline .half { font: var(--hw, 800) clamp(50px, 8vw, 110px)/1.05 var(--display); text-transform: none; letter-spacing: -.01em; gap: 40px; padding: 4px 40px 4px 0;
+.r-outline .half { font: var(--hw, 800) clamp(28px, 5vw, 60px)/1.05 var(--display); text-transform: none; letter-spacing: -.01em; gap: 28px; padding: 4px 28px 4px 0;
   color: transparent; -webkit-text-stroke: 1.4px color-mix(in srgb, var(--ink) 60%, transparent); }
 .r-outline .half span:nth-of-type(odd) { color: var(--accent); -webkit-text-stroke: 0; }
 .r-outline .ic { width: 40px; height: 40px; color: var(--accent); opacity: 1; }
-.r-outline .track { animation-duration: 70s; }
+.r-outline .track { animation-duration: 45s; }
+.r-outline .ic { width: 26px; height: 26px; }
 main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { background: var(--surface); }.wrap { max-width: 1000px; }
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
