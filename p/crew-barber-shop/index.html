@@ -328,7 +328,7 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
     }
     const cur = span(biz.hours[DAYS[today]]), open = cur && minute >= cur[0] && minute < cur[1];
     let sub = '';
-    if (open) sub = `Closes at ${nice(cur[1])}`;
+    if (open) sub = cur[1] - cur[0] >= 1440 ? 'Open 24 hours' : `Closes at ${nice(cur[1])}`;
     else for (let k = 0; k < 7; k++) { const dd = (today + k) % 7, s = span(biz.hours[DAYS[dd]]); if (s && (k > 0 || s[0] > minute)) { sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(s[0])}`; break; } }
     for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : 'Closed now';
     for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
