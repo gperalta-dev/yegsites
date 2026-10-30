@@ -348,7 +348,7 @@ main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { backg
     const known = Object.keys(H).length;
     if (!known) {   // no hours on the google listing
       for (const el of document.querySelectorAll('[data-state], [data-today]')) el.textContent = 'Call to book';
-      for (const el of document.querySelectorAll('[data-sub]')) el.textContent = 'By appointment';
+      for (const el of document.querySelectorAll('[data-sub]')) el.textContent = 'Hours not listed';
       return;
     }
     let end = null;
@@ -508,7 +508,7 @@ main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { backg
         if (len >= 720) band.setAttribute('d', 'M100 8.5a91.5 91.5 0 1 1 0 183a91.5 91.5 0 1 1 0-183');
         else { const [x0, y0] = pt(s[0]), [x1, y1] = pt(s[1]);
           band.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A91.5 91.5 0 ${len > 360 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
-      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Hours by appointment.';
+      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Call for hours.';
     }
   })();
 </script>
@@ -574,7 +574,7 @@ main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { backg
   </div>
   <div class="grid">
     <div class="box"><small>On Google today</small>
-      <div class="big">New<span>on Google</span></div>
+      <div class="big">Listed<span>on Google, rating not checked</span></div>
       <ul><li><span>Website</span><b class="bad">Your listing links to your current website</b></li></ul>
     </div>
     <div class="box"><small>Your new site</small>
@@ -586,6 +586,7 @@ main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { backg
     <div class="row"><span>Edmonton founding price, my first 3 shops</span><b class="now"><s>$399</s>$249 once</b></div>
     <div class="row"><span>Your .ca domain, first year</span><b class="free">Included</b></div>
     <div class="row"><span>Hosting and small edits, cancel any month</span><b>$29 a month</b></div>
+    <div class="row"><span>Happy or it doesn't go live: not published or charged until you say it's right</span><b class="free">Promise</b></div>
   </div>
   <a class="more" href="https://southsites.ca/#samples">See other sites I've built</a>
   <footer><b>Jan Gabriel</b>, Southsites, Edmonton<br><a href="tel:+18254615061">825-461-5061</a><a href="mailto:contact@southsites.ca">contact@southsites.ca</a><a href="https://southsites.ca/">southsites.ca</a></footer>
