@@ -272,7 +272,7 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <div class="btns"><a class="btn btn-acc" href="tel:+14378082286">Book a call<span class="num"> (437) 808-2286</span></a><a class="btn btn-line" href="#services">Services</a></div></div>
   <div class="arch"><img src="img/0-tailor-c16.jpg" alt="Stitching under the machine light"></div></div></header>
 
-<section class="p-strip" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>At the bench</h2></div><div class="row"><figure tabindex="0"><img src="img/1-photo-2.jpg" alt="Stitching a seam" loading="lazy"><figcaption>Stitching a seam</figcaption></figure><figure tabindex="0"><img src="img/2-photo-3.jpg" alt="A wall of fabric" loading="lazy"><figcaption>A wall of fabric</figcaption></figure><figure tabindex="0"><img src="img/3-photo-2.jpg" alt="A tailor&#x27;s wooden ruler" loading="lazy"><figcaption>A tailor&#x27;s wooden ruler</figcaption></figure><figure tabindex="0"><img src="img/4-tailor-c26.jpg" alt="A tailor&#x27;s tape measure" loading="lazy"><figcaption>A tailor&#x27;s tape measure</figcaption></figure></div></div></section><section class="s-split" id="services"><div class="wrap"><div class="sec-head"><span class="label">Tailoring</span><h2>The menu<span class="tone"> Starting prices. Call for a quote on yours.</span></h2></div><div class="grid">
+<section class="p-strip" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>At the bench</h2></div><div class="row"><figure tabindex="0"><img src="img/1-photo-2.jpg" alt="Stitching a seam" loading="lazy"><figcaption>Stitching a seam</figcaption></figure><figure tabindex="0"><img src="img/2-photo-3.jpg" alt="A wall of fabric" loading="lazy"><figcaption>A wall of fabric</figcaption></figure><figure tabindex="0"><img src="img/3-photo-2.jpg" alt="A tailor&#x27;s wooden ruler" loading="lazy"><figcaption>A tailor&#x27;s wooden ruler</figcaption></figure><figure tabindex="0"><img src="img/4-tailor-c26.jpg" alt="A tailor&#x27;s tape measure" loading="lazy"><figcaption>A tailor&#x27;s tape measure</figcaption></figure></div></div></section><section class="s-split" id="services"><div class="wrap"><div class="sec-head"><span class="label">Tailoring</span><h2>Price list<span class="tone"> Starting prices. Call for a quote on yours.</span></h2></div><div class="grid">
   <figure class="stage" data-stage><img src="img/1-photo-2.jpg" alt="Stitching a seam" loading="lazy" class=on><img src="img/2-photo-3.jpg" alt="A wall of fabric" loading="lazy"><img src="img/3-photo-2.jpg" alt="A tailor&#x27;s wooden ruler" loading="lazy"><img src="img/4-tailor-c26.jpg" alt="A tailor&#x27;s tape measure" loading="lazy"><figcaption>Stitching a seam</figcaption></figure>
   <div><ol data-rows><li data-i="0" tabindex="0"><h3>Hemming</h3><b>from $15</b><p>Pants, skirts and sleeves taken up.</p></li><li data-i="1" tabindex="0"><h3>Suit alterations</h3><b>from $30</b><p>Jackets and trousers taken in, let out and hemmed.</p></li><li data-i="2" tabindex="0"><h3>Dress alterations</h3><b>from $25</b><p>Take-ins, hems and straps.</p></li></ol><div class="btns"><a class="btn btn-acc" href="tel:+14378082286">Call to book<span class="num"> (437) 808-2286</span></a></div></div></div></div></section><section class="o-sign" id="hours"><div class="wrap"><div class="grid">
   <div class="sign"><b data-sign>Hours</b><small data-sub>See the week</small></div>
@@ -449,13 +449,23 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
       });
     }
     const dial = document.querySelector('[data-clock]');
-    if (dial && window.ssHours) {
-      const H = window.ssHours, arc = dial.querySelector('.arc'), hand = dial.querySelector('.hand');
-      const pt = (m) => { const a = m / 1440 * 2 * Math.PI; return [100 + 70 * Math.sin(a), 100 - 70 * Math.cos(a)]; };
-      const s = H.hours && H.span(H.hours[H.DAYS[H.today]]);
-      if (s) { const a0 = s[0], a1 = Math.min(s[1], s[0] + 1439), [x0, y0] = pt(a0), [x1, y1] = pt(a1);
-        arc.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A70 70 0 ${a1 - a0 > 720 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
-      hand.style.transform = `rotate(${H.minute / 1440 * 360}deg)`;
+    if (dial) {
+      const hh = dial.querySelector('.hand.h'), mm = dial.querySelector('.hand.m'), ss = dial.querySelector('.hand.s'), band = dial.querySelector('.band');
+      const tick = () => {
+        const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
+        const h = now.getHours() % 12, m = now.getMinutes(), sec = now.getSeconds();
+        hh.style.transform = `rotate(${(h * 60 + m) / 720 * 360}deg)`;
+        mm.style.transform = `rotate(${(m * 60 + sec) / 3600 * 360}deg)`;
+        ss.style.transform = `rotate(${sec * 6}deg)`;
+      };
+      tick(); if (!still) setInterval(tick, 1000); else ss.style.display = 'none';
+      const H = window.ssHours, s = H && H.hours && H.span(H.hours[H.DAYS[H.today]]);
+      if (s) {
+        const len = s[1] - s[0], pt = (min) => { const a = (min % 720) / 720 * 2 * Math.PI; return [100 + 91.5 * Math.sin(a), 100 - 91.5 * Math.cos(a)]; };
+        if (len >= 720) band.setAttribute('d', 'M100 8.5a91.5 91.5 0 1 1 0 183a91.5 91.5 0 1 1 0-183');
+        else { const [x0, y0] = pt(s[0]), [x1, y1] = pt(s[1]);
+          band.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A91.5 91.5 0 ${len > 360 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
+      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Hours by appointment.';
     }
   })();
 </script>

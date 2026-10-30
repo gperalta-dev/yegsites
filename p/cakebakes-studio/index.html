@@ -290,7 +290,7 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <figure class="shot"><img src="img/0-photo-1.jpg" alt="Butterfly cupcakes"><span class="spin" aria-hidden="true"><svg viewBox="0 0 100 100"><path id="sp-cakebakes-studio" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0" fill="none"/><text fill="currentColor" font-size="10.93" letter-spacing="1.6" style="font-family:var(--body);font-weight:700"><textPath href="#sp-cakebakes-studio">CALL TO ORDER • EDMONTON • </textPath></text><g transform="translate(36 36) scale(1.15)" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></g></svg></span></figure></div></div><canvas class="fx" data-kind="sprinkles" data-colors="[&quot;#b23a0a&quot;, &quot;#f7c1d5&quot;, &quot;#fcd9a8&quot;, &quot;#f2c14e&quot;]" aria-hidden="true"></canvas></header>
 
 <section class="s-tags" id="services"><div class="wrap"><div class="sec-head"><h2>The menu</h2><p>Starting prices. Call for a quote on yours.</p></div>
-  <div class="tags"><article class="tag" style="--tilt:-1.6deg"><h3>Custom cake</h3><span class="p">from $65</span><small>Designed with you, from flavour to finish.</small></article><article class="tag" style="--tilt:1.2deg"><h3>Cupcakes</h3><span class="p">$36 a dozen</span><small>Swirled buttercream cupcakes by the dozen.</small></article><article class="tag" style="--tilt:-.6deg"><h3>Cookies and treats</h3><span class="p">from $20</span><small>Cookies, squares and party trays.</small></article></div><div class="btns" style="margin-top:30px"><a class="btn btn-acc" href="tel:+17807072272">Call about your garment:<span class="num"> (780) 707-2272</span></a></div></div></section><section class="o-sign" id="hours"><div class="wrap"><div class="grid">
+  <div class="tags"><article class="tag" style="--tilt:-1.6deg"><h3>Custom cake</h3><span class="p">from $65</span><small>Designed with you, from flavour to finish.</small></article><article class="tag" style="--tilt:1.2deg"><h3>Cupcakes</h3><span class="p">$36 a dozen</span><small>Swirled buttercream cupcakes by the dozen.</small></article><article class="tag" style="--tilt:-.6deg"><h3>Cookies and treats</h3><span class="p">from $20</span><small>Cookies, squares and party trays.</small></article></div><div class="btns" style="margin-top:30px"><a class="btn btn-acc" href="tel:+17807072272">Call to order:<span class="num"> (780) 707-2272</span></a></div></div></section><section class="o-sign" id="hours"><div class="wrap"><div class="grid">
   <div class="sign"><b data-sign>Hours</b><small data-sub>See the week</small></div>
   <div><h2>Hours</h2><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="4"><span>Friday</span><b>Closed</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></div></div></div></section><section class="p-strip" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>Fresh from the oven</h2></div><div class="row"><figure tabindex="0"><img src="img/1-photo-3.jpg" alt="Flower cupcakes" loading="lazy"><figcaption>Flower cupcakes</figcaption></figure><figure tabindex="0"><img src="img/2-bakery-c38.jpg" alt="A box of macarons" loading="lazy"><figcaption>A box of macarons</figcaption></figure><figure tabindex="0"><img src="img/3-bakery-c41.jpg" alt="Macarons on a plate" loading="lazy"><figcaption>Macarons on a plate</figcaption></figure><figure tabindex="0"><img src="img/4-photo-2.jpg" alt="Pink swirl cupcakes" loading="lazy"><figcaption>Pink swirl cupcakes</figcaption></figure></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
   <h2>Quick answers.<span class="tone"> Straight from the shop's Google listing.</span></h2></div><div class="list"><details><summary>How do I book?</summary><p class="a">Call <a href="tel:+17807072272">(780) 707-2272</a>, or tap Call at the bottom of the screen.</p></details><details><summary>What does it cost?</summary><p class="a">Starting prices: custom cake from $65; cupcakes $36 a dozen; cookies and treats from $20. Call for a quote on yours.</p></details><details><summary>Where are you?</summary><p class="a">5447 20 Ave SW, Edmonton, AB T6X 1V4. </p></details><details><summary>When are you open?</summary><p class="a">Today: <b data-today>see the hours above</b>. The whole week is in the hours section.</p></details></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
@@ -466,13 +466,23 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
       });
     }
     const dial = document.querySelector('[data-clock]');
-    if (dial && window.ssHours) {
-      const H = window.ssHours, arc = dial.querySelector('.arc'), hand = dial.querySelector('.hand');
-      const pt = (m) => { const a = m / 1440 * 2 * Math.PI; return [100 + 70 * Math.sin(a), 100 - 70 * Math.cos(a)]; };
-      const s = H.hours && H.span(H.hours[H.DAYS[H.today]]);
-      if (s) { const a0 = s[0], a1 = Math.min(s[1], s[0] + 1439), [x0, y0] = pt(a0), [x1, y1] = pt(a1);
-        arc.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A70 70 0 ${a1 - a0 > 720 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
-      hand.style.transform = `rotate(${H.minute / 1440 * 360}deg)`;
+    if (dial) {
+      const hh = dial.querySelector('.hand.h'), mm = dial.querySelector('.hand.m'), ss = dial.querySelector('.hand.s'), band = dial.querySelector('.band');
+      const tick = () => {
+        const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
+        const h = now.getHours() % 12, m = now.getMinutes(), sec = now.getSeconds();
+        hh.style.transform = `rotate(${(h * 60 + m) / 720 * 360}deg)`;
+        mm.style.transform = `rotate(${(m * 60 + sec) / 3600 * 360}deg)`;
+        ss.style.transform = `rotate(${sec * 6}deg)`;
+      };
+      tick(); if (!still) setInterval(tick, 1000); else ss.style.display = 'none';
+      const H = window.ssHours, s = H && H.hours && H.span(H.hours[H.DAYS[H.today]]);
+      if (s) {
+        const len = s[1] - s[0], pt = (min) => { const a = (min % 720) / 720 * 2 * Math.PI; return [100 + 91.5 * Math.sin(a), 100 - 91.5 * Math.cos(a)]; };
+        if (len >= 720) band.setAttribute('d', 'M100 8.5a91.5 91.5 0 1 1 0 183a91.5 91.5 0 1 1 0-183');
+        else { const [x0, y0] = pt(s[0]), [x1, y1] = pt(s[1]);
+          band.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A91.5 91.5 0 ${len > 360 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
+      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Hours by appointment.';
     }
   })();
 </script>

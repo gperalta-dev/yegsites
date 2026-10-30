@@ -278,7 +278,7 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <span class="eyebrow">Barber shop in St. Albert</span><h1>Your next cut<span class="tone"> in St. Albert.</span></h1><p>Find us at 18A Muir Dr, St. Albert. Call to book.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
   <div class="btns"><a class="btn btn-acc" href="tel:+17809409129">Call<span class="num"> (780) 940-9129</span></a><a class="btn btn-line" href="#services">See prices</a></div></div></header>
 
-<section class="s-tiles" id="services"><div class="wrap"><div class="sec-head"><span class="label">The price board</span><h2>The menu<span class="tone"> Starting prices. Call for a quote on yours.</span></h2></div><div class="row"><article class="tile" tabindex="0"><div class="art " aria-hidden="true"><svg class="ic" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6 20 18M8.6 16.4 20 6"/></svg></div><div class="body"><h3>Haircut</h3><span class="p">from $30</span><p class="d">Clipper and scissor work, finished clean.</p></div></article><article class="tile" tabindex="0"><figure class=""><img src="img/0-fade.jpg" alt="A clean skin fade" loading="lazy"><figcaption>A clean skin fade</figcaption></figure><div class="body"><h3>Fade</h3><span class="p">from $35</span><p class="d">Blended down to the skin, with a line-up.</p></div></article><article class="tile" tabindex="0"><figure class=""><img src="img/4-barber-c41.jpg" alt="A stainless trimmer" loading="lazy"><figcaption>A stainless trimmer</figcaption></figure><div class="body"><h3>Beard trim</h3><span class="p">from $20</span><p class="d">Shape, line and detail for the beard, with a sharp neckline.</p></div></article></div>
+<section class="s-tiles" id="services"><div class="wrap"><div class="sec-head"><span class="label">The price board</span><h2>Price list<span class="tone"> Starting prices. Call for a quote on yours.</span></h2></div><div class="row"><article class="tile" tabindex="0"><div class="art " aria-hidden="true"><svg class="ic" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6 20 18M8.6 16.4 20 6"/></svg></div><div class="body"><h3>Haircut</h3><span class="p">from $30</span><p class="d">Clipper and scissor work, finished clean.</p></div></article><article class="tile" tabindex="0"><figure class=""><img src="img/0-fade.jpg" alt="A clean skin fade" loading="lazy"><figcaption>A clean skin fade</figcaption></figure><div class="body"><h3>Fade</h3><span class="p">from $35</span><p class="d">Blended down to the skin, with a line-up.</p></div></article><article class="tile" tabindex="0"><figure class=""><img src="img/4-barber-c41.jpg" alt="A stainless trimmer" loading="lazy"><figcaption>A stainless trimmer</figcaption></figure><div class="body"><h3>Beard trim</h3><span class="p">from $20</span><p class="d">Shape, line and detail for the beard, with a sharp neckline.</p></div></article></div>
   <div class="btns" style="margin-top:26px"><a class="btn btn-acc" href="tel:+17809409129">Call to book<span class="num"> (780) 940-9129</span></a></div></div></section><section class="p-fan" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>From the chair</h2></div><div class="deck" data-rv><figure style="--k:-1.5;--a:1.5"><img src="img/1-barber-c5.jpg" alt="Clipper over comb on the sides" loading="lazy"><figcaption>Clipper over comb on the sides</figcaption></figure><figure style="--k:-0.5;--a:0.5"><img src="img/2-barber-c23.jpg" alt="Two barbers, two chairs" loading="lazy"><figcaption>Two barbers, two chairs</figcaption></figure><figure style="--k:0.5;--a:0.5"><img src="img/3-shop-floor.jpg" alt="Barber chairs on a checkered floor" loading="lazy"><figcaption>Barber chairs on a checkered floor</figcaption></figure><figure style="--k:1.5;--a:1.5"><img src="img/4-barber-c41.jpg" alt="A stainless trimmer" loading="lazy"><figcaption>A stainless trimmer</figcaption></figure></div></div></section><section class="o-today" id="hours"><div class="wrap"><div class="card">
   <div><span class="label">Today</span><div class="now" data-today>See the week</div><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
   <details open><summary>The whole week</summary><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Closed</b></li><li data-day="4"><span>Friday</span><b>9:30 a.m. to 7:30 p.m.</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></details></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
@@ -455,13 +455,23 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
       });
     }
     const dial = document.querySelector('[data-clock]');
-    if (dial && window.ssHours) {
-      const H = window.ssHours, arc = dial.querySelector('.arc'), hand = dial.querySelector('.hand');
-      const pt = (m) => { const a = m / 1440 * 2 * Math.PI; return [100 + 70 * Math.sin(a), 100 - 70 * Math.cos(a)]; };
-      const s = H.hours && H.span(H.hours[H.DAYS[H.today]]);
-      if (s) { const a0 = s[0], a1 = Math.min(s[1], s[0] + 1439), [x0, y0] = pt(a0), [x1, y1] = pt(a1);
-        arc.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A70 70 0 ${a1 - a0 > 720 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
-      hand.style.transform = `rotate(${H.minute / 1440 * 360}deg)`;
+    if (dial) {
+      const hh = dial.querySelector('.hand.h'), mm = dial.querySelector('.hand.m'), ss = dial.querySelector('.hand.s'), band = dial.querySelector('.band');
+      const tick = () => {
+        const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
+        const h = now.getHours() % 12, m = now.getMinutes(), sec = now.getSeconds();
+        hh.style.transform = `rotate(${(h * 60 + m) / 720 * 360}deg)`;
+        mm.style.transform = `rotate(${(m * 60 + sec) / 3600 * 360}deg)`;
+        ss.style.transform = `rotate(${sec * 6}deg)`;
+      };
+      tick(); if (!still) setInterval(tick, 1000); else ss.style.display = 'none';
+      const H = window.ssHours, s = H && H.hours && H.span(H.hours[H.DAYS[H.today]]);
+      if (s) {
+        const len = s[1] - s[0], pt = (min) => { const a = (min % 720) / 720 * 2 * Math.PI; return [100 + 91.5 * Math.sin(a), 100 - 91.5 * Math.cos(a)]; };
+        if (len >= 720) band.setAttribute('d', 'M100 8.5a91.5 91.5 0 1 1 0 183a91.5 91.5 0 1 1 0-183');
+        else { const [x0, y0] = pt(s[0]), [x1, y1] = pt(s[1]);
+          band.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A91.5 91.5 0 ${len > 360 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
+      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Hours by appointment.';
     }
   })();
 </script>

@@ -274,8 +274,8 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <div class="ph"><img src="img/0-barber-c27.jpg" alt="Scissor work"><span class="tag"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Edmonton</span></div></header>
 
 <section class="s-menu" id="services"><div class="wrap"><div class="card">
-  <span class="hand">Order ahead</span><h2>The price board</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Haircut<small>Clipper and scissor work, finished clean.</small></span><b>from $30</b></li><li><span>Fade<small>Blended down to the skin, with a line-up.</small></span><b>from $35</b></li><li><span>Beard trim<small>Shape, line and detail for the beard, with a sharp neckline.</small></span><b>from $20</b></li></ul>
-  <div class="btns"><a class="btn btn-acc" href="tel:+17806656465">Call to order<span class="num"> (780) 665-6465</span></a></div></div></div></section><section class="o-neon" id="hours" style="--glow:#3fb8a8"><div class="wrap"><div class="grid">
+  <span class="hand">Price list</span><h2>The price board</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Haircut<small>Clipper and scissor work, finished clean.</small></span><b>from $30</b></li><li><span>Fade<small>Blended down to the skin, with a line-up.</small></span><b>from $35</b></li><li><span>Beard trim<small>Shape, line and detail for the beard, with a sharp neckline.</small></span><b>from $20</b></li></ul>
+  <div class="btns"><a class="btn btn-acc" href="tel:+17806656465">Call to book<span class="num"> (780) 665-6465</span></a></div></div></div></section><section class="o-neon" id="hours" style="--glow:#3fb8a8"><div class="wrap"><div class="grid">
   <div class="box" data-rv><span class="neon" data-sign>Hours</span><small data-sub>See the week</small></div>
   <div><div class="sec-head"><span class="label">Hours</span><h2>Come by<span class="tone"> The sign is live: it reads the hours on Google.</span></h2></div><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Closed</b></li><li data-day="4"><span>Friday</span><b>9 a.m. to 7 p.m.</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></div></div></div></section><section class="p-mosaic" id="photos"><div class="wrap"><div class="sec-head"><h2>From the chair</h2></div><div class="grid"><figure><img src="img/1-barber-c30.jpg" alt="Barbers at work" loading="lazy"><figcaption>Barbers at work</figcaption></figure><figure><img src="img/2-barber-c32.jpg" alt="Cordless clippers" loading="lazy"><figcaption>Cordless clippers</figcaption></figure><figure><img src="img/3-fade.jpg" alt="A clean skin fade" loading="lazy"><figcaption>A clean skin fade</figcaption></figure></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
   <h2>Quick answers.<span class="tone"> Straight from the shop's Google listing.</span></h2></div><div class="list"><details><summary>How do I book?</summary><p class="a">Call <a href="tel:+17806656465">(780) 665-6465</a>, or tap Call at the bottom of the screen.</p></details><details><summary>What does it cost?</summary><p class="a">Starting prices: haircut from $30; fade from $35; beard trim from $20. Call for a quote on yours.</p></details><details><summary>Where are you?</summary><p class="a">6610 127 Ave NW, Edmonton, AB T5C 1P9. </p></details><details><summary>When are you open?</summary><p class="a">Today: <b data-today>see the hours above</b>. The whole week is in the hours section.</p></details></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
@@ -451,13 +451,23 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
       });
     }
     const dial = document.querySelector('[data-clock]');
-    if (dial && window.ssHours) {
-      const H = window.ssHours, arc = dial.querySelector('.arc'), hand = dial.querySelector('.hand');
-      const pt = (m) => { const a = m / 1440 * 2 * Math.PI; return [100 + 70 * Math.sin(a), 100 - 70 * Math.cos(a)]; };
-      const s = H.hours && H.span(H.hours[H.DAYS[H.today]]);
-      if (s) { const a0 = s[0], a1 = Math.min(s[1], s[0] + 1439), [x0, y0] = pt(a0), [x1, y1] = pt(a1);
-        arc.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A70 70 0 ${a1 - a0 > 720 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
-      hand.style.transform = `rotate(${H.minute / 1440 * 360}deg)`;
+    if (dial) {
+      const hh = dial.querySelector('.hand.h'), mm = dial.querySelector('.hand.m'), ss = dial.querySelector('.hand.s'), band = dial.querySelector('.band');
+      const tick = () => {
+        const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
+        const h = now.getHours() % 12, m = now.getMinutes(), sec = now.getSeconds();
+        hh.style.transform = `rotate(${(h * 60 + m) / 720 * 360}deg)`;
+        mm.style.transform = `rotate(${(m * 60 + sec) / 3600 * 360}deg)`;
+        ss.style.transform = `rotate(${sec * 6}deg)`;
+      };
+      tick(); if (!still) setInterval(tick, 1000); else ss.style.display = 'none';
+      const H = window.ssHours, s = H && H.hours && H.span(H.hours[H.DAYS[H.today]]);
+      if (s) {
+        const len = s[1] - s[0], pt = (min) => { const a = (min % 720) / 720 * 2 * Math.PI; return [100 + 91.5 * Math.sin(a), 100 - 91.5 * Math.cos(a)]; };
+        if (len >= 720) band.setAttribute('d', 'M100 8.5a91.5 91.5 0 1 1 0 183a91.5 91.5 0 1 1 0-183');
+        else { const [x0, y0] = pt(s[0]), [x1, y1] = pt(s[1]);
+          band.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A91.5 91.5 0 ${len > 360 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
+      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Hours by appointment.';
     }
   })();
 </script>
