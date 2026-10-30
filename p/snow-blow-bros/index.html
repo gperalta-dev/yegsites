@@ -116,6 +116,17 @@ footer.site .credits a { color: inherit; }
 .o-today li.today { font-weight: 800; color: var(--accent); }
 @media (max-width: 760px) { .o-today .card { grid-template-columns: 1fr; } }
 
+.v-full { padding: 0; }
+.v-full .mapwrap { position: relative; min-height: 560px; background: var(--surface); }
+.v-full .ph { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-weight: 600; padding: 20px; text-align: center; }
+.v-full iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(.5) contrast(1.05); }
+.v-full .card { position: absolute; left: max(20px, calc((100% - 1080px) / 2)); bottom: 40px; width: min(430px, calc(100% - 40px)); background: var(--bg); color: var(--ink);
+  border-radius: calc(var(--r) + 10px); padding: 28px; box-shadow: 0 30px 60px -24px rgba(0,0,0,.5); display: grid; gap: 12px; }
+.v-full .addr { font: var(--hw, 700) 22px/1.25 var(--display); }
+.v-full .today { display: flex; gap: 10px; align-items: center; color: var(--muted); } .v-full .today .ic { color: var(--accent); } .v-full .today b { color: var(--ink); }
+@media (max-width: 760px) { .v-full .mapwrap { min-height: 0; display: grid; } .v-full .ph, .v-full iframe { position: relative; height: 300px; }
+  .v-full .ph { position: absolute; inset: 0 0 auto; } .v-full .card { position: relative; left: auto; bottom: auto; width: auto; margin: -40px 12px 0; } }
+
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
 body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
@@ -178,7 +189,9 @@ nav.n-bar .links .btn { border-radius: var(--rb); }
 .cb-pill a + a { background: transparent; color: var(--on-dark); padding: 0 18px; }
 body { padding-bottom: 92px; }
 @media (max-width: 760px) { .k-callbar.cb-pill { left: 12px; right: 12px; transform: none; } .cb-pill a { flex: 1; } .cb-pill a + a { flex: 0 0 auto; } }
-body { background-image: radial-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1.4px, transparent 2px); background-size: 22px 22px; }
+main { counter-reset: sec; } main .sec-head .label { counter-increment: sec; flex-direction: column; align-items: flex-start; gap: 8px; }
+main .sec-head .label::before { content: counter(sec, decimal-leading-zero); width: auto; height: auto; background: none; font: var(--hw, 700) 52px/1 var(--display);
+  color: transparent; -webkit-text-stroke: 1.2px var(--accent); letter-spacing: 0; }body { background-image: radial-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1.4px, transparent 2px); background-size: 22px 22px; }
 main > header { position: relative; }
 main > header > canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
 main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-index: 1;
@@ -204,6 +217,13 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
 .r-outline .ic { width: 40px; height: 40px; color: var(--accent); opacity: 1; }
 .r-outline .track { animation-duration: 70s; }
 
+footer.f-min { background: var(--bg); color: var(--ink); border-top: 1px solid var(--line); text-align: center; }
+footer.f-min .wrap { justify-items: center; gap: 8px; }
+footer.f-min .mark { width: 56px; height: 56px; color: var(--accent); }
+footer.f-min p { color: var(--muted); } footer.f-min p a { color: var(--ink); text-decoration: none; font-weight: 700; }
+main > section:not(.v-full) { margin: 14px clamp(8px, 1.6vw, 22px); border-radius: calc(var(--r) + 18px); background: var(--surface); }
+main > section.p-film, main > section.v-strip { background: var(--dark); }
+@media (max-width: 760px) { main > section:not(.v-full) { margin: 10px 8px; border-radius: 22px; } }.wrap { max-width: 1120px; }
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* southsites frame around their site: grey backdrop while their site is a card, their own background moves onto the stage */
@@ -295,22 +315,13 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <div class="q-foot"><p class="q-sum" aria-live="polite">Tick what you need.</p><a class="btn btn-acc" data-go href="sms:+17809758483">Text for a quote</a><a class="btn btn-line" href="tel:+17809758483">Call<span class="num"> (780) 975-8483</span></a></div></form>
   </div></div></section><section class="o-today" id="hours"><div class="wrap"><div class="card">
   <div><span class="label">Today</span><div class="now" data-today>See the week</div><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
-  <details open><summary>The whole week</summary><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Closed</b></li><li data-day="4"><span>Friday</span><b>Open 24 hours</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></details></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
-  <div><span class="label">Visit</span><h2>Come see us</h2>
-  <ul class="facts">
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>4918 27a Ave NW, Edmonton, AB T6L 6B3</b><small>Snow removal service in Mill Woods.</small></div></li>
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-today>See the week above</b><small><span data-state></span> <span data-sub></span></small></div></li>
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><div><b><a href="tel:+17809758483">(780) 975-8483</a></b><small>Call before you come.</small></div></li>
-  </ul>
-  <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Snow-blow+Bros%2C+4918+27a+Ave+NW%2C+Edmonton%2C+AB+T6L+6B3" target="_blank" rel="noopener">Get directions</a><a class="btn btn-line" href="tel:+17809758483">Call<span class="num"> (780) 975-8483</span></a></div></div>
-  <div class="map"><span>Map: 4918 27a Ave NW, Edmonton, AB T6L 6B3</span><iframe title="Map to Snow-blow Bros" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Snow-blow+Bros%2C+4918+27a+Ave+NW%2C+Edmonton%2C+AB+T6L+6B3&amp;output=embed"></iframe></div>
-  </div></div></section>
+  <details open><summary>The whole week</summary><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Closed</b></li><li data-day="4"><span>Friday</span><b>Open 24 hours</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></details></div></div></section><section class="v-full" id="visit"><div class="mapwrap"><div class="ph">Map: 4918 27a Ave NW, Edmonton, AB T6L 6B3</div>
+  <iframe title="Map to Snow-blow Bros" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Snow-blow+Bros%2C+4918+27a+Ave+NW%2C+Edmonton%2C+AB+T6L+6B3&amp;output=embed"></iframe>
+  <div class="card"><span class="label">Visit</span><h2>Find us</h2><p class="addr">4918 27a Ave NW, Edmonton, AB T6L 6B3</p>
+  <p class="today"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b data-today>Hours above</b> <small data-state></small></span></p>
+  <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Snow-blow+Bros%2C+4918+27a+Ave+NW%2C+Edmonton%2C+AB+T6L+6B3" target="_blank" rel="noopener">Get directions</a><a class="btn btn-line" href="tel:+17809758483">Call<span class="num"> (780) 975-8483</span></a></div></div></div></section>
 </main>
-<footer class="site"><div class="wrap"><div class="fgrid">
-  <div class="fb"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Snow-blow Bros logo"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/><path id="lr-snow-blow-bros" d="M50 50m-38.5 0a38.5 38.5 0 1 1 77 0a38.5 38.5 0 1 1-77 0" fill="none"/><text fill="currentColor" font-size="9.8" letter-spacing="2" style="font-family:var(--body);font-weight:700"><textPath href="#lr-snow-blow-bros">SNOWBLOW BROS • MILL WOODS •</textPath></text><g transform="translate(35 35) scale(1.25)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11"/><path d="M9.5 3.5 12 6l2.5-2.5M9.5 20.5 12 18l2.5 2.5M3 9.5l3.4-.9-.9-3.4M21 14.5l-3.4.9.9 3.4M3 14.5l3.4.9-.9 3.4M21 9.5l-3.4-.9.9-3.4"/></g></svg><b>Snow-blow Bros</b><span>Snow removal service in Mill Woods</span></div>
-  <div><span class="label">Visit</span><p>4918 27a Ave NW, Edmonton, AB T6L 6B3</p></div>
-  <div><span class="label">Call</span><p><a href="tel:+17809758483">(780) 975-8483</a></p></div></div>
-  <span class="credits">Sample website by Southsites. Photos are samples until Snow-blow Bros sends their own: <a href="https://commons.wikimedia.org/wiki/File:Shovelling_(Unsplash).jpg" target="_blank" rel="noopener">Filip Mroz mroz</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:Snowblower_(5341723168).jpg" target="_blank" rel="noopener">Kurt Bauschardt from Edmonton, Canada</a> (CC BY-SA 2.0); <a href="https://commons.wikimedia.org/wiki/File:Snow_shovel,_rear,_against_wooden_fence.jpg" target="_blank" rel="noopener">Cbaile19</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:2026-01-26_21_12_21_A_house_and_shoveled_driveway_along_Aquetong_Lane_on_the_night_after_a_winter_storm_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg" target="_blank" rel="noopener">Famartin</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Transparent_orange_snow_shovel_against_granite_at_F1.8_02.jpg" target="_blank" rel="noopener">Retired electrician</a> (CC0).</span></div></footer>
+<footer class="site f-min"><div class="wrap"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Snow-blow Bros logo"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/><path id="lr-snow-blow-bros" d="M50 50m-38.5 0a38.5 38.5 0 1 1 77 0a38.5 38.5 0 1 1-77 0" fill="none"/><text fill="currentColor" font-size="9.8" letter-spacing="2" style="font-family:var(--body);font-weight:700"><textPath href="#lr-snow-blow-bros">SNOWBLOW BROS • MILL WOODS •</textPath></text><g transform="translate(35 35) scale(1.25)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11"/><path d="M9.5 3.5 12 6l2.5-2.5M9.5 20.5 12 18l2.5 2.5M3 9.5l3.4-.9-.9-3.4M21 14.5l-3.4.9.9 3.4M3 14.5l3.4.9-.9 3.4M21 9.5l-3.4-.9.9-3.4"/></g></svg><b>Snow-blow Bros</b><p>4918 27a Ave NW, Edmonton, AB T6L 6B3 · <a href="tel:+17809758483">(780) 975-8483</a></p><span class="credits">Sample website by Southsites. Photos are samples until Snow-blow Bros sends their own: <a href="https://commons.wikimedia.org/wiki/File:Shovelling_(Unsplash).jpg" target="_blank" rel="noopener">Filip Mroz mroz</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:Snowblower_(5341723168).jpg" target="_blank" rel="noopener">Kurt Bauschardt from Edmonton, Canada</a> (CC BY-SA 2.0); <a href="https://commons.wikimedia.org/wiki/File:Snow_shovel,_rear,_against_wooden_fence.jpg" target="_blank" rel="noopener">Cbaile19</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:2026-01-26_21_12_21_A_house_and_shoveled_driveway_along_Aquetong_Lane_on_the_night_after_a_winter_storm_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg" target="_blank" rel="noopener">Famartin</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Transparent_orange_snow_shovel_against_granite_at_F1.8_02.jpg" target="_blank" rel="noopener">Retired electrician</a> (CC0).</span></div></footer>
 <div class="k-callbar cb-pill"><a href="tel:+17809758483">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Snow-blow+Bros%2C+4918+27a+Ave+NW%2C+Edmonton%2C+AB+T6L+6B3" target="_blank" rel="noopener">Directions</a></div>
 <script type="application/json" id="biz">{"hours": {"Friday": "Open 24 hours"}}</script>
 <script>

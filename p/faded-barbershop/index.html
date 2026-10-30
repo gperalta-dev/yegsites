@@ -73,6 +73,14 @@ footer.site .credits a { color: inherit; }
 @media (max-width: 760px) { .h-split { grid-template-columns: 1fr; min-height: 0; } .h-split .ph { order: -1; height: 48vh; min-height: 280px; clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); }
   .h-split .txt { padding: 14px 20px 44px; } }
 
+.p-mosaic .grid { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 12px; height: clamp(420px, 56vw, 620px); }
+.p-mosaic figure { margin: 0; position: relative; overflow: hidden; }
+.p-mosaic figure:first-child { grid-row: 1 / -1; }
+.p-mosaic img { width: 100%; height: 100%; object-fit: cover; }
+.p-mosaic figcaption { position: absolute; left: 12px; bottom: 12px; background: var(--surface); color: var(--ink); padding: 6px 12px; font-size: 13.5px; font-weight: 600; }
+@media (max-width: 760px) { .p-mosaic .grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; height: auto; } .p-mosaic figure:first-child { grid-column: 1 / -1; grid-row: auto; }
+  .p-mosaic figure { aspect-ratio: 1; } .p-mosaic figure:first-child { aspect-ratio: 4 / 3; } }
+
 .s-menu .card { position: relative; max-width: 720px; margin: 0 auto; background: var(--surface); padding: clamp(36px, 6vw, 64px) clamp(22px, 5vw, 60px) clamp(30px, 5vw, 52px); text-align: center;
   border-radius: 6px; box-shadow: 0 20px 50px -30px rgba(0,0,0,.35); }
 .s-menu .card::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; height: 24px;
@@ -99,26 +107,6 @@ footer.site .credits a { color: inherit; }
 .o-neon li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
 .o-neon li.today { color: var(--accent); font-weight: 700; }
 @media (max-width: 760px) { .o-neon .grid { grid-template-columns: 1fr; } }
-
-.p-mosaic .grid { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 12px; height: clamp(420px, 56vw, 620px); }
-.p-mosaic figure { margin: 0; position: relative; overflow: hidden; }
-.p-mosaic figure:first-child { grid-row: 1 / -1; }
-.p-mosaic img { width: 100%; height: 100%; object-fit: cover; }
-.p-mosaic figcaption { position: absolute; left: 12px; bottom: 12px; background: var(--surface); color: var(--ink); padding: 6px 12px; font-size: 13.5px; font-weight: 600; }
-@media (max-width: 760px) { .p-mosaic .grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; height: auto; } .p-mosaic figure:first-child { grid-column: 1 / -1; grid-row: auto; }
-  .p-mosaic figure { aspect-ratio: 1; } .p-mosaic figure:first-child { aspect-ratio: 4 / 3; } }
-
-.faq .grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
-.faq details { border-bottom: 1px solid var(--line); }
-.faq details:first-child { border-top: 1px solid var(--line); }
-.faq summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; cursor: pointer;
-  font: var(--hw, 600) clamp(19px, 2.2vw, 26px)/1.2 var(--display); }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; font: 400 30px/1 var(--body); color: var(--accent); transition: transform .3s ease; }
-.faq details[open] summary::after { transform: rotate(45deg); }
-.faq .a { margin: 0; padding: 0 0 22px; color: var(--muted); max-width: 62ch; }
-.faq .a a { color: var(--ink); font-weight: 700; }
-@media (max-width: 760px) { .faq .grid { grid-template-columns: 1fr; } }
 
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
@@ -182,13 +170,20 @@ nav.n-minimal .ring { width: 48px; height: 48px; border-radius: 50%; display: gr
 .cb-pill a + a { background: transparent; color: var(--on-dark); padding: 0 18px; }
 body { padding-bottom: 92px; }
 @media (max-width: 760px) { .k-callbar.cb-pill { left: 12px; right: 12px; transform: none; } .cb-pill a { flex: 1; } .cb-pill a + a { flex: 0 0 auto; } }
-main .label::before { width: 9px; height: 9px; border-radius: 2px; rotate: 45deg; }body::after { opacity: .16; }
+body::after { opacity: .16; }
 main > header { position: relative; }
 main > header > canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
 main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(420px circle at var(--mx, 75%) var(--my, 30%), color-mix(in srgb, var(--accent) 24%, transparent), transparent 65%); transition: background-position .2s; }
 :is(.h-split .ph, .h-bp .pin, .h-poster .shot, .h-collage .stack, .h-center .fanrow, .h-stripe figure) { animation: rise 1.3s cubic-bezier(.2,.7,.2,1) .25s both; }
 
+footer.f-giant { padding-top: clamp(40px, 6vw, 72px); }
+footer.f-giant .big { font: var(--hw, 800) clamp(54px, 12vw, 180px)/.85 var(--display); letter-spacing: -.035em; color: var(--accent); overflow-wrap: anywhere; }
+footer.f-giant .row { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 22px 0; margin-top: 18px; border-top: 1px solid color-mix(in srgb, var(--on-dark) 18%, transparent); }
+footer.f-giant .row a { text-decoration: none; font-weight: 700; }
+main > section:not(.v-full) { margin: 14px clamp(8px, 1.6vw, 22px); border-radius: calc(var(--r) + 18px); background: var(--surface); }
+main > section.p-film, main > section.v-strip { background: var(--dark); }
+@media (max-width: 760px) { main > section:not(.v-full) { margin: 10px 8px; border-radius: 22px; } }.wrap { max-width: 1000px; }
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* southsites frame around their site: grey backdrop while their site is a card, their own background moves onto the stage */
@@ -267,19 +262,18 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
 </template></ss-intro>
 <div id="ss-stage">
 
-<nav class="top n-minimal"><div class="wrap"><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Faded Barbershop logo"><rect x="4" y="4" width="92" height="92" rx="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="11" y="11" width="78" height="78" rx="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/><text x="50" y="52" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="38" style="font-family:var(--display);font-weight:600">FB</text></svg><span class="name">Faded Barbershop</span></a><div class="links"><a href="#services">Services</a><a href="#hours">Hours</a><a href="#photos">Photos</a><a class="ring" href="tel:+17806656465" aria-label="Call Faded Barbershop"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></a></div></div></nav>
+<nav class="top n-minimal"><div class="wrap"><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Faded Barbershop logo"><rect x="4" y="4" width="92" height="92" rx="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="11" y="11" width="78" height="78" rx="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/><text x="50" y="52" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="38" style="font-family:var(--display);font-weight:600">FB</text></svg><span class="name">Faded Barbershop</span></a><div class="links"><a href="#photos">Photos</a><a href="#services">Services</a><a href="#hours">Hours</a><a class="ring" href="tel:+17806656465" aria-label="Call Faded Barbershop"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></a></div></div></nav>
 <main>
 <header class="h-split"><div class="txt"><span class="eyebrow"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6 20 18M8.6 16.4 20 6"/></svg>Barber shop in Edmonton</span><h1>Fresh cuts<span class="tone"> in Edmonton.</span></h1>
   <p>Barber shop at 6610 127 Ave NW. Call to book.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span><div class="btns"><a class="btn btn-acc" href="tel:+17806656465">Call<span class="num"> (780) 665-6465</span></a><a class="btn btn-line" href="#services">See prices</a></div></div>
-  <div class="ph"><img src="img/0-barber-c27.jpg" alt="Scissor work"><span class="tag"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Edmonton</span></div></header>
+  <div class="ph"><img src="img/0-barber-c27.jpg" alt="Scissor work"><span class="tag"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Edmonton</span></div><div class="spot" aria-hidden="true"></div></header>
 
-<section class="s-menu" id="services"><div class="wrap"><div class="card">
+<section class="p-mosaic" id="photos"><div class="wrap"><div class="sec-head"><h2>From the chair</h2></div><div class="grid"><figure><img src="img/1-barber-c30.jpg" alt="Barbers at work" loading="lazy"><figcaption>Barbers at work</figcaption></figure><figure><img src="img/2-barber-c32.jpg" alt="Cordless clippers" loading="lazy"><figcaption>Cordless clippers</figcaption></figure><figure><img src="img/3-fade.jpg" alt="A clean skin fade" loading="lazy"><figcaption>A clean skin fade</figcaption></figure></div></div></section><section class="s-menu" id="services"><div class="wrap"><div class="card">
   <span class="hand">Price list</span><h2>The price board</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Haircut<small>Clipper and scissor work, finished clean.</small></span><b>from $30</b></li><li><span>Fade<small>Blended down to the skin, with a line-up.</small></span><b>from $35</b></li><li><span>Beard trim<small>Shape, line and detail for the beard, with a sharp neckline.</small></span><b>from $20</b></li></ul>
   <div class="btns"><a class="btn btn-acc" href="tel:+17806656465">Call to book<span class="num"> (780) 665-6465</span></a></div></div></div></section><section class="o-neon" id="hours" style="--glow:#3fb8a8"><div class="wrap"><div class="grid">
   <div class="box" data-rv><span class="neon" data-sign>Hours</span><small data-sub>See the week</small></div>
-  <div><div class="sec-head"><span class="label">Hours</span><h2>Come by<span class="tone"> The sign is live: it reads the hours on Google.</span></h2></div><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Closed</b></li><li data-day="4"><span>Friday</span><b>9 a.m. to 7 p.m.</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></div></div></div></section><section class="p-mosaic" id="photos"><div class="wrap"><div class="sec-head"><h2>From the chair</h2></div><div class="grid"><figure><img src="img/1-barber-c30.jpg" alt="Barbers at work" loading="lazy"><figcaption>Barbers at work</figcaption></figure><figure><img src="img/2-barber-c32.jpg" alt="Cordless clippers" loading="lazy"><figcaption>Cordless clippers</figcaption></figure><figure><img src="img/3-fade.jpg" alt="A clean skin fade" loading="lazy"><figcaption>A clean skin fade</figcaption></figure></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
-  <h2>Quick answers.<span class="tone"> Straight from the shop's Google listing.</span></h2></div><div class="list"><details><summary>How do I book?</summary><p class="a">Call <a href="tel:+17806656465">(780) 665-6465</a>, or tap Call at the bottom of the screen.</p></details><details><summary>What does it cost?</summary><p class="a">Starting prices: haircut from $30; fade from $35; beard trim from $20. Call for a quote on yours.</p></details><details><summary>Where are you?</summary><p class="a">6610 127 Ave NW, Edmonton, AB T5C 1P9. </p></details><details><summary>When are you open?</summary><p class="a">Today: <b data-today>see the hours above</b>. The whole week is in the hours section.</p></details></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
-  <div><span class="label">Visit</span><h2>Come see us</h2>
+  <div><div class="sec-head"><span class="label">Hours</span><h2>Come by<span class="tone"> The sign is live: it reads the hours on Google.</span></h2></div><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Closed</b></li><li data-day="4"><span>Friday</span><b>9 a.m. to 7 p.m.</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
+  <div><span class="label">Visit</span><h2>Where we are</h2>
   <ul class="facts">
     <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>6610 127 Ave NW, Edmonton, AB T5C 1P9</b><small>Barber shop in Edmonton.</small></div></li>
     <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-today>See the week above</b><small><span data-state></span> <span data-sub></span></small></div></li>
@@ -289,11 +283,8 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <div class="map"><span>Map: 6610 127 Ave NW, Edmonton, AB T5C 1P9</span><iframe title="Map to Faded Barbershop" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Faded+Barbershop%2C+6610+127+Ave+NW%2C+Edmonton%2C+AB+T5C+1P9&amp;output=embed"></iframe></div>
   </div></div></section>
 </main>
-<footer class="site"><div class="wrap"><div class="fgrid">
-  <div class="fb"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Faded Barbershop logo"><rect x="4" y="4" width="92" height="92" rx="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="11" y="11" width="78" height="78" rx="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/><text x="50" y="52" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="38" style="font-family:var(--display);font-weight:600">FB</text></svg><b>Faded Barbershop</b><span>Barber shop in Edmonton</span></div>
-  <div><span class="label">Visit</span><p>6610 127 Ave NW, Edmonton, AB T5C 1P9</p></div>
-  <div><span class="label">Call</span><p><a href="tel:+17806656465">(780) 665-6465</a></p></div></div>
-  <span class="credits">Sample website by Southsites. Photos are samples until Faded Barbershop sends their own: <a href="https://commons.wikimedia.org/wiki/File:Barber_shop_iran.jpg" target="_blank" rel="noopener">Mostafameraji</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Jorj_Barber_shop.jpg" target="_blank" rel="noopener">Mostafameraji</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:2023_Maszynka_do_strzy%C5%BCenia_Enchen_Boost.jpg" target="_blank" rel="noopener">Jacek Halicki</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Fade_Hair_Cut.jpg" target="_blank" rel="noopener">Truth678</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Hair_texturizing_shears.jpg" target="_blank" rel="noopener">Gaurav Dhwaj Khadka</a> (CC BY-SA 4.0).</span></div></footer>
+<footer class="site f-giant"><div class="wrap"><div class="big">Faded Barbershop</div>
+  <div class="row"><span>Barber shop in Edmonton</span><span>6610 127 Ave NW, Edmonton, AB T5C 1P9</span><a href="tel:+17806656465">(780) 665-6465</a></div><span class="credits">Sample website by Southsites. Photos are samples until Faded Barbershop sends their own: <a href="https://commons.wikimedia.org/wiki/File:Barber_shop_iran.jpg" target="_blank" rel="noopener">Mostafameraji</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Jorj_Barber_shop.jpg" target="_blank" rel="noopener">Mostafameraji</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:2023_Maszynka_do_strzy%C5%BCenia_Enchen_Boost.jpg" target="_blank" rel="noopener">Jacek Halicki</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Fade_Hair_Cut.jpg" target="_blank" rel="noopener">Truth678</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Hair_texturizing_shears.jpg" target="_blank" rel="noopener">Gaurav Dhwaj Khadka</a> (CC BY-SA 4.0).</span></div></footer>
 <div class="k-callbar cb-pill"><a href="tel:+17806656465">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Faded+Barbershop%2C+6610+127+Ave+NW%2C+Edmonton%2C+AB+T5C+1P9" target="_blank" rel="noopener">Directions</a></div>
 <script type="application/json" id="biz">{"hours": {"Friday": "9 a.m. to 7 p.m."}}</script>
 <script>

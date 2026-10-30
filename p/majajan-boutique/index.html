@@ -115,6 +115,17 @@ footer.site .credits a { color: inherit; }
 .o-strip .status { margin-bottom: 18px; }
 @media (max-width: 760px) { .o-strip .days { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; } .o-strip .days li:last-child { grid-column: 1 / -1; } }
 
+.v-strip { background: var(--dark); color: var(--on-dark); }
+.v-strip h2 { color: var(--on-dark); margin-bottom: 30px; }
+.v-strip .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: color-mix(in srgb, var(--on-dark) 14%, transparent); border-radius: var(--r); overflow: hidden; }
+.v-strip .cols > div { background: var(--dark); padding: clamp(22px, 3vw, 34px); display: grid; gap: 8px; align-content: start; }
+.v-strip .ic { color: var(--accent); }
+.v-strip .k { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; opacity: .7; }
+.v-strip p { font: var(--hw, 700) clamp(20px, 2.4vw, 26px)/1.25 var(--display); margin: 0; } .v-strip p a { text-decoration: none; }
+.v-strip .go { color: var(--accent); font-weight: 700; margin-top: 6px; }
+.v-strip small { opacity: .75; }
+@media (max-width: 760px) { .v-strip .cols { grid-template-columns: 1fr; } }
+
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
 body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
@@ -181,14 +192,19 @@ nav.n-center .l { justify-self: start; } nav.n-center .r { justify-self: end; }
 .cb-pill a + a { background: transparent; color: var(--on-dark); padding: 0 18px; }
 body { padding-bottom: 92px; }
 @media (max-width: 760px) { .k-callbar.cb-pill { left: 12px; right: 12px; transform: none; } .cb-pill a { flex: 1; } .cb-pill a + a { flex: 0 0 auto; } }
-main { counter-reset: sec; } main .label { counter-increment: sec; }
-main .label::before { content: counter(sec, decimal-leading-zero) " /"; width: auto; height: auto; background: none; letter-spacing: .06em; }body { background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 22px); }
+main .sec-head { text-align: center; justify-items: center; margin-inline: auto; } main .sec-head .label::before { display: none; }
+main .sec-head .label { letter-spacing: .3em; }body { background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 22px); }
 main > header { position: relative; }
 main > header > canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
 main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(420px circle at var(--mx, 75%) var(--my, 30%), color-mix(in srgb, var(--accent) 24%, transparent), transparent 65%); transition: background-position .2s; }
 :is(.h-split .ph, .h-bp .pin, .h-poster .shot, .h-collage .stack, .h-center .fanrow, .h-stripe figure) { animation: rise 1.3s cubic-bezier(.2,.7,.2,1) .25s both; }
 
+footer.f-giant { padding-top: clamp(40px, 6vw, 72px); }
+footer.f-giant .big { font: var(--hw, 800) clamp(54px, 12vw, 180px)/.85 var(--display); letter-spacing: -.035em; color: var(--accent); overflow-wrap: anywhere; }
+footer.f-giant .row { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 22px 0; margin-top: 18px; border-top: 1px solid color-mix(in srgb, var(--on-dark) 18%, transparent); }
+footer.f-giant .row a { text-decoration: none; font-weight: 700; }
+.wrap { max-width: 1120px; }
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* southsites frame around their site: grey backdrop while their site is a card, their own background moves onto the stage */
@@ -279,22 +295,13 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <ul data-rv><li><div class="t"><b>Perfect fitting</b><span>7 reviews</span></div><i style="--w:100%"></i></li><li><div class="t"><b>Attention to detail</b><span>7 reviews</span></div><i style="--w:100%"></i></li><li><div class="t"><b>Suit alterations</b><span>6 reviews</span></div><i style="--w:86%"></i></li><li><div class="t"><b>Kind staff</b><span>6 reviews</span></div><i style="--w:86%"></i></li></ul></div></div></section><section class="s-tape" id="services"><div class="wrap"><div class="sec-head"><h2>Fittings and prices</h2><p>Starting prices. Call for a quote on yours.</p></div>
   <div class="chart"><div class="ruler" aria-hidden="true"></div><ul><li><div><h3>Suit alterations</h3><small>Jackets and trousers taken in, let out and hemmed.</small></div><b>from $25</b></li><li><div><h3>Suit making</h3><small>Suits made to your measurements.</small></div><b>from $60</b></li><li><div><h3>Indian suits</h3><small>Salwar suits stitched and fitted.</small></div><b>from $50</b></li></ul></div>
   <div class="btns" style="margin-top:26px"><a class="btn btn-acc" href="tel:+17803807848">Book a fitting:<span class="num"> (780) 380-7848</span></a></div></div></section><section class="p-mosaic" id="photos"><div class="wrap"><div class="sec-head"><h2>Fabric and thread</h2></div><div class="grid"><figure><img src="img/photo-1.jpg" alt="A tape measure" loading="lazy"><figcaption>A tape measure</figcaption></figure><figure><img src="img/photo-spools.jpg" alt="Thread spools" loading="lazy"><figcaption>Thread spools</figcaption></figure><figure><img src="img/photo-2-shelves.jpg" alt="Fabric on the shelves" loading="lazy"><figcaption>Fabric on the shelves</figcaption></figure></div></div></section><section class="o-strip" id="hours"><div class="wrap"><div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
-  <ul class="days"><li data-day="0"><span>Monday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="3"><span>Thursday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="4"><span>Friday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="5"><span>Saturday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="6"><span>Sunday</span><b>11 a.m. to 5 p.m.</b></li></ul></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
-  <div><span class="label">Visit</span><h2>Come see us</h2>
-  <ul class="facts">
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>2503 24 St NW, Edmonton, AB T6T 0B5</b><small>Tailor in Mill Woods.</small></div></li>
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-today>See the week above</b><small><span data-state></span> <span data-sub></span></small></div></li>
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><div><b><a href="tel:+17803807848">(780) 380-7848</a></b><small>Call before you come.</small></div></li>
-  </ul>
-  <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Majajan+Boutique%2C+2503+24+St+NW%2C+Edmonton%2C+AB+T6T+0B5" target="_blank" rel="noopener">Get directions</a><a class="btn btn-line" href="tel:+17803807848">Call<span class="num"> (780) 380-7848</span></a></div></div>
-  <div class="map"><span>Map: 2503 24 St NW, Edmonton, AB T6T 0B5</span><iframe title="Map to Majajan Boutique" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Majajan+Boutique%2C+2503+24+St+NW%2C+Edmonton%2C+AB+T6T+0B5&amp;output=embed"></iframe></div>
-  </div></div></section>
+  <ul class="days"><li data-day="0"><span>Monday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="3"><span>Thursday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="4"><span>Friday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="5"><span>Saturday</span><b>9 a.m. to 8 p.m.</b></li><li data-day="6"><span>Sunday</span><b>11 a.m. to 5 p.m.</b></li></ul></div></section><section class="v-strip" id="visit"><div class="wrap"><h2>Drop by</h2><div class="cols">
+  <div><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="k">Where</span><p>2503 24 St NW, Edmonton, AB T6T 0B5</p><a class="go" href="https://www.google.com/maps/dir/?api=1&amp;destination=Majajan+Boutique%2C+2503+24+St+NW%2C+Edmonton%2C+AB+T6T+0B5" target="_blank" rel="noopener">Get directions</a></div>
+  <div><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="k">Today</span><p data-today>Hours above</p><small data-state></small></div>
+  <div><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><span class="k">Call</span><p><a href="tel:+17803807848">(780) 380-7848</a></p><a class="go" href="tel:+17803807848">Call now</a></div></div></div></section>
 </main>
-<footer class="site"><div class="wrap"><div class="fgrid">
-  <div class="fb"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Majajan Boutique logo"><path d="M12 97V46a38 38 0 0 1 76 0v51Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M19 90V46a31 31 0 0 1 62 0v44Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/><text x="50" y="60" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="52" style="font-family:var(--display);font-weight:600">M</text></svg><b>Majajan Boutique</b><span>Tailor in Mill Woods</span></div>
-  <div><span class="label">Visit</span><p>2503 24 St NW, Edmonton, AB T6T 0B5</p></div>
-  <div><span class="label">Call</span><p><a href="tel:+17803807848">(780) 380-7848</a></p></div></div>
-  <span class="credits">Sample website by Southsites. Photos are samples until Majajan Boutique sends their own: <a href="https://commons.wikimedia.org/wiki/File:A_cloth_shop_in_Khairpur.jpg" target="_blank" rel="noopener">Kartar kumar</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Tape_Measure_Tailor_Tape_Measure_387277_Edited_2020_(49917401241).jpg" target="_blank" rel="noopener">Tool Dude8mm</a> (CC BY 2.0); <a href="https://www.flickr.com/photos/186580451@N03/49425446718" target="_blank" rel="noopener">DarkStar Leatherworks</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Commerciante_di_tessuti.jpg" target="_blank" rel="noopener">Vajo</a> (Public domain).</span></div></footer>
+<footer class="site f-giant"><div class="wrap"><div class="big">Majajan Boutique</div>
+  <div class="row"><span>Tailor in Mill Woods</span><span>2503 24 St NW, Edmonton, AB T6T 0B5</span><a href="tel:+17803807848">(780) 380-7848</a></div><span class="credits">Sample website by Southsites. Photos are samples until Majajan Boutique sends their own: <a href="https://commons.wikimedia.org/wiki/File:A_cloth_shop_in_Khairpur.jpg" target="_blank" rel="noopener">Kartar kumar</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Tape_Measure_Tailor_Tape_Measure_387277_Edited_2020_(49917401241).jpg" target="_blank" rel="noopener">Tool Dude8mm</a> (CC BY 2.0); <a href="https://www.flickr.com/photos/186580451@N03/49425446718" target="_blank" rel="noopener">DarkStar Leatherworks</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Commerciante_di_tessuti.jpg" target="_blank" rel="noopener">Vajo</a> (Public domain).</span></div></footer>
 <div class="k-callbar cb-pill"><a href="tel:+17803807848">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Majajan+Boutique%2C+2503+24+St+NW%2C+Edmonton%2C+AB+T6T+0B5" target="_blank" rel="noopener">Directions</a></div>
 <script type="application/json" id="biz">{"hours": {"Monday": "9 a.m. to 8 p.m.", "Tuesday": "9 a.m. to 8 p.m.", "Wednesday": "9 a.m. to 8 p.m.", "Thursday": "9 a.m. to 8 p.m.", "Friday": "9 a.m. to 8 p.m.", "Saturday": "9 a.m. to 8 p.m.", "Sunday": "11 a.m. to 5 p.m."}}</script>
 <script>

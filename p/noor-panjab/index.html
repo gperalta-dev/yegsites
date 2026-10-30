@@ -115,6 +115,16 @@ footer.site .credits a { color: inherit; }
 .o-sign li.today { font-weight: 700; color: var(--accent); }
 @media (max-width: 640px) { .o-sign .grid { grid-template-columns: 1fr; justify-items: center; } .o-sign .grid > div:last-child { width: 100%; } }
 
+.v-big .addr { display: block; font: var(--hw, 700) clamp(42px, 7.5vw, 104px)/.95 var(--display); letter-spacing: -.025em; text-decoration: none; margin: 16px 0 30px; overflow-wrap: anywhere; }
+.v-big .addr span { display: block; color: var(--muted); font-size: .34em; letter-spacing: 0; margin-top: 12px; }
+.v-big .addr:hover { color: var(--accent); }
+.v-big .facts3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); margin-bottom: 28px; }
+.v-big .facts3 > div { padding: 20px 0; display: grid; gap: 4px; } .v-big .facts3 > div + div { border-left: 1px solid var(--line); padding-left: 22px; }
+.v-big .facts3 small { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.v-big .facts3 b { font-size: 19px; } .v-big .facts3 a { text-decoration: none; }
+.v-big .btn .ic { margin-left: 8px; }
+@media (max-width: 760px) { .v-big .facts3 { grid-template-columns: 1fr; } .v-big .facts3 > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); } }
+
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
 body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
@@ -179,14 +189,14 @@ nav.n-minimal .ring { width: 48px; height: 48px; border-radius: 50%; display: gr
   .cb-dock a + a { background: transparent; color: var(--on-dark); border: 1px solid color-mix(in srgb, var(--on-dark) 30%, transparent); }
   body { padding-bottom: 80px; }
 }
-main .label { padding: 8px 14px; border: 1px solid color-mix(in srgb, currentColor 45%, transparent); border-radius: 999px; letter-spacing: .14em; }
-main .label::before { width: 7px; height: 7px; border-radius: 50%; }body { background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 22px); }
+main .sec-head .label { display: none; } main .sec-head h2 { font-size: clamp(40px, 7vw, 84px); letter-spacing: -.025em; line-height: .95; }
+main .sec-head h2 .tone { font-size: .34em; letter-spacing: 0; margin-top: 14px; }body { background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 22px); }
 main > header { position: relative; }
 main > header > canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
 main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(420px circle at var(--mx, 75%) var(--my, 30%), color-mix(in srgb, var(--accent) 24%, transparent), transparent 65%); transition: background-position .2s; }
 :is(.h-split .ph, .h-bp .pin, .h-poster .shot, .h-collage .stack, .h-center .fanrow, .h-stripe figure) { animation: rise 1.3s cubic-bezier(.2,.7,.2,1) .25s both; }
-
+main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { background: var(--surface); }.wrap { max-width: 1120px; }
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* southsites frame around their site: grey backdrop while their site is a card, their own background moves onto the stage */
@@ -276,16 +286,11 @@ main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-in
   <figure class="stage" data-stage><img src="img/1-photo-2.jpg" alt="Stitching a seam" loading="lazy" class=on><img src="img/2-photo-3.jpg" alt="A wall of fabric" loading="lazy"><img src="img/3-photo-2.jpg" alt="A tailor&#x27;s wooden ruler" loading="lazy"><img src="img/4-tailor-c26.jpg" alt="A tailor&#x27;s tape measure" loading="lazy"><figcaption>Stitching a seam</figcaption></figure>
   <div><ol data-rows><li data-i="0" tabindex="0"><h3>Hemming</h3><b>from $15</b><p>Pants, skirts and sleeves taken up.</p></li><li data-i="1" tabindex="0"><h3>Suit alterations</h3><b>from $30</b><p>Jackets and trousers taken in, let out and hemmed.</p></li><li data-i="2" tabindex="0"><h3>Dress alterations</h3><b>from $25</b><p>Take-ins, hems and straps.</p></li></ol><div class="btns"><a class="btn btn-acc" href="tel:+14378082286">Call to book<span class="num"> (437) 808-2286</span></a></div></div></div></div></section><section class="o-sign" id="hours"><div class="wrap"><div class="grid">
   <div class="sign"><b data-sign>Hours</b><small data-sub>See the week</small></div>
-  <div><h2>Hours</h2><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Open 24 hours</b></li><li data-day="4"><span>Friday</span><b>Closed</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
-  <div><span class="label">Visit</span><h2>Come see us</h2>
-  <ul class="facts">
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>1725 25A St NW, Edmonton, AB T6T 2J1</b><small>Clothing alteration service in Edmonton.</small></div></li>
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-today>See the week above</b><small><span data-state></span> <span data-sub></span></small></div></li>
-    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><div><b><a href="tel:+14378082286">(437) 808-2286</a></b><small>Call before you come.</small></div></li>
-  </ul>
-  <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Noor+Panjab%2C+1725+25A+St+NW%2C+Edmonton%2C+AB+T6T+2J1" target="_blank" rel="noopener">Get directions</a><a class="btn btn-line" href="tel:+14378082286">Call<span class="num"> (437) 808-2286</span></a></div></div>
-  <div class="map"><span>Map: 1725 25A St NW, Edmonton, AB T6T 2J1</span><iframe title="Map to Noor Panjab" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Noor+Panjab%2C+1725+25A+St+NW%2C+Edmonton%2C+AB+T6T+2J1&amp;output=embed"></iframe></div>
-  </div></div></section>
+  <div><h2>Hours</h2><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Open 24 hours</b></li><li data-day="4"><span>Friday</span><b>Closed</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></div></div></div></section><section class="v-big" id="visit"><div class="wrap"><span class="label">Where we are</span>
+  <a class="addr" href="https://www.google.com/maps/dir/?api=1&amp;destination=Noor+Panjab%2C+1725+25A+St+NW%2C+Edmonton%2C+AB+T6T+2J1" target="_blank" rel="noopener">1725 25A St NW<span>Edmonton, AB T6T 2J1</span></a>
+  <div class="facts3"><div><small>Today</small><b data-today>Hours above</b></div><div><small>Call</small><b><a href="tel:+14378082286">(437) 808-2286</a></b></div>
+  <div><small>Area</small><b>Edmonton</b></div></div>
+  <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Noor+Panjab%2C+1725+25A+St+NW%2C+Edmonton%2C+AB+T6T+2J1" target="_blank" rel="noopener">Directions<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-line" href="tel:+14378082286">Call<span class="num"> (437) 808-2286</span></a></div></div></section>
 </main>
 <footer class="site"><div class="wrap"><div class="fgrid">
   <div class="fb"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Noor Panjab logo"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/><text x="50" y="52" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="38" style="font-family:var(--display);font-weight:600">NP</text></svg><b>Noor Panjab</b><span>Clothing alteration service in Edmonton</span></div>
