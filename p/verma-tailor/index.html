@@ -1,113 +1,133 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
+<html lang="en-CA"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Your website preview, Verma Tailor | Southsites</title>
-<meta name="description" content="Suit tailoring, pants alterations and dress alterations at 3426 16a Ave NW, Mill Woods. Free website preview by Southsites. Not the official site.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<!-- layout: boutique. centred masthead, panoramic photo with an inset card, fine-ruled service list, tall photo pair -->
+<meta name="description" content="Suit tailoring, pants and dress alterations at 3426 16a Ave NW. A perfect 5.0 from 34 Google reviews.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #ffffff; --ink: #1f1f1f; --muted: #5c5c5c; --soft: #f3f1ec; --dark: #262626; --on-dark: #ffffff;
-    --accent: #9a6b00; --accent-ink: #ffffff;
-    --k-accent: var(--accent); --k-accent-ink: var(--accent-ink); --k-dark: var(--dark); --k-on-dark: var(--on-dark); --k-font: "Work Sans", system-ui, sans-serif;
-    --display: "Lora", Georgia, serif; --rule: color-mix(in srgb, var(--ink) 15%, transparent);
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.65 var(--k-font); -webkit-font-smoothing: antialiased; }
-  img { display: block; max-width: 100%; }
-  a { color: inherit; }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-  .wrap { width: min(1080px, 100% - 40px); margin-inline: auto; }
-  .notice a { color: inherit; font-weight: 700; text-underline-offset: 3px; }
-  .notice { border-bottom: 1px solid var(--rule); font-size: 13.5px; text-align: center; padding: 8px 16px; color: var(--muted); }
-  .mast { text-align: center; padding: 34px 0 22px; }
-  .mast .where { font-size: 14px; color: var(--muted); }
-  .mast h1 { font: 500 clamp(44px, 6.5vw, 86px)/1 var(--display); letter-spacing: -0.01em; margin: 8px 0 6px; }
-  .mast .hl { font: italic 400 clamp(20px, 2.2vw, 26px)/1.3 var(--display); color: var(--muted); margin: 0; }
-  .mast-cta { display: none; }
-  .mast nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 30px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 15px; }
-  .mast nav a { text-decoration: none; padding: 8px 0; }
-  .mast nav a:hover { color: var(--accent); }
-  .mast nav .call { color: var(--accent); font-weight: 700; }
+:root { --bg: #f4efe6; --ink: #1f1b16; --muted: #5f574c; --surface: #fffcf6; --line: #ddd2c0; --accent: #1f3354; --accent-ink: #ffffff; --dark: #3a2a1c; --on-dark: #f4efe6; --accent2: #8a5a2b; --display: "Libre Baskerville", Georgia, serif; --body: "Work Sans", system-ui, sans-serif;  --r: 2px; --rb: 2px; }
 
-  .pano { position: relative; margin-top: 8px; }
-  .pano img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
-  .inset { position: relative; margin: -80px auto 0; width: min(760px, 100% - 40px); background: var(--bg); padding: 30px 36px; display: grid; grid-template-columns: auto 1fr auto; gap: 28px; align-items: center; box-shadow: 0 20px 50px rgba(10, 10, 20, 0.12); }
-  .inset .r b { display: block; font: 500 44px/1 var(--display); }
-  .inset .r small, .inset .s small { color: var(--muted); font-size: 14px; }
-  .inset .s { border-left: 1px solid var(--rule); padding-left: 28px; }
-  .inset .s span { display: flex; align-items: center; gap: 9px; font-weight: 600; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 28px; font-weight: 600; text-decoration: none; font-size: 16px; background: var(--dark); color: var(--on-dark); }
-  .btn-acc { background: var(--accent); color: var(--accent-ink); }
 
-  section { padding: 96px 0; }
-  .eyebrow-line { display: flex; align-items: center; gap: 16px; font: italic 400 20px var(--display); color: var(--accent); margin-bottom: 14px; }
-  .eyebrow-line::after { content: ""; height: 1px; width: 64px; background: currentColor; }
-  h2 { font: 500 clamp(34px, 4vw, 52px)/1.08 var(--display); margin: 0 0 18px; }
-  .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-  .intro p { color: var(--muted); margin: 0 0 24px; max-width: 42ch; }
-  .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-  .list li { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
-  .list .s-name { font: 500 26px/1.2 var(--display); }
-  .list .s-meta { color: var(--muted); font-size: 14.5px; text-align: right; }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--display); font-weight: var(--hw, 700); line-height: 1.05; margin: 0; text-wrap: balance; overflow-wrap: break-word; }
+h2 { font-size: clamp(30px, 5vw, 46px); }
+p { margin: 0; }
+.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+section { padding: clamp(56px, 8vw, 96px) 0; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 30px; max-width: 640px; }
+.sec-head p { color: var(--muted); }
+.btn { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; min-height: 50px; padding: 10px 24px; border-radius: var(--rb, var(--r));
+  font: 700 16px/1.2 var(--body); text-align: center; text-decoration: none; border: 2px solid transparent; cursor: pointer; }
+.num { white-space: pre; }
+.btn-acc { background: var(--accent); color: var(--accent-ink); }
+.btn-line { border-color: currentColor; }
+.btn:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.status i { width: 10px; height: 10px; border-radius: 50%; background: #9aa1a8; flex: none; }
+.status i.open { background: #1f9d55; box-shadow: 0 0 0 4px rgba(31, 157, 85, .18); }
+.status i.closed { background: #c2412d; }
+.status small { font-weight: 500; opacity: .8; font-size: 15px; }
+nav.top { position: sticky; top: 0; z-index: 30; background: var(--nav-bg, var(--bg)); color: var(--nav-ink, var(--ink)); border-bottom: 1px solid var(--line); }
+nav.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+nav.top .name { font: var(--hw, 700) 22px/1.1 var(--display); text-decoration: none; min-width: 0; }
+nav.top .links { display: flex; align-items: center; gap: 22px; font-weight: 600; font-size: 15px; flex: none; }
+nav.top .links a:not(.btn) { text-decoration: none; }
+nav.top .btn { min-height: 44px; padding: 0 18px; font-size: 15px; }
+@media (max-width: 760px) { nav.top .links a:not(.btn), nav.top .num { display: none; } nav.top .name { font-size: 19px; } }
+.visit { background: var(--surface); }
+.visit .grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items: stretch; }
+.visit .addr { font: 700 clamp(24px, 3.4vw, 32px)/1.2 var(--display); margin: 14px 0 6px; }
+.visit .note { color: var(--muted); margin-bottom: 22px; }
+.visit .note b { color: var(--ink); }
+.visit .map { position: relative; min-height: 320px; border-radius: min(var(--r), 22px); overflow: hidden; background: var(--bg); border: 1px solid var(--line);
+  display: grid; place-items: center; text-align: center; padding: 20px; color: var(--muted); font-weight: 600; }
+.visit .map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+@media (max-width: 760px) { .visit .grid { grid-template-columns: 1fr; } }
+footer.site { background: var(--dark); color: var(--on-dark); padding: 40px 0 46px; font-size: 14.5px; }
+footer.site .wrap { display: grid; gap: 10px; }
+footer.site b { font: 700 22px/1.1 var(--display); }
+footer.site .credits { opacity: .72; font-size: 12.5px; line-height: 1.5; }
+footer.site .credits a { color: inherit; }
+.k-callbar { display: none; }
+@media (max-width: 760px) {
+  .k-callbar { display: flex; position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 40; gap: 10px; }
+  .k-callbar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: var(--r);
+    background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; box-shadow: 0 10px 28px rgba(0,0,0,.22); }
+  .k-callbar a + a { flex: 0 0 auto; padding: 0 18px; background: var(--dark); color: var(--on-dark); }
+  body { padding-bottom: 84px; }
+}
+.photo-credit { position: absolute; right: 10px; bottom: 10px; }
 
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .pair figure { margin: 0; }
-  .pair img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-  .pair figure:last-child { margin-top: 96px; }
-  .pair figcaption { font: italic 400 17px var(--display); color: var(--muted); margin-top: 10px; }
 
-  .voices { text-align: center; background: var(--soft); }
-  .voices .big { font: 500 clamp(64px, 9vw, 120px)/1 var(--display); color: var(--accent); }
-  .voices p { max-width: 46ch; margin: 10px auto 24px; }
-  .glink { font-weight: 700; color: var(--accent); text-underline-offset: 5px; }
-  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-  .chip { display: inline-flex; gap: 8px; padding: 7px 16px; border: 1px solid var(--rule); background: var(--bg); font-size: 15px; }
-  .chip em { font-style: normal; color: var(--muted); }
 
-  .visit { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: start; }
-  .visit .addr { font: 500 24px/1.35 var(--display); margin: 0 0 22px; }
-  .visit .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; }
-  .map { aspect-ratio: 1 / 1; background: var(--soft); }
-  .map iframe { width: 100%; height: 100%; border: 0; }
-  footer { border-top: 1px solid var(--rule); padding: 32px 0 56px; font-size: 14px; color: var(--muted); text-align: center; }
-  footer .wrap { display: grid; gap: 8px; }
+.h-door { padding: clamp(44px, 7vw, 92px) 0; }
+.h-door .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.h-door .eyebrow { color: var(--accent2); font-style: italic; font-family: var(--display); font-size: 18px; }
+.h-door h1 { font-size: clamp(42px, 7vw, 82px); margin: 14px 0 20px; }
+.h-door p { color: var(--muted); max-width: 500px; margin-bottom: 18px; }
+.h-door .status { margin-bottom: 24px; }
+.h-door .scene { position: relative; display: grid; grid-template-columns: 1fr 150px; gap: 16px; align-items: end; }
+.h-door .scene img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; }
+.h-door .door { height: 300px; border-radius: 6px 6px 0 0; position: relative; box-shadow: inset 0 0 0 6px #5c3d22;
+  background: repeating-linear-gradient(90deg, #8a5a2b 0 34px, #7a4e24 34px 36px), #8a5a2b; }
+.h-door .door::after { content: ""; position: absolute; right: 18px; top: 52%; width: 12px; height: 12px; border-radius: 50%; background: #e2c27a; box-shadow: 0 0 0 3px #5c3d22; }
+.h-door .door span { position: absolute; left: 50%; top: 22px; transform: translateX(-50%); background: var(--surface); color: var(--ink); font: 700 13px/1.2 var(--body);
+  padding: 6px 8px; text-align: center; border-radius: 3px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+@media (max-width: 760px) { .h-door .wrap { grid-template-columns: 1fr; } .h-door .scene { grid-template-columns: 1fr 118px; } .h-door .door { height: 250px; } }
 
-  .dark .mast { width: 100%; max-width: none; background: var(--dark); color: var(--on-dark); padding: 40px 20px 24px; }
-  .dark .mast .where, .dark .mast .hl { color: color-mix(in srgb, var(--on-dark) 75%, transparent); }
-  .dark .mast nav { border-color: color-mix(in srgb, var(--on-dark) 25%, transparent); }
-  .dark .mast nav .call { color: var(--on-dark); text-decoration: underline; text-underline-offset: 5px; }
-  @media (min-width: 901px) {
-    .flip .pano { width: min(1080px, 100% - 40px); margin-inline: auto; }
-    .flip .pano img { aspect-ratio: 3 / 2; }
-    .flip .inset { margin: -110px 24px 0 auto; width: min(620px, 100% - 40px); }
-  }
-  @media (max-width: 480px) { .inset { grid-template-columns: 1fr !important; margin-top: -40px; padding: 18px 20px; gap: 12px; box-shadow: 0 6px 18px rgba(10, 10, 20, 0.08); } .inset .s { border-left: 0; padding-left: 0; } }
-  @media (max-width: 860px) {
-    .pano img { aspect-ratio: 4 / 3; }
-    .inset { grid-template-columns: 1fr 1fr; margin-top: -40px; padding: 22px; gap: 18px; }
-    .inset .btn { grid-column: 1 / -1; }
-    .inset .s span { white-space: nowrap; }
-    .inset .s { padding-left: 18px; }
-    .intro, .visit { grid-template-columns: 1fr; gap: 36px; }
-    .pair figure:last-child { margin-top: 40px; }
-    section { padding: 64px 0; }
-    .mast nav { display: none; }
-    .mast { padding: 18px 0 16px; }
-    .dark .mast { padding: 22px 20px 18px; }
-    .mast h1 { font-size: 40px; }
-    .mast .hl { font-size: 18px; }
-    .mast-cta { display: inline-flex; margin-top: 14px; min-height: 48px; }
-    .pano img { aspect-ratio: 16 / 9; }
-    .inset .btn { display: none; }
-  }
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+.s-tags .tags { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; padding-top: 18px; }
+.s-tags .tag { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 10px 10px 10px 10px; padding: 46px 22px 24px;
+  box-shadow: 0 14px 30px -22px rgba(0,0,0,.4); transform: rotate(var(--tilt)); }
+.s-tags .tag::before { content: ""; position: absolute; top: 16px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 0 0 2px var(--line); }
+.s-tags .tag::after { content: ""; position: absolute; top: -26px; left: 50%; width: 2px; height: 44px; background: var(--accent); }
+.s-tags .tag h3 { font-size: 24px; }
+.s-tags .tag .p { display: block; font: 700 28px/1 var(--display); color: var(--accent); margin-top: 14px; }
+.s-tags .tag small { display: block; color: var(--muted); margin-top: 8px; font-size: 14px; }
+@media (max-width: 760px) { .s-tags .tags { grid-template-columns: 1fr; gap: 34px; } }
+
+.p-pair .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.p-pair figure { margin: 0; }
+.p-pair img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.p-pair figcaption { display: flex; gap: 10px; align-items: center; padding-top: 12px; font-family: var(--display); font-style: italic; font-size: 18px; color: var(--muted); }
+.p-pair figcaption::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+.p-pair .more { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; margin-top: 18px; }
+.p-pair .more img { aspect-ratio: 4 / 3; }
+@media (max-width: 560px) { .p-pair .grid { grid-template-columns: 1fr; } }
+
+.r-stamp .grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
+.r-stamp .seal { width: clamp(190px, 26vw, 240px); aspect-ratio: 1; border-radius: 50%; border: 3px dashed var(--accent); display: grid; place-items: center; text-align: center;
+  color: var(--accent); transform: rotate(-8deg); padding: 18px; }
+.r-stamp .seal b { display: block; font: 700 clamp(60px, 8vw, 84px)/1 var(--display); }
+.r-stamp .seal span { font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 13px; }
+.r-stamp h2 { margin-bottom: 18px; }
+.r-stamp ul { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 10px; }
+.r-stamp li { display: flex; gap: 12px; align-items: baseline; font-size: 18px; }
+.r-stamp li b { min-width: 2.4ch; color: var(--accent); font-family: var(--display); font-size: 24px; }
+@media (max-width: 640px) { .r-stamp .grid { grid-template-columns: 1fr; justify-items: start; } }
+
+.o-sign .grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
+.o-sign .sign { position: relative; width: min(280px, 100%); padding: 26px 18px 22px; background: var(--dark); color: var(--on-dark); border-radius: 12px; text-align: center; margin-top: 44px;
+  box-shadow: 0 20px 40px -24px rgba(0,0,0,.6); }
+.o-sign .sign::before { content: ""; position: absolute; left: 50%; top: -42px; width: 120px; height: 42px; margin-left: -60px;
+  background: linear-gradient(to top right, transparent calc(50% - 1px), var(--muted) 50%, transparent calc(50% + 1.5px)) left / 50% 100% no-repeat,
+  linear-gradient(to top left, transparent calc(50% - 1px), var(--muted) 50%, transparent calc(50% + 1.5px)) right / 50% 100% no-repeat; }
+.o-sign .sign::after { content: ""; position: absolute; left: 50%; top: -48px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--muted); }
+.o-sign .sign b { display: block; font: 700 var(--sign, 40px)/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--accent2-on, var(--accent2)); }
+.o-sign .sign small { display: block; margin-top: 8px; font-size: 15px; opacity: .85; }
+.o-sign ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 2px; max-width: 460px; }
+.o-sign li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.o-sign li.today { font-weight: 700; color: var(--accent); }
+@media (max-width: 640px) { .o-sign .grid { grid-template-columns: 1fr; justify-items: center; } .o-sign .grid > div:last-child { width: 100%; } }
+
+</style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* southsites frame around their site: grey backdrop while their site is a card, their own background moves onto the stage */
   html.ss, html.ss body { background: #e7e9ec !important; }
@@ -118,14 +138,9 @@
   /* their call bar and chat button only while their site fills the screen */
   .k-callbar, .callbar, .chat-fab { transition: opacity 200ms ease, transform 160ms ease; }
   html.ss:not(.ss-full) :is(.k-callbar, .callbar, .chat-fab), html.ss-end :is(.k-callbar, .callbar, .chat-fab) { opacity: 0; pointer-events: none; }
-  /* starting prices beside each service */
-  .ss-price { margin-left: auto; padding-left: 16px; white-space: nowrap; font-weight: 700; font-variant-numeric: tabular-nums; }
-  li:has(> .ss-price) { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  li > .ss-price { order: 2; }   /* after a dotted leader line, where a layout draws one */
-  .svc .ss-price { display: block; margin: 4px 0 12px; padding: 0; font-size: 1.15em; }
 </style>
 </head>
-<body class="dark">
+<body>
 <ss-intro><template shadowrootmode="open"><style>
   :host { all: initial; display: block; color: #12151a; font: 500 16px/1.45 "Figtree", system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
   * { box-sizing: border-box; }
@@ -190,455 +205,58 @@
 </template></ss-intro>
 <div id="ss-stage">
 
-<header class="wrap mast" id="top">
-  <div class="where">Tailor, Mill Woods, Edmonton</div>
-  <h1>Verma Tailor</h1>
-  <p class="hl">Suit tailoring, pants and dress alterations.</p>
-  <a class="btn btn-acc mast-cta" href="tel:+17806680564">Call about your garment</a>
-  <nav aria-label="Sections"><a href="#services">Services</a><a href="#photos">Work</a><a href="#visit">Hours and visit</a><a class="call" href="tel:+17806680564">(780) 668-0564</a></nav>
-</header>
-
-<div class="pano">
-  <img src="img/photo-1.jpg" alt="Presser foot and needle">
-  <div class="inset">
-    <div class="r"><b>5.0</b><small>34 Google reviews</small></div>
-    <div class="s"><span><i class="k-dot" data-dot></i><span data-state></span></span><small data-sub></small></div>
-    <a class="btn btn-acc" href="tel:+17806680564">Call about your garment</a>
-  </div>
-</div>
-
+<nav class="top"><div class="wrap"><a class="name" href="#">Verma Tailor</a>
+  <div class="links"><a href="#services">Services</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+17806680564">Call<span class="num"> (780) 668-0564</span></a></div></div></nav>
 <main>
-  <div class="wrap" style="padding-top:72px; --k-accent-text: var(--accent)"><ul class="k-facts" aria-label="Contact"><li><b>Call</b><a href="tel:+17806680564">(780) 668-0564</a></li><li><b>Address</b><span>3426 16a Ave NW</span></li><li><b>Today</b><span data-today>Call to check</span></li></ul></div>
-  <section id="services">
-    <div class="wrap intro">
-      <div>
-        <div class="eyebrow-line">Services</div>
-        <h2>Tailoring &amp; alterations</h2>
-        <p>Starting prices. Call for a quote on yours.</p>
-        <a class="btn" href="tel:+17806680564">Call (780) 668-0564</a>
-      </div>
-      <ul class="list"><li><span class="s-name">Suit tailoring</span><b class="ss-price">from $40</b></li><li><span class="s-name">Pants alterations</span><b class="ss-price">from $15</b></li><li><span class="s-name">Dress alterations</span><b class="ss-price">from $25</b></li></ul>
-    </div>
-  </section>
-
-  <section id="photos" style="padding-top:0">
-    <div class="wrap pair">
-      <figure><img src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy"><figcaption>Stitching a seam</figcaption></figure>
-      <figure><img src="img/photo-3.jpg" alt="Cutting cloth" loading="lazy"><figcaption>Cutting cloth</figcaption></figure>
-    </div>
-  </section>
-
-  <section class="voices">
-    <div class="wrap">
-      <div class="big">5.0</div>
-      <p>34 people have reviewed Verma Tailor on Google.</p>
-      <a class="glink" href="https://www.google.com/maps/place/Verma+Tailor+%28Side+wooden+door%29/data=!4m7!3m6!1s0x53a01912b684c545:0x578887254e3a8db8!8m2!3d53.4437339!4d-113.3968885!16s%2Fg%2F11m77k351x!19sChIJRcWEthIZoFMRuI06TiWHiFc" target="_blank" rel="noopener">Read them on Google</a>
-    </div>
-  </section>
-
-  <section id="visit">
-    <div class="wrap visit">
-      <div>
-        <div class="eyebrow-line">Visit</div>
-        <h2>Easy to find in Mill Woods.</h2>
-        <p class="addr">3426 16a Ave NW, Edmonton, AB T6L 2N4</p>
-        <div class="ctas"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4" target="_blank" rel="noopener">Get directions</a><a class="btn" href="tel:+17806680564">Call first</a></div>
-        <div class="k-hours" data-hours></div>
-      </div>
-      <div class="map"><iframe title="Map showing Verma Tailor" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4&amp;output=embed"></iframe></div>
-    </div>
-  </section>
+<header class="h-door"><div class="wrap">
+  <div><span class="eyebrow">Tailor in Mill Woods</span><h1>Find the side wooden door.</h1><p>Suit tailoring, pants and dress alterations at 3426 16a Ave NW. A perfect 5.0 from 34 Google reviews.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
+  <div class="btns"><a class="btn btn-acc" href="tel:+17806680564">Call<span class="num"> (780) 668-0564</span></a><a class="btn btn-line" href="#visit">How to find us</a></div></div>
+  <div class="scene"><img src="img/photo-1.jpg" alt="Needle and presser foot"><div class="door" role="img" aria-label="The side wooden door"><span>Side door</span></div></div></div></header>
+<section class="s-tags" id="services"><div class="wrap"><div class="sec-head"><h2>Tailoring</h2><p>Starting prices. Call for a quote on yours.</p></div>
+  <div class="tags"><article class="tag" style="--tilt:-1.6deg"><h3>Suit tailoring</h3><span class="p">from $40</span><small>3 Google reviews mention it</small></article><article class="tag" style="--tilt:1.2deg"><h3>Pants alterations</h3><span class="p">from $15</span><small>3 Google reviews mention it</small></article><article class="tag" style="--tilt:-.6deg"><h3>Dress alterations</h3><span class="p">from $25</span><small>3 Google reviews mention it</small></article></div><div class="btns" style="margin-top:30px"><a class="btn btn-acc" href="tel:+17806680564">Call about your garment:<span class="num"> (780) 668-0564</span></a></div></div></section><section class="p-pair" id="photos"><div class="wrap"><div class="sec-head"><h2>At the bench</h2></div>
+  <div class="grid"><figure><img src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy"><figcaption>Stitching a seam</figcaption></figure><figure><img src="img/photo-3.jpg" alt="Cutting cloth" loading="lazy"><figcaption>Cutting cloth</figcaption></figure></div><div class="more"><figure><img src="img/photo-4.jpg" alt="Stitching leather" loading="lazy"><figcaption>Stitching leather</figcaption></figure></div></div></section><section class="r-stamp"><div class="wrap"><div class="grid">
+  <div class="seal"><div><b>5.0</b><span>34 Google reviews</span></div></div>
+  <div><h2>What people say</h2><ul><li><b>3</b>reviews mention suit tailoring</li><li><b>3</b>reviews mention pants alterations</li><li><b>3</b>reviews mention dress alterations</li><li><b>3</b>reviews mention perfect fit</li></ul><a class="btn btn-line" href="https://www.google.com/maps/place/Verma+Tailor+%28Side+wooden+door%29/data=!4m7!3m6!1s0x53a01912b684c545:0x578887254e3a8db8!8m2!3d53.4437339!4d-113.3968885!16s%2Fg%2F11m77k351x!19sChIJRcWEthIZoFMRuI06TiWHiFc" target="_blank" rel="noopener">Read the reviews on Google</a></div></div></div></section><section class="o-sign" id="hours"><div class="wrap"><div class="grid">
+  <div class="sign"><b data-sign>Hours</b><small data-sub>See the week</small></div>
+  <div><h2>Hours</h2><ul><li data-day="0"><span>Monday</span><b>4 to 8 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>4 to 8 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>4 to 8 p.m.</b></li><li data-day="3"><span>Thursday</span><b>4 to 8 p.m.</b></li><li data-day="4"><span>Friday</span><b>4 to 8 p.m.</b></li><li data-day="5"><span>Saturday</span><b>4 to 8 p.m.</b></li><li data-day="6"><span>Sunday</span><b>4 to 8 p.m.</b></li></ul></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
+  <div><h2>Come see us</h2><p class="addr">3426 16a Ave NW, Edmonton, AB T6L 2N4</p><p class="note"><b>Come around to the side wooden door.</b> Call (780) 668-0564 before you come.</p>
+  <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4" target="_blank" rel="noopener">Get directions</a><a class="btn btn-line" href="tel:+17806680564">Call<span class="num"> (780) 668-0564</span></a></div></div>
+  <div class="map"><span>Map: 3426 16a Ave NW, Edmonton, AB T6L 2N4</span><iframe title="Map to Verma Tailor" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4&amp;output=embed"></iframe></div>
+  </div></div></section>
 </main>
-
-<footer>
-  <div class="wrap">
-    <span>Preview made for Verma Tailor by Jan Gabriel, <a href="https://southsites.ca/#samples">Southsites</a>, Edmonton (see other sites I've built). Details from the public Google listing (Oct 27, 2026). Not the official website. Like it? Text <a href="sms:+18254615061">825-461-5061</a> or email <a href="mailto:contact@southsites.ca">contact@southsites.ca</a>.</span>
-    <a href="https://www.google.com/maps/place/Verma+Tailor+%28Side+wooden+door%29/data=!4m7!3m6!1s0x53a01912b684c545:0x578887254e3a8db8!8m2!3d53.4437339!4d-113.3968885!16s%2Fg%2F11m77k351x!19sChIJRcWEthIZoFMRuI06TiWHiFc" target="_blank" rel="noopener">Verma Tailor on Google Maps</a>
-    <span>Photos: <a href="https://commons.wikimedia.org/wiki/File:A_sewing_machine_needle_on_pink_%26_white_fabric.jpg" target="_blank" rel="noopener">Stch2022</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:Woman_sewing_a_face_mask_with_a_Singer_machine_08.jpg" target="_blank" rel="noopener">Tadeáš Bednarz</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:India_-_Varanasi_tailor_sewing_machine_-_1093.jpg" target="_blank" rel="noopener">Jorge Royan</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:African_tailor_sewing_a_leather_bag.jpg" target="_blank" rel="noopener">Wuzyprod</a> (CC BY-SA 4.0). Sample photos until Verma Tailor adds their own.</span>
-  </div>
-</footer>
-<!-- shared by every layout: mobile call bar, chat assistant, live open/closed status. layouts set the --k-* colours. -->
-<style>
-  .k-dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: #2f9e66; flex: none; animation: k-pulse 2.2s infinite; }
-  .k-dot.closed { background: #c2412d; animation: none; }
-  .k-dot.unknown { background: #8a8f98; animation: none; }
-  @keyframes k-pulse { 0% { box-shadow: 0 0 0 0 rgba(47, 158, 102, 0.5); } 70% { box-shadow: 0 0 0 10px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
-  .k-hours { display: grid; }
-  .k-hours div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
-  .k-hours div.today { font-weight: 700; }
-  .k-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-  .k-week div { display: grid; gap: 4px; justify-items: center; font-size: 12px; }
-  .k-week i { display: block; width: 100%; height: 6px; border-radius: 3px; background: color-mix(in srgb, currentColor 18%, transparent); }
-  .k-week i.on { background: var(--k-accent); }
-  .k-week i.today { outline: 2px solid currentColor; outline-offset: 1px; }
-  .k-callbar { display: none; }
-  .k-facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .k-facts li { display: grid; gap: 2px; padding: 16px 20px; border: 1px solid color-mix(in srgb, currentColor 16%, transparent); border-radius: 14px; min-width: 0; }
-  .k-facts b { font-size: 13.5px; font-weight: 700; opacity: 0.7; }
-  .k-facts a, .k-facts span { font-size: 18px; font-weight: 600; color: inherit; text-decoration: none; overflow-wrap: anywhere; }
-  @media (max-width: 760px) { .k-facts { grid-template-columns: 1fr; gap: 8px; } .k-facts li { padding: 12px 16px; } }
-  .k-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; counter-reset: step; }
-  .k-steps li { counter-increment: step; display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: baseline; padding: 18px 20px; border: 1px solid color-mix(in srgb, currentColor 16%, transparent); border-radius: 14px; }
-  .k-steps li::before { content: counter(step); grid-row: span 2; font-weight: 800; font-size: 22px; line-height: 1; color: var(--k-accent-text, currentColor); }
-  .k-steps b { font-size: 17px; }
-  .k-steps span { font-size: 15px; opacity: 0.78; }
-  @media (max-width: 760px) { .k-steps { grid-template-columns: 1fr; gap: 10px; } }
-  .k-sample { position: absolute; z-index: 2; left: 16px; top: 16px; padding: 4px 11px; border-radius: 999px; background: rgba(10, 12, 16, 0.66); color: #fff; font: 600 12.5px/1.35 system-ui, sans-serif; letter-spacing: 0.01em; pointer-events: none; }
-  figure { position: relative; }
-  .chat-fab { position: fixed; right: 24px; bottom: 24px; z-index: 30; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px 0 18px; border: 0; border-radius: 999px; background: var(--k-accent); color: var(--k-accent-ink); font: 700 16px/1 var(--k-font); cursor: pointer; box-shadow: 0 12px 32px rgba(5, 10, 15, 0.3); transition: transform 160ms ease; }
-  .chat-fab:hover { transform: translateY(-2px); }
-  .chat-fab svg { width: 22px; height: 22px; }
-  .chat { position: fixed; right: 24px; bottom: 24px; z-index: 40; width: 380px; height: min(580px, calc(100dvh - 48px)); display: none; flex-direction: column; background: #fff; color: #16181c; border-radius: 22px; box-shadow: 0 24px 70px rgba(5, 10, 15, 0.4); overflow: hidden; font-family: var(--k-font); }
-  .chat.open { display: flex; }
-  .chat-head { background: var(--k-dark); color: var(--k-on-dark); padding: 14px 14px 14px 18px; display: flex; align-items: center; gap: 12px; }
-  .chat-head .t { flex: 1; min-width: 0; }
-  .chat-head b { display: block; font-size: 17px; line-height: 1.2; }
-  .chat-head small { display: flex; align-items: center; gap: 7px; opacity: 0.85; font-size: 13.5px; margin-top: 2px; }
-  .chat-head small .k-dot { width: 9px; height: 9px; animation: none; }
-  .chat-x { flex: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.14); color: inherit; cursor: pointer; display: grid; place-items: center; }
-  .chat-x svg { width: 20px; height: 20px; }
-  .chat-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #f4f4f2; overscroll-behavior: contain; }
-  .msg { white-space: pre-line; max-width: 88%; padding: 10px 14px; border-radius: 16px; font-size: 16px; line-height: 1.45; overflow-wrap: anywhere; }
-  .msg.bot { align-self: flex-start; background: #fff; border: 1px solid rgba(22, 24, 28, 0.1); border-bottom-left-radius: 5px; }
-  .msg.me { align-self: flex-end; background: var(--k-dark); color: var(--k-on-dark); border-bottom-right-radius: 5px; }
-  .msg .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .msg .acts a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--k-accent); color: var(--k-accent-ink); font-weight: 700; font-size: 15px; text-decoration: none; }
-  .msg .acts a.alt { background: transparent; color: #16181c; border: 1.5px solid #16181c; }
-  .msg.typing { color: #5d6470; letter-spacing: 3px; }
-  .chat-chips { display: flex; gap: 8px; padding: 10px 14px 0; overflow-x: auto; background: #fff; scrollbar-width: none; }
-  .chat-chips::-webkit-scrollbar { display: none; }
-  .chat-chips button { flex: none; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #d4d6da; background: #fff; color: #16181c; font: 600 15px/1 var(--k-font); cursor: pointer; }
-  .chat-form { display: flex; gap: 8px; padding: 10px 14px; background: #fff; }
-  .chat-form input { flex: 1; min-width: 0; min-height: 48px; border: 1.5px solid #c9ccd1; border-radius: 999px; padding: 0 18px; font: 400 16px var(--k-font); color: #16181c; background: #fff; }
-  .chat-form button { flex: none; min-height: 48px; padding: 0 20px; border: 0; border-radius: 999px; background: var(--k-dark); color: var(--k-on-dark); font: 700 16px var(--k-font); cursor: pointer; }
-  .chat-note { padding: 0 16px 12px; background: #fff; color: #5d6470; font-size: 12.5px; line-height: 1.4; }
-  @media (max-width: 760px) {
-    .k-callbar { display: flex; position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 20; gap: 10px; }
-    .k-callbar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 14px; font: 700 16px var(--k-font); text-decoration: none; box-shadow: 0 10px 28px rgba(5, 10, 15, 0.28); }
-    .k-callbar a:first-child { background: var(--k-accent); color: var(--k-accent-ink); }
-    .k-callbar a:last-child { flex: 0 0 auto; padding: 0 18px; background: var(--k-dark); color: var(--k-on-dark); }
-    .chat-fab { display: none; right: 12px; bottom: calc(max(12px, env(safe-area-inset-bottom)) + 66px); min-height: 48px; padding: 0 18px 0 14px; }
-    .chat { right: 8px; left: 8px; bottom: 8px; width: auto; height: min(620px, calc(100dvh - 16px)); }
-    body { padding-bottom: 84px; }
-  }
-  @media (prefers-reduced-motion: reduce) { .k-dot { animation: none; } .chat-fab { transition: none; } }
-</style>
-
-<div class="k-callbar">
-  <a href="tel:+17806680564" aria-label="Call (780) 668-0564">Call now</a>
-  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4" target="_blank" rel="noopener" aria-label="Get directions">Directions</a>
-</div>
-
-<button class="chat-fab" id="chat-fab" type="button" aria-expanded="false" aria-controls="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>Ask us</button>
-<section class="chat" id="chat" role="dialog" aria-label="Verma Tailor chat assistant">
-  <div class="chat-head">
-    <div class="t"><b>Verma Tailor</b><small><i class="k-dot dot" id="chat-dot"></i><span id="chat-status"></span></small></div>
-    <button class="chat-x" id="chat-x" type="button" aria-label="Close chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-  </div>
-  <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
-  <div class="chat-chips" id="chat-chips"></div>
-  <form class="chat-form" id="chat-form" autocomplete="off">
-    <input id="chat-in" type="text" maxlength="200" placeholder="Ask about hours, location, services" aria-label="Your question" enterkeyhint="send">
-    <button type="submit">Send</button>
-  </form>
-  <div class="chat-note">Demo assistant by Southsites. It answers only from Verma Tailor's Google listing. For anything else, call or text.</div>
-</section>
-
-<script type="application/json" id="biz">{"hours": {"Monday": "4 to 8 p.m.", "Tuesday": "4 to 8 p.m.", "Wednesday": "4 to 8 p.m.", "Thursday": "4 to 8 p.m.", "Friday": "4 to 8 p.m.", "Saturday": "4 to 8 p.m.", "Sunday": "4 to 8 p.m."}, "name": "Verma Tailor", "category": "Tailor", "area": "Mill Woods", "address": "3426 16a Ave NW, Edmonton, AB T6L 2N4", "phone": "(780) 668-0564", "tel": "+17806680564", "rating": "5.0", "reviews": "34", "maps_url": "https://www.google.com/maps/place/Verma+Tailor+%28Side+wooden+door%29/data=!4m7!3m6!1s0x53a01912b684c545:0x578887254e3a8db8!8m2!3d53.4437339!4d-113.3968885!16s%2Fg%2F11m77k351x!19sChIJRcWEthIZoFMRuI06TiWHiFc", "directions_url": "https://www.google.com/maps/dir/?api=1&destination=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4", "services": [["suit tailoring", 3], ["pants alterations", 3], ["dress alterations", 3]]}</script>
+<footer class="site"><div class="wrap"><b>Verma Tailor</b><span>3426 16a Ave NW, Edmonton, AB T6L 2N4. (780) 668-0564</span>
+  <span class="credits">Sample website by Southsites. Photos are samples until Verma Tailor sends their own: <a href="https://commons.wikimedia.org/wiki/File:A_sewing_machine_needle_on_pink_%26_white_fabric.jpg" target="_blank" rel="noopener">Stch2022</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:Woman_sewing_a_face_mask_with_a_Singer_machine_08.jpg" target="_blank" rel="noopener">Tadeáš Bednarz</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:India_-_Varanasi_tailor_sewing_machine_-_1093.jpg" target="_blank" rel="noopener">Jorge Royan</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:African_tailor_sewing_a_leather_bag.jpg" target="_blank" rel="noopener">Wuzyprod</a> (CC BY-SA 4.0).</span></div></footer>
+<div class="k-callbar"><a href="tel:+17806680564">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4" target="_blank" rel="noopener">Directions</a></div>
+<script type="application/json" id="biz">{"hours": {"Monday": "4 to 8 p.m.", "Tuesday": "4 to 8 p.m.", "Wednesday": "4 to 8 p.m.", "Thursday": "4 to 8 p.m.", "Friday": "4 to 8 p.m.", "Saturday": "4 to 8 p.m.", "Sunday": "4 to 8 p.m."}}</script>
 <script>
-  // live open/closed status in edmonton time, from the hours on the google listing
-  const biz = JSON.parse(document.getElementById('biz').textContent);
-  const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const toMin = (t) => {
-    const m = t.trim().toLowerCase().replace(/\./g, '').match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/);
-    if (!m) return null;
-    let h = Number(m[1]) % 12; if (m[3] === 'pm') h += 12;
-    return h * 60 + Number(m[2] || 0);
-  };
-  function spans(text) {
-    if (!text || /closed/i.test(text)) return [];
-    if (/24 hours/i.test(text)) return [[0, 1440]];
-    return text.split(',').map((part) => {
-      const [a, b] = part.split(/\s+to\s+|[–—-]/);
-      if (!b) return null;
-      let s = toMin(a), e = toMin(b);
-      if (s == null || e == null) return null;
-      // "4 to 8 p.m.": the start has no a.m./p.m., so it takes the end's. if that puts it after the end ("11 to 2 p.m."), it is the morning
-      if (!/[ap]\.?m/i.test(a) && /[ap]\.?m/i.test(b)) { if (/p\.?m/i.test(b) && s < 720) s += 720; if (s >= e && s >= 720) s -= 720; }
-      if (e <= s) e += 1440;
-      return [s, e];
-    }).filter(Boolean);
-  }
-  const pretty = (min) => {
-    min %= 1440; let h = Math.floor(min / 60), m = min % 60; const ap = h >= 12 ? 'p.m.' : 'a.m.';
-    h = h % 12 || 12; return m ? `${h}:${String(m).padStart(2, '0')} ${ap}` : `${h} ${ap}`;
-  };
-  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
-  const today = (now.getDay() + 6) % 7, minute = now.getHours() * 60 + now.getMinutes();
-  let state = 'Hours unconfirmed', sub = 'Call to check', open = false;
-  const hoursKnown = Object.keys(biz.hours || {}).length > 0;
-  if (hoursKnown) {
-    const cur = spans(biz.hours[DAYS[today]]).find(([s, e]) => minute >= s && minute < e);
-    if (cur) { open = true; state = 'Open now'; sub = `Closes at ${pretty(cur[1])}`; }
-    else {
-      state = 'Closed now';
-      for (let k = 0; k < 7; k++) {
-        const d = (today + k) % 7, next = spans(biz.hours[DAYS[d]]).find(([s]) => k > 0 || s > minute);
-        if (next) { sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[d]} at ${pretty(next[0])}`; break; }
-      }
+  // open now, in edmonton time, from the hours on the google listing
+  (() => {
+    const biz = JSON.parse(document.getElementById('biz').textContent), DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const toMin = (t, ap) => { const m = t.trim().toLowerCase().replace(/\./g, '').match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/); if (!m) return null;
+      let h = +m[1] % 12; if ((m[3] || ap) === 'pm') h += 12; return h * 60 + (+m[2] || 0); };
+    const span = (txt) => { if (!txt || /closed/i.test(txt)) return null; const [a, b] = txt.split(/\s+to\s+/); if (!b) return null;
+      const ap = (b.toLowerCase().replace(/\./g, '').match(/(am|pm)/) || [])[1]; let s = toMin(a, ap), en = toMin(b); if (s === null || en === null) return null;
+      if (s >= en && ap === 'pm' && !/(a\.?m|p\.?m)/i.test(a)) s -= 720; return [s, en <= s ? en + 1440 : en]; };
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
+    const today = (now.getDay() + 6) % 7, minute = now.getHours() * 60 + now.getMinutes();
+    const nice = (min) => { min %= 1440; const h = Math.floor(min / 60), m = min % 60, ap = h >= 12 ? 'p.m.' : 'a.m.'; return `${h % 12 || 12}${m ? ':' + String(m).padStart(2, '0') : ''} ${ap}`; };
+    if (!Object.keys(biz.hours).length) {   // no hours on the google listing
+      for (const el of document.querySelectorAll('[data-state], [data-sign], [data-today]')) el.textContent = 'Call to book';
+      for (const el of document.querySelectorAll('[data-sub]')) el.textContent = 'By appointment';
+      return;
     }
-  }
-  // fill every [data-state] / [data-sub] / [data-statesub] / [data-dot] / [data-hours] / [data-week] the layout has
-  document.querySelectorAll('[data-state]').forEach((el) => { el.textContent = state; });
-  document.querySelectorAll('[data-sub]').forEach((el) => { el.textContent = sub; });
-  document.querySelectorAll('[data-statesub]').forEach((el) => { el.textContent = `${state}. ${sub}.`; });
-  document.querySelectorAll('[data-dot]').forEach((el) => { el.classList.toggle('closed', hoursKnown && !open); el.classList.toggle('unknown', !hoursKnown); });
-  document.querySelectorAll('[data-today]').forEach((el) => { el.textContent = hoursKnown ? ((biz.hours || {})[DAYS[today]] || 'Closed') : 'Call to check'; });
-  document.querySelectorAll('[data-week]').forEach((week) => DAYS.forEach((d, k) => {
-    const cell = document.createElement('div'), bar = document.createElement('i'), lbl = document.createElement('b');
-    if (spans((biz.hours || {})[d]).length) bar.className = 'on';
-    if (k === today) bar.classList.add('today');
-    lbl.textContent = d.slice(0, 1); cell.append(bar, lbl); week.append(cell);
-  }));
-  document.querySelectorAll('[data-hours]').forEach((table) => DAYS.forEach((d, k) => {
-    const row = document.createElement('div'); if (k === today) row.className = 'today';
-    const a = document.createElement('span'); a.textContent = k === today ? `${d} (today)` : d;
-    const b = document.createElement('span'); b.textContent = (biz.hours || {})[d] || (hoursKnown ? 'Closed' : 'Call to check');
-    row.append(a, b); table.append(row);
-  }));
-</script>
-<script>
-  // chat assistant: rule-based, runs in the page, no network calls, no API key.
-  // it answers from `biz` (the google listing data) and hands everything else to call or text.
-  (function () {
-    const fab = document.getElementById('chat-fab'), box = document.getElementById('chat');
-    const log = document.getElementById('chat-log'), input = document.getElementById('chat-in');
-    const chips = document.getElementById('chat-chips');
-    const phone = biz.phone, tel = biz.tel;
-    const nowEdm = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
-    const todayIdx = () => (nowEdm().getDay() + 6) % 7;
-    const hoursOf = (k) => (biz.hours || {})[DAYS[k]] || '';
-    const known = Object.keys(biz.hours || {}).length > 0;
-    const callAct = { label: 'Call ' + phone, href: 'tel:' + tel };
-    const textAct = { label: 'Text', href: 'sms:' + tel, alt: true };
-    const contactActs = [callAct];
-    const noHours = { text: "I don't have hours on file. Call and we'll tell you.", acts: contactActs };
-
-    function status() {
-      const n = nowEdm(), t = todayIdx(), m = n.getHours() * 60 + n.getMinutes();
-      const cur = spans(hoursOf(t)).find(([s, e]) => m >= s && m < e);
-      if (cur) return { open: true, closes: pretty(cur[1]) };
-      let next = null;
-      for (let k = 0; k < 7 && !next; k++) {
-        const d = (t + k) % 7, s = spans(hoursOf(d)).find(([a]) => k > 0 || a > m);
-        if (s) next = { k, d, at: pretty(s[0]), end: pretty(s[1]) };
-      }
-      return { open: false, next };
-    }
-    const when = (nx) => nx.k === 0 ? 'today' : nx.k === 1 ? 'tomorrow' : DAYS[nx.d];
-    function paintStatus() {
-      const dot = document.getElementById('chat-dot'), label = document.getElementById('chat-status');
-      if (!known) { dot.classList.add('unknown'); label.textContent = 'Call to check hours'; return; }
-      const s = status();
-      dot.classList.toggle('closed', !s.open);
-      label.textContent = s.open ? 'Open now, closes ' + s.closes : 'Closed now' + (s.next ? ', opens ' + when(s.next) + ' at ' + s.next.at : '');
-    }
-    function hoursSummary() {
-      const rows = [];
-      DAYS.forEach((d, k) => {
-        const h = hoursOf(k) || 'Closed', last = rows[rows.length - 1];
-        if (last && last.h === h && last.to === k - 1) last.to = k; else rows.push({ from: k, to: k, h });
-      });
-      return rows.map((r) => (r.from === r.to ? DAYS[r.from] : DAYS[r.from].slice(0, 3) + ' to ' + DAYS[r.to].slice(0, 3)) + ': ' + r.h).join('\n');
-    }
-    const norm = (s) => ' ' + s.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim() + ' ';
-    const GENERIC = ['haircut', 'haircuts', 'cut', 'cuts', 'hair', 'the', 'for', 'and', 'fresh'];
-    const stem = (w) => w.replace(/s$/, '');
-    function matchServices(q) {
-      const words = q.trim().split(' ').map(stem);
-      return (biz.services || []).map(([name, n]) => {
-        const toks = norm(name).trim().split(' ').filter((tok) => tok.length > 2 && !GENERIC.includes(tok)).map(stem);
-        let i = words.findIndex((w) => toks.includes(w));
-        if (i < 0 && /kid/.test(name)) i = words.findIndex((w) => /^(kid|child|children|boy|son|toddler)$/.test(w));
-        return i < 0 ? null : [name, n, i];
-      }).filter(Boolean).sort((a, b) => a[2] - b[2]);
-    }
-    // every day the question names, in the order asked ("today", "tomorrow", day names, "weekend")
-    function dayRefs(q) {
-      const found = [];
-      const add = (k, at) => { if (!found.some((f) => f.k === k)) found.push({ k, at }); };
-      const at = (rx) => { const m = rx.exec(q); return m ? m.index : -1; };
-      let i;
-      if ((i = at(/ (today|tonight) /)) >= 0) add(todayIdx(), i);
-      if ((i = at(/ tomorrow /)) >= 0) add((todayIdx() + 1) % 7, i);
-      if ((i = at(/ weekends? /)) >= 0) { add(5, i); add(6, i); }
-      DAYS.forEach((d, k) => { if ((i = at(new RegExp(' (' + d.toLowerCase() + '|' + d.toLowerCase().slice(0, 3) + ')s? '))) >= 0) add(k, i); });
-      return found.sort((a, b) => a.at - b.at).map((f) => f.k);
-    }
-    function dayAnswer(ks) {
-      if (!known) return noHours;
-      return { text: ks.map((k) => {
-        const h = hoursOf(k), name = k === todayIdx() ? 'Today (' + DAYS[k] + ')' : DAYS[k];
-        return spans(h).length ? name + " we're open " + h + '.' : 'We are closed on ' + DAYS[k] + '.';
-      }).join('\n') };
-    }
-
-    // words the assistant understands. a question with any other word is handed off, never answered from a keyword match
-    const KNOWN = new Set(('a an the any some my me i we us you your yours our it its is are am was be do does did can could would will have has get got need needs want wants looking ' +
-      'what which when where how who whats there here this that if so with by on at in of to for from and or also please just really quick question wondering tell know let guys ok okay yes no about right still around then soon sometime anytime ' +
-      'open opened opening close closed closes closing hours hour schedule time times now today tonight tomorrow currently late early until till morning afternoon evening day days week weekend ' +
-      'address location located directions direction map maps find street near nearby way go come stop phone number call text contact reach rating rated review reviews star stars good best recommend people say reputation ' +
-      'service services offer offers menu style styles specialty trim trims cut cuts haircut haircuts hair fade fades kid kids child children boy son toddler daughter girl ' +
-      'robot robots bot real human person machine automated chatbot talking ai thanks thank thx cheers appreciate hi hello hey hiya bye goodbye later much again very take takes accept accepts price prices pricing cost costs much charge fee fees cheap discount deposit pay payment card cash debit tip student senior coupon book booking appointment appointments reserve reservation walk walkin walkins ins wait waiting cancel reschedule queue ' +
-      'park parking bus transit train lrt wheelchair accessible accessibility wifi pet pets dog dogs product products gift gifts career careers job jobs hiring ' +
-      'mon tue wed thu fri sat sun monday tuesday wednesday thursday friday saturday sunday').split(' '));
-    [biz.name, biz.area, biz.category, ...(biz.services || []).map((s) => s[0])].forEach((s) => norm(s).trim().split(' ').forEach((w) => KNOWN.add(w)));
-    const unknownWords = (q) => q.trim().split(' ').filter((w) => w && !/^\d+$/.test(w) && !KNOWN.has(w) && !KNOWN.has(stem(w)));
-    const handoff = { text: "I don't have that. I only know our hours, address, phone and what's in our Google reviews. Call " + phone + ' and a person will help.', acts: contactActs };
-
-    // every intent a question contains contributes a part; parts are merged in the order they were asked.
-    // anything that can't be answered completely (digits, dates, holidays, unknown words) hands the whole question off.
-    const SOCIAL = new Set('hi hello hey yo hiya good morning afternoon evening thanks thank you thx cheers appreciate it bye goodbye see later much so very a lot again there now'.split(' '));
-    function answer(raw) {
-      const q = norm(raw), R = (rx) => rx.test(q);
-      const words = q.trim().split(' ');
-      // dates and clock times (12/25, 2026-12-25, 5pm, 24/7) are not in the data: never answer them with today's status
-      if (/\d/.test(raw)) return handoff;
-      // social replies only for social-only messages
-      if (words.every((w) => SOCIAL.has(w))) {
-        if (R(/ (thanks|thank|thx|cheers|appreciate) /)) return { text: "You're welcome! See you soon." };
-        if (R(/ (bye|goodbye|see you|later) /)) return { text: 'Take care!' };
-        return { text: 'Hi! Ask me about hours, where we are, services or how to reach us.' };
-      }
-      // holidays and anything we have no data for: hand off instead of guessing from a keyword
-      if (R(/ (christmas|xmas|boxing day|easter|thanksgiving|halloween|new years?|canada day|victoria day|labou?r day|remembrance|family day|good friday|holidays?|stat|long weekend) /))
-        return { text: "I don't have holiday hours. Call " + phone + " to check before you come.", acts: contactActs };
-      if (unknownWords(q).length) return handoff;
-
-      const at = (rx) => { const m = rx.exec(q); return m ? m.index : -1; };
-      const parts = [];
-      if (R(/ (are you|r u|am i talking to) (a |an |the )?(real|human|person|bot|robot|ai|machine|automated|chatbot|talking)/))
-        parts.push({ i: at(/ (are you|r u|am i talking to) /), text: "I'm an automated assistant. I only know what's on our Google listing: hours, address, phone and what people say about us. For anything else, call or text and a person will help.", acts: contactActs });
-      const push = (rx, text, acts) => { const i = at(rx); if (i >= 0) parts.push({ i, text, acts }); return i >= 0; };
-
-      // things we don't have: one combined handoff
-      const parking = at(/ (park|parking|bus|transit|train|lrt|wheelchair|accessible|accessibility|wifi|pets?|dogs?|products?|gift|gifts|careers?|jobs?|hiring) /);
-      const price = at(/ (price|prices|pricing|cost|costs|how much|charge|fee|fees|cheap|discount|deposit|pay|payment|card|cash|debit|tip|student|senior|coupon) /);
-      const book = at(/ (book|booking|appointment|appointments|reserve|reservation|walk in|walkin|walk ins|walkins|wait time|waiting|cancel|reschedule|queue) /);
-      const noData = [parking, price, book].filter((i) => i >= 0);
-      if (noData.length) {
-        const text = price >= 0 && book >= 0 ? "I don't have prices or payment details, and I can't book or check the wait. Call " + phone + " and we'll sort it out."
-          : price >= 0 ? "I don't have prices or payment details. Call " + phone + " and we'll quote you."
-          : book >= 0 ? "I can't book or check the wait. Call " + phone + " and we'll sort it out."
-          : "I don't have that on our listing. Call " + phone + " and we'll tell you.";
-        parts.push({ i: Math.min(...noData), text, acts: contactActs });
-      }
-      if (!noData.length)
-        push(/ (phone|number|call|text|contact|reach|email|dm|message|instagram|facebook) /, 'Call ' + phone + '.', contactActs);
-      push(/ (where|address|location|directions?|map|maps|find you|get there|located|street|how do i get|near|nearby) /,
-        biz.address ? 'We are at ' + biz.address + '.' : 'Call for our address.',
-        [{ label: 'Get directions', href: biz.directions_url }, { label: 'Open in Maps', href: biz.maps_url, alt: true }]);
-
-      const svcs = matchServices(q);
-      const listRx = / (services?|offer|menu|do you do|what do you do|haircuts?|hair cuts?|cuts?|trims?|styles?|specialt(y|ies)|good at) /;
-      const noPrices = price < 0 && book < 0; // when prices/booking were asked, the handoff part already says so
-      const listAsked = / (services?|offer|menu|specialt(y|ies)) /.test(q);
-      if (listAsked || !svcs.length) {
-        const list = (biz.services || []).map((s) => s[0] + ' (' + s[1] + ' reviews)').join(', ');
-        push(listAsked ? / (services?|offer|menu|specialt(y|ies)) / : listRx, list ? 'What reviewers mention most: ' + list + '.' + (noPrices ? ' For the full list and prices, call or text ' + phone + '.' : '') : 'Call ' + phone + ' to ask what we offer.', contactActs);
-      } else {
-        const named = svcs.map((s) => s[0] + ' (' + s[1] + ' reviews)');
-        const list = named.length > 1 ? named.slice(0, -1).join(', ') + ' and ' + named[named.length - 1] : named[0];
-        parts.push({ i: Math.max(0, at(new RegExp(' ' + norm(svcs[0][0]).trim().split(' ')[0].replace(/s$/, '') + '\\w* '))),
-          text: list.charAt(0).toUpperCase() + list.slice(1) + (svcs.length > 1 ? ' are things' : ' is one of the things') + ' people mention in our Google reviews.' + (noPrices ? ' I do not have prices or appointment times, so call or text ' + phone + ' to ask.' : ''), acts: contactActs });
-      }
-      if (biz.rating)
-        push(/ (rating|rated|reviews?|stars?|good|best|recommend|people say|reputation) /, biz.rating + ' stars on Google from ' + biz.reviews + ' reviews. Reviewers mention ' + (biz.services || []).map((s) => s[0]).join(', ') + '.', [{ label: 'Read the reviews', href: biz.maps_url }]);
-
-      // hours: each clause of the question ("... and ...", "... or ...") is answered on its own
-      // (same-length rewrites keep positions comparable with the other parts)
-      const hq = q.replace(/ (opening|open|business|closing) (hours|times) /g, (m, a, b) => ' ' + '_'.repeat(a.length) + ' hours ')
-        .replace(/ (open|opens|opening) (and|or) (close|closes|closing) /g, (m) => m.replace(' and ', '_and_').replace(' or ', '_or_'));
-      const clauses = []; { let st = 0, m; const sep = / (and|or) /g; while ((m = sep.exec(hq))) { clauses.push([st, hq.slice(st, m.index) + ' ']); st = m.index + m[0].length - 1; } clauses.push([st, hq.slice(st)]); }
-      let plainStatus = false;
-      clauses.forEach(([off, c]) => {
-        const hw = / (hours|schedule|timings?) /.exec(c), dr = dayRefs(c), oc = / (open|open_and_close|open_or_close|opened|opens|opening|close|closed|closes|closing|late|early) /.exec(c);
-        if (!hw && !dr.length && !oc) return;
-        if (!known) { parts.push({ i: off + Math.max(0, hw ? hw.index : 0, oc ? oc.index : 0), text: noHours.text, acts: noHours.acts }); return; }
-        if (hw) parts.push({ i: off + hw.index, text: hoursSummary() });
-        if (dr.length) {
-          let text = dayAnswer(dr).text;
-          if (/ (now|currently) /.test(c)) { const s = status(); text = (s.open ? "We're open now, until " + s.closes + '.' : 'We are closed right now.' + (s.next ? ' We open ' + when(s.next) + ' at ' + s.next.at + '.' : '')) + '\n' + text; }
-          parts.push({ i: off + Math.max(0, oc ? oc.index : 0, (/ (today|tonight|tomorrow|weekends?|monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tue|wed|thu|fri|sat|sun)s? /.exec(c) || { index: 0 }).index), text });
-        } else if (oc) {
-          const s = status(), both = /open_(and|or)_close/.test(c);
-          const asksOpen = both || (/ (open|opens|opening) /.test(c) && / (what time|when) /.test(c)), asksClose = both || / (close|closes|closing) /.test(c);
-          const onlyClosed = / closed /.test(c) && !/ open /.test(c);
-          if (!asksOpen && !asksClose) { if (plainStatus) return; plainStatus = true; } // one open-now answer, even for "open and closed?"
-          let text;
-          if (s.open) {
-            if (asksOpen) text = dayAnswer([todayIdx()]).text;
-            else if (onlyClosed) text = "No, we're open now. We close at " + s.closes + ' today.';
-            else text = asksClose && !/ (open|now) /.test(c) ? 'We close at ' + s.closes + ' today.' : "Yes, we're open now. We close at " + s.closes + ' today.';
-          } else if (s.next) {
-            text = asksOpen || asksClose ? 'We open ' + when(s.next) + ' at ' + s.next.at + (asksClose ? ' and close at ' + s.next.end : '') + '.'
-              : (onlyClosed ? 'Yes, we are closed right now. ' : 'We are closed right now. ') + 'We open ' + when(s.next) + ' at ' + s.next.at + '.';
-          } else text = 'Call for our hours.';
-          parts.push({ i: off + oc.index, text });
-        }
-      });
-
-      if (!parts.length) return handoff;
-      parts.sort((a, b) => a.i - b.i);
-      for (let k = parts.length - 1; k > 0; k--) if (parts.slice(0, k).some((x) => x.text === parts[k].text)) parts.splice(k, 1);
-      const acts = [];
-      parts.forEach((p) => (p.acts || []).forEach((a) => { if (!acts.some((x) => x.href === a.href)) acts.push(a); }));
-      return { text: parts.map((p) => p.text).join('\n'), acts: acts.length ? acts : undefined };
-    }
-
-    function add(cls, text, acts) {
-      const m = document.createElement('div'); m.className = 'msg ' + cls; m.textContent = text.replace(/\.{2}(?!\.)/g, '.');
-      if (acts && acts.length) {
-        const a = document.createElement('div'); a.className = 'acts';
-        acts.forEach((x) => {
-          const l = document.createElement('a'); l.href = x.href; l.textContent = x.label;
-          if (x.alt) l.className = 'alt';
-          if (/^https?:/.test(x.href)) { l.target = '_blank'; l.rel = 'noopener'; }
-          a.append(l);
-        });
-        m.append(a);
-      }
-      log.append(m); log.scrollTop = log.scrollHeight; return m;
-    }
-    function ask(text) {
-      text = text.trim(); if (!text) return;
-      add('me', text);
-      const wait = add('bot typing', '•••');
-      setTimeout(() => { const r = answer(text); wait.remove(); add('bot', r.text, r.acts); }, 350);
-    }
-    function start() {
-      paintStatus();
-      add('bot', 'Hi! I can answer questions about ' + biz.name + ': hours, where we are, services. For anything else I will point you to call or text.');
-      [['Open now?', 'Are you open now?'], ['Hours', 'What are your hours?'], ['Where are you?', 'Where are you located?'], ['Services', 'What services do you offer?'], ['Call', 'What is your phone number?']].forEach(([label, q]) => {
-        const b = document.createElement('button'); b.type = 'button'; b.textContent = label;
-        b.addEventListener('click', () => ask(q)); chips.append(b);
-      });
-    }
-    let started = false;
-    function setOpen(on) {
-      box.classList.toggle('open', on); fab.style.display = on ? 'none' : '';
-      fab.setAttribute('aria-expanded', String(on));
-      if (on) { if (!started) { started = true; start(); } else paintStatus(); setTimeout(() => input.focus(), 30); }
-      else fab.focus();
-    }
-    fab.addEventListener('click', () => setOpen(true));
-    document.getElementById('chat-x').addEventListener('click', () => setOpen(false));
-    box.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-    document.getElementById('chat-form').addEventListener('submit', (e) => { e.preventDefault(); const v = input.value; input.value = ''; ask(v); });
-    window.__chatAnswer = answer; // exposed so the question list can be tested without clicking
+    const cur = span(biz.hours[DAYS[today]]), open = cur && minute >= cur[0] && minute < cur[1];
+    let sub = '';
+    if (open) sub = `Closes at ${nice(cur[1])}`;
+    else for (let k = 0; k < 7; k++) { const dd = (today + k) % 7, s = span(biz.hours[DAYS[dd]]); if (s && (k > 0 || s[0] > minute)) { sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(s[0])}`; break; } }
+    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : 'Closed now';
+    for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
+    for (const el of document.querySelectorAll('[data-sub]')) el.textContent = sub;
+    for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : 'closed';
+    for (const el of document.querySelectorAll('[data-today]')) el.textContent = biz.hours[DAYS[today]] || 'Closed today';
+    for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
   })();
 </script>
-
 </div>
 <ss-outro><template shadowrootmode="open"><style>
   :host { all: initial; display: block; color: #12151a; font: 500 16px/1.45 "Figtree", system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
@@ -747,5 +365,4 @@
     new IntersectionObserver(([en]) => root.classList.toggle('ss-end', en.isIntersecting)).observe(outro);
   })();
 </script>
-</body>
-</html>
+</body></html>
