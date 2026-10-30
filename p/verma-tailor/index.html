@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%20role%3D%22img%22%20aria-label%3D%22Verma%20Tailor%20logo%22%3E%3Cpath%20d%3D%22M18%2097V16a7%207%200%200%201%207-7h50a7%207%200%200%201%207%207v81%22%20fill%3D%22none%22%20stroke%3D%22%231f3354%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M8%2097h84%22%20fill%3D%22none%22%20stroke%3D%22%231f3354%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22/%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2258%22%20r%3D%223%22%20fill%3D%22%231f3354%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2258%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20fill%3D%22%231f3354%22%20font-size%3D%2252%22%20style%3D%22font-family%3A%27Libre%20Baskerville%27%2C%20serif%3Bfont-weight%3A600%22%3EV%3C/text%3E%3C/svg%3E">
 <style>
-:root { --bg: #f4efe6; --ink: #1f1b16; --muted: #5f574c; --surface: #fffcf6; --line: #ddd2c0; --accent: #1f3354; --accent-ink: #ffffff; --dark: #3a2a1c; --on-dark: #f4efe6; --accent2: #8a5a2b; --display: "Libre Baskerville", Georgia, serif; --body: "Work Sans", system-ui, sans-serif;  --r: 2px; --rb: 2px; }
+:root { --accent3: #8a5a2b; --bg: #f4efe6; --ink: #1f1b16; --muted: #5f574c; --surface: #fffcf6; --line: #ddd2c0; --accent: #1f3354; --accent-ink: #ffffff; --dark: #3a2a1c; --on-dark: #f4efe6; --accent2: #8a5a2b; --display: "Libre Baskerville", Georgia, serif; --body: "Work Sans", system-ui, sans-serif;  --r: 2px; --rb: 2px; }
 
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -57,14 +57,6 @@ footer.site .wrap { display: grid; gap: 10px; }
 footer.site b { font: 700 22px/1.1 var(--display); }
 footer.site .credits { opacity: .72; font-size: 12.5px; line-height: 1.5; }
 footer.site .credits a { color: inherit; }
-.k-callbar { display: none; }
-@media (max-width: 760px) {
-  .k-callbar { display: flex; position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 40; gap: 10px; }
-  .k-callbar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: var(--r);
-    background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; box-shadow: 0 10px 28px rgba(0,0,0,.22); }
-  .k-callbar a + a { flex: 0 0 auto; padding: 0 18px; background: var(--dark); color: var(--on-dark); }
-  body { padding-bottom: 84px; }
-}
 .photo-credit { position: absolute; right: 10px; bottom: 10px; }
 
 
@@ -84,72 +76,38 @@ footer.site .credits a { color: inherit; }
   padding: 6px 8px; text-align: center; border-radius: 3px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
 @media (max-width: 760px) { .h-door .wrap { grid-template-columns: 1fr; } .h-door .scene { grid-template-columns: 1fr 118px; } .h-door .door { height: 250px; } }
 
-.s-stack .cards { display: grid; gap: 22px; }
-.s-stack .sc { position: sticky; top: calc(92px + var(--i) * 20px); min-height: min(74vh, 620px); border-radius: 30px; padding: clamp(24px, 4vw, 48px);
-  color: var(--fgc); display: grid; grid-template-rows: auto 1fr auto; gap: 24px; overflow: hidden;
-  background: radial-gradient(130% 140% at 0% 0%, color-mix(in srgb, var(--bgc) 72%, #fff) 0%, var(--bgc) 46%, color-mix(in srgb, var(--bgc) 68%, #000) 100%);
-  box-shadow: 0 -24px 60px -34px rgba(0, 0, 0, .55); }
-.s-stack .sc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid color-mix(in srgb, currentColor 28%, transparent); }
-.s-stack .sc-top h3 { font-size: clamp(34px, 5.4vw, 68px); line-height: .98; color: inherit; }
-.s-stack .sc-n { font: var(--hw, 700) clamp(44px, 6.4vw, 88px)/1 var(--display); opacity: .92; }
-.s-stack .sc-mid { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
-.s-stack .sc-d { display: flex; gap: 12px; align-items: flex-start; font-size: clamp(17px, 1.6vw, 20px); max-width: 44ch; opacity: .92; }
-.s-stack .sc-p { text-align: right; }
-.s-stack .sc-p small { display: block; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; opacity: .75; }
-.s-stack .sc-p b { font: var(--hw, 700) clamp(40px, 6vw, 76px)/1 var(--display); white-space: nowrap; }
-.s-stack .sc-bot { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
-.s-stack .pill { display: inline-flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 22px; border-radius: 999px; background: var(--fgc); color: var(--bgc);
-  font-weight: 700; text-decoration: none; transition: transform .25s ease; }
-.s-stack .pill:hover { transform: translateY(-2px); }
-.s-stack figure { margin: 0; width: min(340px, 44%); aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; position: relative; flex: none; }
-.s-stack figure img { width: 100%; height: 100%; object-fit: cover; }
-.s-stack figcaption { position: absolute; left: 10px; bottom: 10px; font-size: 12px; font-weight: 600; background: rgba(0, 0, 0, .55); color: #fff; padding: 5px 9px; border-radius: 8px; }
-@media (max-width: 760px) {
-  .s-stack .sc { min-height: 0; top: calc(78px + var(--i) * 12px); border-radius: 24px; }
-  .s-stack .sc-mid { grid-template-columns: 1fr; } .s-stack .sc-p { text-align: left; }
-  .s-stack .sc-bot { flex-direction: column-reverse; align-items: stretch; } .s-stack figure { width: 100%; }
-}
+.s-ticket .grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+.s-ticket .sheet { position: relative; background: #fffdf7; color: #1d1d1b; border-radius: 10px; padding: 54px clamp(20px, 3.4vw, 40px) 28px; rotate: -1.2deg;
+  box-shadow: 0 2px 0 #e9e3d4, 0 40px 70px -40px rgba(0,0,0,.6); }
+.s-ticket .clip { position: absolute; left: 50%; top: -18px; width: 150px; height: 46px; translate: -50% 0; border-radius: 10px 10px 14px 14px;
+  background: linear-gradient(#d5dade, #8f979f); box-shadow: inset 0 -4px 0 rgba(0,0,0,.18), 0 6px 14px rgba(0,0,0,.25); }
+.s-ticket .clip::after { content: ""; position: absolute; left: 50%; top: 9px; width: 54px; height: 12px; translate: -50% 0; border-radius: 8px; background: #6f777f; }
+.s-ticket .sh-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; border-bottom: 2px solid #1d1d1b; padding-bottom: 10px; margin-bottom: 6px;
+  font: 600 13px/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-transform: uppercase; letter-spacing: .08em; }
+.s-ticket .sh-head b { font-size: 15px; }
+.s-ticket ul { list-style: none; margin: 0; padding: 0; }
+.s-ticket li { display: grid; grid-template-columns: 30px 1fr auto; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px dashed #c9c3b5; }
+.s-ticket li b { font: var(--hw, 700) 20px/1.2 var(--display); display: block; }
+.s-ticket li small { color: #5c5a55; font-size: 14px; }
+.s-ticket .p { font: 700 16px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: right; }
+.s-ticket .ck { width: 28px; height: 28px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.s-ticket .ck rect { stroke: #1d1d1b; }
+.s-ticket .ck path { stroke: var(--tick, #1f7a3d); stroke-width: 2.6; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset .6s ease; transition-delay: calc(var(--k) * .3s + .4s); }
+.s-ticket .sheet.in .ck path { stroke-dashoffset: 0; }
+.s-ticket .sh-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 18px; font-size: 14px; color: #5c5a55; }
+@media (prefers-reduced-motion: reduce) { .s-ticket .ck path { stroke-dashoffset: 0; } }
+@media (max-width: 760px) { .s-ticket .grid { grid-template-columns: 1fr; } .s-ticket .sheet { rotate: 0deg; } .s-ticket li { grid-template-columns: 28px 1fr; } .s-ticket .p { grid-column: 2; text-align: left; } }
 
-.p-pair .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-.p-pair figure { margin: 0; }
-.p-pair img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-.p-pair figcaption { display: flex; gap: 10px; align-items: center; padding-top: 12px; font-family: var(--display); font-style: italic; font-size: 18px; color: var(--muted); }
-.p-pair figcaption::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
-.p-pair .more { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; margin-top: 18px; }
-.p-pair .more img { aspect-ratio: 4 / 3; }
-@media (max-width: 560px) { .p-pair .grid { grid-template-columns: 1fr; } }
-
-.story .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
-.story .media { position: sticky; top: 96px; margin: 0; height: min(78vh, 700px); border-radius: min(var(--r), 22px); overflow: hidden; background: var(--surface); }
-.story .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; scale: 1.08; transition: opacity 1s ease, scale 1.8s cubic-bezier(.2,.7,.2,1); }
-.story .media img.on { opacity: 1; scale: 1; }
-.story .media figcaption { position: absolute; left: 16px; bottom: 16px; background: var(--bg); color: var(--ink); padding: 7px 12px; font-size: 13px; font-weight: 600; border-radius: 4px; }
-.story .step { min-height: 58vh; display: grid; align-content: center; gap: 8px; border-top: 1px solid var(--line); padding: 32px 0; }
-.story .step .num { font: var(--hw, 700) clamp(76px, 11vw, 136px)/.9 var(--display); color: var(--accent); font-variant-numeric: tabular-nums; }
-.story .step .glyph { color: var(--accent); }
-.story .step h3 { font-size: clamp(28px, 3.6vw, 42px); }
-.story .step p { color: var(--muted); }
-.story .step img.m { display: none; }
-.story .btn { margin-top: 18px; }
-@media (max-width: 760px) {
-  .story .grid { grid-template-columns: 1fr; } .story .media { display: none; }
-  .story .step { min-height: 0; padding: 26px 0; }
-  .story .step img.m { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: min(var(--r), 16px); margin-bottom: 12px; }
-}
-
-.o-sign .grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
-.o-sign .sign { position: relative; width: min(280px, 100%); padding: 26px 18px 22px; background: var(--dark); color: var(--on-dark); border-radius: 12px; text-align: center; margin-top: 44px;
-  box-shadow: 0 20px 40px -24px rgba(0,0,0,.6); }
-.o-sign .sign::before { content: ""; position: absolute; left: 50%; top: -42px; width: 120px; height: 42px; margin-left: -60px;
-  background: linear-gradient(to top right, transparent calc(50% - 1px), var(--muted) 50%, transparent calc(50% + 1.5px)) left / 50% 100% no-repeat,
-  linear-gradient(to top left, transparent calc(50% - 1px), var(--muted) 50%, transparent calc(50% + 1.5px)) right / 50% 100% no-repeat; }
-.o-sign .sign::after { content: ""; position: absolute; left: 50%; top: -48px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--muted); }
-.o-sign .sign b { display: block; font: 700 var(--sign, 40px)/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--accent2-on, var(--accent2)); }
-.o-sign .sign small { display: block; margin-top: 8px; font-size: 15px; opacity: .85; }
-.o-sign ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 2px; max-width: 460px; }
-.o-sign li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
-.o-sign li.today { font-weight: 700; color: var(--accent); }
-@media (max-width: 640px) { .o-sign .grid { grid-template-columns: 1fr; justify-items: center; } .o-sign .grid > div:last-child { width: 100%; } }
+.p-swap .grid { display: grid; grid-template-columns: 1fr 150px; gap: 14px; }
+.p-swap .big { margin: 0; position: relative; aspect-ratio: 16 / 10; border-radius: var(--r); overflow: hidden; background: var(--surface); }
+.p-swap .big img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .45s ease; }
+.p-swap .big figcaption { position: absolute; left: 14px; bottom: 14px; background: var(--bg); color: var(--ink); padding: 7px 13px; border-radius: 999px; font-size: 13.5px; font-weight: 600; }
+.p-swap .thumbs { display: grid; gap: 10px; align-content: start; }
+.p-swap .thumbs button { padding: 0; border: 2px solid transparent; border-radius: min(var(--r), 14px); overflow: hidden; cursor: pointer; background: none; aspect-ratio: 4 / 3; opacity: .55; transition: .3s; }
+.p-swap .thumbs button.on, .p-swap .thumbs button:hover { opacity: 1; border-color: var(--accent); }
+.p-swap .thumbs button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.p-swap .thumbs img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 760px) { .p-swap .grid { grid-template-columns: 1fr; } .p-swap .thumbs { grid-template-columns: repeat(4, 1fr); } .p-swap .big { aspect-ratio: 4 / 3; } }
 
 .faq .grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
 .faq details { border-bottom: 1px solid var(--line); }
@@ -163,13 +121,33 @@ footer.site .credits a { color: inherit; }
 .faq .a a { color: var(--ink); font-weight: 700; }
 @media (max-width: 760px) { .faq .grid { grid-template-columns: 1fr; } }
 
+.story-bars .grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+.story-bars .sec-head .btn { margin-top: 10px; justify-self: start; }
+.story-bars ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px; }
+.story-bars .t { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.story-bars .t b { font: var(--hw, 700) clamp(22px, 2.6vw, 30px)/1.1 var(--display); }
+.story-bars .t span { color: var(--muted); white-space: nowrap; }
+.story-bars i { display: block; height: 12px; border-radius: 99px; background: color-mix(in srgb, var(--accent) 16%, transparent); position: relative; overflow: hidden; }
+.story-bars i::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); background: var(--accent); border-radius: inherit; transform: scaleX(0); transform-origin: left;
+  transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+.story-bars ul.in i::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .story-bars i::after { transform: none; } }
+@media (max-width: 760px) { .story-bars .grid { grid-template-columns: 1fr; } }
 
-.ribbon { overflow: hidden; background: var(--accent); color: var(--accent-ink); }
-.ribbon .track { display: flex; width: max-content; animation: ribbon 42s linear infinite; }
-.ribbon .half { display: flex; align-items: center; gap: 30px; padding: 18px 30px 18px 0; font: var(--hw, 700) clamp(18px, 2.2vw, 24px)/1 var(--display);
-  text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
-.ribbon .ic { opacity: .75; }
-@keyframes ribbon { to { transform: translateX(-50%); } }
+.o-clock .grid { display: grid; grid-template-columns: minmax(240px, 360px) 1fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
+.o-clock .dial { position: relative; }
+.o-clock svg { width: 100%; height: auto; display: block; }
+.o-clock .rim { fill: var(--surface); stroke: var(--line); stroke-width: 2; }
+.o-clock .tick { stroke: var(--muted); stroke-width: 1.4; } .o-clock .tick.big { stroke: var(--ink); stroke-width: 2.4; }
+.o-clock .arc { fill: none; stroke: var(--accent); stroke-width: 11; stroke-linecap: round; }
+.o-clock .hand { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; transform-origin: 100px 100px; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+.o-clock .hub { fill: var(--accent); }
+.o-clock .lbl { font: 600 9px var(--body); fill: var(--muted); text-anchor: middle; dominant-baseline: middle; }
+.o-clock .read { display: flex; justify-content: center; margin-top: 14px; }
+.o-clock ul { list-style: none; margin: 18px 0 0; padding: 0; max-width: 480px; }
+.o-clock li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.o-clock li.today { color: var(--accent); font-weight: 700; }
+@media (max-width: 760px) { .o-clock .grid { grid-template-columns: 1fr; } .o-clock .dial { max-width: 300px; margin: 0 auto; } }
 
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
@@ -216,22 +194,31 @@ footer.site p a { color: inherit; text-decoration: none; }
 
 h1 .tone, h2 .tone { display: block; color: color-mix(in srgb, currentColor 46%, transparent); }
 h2 .tone { font-size: .62em; line-height: 1.2; margin-top: 8px; }
-nav.top { top: 10px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; pointer-events: none; }
-nav.top .wrap { min-height: 60px; }
-nav.top .brand, nav.top .links { pointer-events: auto; background: color-mix(in srgb, var(--surface) 72%, transparent); -webkit-backdrop-filter: saturate(1.5) blur(16px);
-  backdrop-filter: saturate(1.5) blur(16px); border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); border-radius: 999px; box-shadow: 0 10px 30px -18px rgba(0,0,0,.35); }
-nav.top .brand { padding: 5px 16px 5px 5px; color: var(--ink); }
-nav.top .brand .mark { width: 38px; height: 38px; }
-nav.top .links { padding: 5px 5px 5px 20px; }
-nav.top .links .btn { border-radius: 999px; min-height: 40px; }
-.k-callbar { display: flex; position: fixed; left: 50%; right: auto; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40; gap: 4px;
-  padding: 5px; border-radius: 999px; background: color-mix(in srgb, var(--dark) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  box-shadow: 0 16px 40px -14px rgba(0,0,0,.55); }
-.k-callbar a { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 999px; font-weight: 700; text-decoration: none;
-  background: var(--accent); color: var(--accent-ink); box-shadow: none; flex: none; }
-.k-callbar a + a { background: transparent; color: var(--on-dark); padding: 0 18px; }
-body { padding-bottom: 92px; }
-@media (max-width: 760px) { .k-callbar { left: 12px; right: 12px; transform: none; } .k-callbar a { flex: 1; } .k-callbar a + a { flex: 0 0 auto; } }
+
+
+nav.top .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw; }
+@media (max-width: 760px) { nav.top .name { font-size: 16px; max-width: 52vw; } nav.top .brand .mark { width: 34px; height: 34px; } }
+@keyframes ringpulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 16px transparent; } }
+
+nav.n-center { border-bottom: 1px solid var(--line); }
+nav.n-center .wrap { display: grid; grid-template-columns: 1fr auto 1fr; }
+nav.n-center .brand { flex-direction: column; gap: 3px; justify-self: center; text-align: center; padding: 6px 0; }
+nav.n-center .brand .mark { width: 34px; height: 34px; }
+nav.n-center .name { font-size: 18px; letter-spacing: .02em; }
+nav.n-center .l { justify-self: start; } nav.n-center .r { justify-self: end; }
+@media (max-width: 760px) { nav.n-center .name { max-width: 56vw; font-size: 15px; } }
+
+.k-callbar.cb-fab { display: flex; align-items: center; gap: 10px; position: fixed; left: auto; right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 40; background: none; box-shadow: none; }
+.cb-fab a { box-shadow: 0 14px 30px -10px rgba(0,0,0,.5); text-decoration: none; }
+.cb-fab .call { width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); animation: ringpulse 2.6s infinite; }
+.cb-fab .dir { display: inline-flex; align-items: center; gap: 6px; min-height: 46px; padding: 0 16px; border-radius: 999px; background: var(--dark); color: var(--on-dark); font-weight: 700; font-size: 14.5px; }
+body { padding-bottom: 90px; }
+main .label::before { width: 9px; height: 9px; border-radius: 2px; rotate: 45deg; }
+main > header { position: relative; }
+main > header > canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(420px circle at var(--mx, 75%) var(--my, 30%), color-mix(in srgb, var(--accent) 24%, transparent), transparent 65%); transition: background-position .2s; }
+:is(.h-split .ph, .h-bp .pin, .h-poster .shot, .h-collage .stack, .h-center .fanrow, .h-stripe figure) { animation: rise 1.3s cubic-bezier(.2,.7,.2,1) .25s both; }
 
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -311,26 +298,24 @@ body { padding-bottom: 92px; }
 </template></ss-intro>
 <div id="ss-stage">
 
-<nav class="top"><div class="wrap"><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Verma Tailor logo"><path d="M18 97V16a7 7 0 0 1 7-7h50a7 7 0 0 1 7 7v81" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M8 97h84" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="70" cy="58" r="3" fill="currentColor"/><text x="50" y="58" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="52" style="font-family:var(--display);font-weight:600">V</text></svg><span class="name">Verma Tailor</span></a>
-  <div class="links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+17806680564">Call<span class="num"> (780) 668-0564</span></a></div></div></nav>
+<nav class="top n-center"><div class="wrap"><div class="links l"><a href="#services">Services</a><a href="#photos">Photos</a><a href="#reviews">Reviews</a><a href="#hours">Hours</a></div><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Verma Tailor logo"><path d="M18 97V16a7 7 0 0 1 7-7h50a7 7 0 0 1 7 7v81" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M8 97h84" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="70" cy="58" r="3" fill="currentColor"/><text x="50" y="58" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="52" style="font-family:var(--display);font-weight:600">V</text></svg><span class="name">Verma Tailor</span></a><div class="links r"><a class="btn btn-acc" href="tel:+17806680564">Call<span class="num"> (780) 668-0564</span></a></div></div></nav>
 <main>
 <header class="h-door"><div class="wrap">
   <div><span class="eyebrow">Tailor in Mill Woods</span><h1>Find the side wooden door.<span class="tone"> Mill Woods.</span></h1><p>Suit tailoring, pants and dress alterations at 3426 16a Ave NW. A perfect 5.0 from 34 Google reviews.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
   <div class="btns"><a class="btn btn-acc" href="tel:+17806680564">Call<span class="num"> (780) 668-0564</span></a><a class="btn btn-line" href="#visit">How to find us</a></div></div>
   <div class="scene"><img src="img/photo-1.jpg" alt="Needle and presser foot"><div class="door" role="img" aria-label="The side wooden door"><span>Side door</span></div></div></div></header>
-<div class="ribbon" aria-hidden="true"><div class="track"><div class="half"><span>Suit tailoring</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg><span>Pants alterations</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg><span>Dress alterations</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg></div><div class="half"><span>Suit tailoring</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg><span>Pants alterations</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg><span>Dress alterations</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg></div></div></div>
-<section class="s-stack" id="services"><div class="wrap"><div class="sec-head"><span class="label">Tailoring</span>
-  <h2>What we do<span class="tone"> Starting prices. Call for a quote on yours.</span></h2></div>
-  <div class="cards"><article class="sc" style="--bgc:var(--accent);--fgc:var(--accent-ink);--i:0"><div class="sc-top"><h3>Suit tailoring</h3><span class="sc-n">01</span></div><div class="sc-mid"><p class="sc-d"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg><span>Jackets and suits fitted to you.</span></p><div class="sc-p"><small>from</small><b>$40</b></div></div><div class="sc-bot"><a class="pill" href="tel:+17806680564">Call to book<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><figure><img src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy"><figcaption>Stitching a seam</figcaption></figure></div></article><article class="sc" style="--bgc:var(--dark);--fgc:var(--on-dark);--i:1"><div class="sc-top"><h3>Pants alterations</h3><span class="sc-n">02</span></div><div class="sc-mid"><p class="sc-d"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg><span>Hems, waists and tapers.</span></p><div class="sc-p"><small>from</small><b>$15</b></div></div><div class="sc-bot"><a class="pill" href="tel:+17806680564">Call to book<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><figure><img src="img/photo-3.jpg" alt="Cutting cloth" loading="lazy"><figcaption>Cutting cloth</figcaption></figure></div></article><article class="sc" style="--bgc:color-mix(in srgb, var(--accent) 55%, var(--dark));--fgc:var(--on-dark);--i:2"><div class="sc-top"><h3>Dress alterations</h3><span class="sc-n">03</span></div><div class="sc-mid"><p class="sc-d"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg><span>Take-ins, hems and straps.</span></p><div class="sc-p"><small>from</small><b>$25</b></div></div><div class="sc-bot"><a class="pill" href="tel:+17806680564">Call to book<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><figure><img src="img/photo-4.jpg" alt="Stitching leather" loading="lazy"><figcaption>Stitching leather</figcaption></figure></div></article></div></div></section><section class="p-pair" id="photos"><div class="wrap"><div class="sec-head"><h2>At the bench</h2></div>
-  <div class="grid"><figure><img src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy"><figcaption>Stitching a seam</figcaption></figure><figure><img src="img/photo-3.jpg" alt="Cutting cloth" loading="lazy"><figcaption>Cutting cloth</figcaption></figure></div><div class="more"><figure><img src="img/photo-4.jpg" alt="Stitching leather" loading="lazy"><figcaption>Stitching leather</figcaption></figure></div></div></section><section class="story" id="reviews"><div class="wrap"><div class="grid">
-  <figure class="media"><img src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy" class=on><img src="img/photo-3.jpg" alt="Cutting cloth" loading="lazy"><img src="img/photo-4.jpg" alt="Stitching leather" loading="lazy"><figcaption>Stitching a seam</figcaption></figure>
-  <div class="steps"><div class="sec-head"><span class="label">What reviewers say</span>
-    <h2><span data-count="5.0" data-dec="1">5.0</span> stars from 34 Google reviews</h2></div>
-    <article class="step" data-step="0"><img class="m" src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy"><span class="num glyph"><svg class="ic" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg></span><h3>Suit tailoring</h3><p>3 of 34 Google reviews bring it up.</p></article><article class="step" data-step="1"><img class="m" src="img/photo-3.jpg" alt="Cutting cloth" loading="lazy"><span class="num glyph"><svg class="ic" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg></span><h3>Pants alterations</h3><p>3 of 34 Google reviews bring it up.</p></article><article class="step" data-step="2"><img class="m" src="img/photo-4.jpg" alt="Stitching leather" loading="lazy"><span class="num glyph"><svg class="ic" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5"/><path d="M16.5 4.5a2 2 0 0 1 3 3"/><path d="M5 19c-2-3 1-5 3-4s3 3 6 1"/></svg></span><h3>Dress alterations</h3><p>3 of 34 Google reviews bring it up.</p></article><a class="btn btn-line" href="https://www.google.com/maps/place/Verma+Tailor+%28Side+wooden+door%29/data=!4m7!3m6!1s0x53a01912b684c545:0x578887254e3a8db8!8m2!3d53.4437339!4d-113.3968885!16s%2Fg%2F11m77k351x!19sChIJRcWEthIZoFMRuI06TiWHiFc" target="_blank" rel="noopener">Read them on Google</a></div>
-  </div></div></section><section class="o-sign" id="hours"><div class="wrap"><div class="grid">
-  <div class="sign"><b data-sign>Hours</b><small data-sub>See the week</small></div>
-  <div><h2>Hours</h2><ul><li data-day="0"><span>Monday</span><b>4 to 8 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>4 to 8 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>4 to 8 p.m.</b></li><li data-day="3"><span>Thursday</span><b>4 to 8 p.m.</b></li><li data-day="4"><span>Friday</span><b>4 to 8 p.m.</b></li><li data-day="5"><span>Saturday</span><b>4 to 8 p.m.</b></li><li data-day="6"><span>Sunday</span><b>4 to 8 p.m.</b></li></ul></div></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
-  <h2>Quick answers.<span class="tone"> Straight from the shop's Google listing.</span></h2></div><div class="list"><details><summary>How do I book?</summary><p class="a">Call <a href="tel:+17806680564">(780) 668-0564</a>, or tap Call at the bottom of the screen.</p></details><details><summary>What does it cost?</summary><p class="a">Starting prices: suit tailoring from $40; pants alterations from $15; dress alterations from $25. Call for a quote on yours.</p></details><details><summary>Where are you?</summary><p class="a">3426 16a Ave NW, Edmonton, AB T6L 2N4. Come around to the side wooden door.</p></details><details><summary>When are you open?</summary><p class="a">Today: <b data-today>see the hours above</b>. The whole week is in the hours section.</p></details><details><summary>What do customers say?</summary><p class="a">5.0 stars from 34 Google reviews, mostly about suit tailoring, pants alterations, dress alterations.</p></details></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
+
+<section class="s-ticket" id="services"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Tailoring</span><h2>Pick a service<span class="tone"> Starting prices. Ask about yours.</span></h2></div>
+  <div class="sheet" data-rv style="--tick:#1f3354"><div class="clip" aria-hidden="true"></div><div class="sh-head"><b>Alteration ticket</b><span>Verma Tailor</span></div>
+  <ul><li style="--k:0"><svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="3"/><path d="M6.5 12.5 10.5 16.5 18 8"/></svg><div><b>Suit tailoring</b><small>Jackets and suits fitted to you.</small></div><span class="p">from $40</span></li><li style="--k:1"><svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="3"/><path d="M6.5 12.5 10.5 16.5 18 8"/></svg><div><b>Pants alterations</b><small>Hems, waists and tapers.</small></div><span class="p">from $15</span></li><li style="--k:2"><svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="3"/><path d="M6.5 12.5 10.5 16.5 18 8"/></svg><div><b>Dress alterations</b><small>Take-ins, hems and straps.</small></div><span class="p">from $25</span></li></ul><div class="sh-foot"><span>Starting prices. Final quote by phone.</span><a class="btn btn-acc" href="tel:+17806680564">Call to book<span class="num"> (780) 668-0564</span></a></div></div></div></div></section><section class="p-swap" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>At the bench</h2></div><div class="grid" data-swap>
+  <figure class="big"><img src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy"><figcaption>Stitching a seam</figcaption></figure><div class="thumbs"><button type="button" class="on" data-src="img/photo-2.jpg" data-alt="Stitching a seam" aria-label="Show: Stitching a seam"><img src="img/photo-2.jpg" alt="Stitching a seam" loading="lazy"></button><button type="button" class="" data-src="img/photo-3.jpg" data-alt="Cutting cloth" aria-label="Show: Cutting cloth"><img src="img/photo-3.jpg" alt="Cutting cloth" loading="lazy"></button><button type="button" class="" data-src="img/photo-4.jpg" data-alt="Stitching leather" aria-label="Show: Stitching leather"><img src="img/photo-4.jpg" alt="Stitching leather" loading="lazy"></button></div></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
+  <h2>Quick answers.<span class="tone"> Straight from the shop's Google listing.</span></h2></div><div class="list"><details><summary>How do I book?</summary><p class="a">Call <a href="tel:+17806680564">(780) 668-0564</a>, or tap Call at the bottom of the screen.</p></details><details><summary>What does it cost?</summary><p class="a">Starting prices: suit tailoring from $40; pants alterations from $15; dress alterations from $25. Call for a quote on yours.</p></details><details><summary>Where are you?</summary><p class="a">3426 16a Ave NW, Edmonton, AB T6L 2N4. Come around to the side wooden door.</p></details><details><summary>When are you open?</summary><p class="a">Today: <b data-today>see the hours above</b>. The whole week is in the hours section.</p></details><details><summary>What do customers say?</summary><p class="a">5.0 stars from 34 Google reviews, mostly about suit tailoring, pants alterations, dress alterations.</p></details></div></div></div></section><section class="story-bars" id="reviews"><div class="wrap"><div class="grid">
+  <div class="sec-head"><span class="label">What reviewers say</span><h2>5.0 stars from 34 Google reviews<span class="tone"> What comes up most in them.</span></h2>
+  <a class="btn btn-line" href="https://www.google.com/maps/place/Verma+Tailor+%28Side+wooden+door%29/data=!4m7!3m6!1s0x53a01912b684c545:0x578887254e3a8db8!8m2!3d53.4437339!4d-113.3968885!16s%2Fg%2F11m77k351x!19sChIJRcWEthIZoFMRuI06TiWHiFc" target="_blank" rel="noopener">Read them on Google</a></div>
+  <ul data-rv><li><div class="t"><b>Suit tailoring</b><span>3 reviews</span></div><i style="--w:100%"></i></li><li><div class="t"><b>Pants alterations</b><span>3 reviews</span></div><i style="--w:100%"></i></li><li><div class="t"><b>Dress alterations</b><span>3 reviews</span></div><i style="--w:100%"></i></li><li><div class="t"><b>Perfect fit</b><span>3 reviews</span></div><i style="--w:100%"></i></li></ul></div></div></section><section class="o-clock" id="hours"><div class="wrap"><div class="grid">
+  <div class="dial" data-clock data-rv><svg viewBox="0 0 200 200" role="img" aria-label="Today's opening hours on a 24 hour clock"><circle class="rim" cx="100" cy="100" r="92"/><line class="tick big" x1="100.0" y1="16.0" x2="100.0" y2="24.0"/><line class="tick" x1="121.7" y1="18.9" x2="120.4" y2="23.7"/><line class="tick" x1="142.0" y1="27.3" x2="139.5" y2="31.6"/><line class="tick" x1="159.4" y1="40.6" x2="155.9" y2="44.1"/><line class="tick" x1="172.7" y1="58.0" x2="168.4" y2="60.5"/><line class="tick" x1="181.1" y1="78.3" x2="176.3" y2="79.6"/><line class="tick big" x1="184.0" y1="100.0" x2="176.0" y2="100.0"/><line class="tick" x1="181.1" y1="121.7" x2="176.3" y2="120.4"/><line class="tick" x1="172.7" y1="142.0" x2="168.4" y2="139.5"/><line class="tick" x1="159.4" y1="159.4" x2="155.9" y2="155.9"/><line class="tick" x1="142.0" y1="172.7" x2="139.5" y2="168.4"/><line class="tick" x1="121.7" y1="181.1" x2="120.4" y2="176.3"/><line class="tick big" x1="100.0" y1="184.0" x2="100.0" y2="176.0"/><line class="tick" x1="78.3" y1="181.1" x2="79.6" y2="176.3"/><line class="tick" x1="58.0" y1="172.7" x2="60.5" y2="168.4"/><line class="tick" x1="40.6" y1="159.4" x2="44.1" y2="155.9"/><line class="tick" x1="27.3" y1="142.0" x2="31.6" y2="139.5"/><line class="tick" x1="18.9" y1="121.7" x2="23.7" y2="120.4"/><line class="tick big" x1="16.0" y1="100.0" x2="24.0" y2="100.0"/><line class="tick" x1="18.9" y1="78.3" x2="23.7" y2="79.6"/><line class="tick" x1="27.3" y1="58.0" x2="31.6" y2="60.5"/><line class="tick" x1="40.6" y1="40.6" x2="44.1" y2="44.1"/><line class="tick" x1="58.0" y1="27.3" x2="60.5" y2="31.6"/><line class="tick" x1="78.3" y1="18.9" x2="79.6" y2="23.7"/><text class="lbl" x="100" y="58">midnight</text><text class="lbl" x="142" y="100">6 am</text><text class="lbl" x="100" y="142">noon</text><text class="lbl" x="58" y="100">6 pm</text>
+  <path class="arc" d=""/><line class="hand" x1="100" y1="100" x2="100" y2="30"/><circle class="hub" cx="100" cy="100" r="6"/></svg><div class="read"><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div></div>
+  <div><div class="sec-head"><span class="label">Hours</span><h2>When we are open<span class="tone"> Today is marked on the clock.</span></h2></div><ul><li data-day="0"><span>Monday</span><b>4 to 8 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>4 to 8 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>4 to 8 p.m.</b></li><li data-day="3"><span>Thursday</span><b>4 to 8 p.m.</b></li><li data-day="4"><span>Friday</span><b>4 to 8 p.m.</b></li><li data-day="5"><span>Saturday</span><b>4 to 8 p.m.</b></li><li data-day="6"><span>Sunday</span><b>4 to 8 p.m.</b></li></ul></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
   <div><span class="label">Visit</span><h2>Come see us</h2>
   <ul class="facts">
     <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>3426 16a Ave NW, Edmonton, AB T6L 2N4</b><small>Come around to the side wooden door.</small></div></li>
@@ -346,7 +331,7 @@ body { padding-bottom: 92px; }
   <div><span class="label">Visit</span><p>3426 16a Ave NW, Edmonton, AB T6L 2N4</p></div>
   <div><span class="label">Call</span><p><a href="tel:+17806680564">(780) 668-0564</a></p></div></div>
   <span class="credits">Sample website by Southsites. Photos are samples until Verma Tailor sends their own: <a href="https://commons.wikimedia.org/wiki/File:A_sewing_machine_needle_on_pink_%26_white_fabric.jpg" target="_blank" rel="noopener">Stch2022</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:Woman_sewing_a_face_mask_with_a_Singer_machine_08.jpg" target="_blank" rel="noopener">Tadeáš Bednarz</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:India_-_Varanasi_tailor_sewing_machine_-_1093.jpg" target="_blank" rel="noopener">Jorge Royan</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:African_tailor_sewing_a_leather_bag.jpg" target="_blank" rel="noopener">Wuzyprod</a> (CC BY-SA 4.0).</span></div></footer>
-<div class="k-callbar"><a href="tel:+17806680564">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4" target="_blank" rel="noopener">Directions</a></div>
+<div class="k-callbar cb-fab"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Verma+Tailor%2C+3426+16a+Ave+NW%2C+Edmonton%2C+AB+T6L+2N4" target="_blank" rel="noopener"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Directions</span></a><a class="call" href="tel:+17806680564" aria-label="Call Verma Tailor"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></a></div>
 <script type="application/json" id="biz">{"hours": {"Monday": "4 to 8 p.m.", "Tuesday": "4 to 8 p.m.", "Wednesday": "4 to 8 p.m.", "Thursday": "4 to 8 p.m.", "Friday": "4 to 8 p.m.", "Saturday": "4 to 8 p.m.", "Sunday": "4 to 8 p.m."}}</script>
 <script>
   // open now, in edmonton time, from the hours on the google listing
@@ -354,11 +339,12 @@ body { padding-bottom: 92px; }
     const biz = JSON.parse(document.getElementById('biz').textContent), DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     const toMin = (t, ap) => { const m = t.trim().toLowerCase().replace(/\./g, '').match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/); if (!m) return null;
       let h = +m[1] % 12; if ((m[3] || ap) === 'pm') h += 12; return h * 60 + (+m[2] || 0); };
-    const span = (txt) => { if (!txt || /closed/i.test(txt)) return null; const [a, b] = txt.split(/\s+to\s+/); if (!b) return null;
+    const span = (txt) => { if (!txt || /closed/i.test(txt)) return null; if (/24 hours/i.test(txt)) return [0, 1440]; const [a, b] = txt.split(/\s+to\s+/); if (!b) return null;
       const ap = (b.toLowerCase().replace(/\./g, '').match(/(am|pm)/) || [])[1]; let s = toMin(a, ap), en = toMin(b); if (s === null || en === null) return null;
       if (s >= en && ap === 'pm' && !/(a\.?m|p\.?m)/i.test(a)) s -= 720; return [s, en <= s ? en + 1440 : en]; };
     const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
     const today = (now.getDay() + 6) % 7, minute = now.getHours() * 60 + now.getMinutes();
+    window.ssHours = { span, today, minute, DAYS, hours: biz.hours };
     const nice = (min) => { min %= 1440; const h = Math.floor(min / 60), m = min % 60, ap = h >= 12 ? 'p.m.' : 'a.m.'; return `${h % 12 || 12}${m ? ':' + String(m).padStart(2, '0') : ''} ${ap}`; };
     if (!Object.keys(biz.hours).length) {   // no hours on the google listing
       for (const el of document.querySelectorAll('[data-state], [data-sign], [data-today]')) el.textContent = 'Call to book';
@@ -382,8 +368,9 @@ body { padding-bottom: 92px; }
   (() => {
     const root = document.documentElement, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     root.classList.add('js');
-    const sel = '.sec-head, .card, .tag, .sw, .board, .s-elegant li, .s-tape .chart, main section figure, .sign, .days li, .o-ledger table, .o-today .card, .visit .facts li, .visit .map, .story .step, footer .fgrid > *';
-    const els = [...document.querySelectorAll(sel)].filter((el) => !el.closest('main > header, .story .media'));
+    const sel = '.sec-head, .card, .tag, .sw, .board, .s-elegant li, .s-tape .chart, main section figure, .sign, .days li, .o-ledger table, .o-today .card, .visit .facts li, .visit .map, .story .step, footer .fgrid > *, [data-rv], .s-grid .cell, .s-tiles .tile';
+    const els = [...document.querySelectorAll(sel)].filter((el) => !el.closest('main > header, .story .media')
+      && !(el.parentElement && el.parentElement.closest('.p-fan .deck, .s-split .stage, .s-tabs .panel, .s-tiles .tile, .p-swap .big, .p-strip .row')));
     els.forEach((el) => { el.style.setProperty('--d', `${Math.min([...el.parentElement.children].indexOf(el), 5) * 90}ms`); el.classList.add('rv'); });
     if (still || !('IntersectionObserver' in window)) els.forEach((el) => el.classList.add('in'));
     else {
@@ -413,6 +400,101 @@ body { padding-bottom: 92px; }
     if (par && !still) {
       let q = false;
       addEventListener('scroll', () => { if (q) return; q = true; requestAnimationFrame(() => { q = false; par.style.translate = `0 ${Math.min(scrollY, innerHeight) * 0.2}px`; }); }, { passive: true });
+    }
+  })();
+</script>
+<script>
+  // the pieces that move: particles in the hero, the spotlight, the service picker, tabs, photo swap, the 24 hour clock, the nav on scroll
+  (() => {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cv = document.querySelector('canvas.fx');
+    if (cv && !still) {
+      const kind = cv.dataset.kind, cols = JSON.parse(cv.dataset.colors), ctx = cv.getContext('2d'), host = cv.parentElement;
+      let W = 0, H = 0, parts = [], on = true;
+      const R = (a, b) => a + Math.random() * (b - a);
+      const make = (top) => {
+        const p = { x: R(0, W), y: top ? R(-H, 0) : R(0, H), c: cols[Math.floor(R(0, cols.length))], a: R(0, 6.28), s: R(.4, 1) };
+        if (kind === 'snow') Object.assign(p, { r: R(1, 3.4), vy: R(.35, 1.3), vx: R(-.3, .3) });
+        if (kind === 'bubbles') Object.assign(p, { r: R(4, 15), vy: -R(.25, .7), vx: R(-.2, .2), y: top ? R(H, H * 2) : p.y });
+        if (kind === 'sprinkles') Object.assign(p, { r: R(2.4, 3.2), vy: R(.5, 1.2), vx: R(-.2, .2), vr: R(-.04, .04) });
+        if (kind === 'sparkles') Object.assign(p, { r: R(2, 5), vy: -R(.05, .2), vx: R(-.1, .1), t: R(0, 6.28) });
+        if (kind === 'dust') Object.assign(p, { r: R(1, 2.6), vy: -R(.1, .4), vx: R(-.15, .15), t: R(0, 6.28) });
+        if (kind === 'leaves') Object.assign(p, { r: R(5, 9), vy: R(.4, 1), vx: R(-.4, .4), vr: R(-.03, .03) });
+        return p;
+      };
+      const size = () => {
+        const b = host.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+        W = b.width; H = b.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const n = Math.round(Math.min(160, W * H / ({ snow: 5200, bubbles: 26000, sprinkles: 9000, sparkles: 16000, dust: 9000, leaves: 30000 }[kind] || 12000)));
+        parts = Array.from({ length: n }, () => make(false));
+      };
+      const star = (x, y, r) => { ctx.beginPath(); for (let k = 0; k < 8; k++) { const rr = k % 2 ? r * .35 : r, t = k * Math.PI / 4; ctx.lineTo(x + rr * Math.cos(t), y + rr * Math.sin(t)); } ctx.closePath(); ctx.fill(); };
+      const draw = (t) => {
+        if (!on) return requestAnimationFrame(draw);
+        ctx.clearRect(0, 0, W, H);
+        for (const p of parts) {
+          p.a += .01; p.x += p.vx + Math.sin(p.a) * (kind === 'snow' || kind === 'leaves' ? .45 : .15); p.y += p.vy;
+          if (p.vr) p.rot = (p.rot || 0) + p.vr;
+          if (p.y > H + 20 || p.y < -40 && kind === 'bubbles' || p.x < -30 || p.x > W + 30) Object.assign(p, make(true), kind === 'bubbles' ? { y: H + 20 } : { y: -10 });
+          if (p.y < -30 && kind !== 'bubbles' && p.vy < 0) p.y = H + 10;
+          ctx.fillStyle = p.c; ctx.strokeStyle = p.c;
+          if (kind === 'snow') { ctx.globalAlpha = .45 + p.s * .5; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28); ctx.fill(); ctx.globalAlpha = .18; ctx.strokeStyle = '#1b3550'; ctx.lineWidth = .6; ctx.stroke(); }
+          else if (kind === 'bubbles') { ctx.globalAlpha = .55; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28); ctx.stroke(); ctx.globalAlpha = .5; ctx.beginPath(); ctx.arc(p.x - p.r * .35, p.y - p.r * .35, p.r * .22, 0, 6.28); ctx.fill(); }
+          else if (kind === 'sprinkles') { ctx.globalAlpha = .9; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot || p.a); ctx.beginPath(); ctx.roundRect ? ctx.roundRect(-p.r / 2, -p.r * 1.8, p.r, p.r * 3.6, p.r / 2) : ctx.rect(-p.r / 2, -p.r * 1.8, p.r, p.r * 3.6); ctx.fill(); ctx.restore(); }
+          else if (kind === 'sparkles') { ctx.globalAlpha = Math.max(0, Math.sin(t / 600 + p.t)) * .9; star(p.x, p.y, p.r); }
+          else if (kind === 'dust') { ctx.globalAlpha = (.25 + Math.max(0, Math.sin(t / 900 + p.t)) * .5); ctx.shadowBlur = 8; ctx.shadowColor = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28); ctx.fill(); ctx.shadowBlur = 0; }
+          else if (kind === 'leaves') { ctx.globalAlpha = .8; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot || p.a); ctx.beginPath(); ctx.ellipse(0, 0, p.r, p.r * .45, 0, 0, 6.28); ctx.fill(); ctx.restore(); }
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      };
+      size(); addEventListener('resize', size);
+      if ('IntersectionObserver' in window) new IntersectionObserver((es) => { on = es[0].isIntersecting; }).observe(host);
+      requestAnimationFrame(draw);
+    }
+    const spot = document.querySelector('main > header > .spot');
+    if (spot && !still) spot.parentElement.addEventListener('pointermove', (ev) => {
+      const b = spot.getBoundingClientRect(); spot.style.setProperty('--mx', `${ev.clientX - b.left}px`); spot.style.setProperty('--my', `${ev.clientY - b.top}px`);
+    });
+    const nav = document.querySelector('nav.n-minimal');
+    if (nav) { const f = () => nav.classList.toggle('scrolled', scrollY > 40); f(); addEventListener('scroll', f, { passive: true }); }
+    const stage = document.querySelector('[data-stage]'), rows = document.querySelectorAll('[data-rows] li');
+    if (stage && rows.length) {
+      const pics = stage.querySelectorAll('img'), cap = stage.querySelector('figcaption');
+      const show = (i) => { pics.forEach((m, k) => m.classList.toggle('on', k === i % pics.length)); rows.forEach((r, k) => r.classList.toggle('on', k === i)); cap.textContent = pics[i % pics.length].alt; };
+      rows.forEach((r, i) => { r.addEventListener('mouseenter', () => show(i)); r.addEventListener('focus', () => show(i)); r.addEventListener('click', () => show(i)); });
+    }
+    for (const tl of document.querySelectorAll('.s-tabs [role=tablist]')) {
+      const tabs = [...tl.querySelectorAll('[role=tab]')], panels = tl.parentElement.querySelectorAll('[role=tabpanel]');
+      const pick = (i) => { tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; }); panels.forEach((p, k) => p.classList.toggle('on', k === i)); };
+      tabs.forEach((t, i) => { t.addEventListener('click', () => pick(i)); t.addEventListener('keydown', (ev) => {
+        if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') { const j = (i + (ev.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length; pick(j); tabs[j].focus(); } }); });
+      pick(0);
+    }
+    for (const sw of document.querySelectorAll('[data-swap]')) {
+      const big = sw.querySelector('.big img'), cap = sw.querySelector('.big figcaption'), btns = sw.querySelectorAll('.thumbs button');
+      btns.forEach((b) => b.addEventListener('click', () => {
+        btns.forEach((x) => x.classList.toggle('on', x === b)); big.style.opacity = 0;
+        setTimeout(() => { big.src = b.dataset.src; big.alt = b.dataset.alt; cap.textContent = b.dataset.alt; big.style.opacity = 1; }, still ? 0 : 280);
+      }));
+    }
+    for (const q of document.querySelectorAll('[data-quote]')) {
+      const sum = q.querySelector('.q-sum'), go = q.querySelector('[data-go]');
+      q.addEventListener('change', () => {
+        const picked = [...q.querySelectorAll('input:checked')].map((x) => x.value);
+        sum.textContent = picked.length ? `You picked: ${picked.join(', ')}.` : 'Tick what you need.';
+        const body = picked.length ? `Hi ${q.dataset.name}, can I get a quote for ${picked.join(' and ').toLowerCase()}?` : '';
+        go.href = `sms:${q.dataset.tel}${body ? '?&body=' + encodeURIComponent(body) : ''}`;
+      });
+    }
+    const dial = document.querySelector('[data-clock]');
+    if (dial && window.ssHours) {
+      const H = window.ssHours, arc = dial.querySelector('.arc'), hand = dial.querySelector('.hand');
+      const pt = (m) => { const a = m / 1440 * 2 * Math.PI; return [100 + 70 * Math.sin(a), 100 - 70 * Math.cos(a)]; };
+      const s = H.hours && H.span(H.hours[H.DAYS[H.today]]);
+      if (s) { const a0 = s[0], a1 = Math.min(s[1], s[0] + 1439), [x0, y0] = pt(a0), [x1, y1] = pt(a1);
+        arc.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A70 70 0 ${a1 - a0 > 720 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
+      hand.style.transform = `rotate(${H.minute / 1440 * 360}deg)`;
     }
   })();
 </script>
