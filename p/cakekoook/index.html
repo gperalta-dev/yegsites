@@ -5,11 +5,11 @@
 <title>Your website preview, Cakekoook | Southsites</title>
 <meta name="description" content="Find us at 1047 James Crescent NW, Edmonton. Call to order.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%20role%3D%22img%22%20aria-label%3D%22Cakekoook%20logo%22%3E%3Cpath%20d%3D%22M50%204s36%2040%2036%2060a36%2036%200%200%201-72%200C14%2044%2050%204%2050%204Z%22%20fill%3D%22none%22%20stroke%3D%22%236b3a2a%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2264%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20fill%3D%22%236b3a2a%22%20font-size%3D%2252%22%20style%3D%22font-family%3A%27Fredoka%27%2C%20serif%3Bfont-weight%3A600%22%3EC%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%20role%3D%22img%22%20aria-label%3D%22Cakekoook%20logo%22%3E%3Cpath%20d%3D%22M50%204s36%2040%2036%2060a36%2036%200%200%201-72%200C14%2044%2050%204%2050%204Z%22%20fill%3D%22none%22%20stroke%3D%22%230f766e%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2264%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20fill%3D%22%230f766e%22%20font-size%3D%2252%22%20style%3D%22font-family%3A%27Instrument%20Serif%27%2C%20serif%3Bfont-weight%3A600%22%3EC%3C/text%3E%3C/svg%3E">
 <style>
-:root { --accent3: #ffd3df; --bg: #fbeef1; --ink: #3b1f1a; --muted: #74544d; --surface: #ffffff; --line: #f2d6dc; --accent: #6b3a2a; --accent-ink: #ffffff; --dark: #3b1f1a; --on-dark: #fbeef1; --accent2: #f39bb5; --display: "Fredoka", Georgia, serif; --body: "Quicksand", system-ui, sans-serif;  --r: 16px; --rb: 999px; }
-
+:root { --accent3: #ffe08a; --bg: #fff7dd; --ink: #2f2618; --muted: #675b46; --surface: #fffdf3; --line: #f0e2b0; --accent: #0f766e; --accent-ink: #ffffff; --dark: #2f2618; --on-dark: #fff7dd; --accent2: #f6b7c8; --display: "Instrument Serif", Georgia, serif; --body: "Nunito Sans", system-ui, sans-serif;  --r: 26px; --rb: 999px; }
+:root { --hw: 400; } body { font-synthesis: none; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -61,18 +61,6 @@ footer.site .credits a { color: inherit; }
 
 
 
-.h-round { padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 72px); text-align: center; }
-.h-round .wrap { display: grid; justify-items: center; gap: 20px; }
-.h-round .plate { position: relative; width: min(340px, 74vw); aspect-ratio: 1; }
-.h-round .plate img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 10px solid var(--surface); box-shadow: 0 24px 60px -20px color-mix(in srgb, var(--accent) 45%, transparent); }
-.h-round .badge { position: absolute; right: -6px; bottom: 14px; width: 104px; height: 104px; border-radius: 50%; background: var(--accent); color: var(--accent-ink);
-  display: grid; place-items: center; text-align: center; font: 700 15px/1.15 var(--body); transform: rotate(-10deg); box-shadow: 0 10px 24px rgba(0,0,0,.18); }
-.h-round .badge b { display: block; font: 700 30px/1 var(--display); }
-.h-round .eyebrow { color: var(--accent); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
-.h-round h1 { font-size: clamp(44px, 8vw, 84px); max-width: 14ch; }
-.h-round p { max-width: 560px; color: var(--muted); font-size: 18px; }
-.h-round .btns { justify-content: center; }
-
 .art { display: grid; place-items: center; color: var(--accent-ink); border-radius: var(--r); min-height: 220px;
   background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--accent) 70%, #fff), var(--accent) 45%, color-mix(in srgb, var(--accent) 60%, #000)),
   var(--accent); background-blend-mode: normal; position: relative; overflow: hidden; }
@@ -101,23 +89,20 @@ html.js .s-tabs .panel.on { animation: up .6s cubic-bezier(.2,.7,.2,1); }
 .s-tabs .p b { font: var(--hw, 700) clamp(40px, 5vw, 64px)/1 var(--display); color: var(--accent); }
 @media (max-width: 760px) { .s-tabs .tabs { border-radius: 22px; width: 100%; } .s-tabs .tabs button { flex: 1 1 auto; } .s-tabs .panel { grid-template-columns: 1fr; } }
 
-.p-masonry .cols { columns: 3 240px; column-gap: 14px; }
-.p-masonry figure { break-inside: avoid; margin: 0 0 14px; position: relative; border-radius: var(--r); overflow: hidden; }
-.p-masonry img { width: 100%; object-fit: cover; aspect-ratio: var(--ar); }
-.p-masonry figcaption { position: absolute; left: 10px; right: 10px; bottom: 10px; background: color-mix(in srgb, var(--bg) 90%, transparent); color: var(--ink); padding: 8px 12px;
-  border-radius: 10px; font-size: 13.5px; font-weight: 600; translate: 0 8px; opacity: 0; transition: .35s ease; }
-.p-masonry figure:hover figcaption { translate: 0 0; opacity: 1; }
-@media (hover: none) { .p-masonry figcaption { opacity: 1; translate: 0 0; } }
+.p-arches .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+.p-arches figure { margin: 0; text-align: center; }
+.p-arches img { width: 100%; aspect-ratio: 3 / 4.2; object-fit: cover; border-radius: 999px 999px 16px 16px; }
+.p-arches figcaption { margin-top: 12px; font-size: 15px; font-weight: 600; color: var(--muted); }
+@media (max-width: 560px) { .p-arches .row { grid-template-columns: 1fr 1fr; } }
 
-.o-today .card { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; background: var(--surface); border-radius: calc(var(--r) * 2); padding: clamp(24px, 5vw, 48px); border: 1px solid var(--line); }
-.o-today .label { color: var(--accent); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
-.o-today .now { font: 700 clamp(34px, 5vw, 52px)/1.05 var(--display); margin: 10px 0 14px; }
-.o-today details { align-self: start; border-top: 1px solid var(--line); }
-.o-today summary { cursor: pointer; padding: 14px 0; font-weight: 700; list-style-position: inside; }
-.o-today ul { list-style: none; margin: 0; padding: 0; }
-.o-today li { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
-.o-today li.today { font-weight: 800; color: var(--accent); }
-@media (max-width: 760px) { .o-today .card { grid-template-columns: 1fr; } }
+.o-strip .days { list-style: none; margin: 0; padding: 4px 0 10px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(130px, 1fr); gap: 10px; overflow-x: auto; }
+.o-strip .days li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 14px; display: grid; gap: 6px; }
+.o-strip .days li span { font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.o-strip .days li b { font-weight: 600; font-size: 16px; }
+.o-strip .days li.today { background: var(--dark); color: var(--on-dark); border-color: var(--dark); }
+.o-strip .days li.today span { color: var(--accent2); }
+.o-strip .status { margin-bottom: 18px; }
+@media (max-width: 760px) { .o-strip .days { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; } .o-strip .days li:last-child { grid-column: 1 / -1; } }
 
 .faq .grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
 .faq details { border-bottom: 1px solid var(--line); }
@@ -193,17 +178,24 @@ nav.n-minimal .ring::after, .cb-fab .call::after { content: ""; position: absolu
   body::before, .h-center .mesh { animation: none !important; }
 }
 
-nav.n-bar { background: var(--dark); color: var(--on-dark); border-bottom: 3px solid var(--accent); -webkit-backdrop-filter: none; backdrop-filter: none; }
-nav.n-bar .name { color: var(--on-dark); }
-nav.n-bar .links .btn { border-radius: var(--rb); }
+nav.n-capsule { top: 10px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; pointer-events: none; }
+nav.n-capsule .wrap { min-height: 60px; }
+nav.n-capsule .brand, nav.n-capsule .links { pointer-events: auto; background: color-mix(in srgb, var(--surface) 72%, transparent); -webkit-backdrop-filter: saturate(1.5) blur(16px);
+  backdrop-filter: saturate(1.5) blur(16px); border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); border-radius: 999px; box-shadow: 0 10px 30px -18px rgba(0,0,0,.35); }
+nav.n-capsule .brand { padding: 5px 16px 5px 5px; color: var(--ink); }
+nav.n-capsule .brand .mark { width: 38px; height: 38px; }
+nav.n-capsule .links { padding: 5px 5px 5px 20px; }
+nav.n-capsule .links .btn { border-radius: 999px; min-height: 40px; }
+@media (max-width: 760px) { nav.n-capsule .links { padding-left: 5px; } }
 
-.k-callbar.cb-fab { display: flex; align-items: center; gap: 10px; position: fixed; left: auto; right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 40; background: none; box-shadow: none; }
-.cb-fab a { box-shadow: 0 14px 30px -10px rgba(0,0,0,.5); text-decoration: none; }
-.cb-fab .call { position: relative; width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); }
-.cb-fab .dir { display: inline-flex; align-items: center; gap: 6px; min-height: 46px; padding: 0 16px; border-radius: 999px; background: var(--dark); color: var(--on-dark); font-weight: 700; font-size: 14.5px; }
-body { padding-bottom: 90px; }
-main .sec-head .label { display: none; } main .sec-head h2 { font-size: clamp(40px, 7vw, 84px); letter-spacing: -.025em; line-height: .95; }
-main .sec-head h2 .tone { font-size: .34em; letter-spacing: 0; margin-top: 14px; }
+.k-callbar.cb-pill { display: flex; position: fixed; left: 50%; right: auto; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40; gap: 4px;
+  padding: 5px; border-radius: 999px; background: color-mix(in srgb, var(--dark) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 16px 40px -14px rgba(0,0,0,.55); }
+.cb-pill a { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 999px; font-weight: 700; text-decoration: none;
+  background: var(--accent); color: var(--accent-ink); box-shadow: none; flex: none; }
+.cb-pill a + a { background: transparent; color: var(--on-dark); padding: 0 18px; }
+body { padding-bottom: 92px; }
+@media (max-width: 760px) { .k-callbar.cb-pill { left: 12px; right: 12px; transform: none; } .cb-pill a { flex: 1; } .cb-pill a + a { flex: 0 0 auto; } }
+
 main > header { position: relative; }
 main > header > canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
 main > header > .spot { position: absolute; inset: 0; pointer-events: none; z-index: 1;
@@ -214,9 +206,63 @@ footer.f-min { background: var(--bg); color: var(--ink); border-top: 1px solid v
 footer.f-min .wrap { justify-items: center; gap: 8px; }
 footer.f-min .mark { width: 56px; height: 56px; color: var(--accent); }
 footer.f-min p { color: var(--muted); } footer.f-min p a { color: var(--ink); text-decoration: none; font-weight: 700; }
-main > section:not(.v-full) { margin: 14px clamp(8px, 1.6vw, 22px); border-radius: calc(var(--r) + 18px); background: var(--surface); }
-main > section.p-film, main > section.v-strip { background: var(--dark); }
-@media (max-width: 760px) { main > section:not(.v-full) { margin: 10px 8px; border-radius: 22px; } }.wrap { max-width: 1000px; }
+
+/* shared: hero entrances wait until the hero is on screen (the site sits under the southsites intro) */
+body[class*="dir-"] main > header :is(.eyebrow, h1, p, .status, .btns) { animation: none; }
+.dx-kicker { display: inline-flex; align-items: center; gap: 8px; font: 700 12.5px/1.2 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
+.split .w > span { display: inline-block; transform: translateY(108%); transition: transform 1.1s cubic-bezier(.2,.75,.15,1); transition-delay: calc(var(--k, 0) * 55ms + 120ms); }
+.dx-hero.in .split .w > span, .split.in .w > span { transform: none; }
+.dx-hero .rise { opacity: 0; transform: translateY(26px); transition: opacity 1s ease, transform 1.1s cubic-bezier(.2,.75,.15,1); transition-delay: calc(var(--i, 0) * 110ms + 300ms); }
+.dx-hero.in .rise { opacity: 1; transform: none; }
+.dx-hero .pop { opacity: 0; transform: translateY(30px) scale(.9); transition: opacity .9s ease, transform 1.1s cubic-bezier(.3,1.4,.4,1); transition-delay: calc(var(--i, 0) * 120ms + 300ms); }
+.dx-hero.in .pop { opacity: 1; transform: none; }
+[data-wipe] { position: relative; overflow: hidden; }
+[data-wipe]::after { content: ""; position: absolute; inset: -1px; z-index: 3; background: var(--wipe, var(--bg)); transform-origin: 50% 0; transition: transform 1.3s cubic-bezier(.75,0,.2,1); }
+[data-wipe].in::after { transform: scaleY(0); }
+[data-wipe] img { transform: scale(1.18); transition: transform 2.2s cubic-bezier(.2,.7,.2,1); }
+[data-wipe].in img { transform: none; }
+html:not(.js) .split .w > span, html:not(.js) .dx-hero :is(.rise, .pop) { transform: none; opacity: 1; }
+html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] img { transform: none; }
+@media (min-width: 761px) { .k-callbar { opacity: 0; pointer-events: none; transition: opacity .4s ease; } body.past-hero .k-callbar { opacity: 1; pointer-events: auto; } }
+@media (prefers-reduced-motion: reduce) {
+  .split .w > span, .dx-hero :is(.rise, .pop) { transform: none !important; opacity: 1 !important; }
+  [data-wipe]::after { display: none !important; } [data-wipe] img { transform: none !important; }
+}
+
+body.dir-soft { background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--accent3) 22%, var(--bg)) 45%, var(--bg) 100%); }
+.dir-soft main > section { padding: clamp(64px, 9vw, 120px) 0; }
+.dir-soft main .sec-head { text-align: center; margin-inline: auto; justify-items: center; }
+.dir-soft main .sec-head .label::before { display: none; }
+.dir-soft h2 { font-weight: 500; font-size: clamp(38px, 6vw, 76px); letter-spacing: -.015em; }
+.dir-soft h2 .tone { font-style: italic; }
+.dir-soft .btn { border-radius: 999px; }
+.ds-hero { position: relative; overflow: hidden; text-align: center; padding: clamp(40px, 7vw, 96px) 0 clamp(60px, 8vw, 110px); }
+.ds-orb { position: absolute; border-radius: 50%; filter: blur(40px); opacity: .55; z-index: 0; }
+.ds-orb.o1 { width: 46vw; height: 46vw; left: -12vw; top: -10vw; background: var(--accent2); }
+.ds-orb.o2 { width: 40vw; height: 40vw; right: -14vw; top: 20%; background: var(--accent3); }
+.ds-hero .wrap { position: relative; z-index: 1; display: grid; justify-items: center; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+.ds-hero .dx-kicker { padding: 8px 14px; border-radius: 999px; background: color-mix(in srgb, var(--surface) 70%, transparent); border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); letter-spacing: .14em; }
+.ds-hero h1 { font-size: clamp(50px, 9vw, 128px); line-height: .92; letter-spacing: -.025em; max-width: 13ch; font-weight: 500; }
+.ds-hero h1 .tone { display: block; font-style: italic; color: var(--accent); }
+.ds-hero p { max-width: min(50ch, 100%); color: var(--muted); font-size: 18px; }
+.ds-hero .btns { justify-content: center; }
+.ds-scene { position: relative; width: min(100%, 760px); height: clamp(380px, 46vw, 560px); margin-top: 18px; }
+.ds-arch { position: absolute; left: 50%; top: 0; translate: -50% 0; margin: 0; width: min(52%, 340px); height: 100%; border-radius: 999px 999px 28px 28px; overflow: hidden;
+  box-shadow: 0 40px 80px -40px rgba(0,0,0,.45); }
+.ds-arch img { width: 100%; height: 100%; object-fit: cover; }
+.ds-dot { position: absolute; margin: 0; border-radius: 50%; overflow: hidden; border: 6px solid var(--surface); box-shadow: 0 20px 40px -20px rgba(0,0,0,.45); }
+.ds-dot img { width: 100%; height: 100%; object-fit: cover; }
+.ds-dot.d1 { width: 150px; height: 150px; left: 4%; top: 14%; } .ds-dot.d2 { width: 120px; height: 120px; right: 6%; bottom: 10%; }
+.ds-card { position: absolute; display: grid; gap: 2px; text-align: left; padding: 14px 18px; border-radius: 18px; background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: 0 20px 40px -24px rgba(0,0,0,.4); font-size: 14px; color: var(--muted); }
+.ds-card b { font: var(--hw, 700) 26px/1 var(--display); color: var(--ink); }
+.ds-card.c1 { right: 2%; top: 10%; } .ds-card.c2 { left: 0; bottom: 6%; }
+.ds-scene .pop { animation: floaty 8s ease-in-out infinite alternate; }
+@keyframes floaty { to { translate: 0 -10px; } }
+@media (max-width: 760px) { .ds-scene { height: 420px; } .ds-arch { width: 62%; } .ds-dot.d1 { width: 96px; height: 96px; left: 0; top: 8%; } .ds-dot.d2 { width: 84px; height: 84px; right: 0; }
+  .ds-card.c1 { right: 0; top: auto; bottom: 30%; } .ds-card.c2 { left: 0; bottom: 2%; } }
+.wrap { max-width: 1160px; }
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* southsites frame around their site: grey backdrop while their site is a card, their own background moves onto the stage */
@@ -230,7 +276,7 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
   html.ss:not(.ss-full) :is(.k-callbar, .callbar, .chat-fab), html.ss-end :is(.k-callbar, .callbar, .chat-fab) { opacity: 0; pointer-events: none; }
 </style>
 </head>
-<body>
+<body class="dir-soft">
 <ss-intro><template shadowrootmode="open"><style>
   :host { all: initial; display: block; color: #12151a; font: 500 16px/1.45 "Figtree", system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
   * { box-sizing: border-box; }
@@ -295,17 +341,21 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
 </template></ss-intro>
 <div id="ss-stage">
 
-<nav class="top n-bar"><div class="wrap"><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Cakekoook logo"><path d="M50 4s36 40 36 60a36 36 0 0 1-72 0C14 44 50 4 50 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><text x="50" y="64" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="52" style="font-family:var(--display);font-weight:600">C</text></svg><span class="name">Cakekoook</span></a><div class="links"><a href="#services">Services</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+18257772253">Call<span class="num"> (825) 777-2253</span></a></div></div></nav>
+<nav class="top n-capsule"><div class="wrap"><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Cakekoook logo"><path d="M50 4s36 40 36 60a36 36 0 0 1-72 0C14 44 50 4 50 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><text x="50" y="64" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="52" style="font-family:var(--display);font-weight:600">C</text></svg><span class="name">Cakekoook</span></a><div class="links"><a href="#services">Services</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+18257772253">Call<span class="num"> (825) 777-2253</span></a></div></div></nav>
 <main>
-<header class="h-round "><div class="wrap">
-  <div class="plate"><img src="img/0-bakery-c7.jpg" alt="A layered cake slice"><span class="badge"><span><b>5.0</b>on Google</span></span></div>
-  <span class="eyebrow">Bakery in Edmonton</span><h1>Something sweet<span class="tone"> in Edmonton.</span></h1><p>Find us at 1047 James Crescent NW, Edmonton. Call to order.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
-  <div class="btns"><a class="btn btn-acc" href="tel:+18257772253">Call to order<span class="num"> (825) 777-2253</span></a><a class="btn btn-line" href="#services">See the menu</a></div></div><canvas class="fx" data-kind="sprinkles" data-colors="[&quot;#6b3a2a&quot;, &quot;#f39bb5&quot;, &quot;#ffd3df&quot;, &quot;#f2c14e&quot;]" aria-hidden="true"></canvas></header>
+<header class="dx-hero ds-hero"><div class="ds-orb o1" aria-hidden="true"></div><div class="ds-orb o2" aria-hidden="true"></div><div class="wrap">
+  <span class="dx-kicker rise"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg>Bakery in Edmonton</span>
+  <h1 class="split">Something sweet<span class="tone"> in Edmonton.</span></h1>
+  <p class="rise" style="--i:3">Find us at 1047 James Crescent NW, Edmonton. Call to order.</p>
+  <div class="btns rise" style="--i:4"><a class="btn btn-acc" href="tel:+18257772253">Book an appointment<span class="num"> (825) 777-2253</span></a><a class="btn btn-line" href="#services">Services</a></div>
+  <div class="ds-scene"><figure class="ds-arch" data-wipe><img src="img/0-bakery-c7.jpg" alt="A layered cake slice"></figure><figure class="ds-dot d1 pop" style="--i:5"><img src="img/1-photo-3.jpg" alt="Flower cupcakes"></figure>
+    <figure class="ds-dot d2 pop" style="--i:6"><img src="img/2-bakery-c38.jpg" alt="A box of macarons"></figure>
+    <div class="ds-card c1 pop" style="--i:7"><b>5.0</b><span>on Google</span></div><div class="ds-card c2 pop" style="--i:8"><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div></div>
+  </div></header>
 
 <section class="s-tabs" id="services"><div class="wrap"><div class="sec-head"><span class="label">The menu</span><h2>Pick a service<span class="tone"> Starting prices. Ask about yours.</span></h2></div>
-  <div class="tabs" role="tablist" aria-label="Services"><button role="tab" id="tb0" aria-controls="tp0" aria-selected="true">Custom cake</button><button role="tab" id="tb1" aria-controls="tp1" aria-selected="false">Cupcakes</button><button role="tab" id="tb2" aria-controls="tp2" aria-selected="false">Cookies and treats</button></div><div class="panels"><article class="panel on" role="tabpanel" id="tp0" aria-labelledby="tb0"><figure class=""><img src="img/0-bakery-c7.jpg" alt="A layered cake slice" loading="lazy"><figcaption>A layered cake slice</figcaption></figure><div class="info"><span class="k">01 / 03</span><h3>Custom cake</h3><p>Designed with you, from flavour to finish.</p><div class="p"><small>from</small><b>$65</b></div><a class="btn btn-acc" href="tel:+18257772253">Call to book<span class="num"> (825) 777-2253</span></a></div></article><article class="panel" role="tabpanel" id="tp1" aria-labelledby="tb1"><figure class=""><img src="img/1-photo-3.jpg" alt="Flower cupcakes" loading="lazy"><figcaption>Flower cupcakes</figcaption></figure><div class="info"><span class="k">02 / 03</span><h3>Cupcakes</h3><p>Swirled buttercream cupcakes by the dozen.</p><div class="p"><small>price</small><b>$36 a dozen</b></div><a class="btn btn-acc" href="tel:+18257772253">Call to book<span class="num"> (825) 777-2253</span></a></div></article><article class="panel" role="tabpanel" id="tp2" aria-labelledby="tb2"><figure class=""><img src="img/3-bakery-c10.jpg" alt="Sprinkle cookies" loading="lazy"><figcaption>Sprinkle cookies</figcaption></figure><div class="info"><span class="k">03 / 03</span><h3>Cookies and treats</h3><p>Cookies, squares and party trays.</p><div class="p"><small>from</small><b>$20</b></div><a class="btn btn-acc" href="tel:+18257772253">Call to book<span class="num"> (825) 777-2253</span></a></div></article></div></div></section><section class="p-masonry" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>Fresh from the oven</h2></div><div class="cols"><figure style="--ar:3 / 4"><img src="img/1-photo-3.jpg" alt="Flower cupcakes" loading="lazy"><figcaption>Flower cupcakes</figcaption></figure><figure style="--ar:1 / 1"><img src="img/2-bakery-c38.jpg" alt="A box of macarons" loading="lazy"><figcaption>A box of macarons</figcaption></figure><figure style="--ar:4 / 5"><img src="img/3-bakery-c10.jpg" alt="Sprinkle cookies" loading="lazy"><figcaption>Sprinkle cookies</figcaption></figure><figure style="--ar:4 / 3"><img src="img/4-bakery-c29.jpg" alt="A basket of cookies" loading="lazy"><figcaption>A basket of cookies</figcaption></figure></div></div></section><section class="o-today" id="hours"><div class="wrap"><div class="card">
-  <div><span class="label">Today</span><div class="now" data-today>See the week</div><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
-  <details open><summary>The whole week</summary><ul><li data-day=""><span>Every day</span><b>By appointment. Call to book</b></li></ul></details></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
+  <div class="tabs" role="tablist" aria-label="Services"><button role="tab" id="tb0" aria-controls="tp0" aria-selected="true">Custom cake</button><button role="tab" id="tb1" aria-controls="tp1" aria-selected="false">Cupcakes</button><button role="tab" id="tb2" aria-controls="tp2" aria-selected="false">Cookies and treats</button></div><div class="panels"><article class="panel on" role="tabpanel" id="tp0" aria-labelledby="tb0"><figure class=""><img src="img/0-bakery-c7.jpg" alt="A layered cake slice" loading="lazy"><figcaption>A layered cake slice</figcaption></figure><div class="info"><span class="k">01 / 03</span><h3>Custom cake</h3><p>Designed with you, from flavour to finish.</p><div class="p"><small>from</small><b>$65</b></div><a class="btn btn-acc" href="tel:+18257772253">Call to book<span class="num"> (825) 777-2253</span></a></div></article><article class="panel" role="tabpanel" id="tp1" aria-labelledby="tb1"><figure class=""><img src="img/1-photo-3.jpg" alt="Flower cupcakes" loading="lazy"><figcaption>Flower cupcakes</figcaption></figure><div class="info"><span class="k">02 / 03</span><h3>Cupcakes</h3><p>Swirled buttercream cupcakes by the dozen.</p><div class="p"><small>price</small><b>$36 a dozen</b></div><a class="btn btn-acc" href="tel:+18257772253">Call to book<span class="num"> (825) 777-2253</span></a></div></article><article class="panel" role="tabpanel" id="tp2" aria-labelledby="tb2"><figure class=""><img src="img/3-bakery-c10.jpg" alt="Sprinkle cookies" loading="lazy"><figcaption>Sprinkle cookies</figcaption></figure><div class="info"><span class="k">03 / 03</span><h3>Cookies and treats</h3><p>Cookies, squares and party trays.</p><div class="p"><small>from</small><b>$20</b></div><a class="btn btn-acc" href="tel:+18257772253">Call to book<span class="num"> (825) 777-2253</span></a></div></article></div></div></section><section class="p-arches" id="photos"><div class="wrap"><div class="sec-head"><h2>Fresh from the oven</h2></div><div class="row"><figure><img src="img/1-photo-3.jpg" alt="Flower cupcakes" loading="lazy"><figcaption>Flower cupcakes</figcaption></figure><figure><img src="img/2-bakery-c38.jpg" alt="A box of macarons" loading="lazy"><figcaption>A box of macarons</figcaption></figure><figure><img src="img/3-bakery-c10.jpg" alt="Sprinkle cookies" loading="lazy"><figcaption>Sprinkle cookies</figcaption></figure><figure><img src="img/4-bakery-c29.jpg" alt="A basket of cookies" loading="lazy"><figcaption>A basket of cookies</figcaption></figure></div></div></section><section class="o-strip" id="hours"><div class="wrap"><div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
+  <ul class="days"><li data-day=""><span>Every day</span><b>Call for hours</b></li></ul></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
   <h2>Good to know.</h2></div><div class="list"><details><summary>How do I book?</summary><p class="a">Call <a href="tel:+18257772253">(825) 777-2253</a>, or tap Call at the bottom of the screen.</p></details><details><summary>What does it cost?</summary><p class="a">Starting prices: custom cake from $65; cupcakes $36 a dozen; cookies and treats from $20. Call for a quote on yours.</p></details><details><summary>Where are you?</summary><p class="a">1047 James Crescent NW, Edmonton, AB T6L 7E8. </p></details><details><summary>When are you open?</summary><p class="a">Today: <b data-today>see the hours above</b>. The whole week is in the hours section.</p></details></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
   <div><span class="label">Visit</span><h2>Drop by</h2>
   <ul class="facts">
@@ -318,7 +368,7 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
   </div></div></section>
 </main>
 <footer class="site f-min"><div class="wrap"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Cakekoook logo"><path d="M50 4s36 40 36 60a36 36 0 0 1-72 0C14 44 50 4 50 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><text x="50" y="64" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="52" style="font-family:var(--display);font-weight:600">C</text></svg><b>Cakekoook</b><p>1047 James Crescent NW, Edmonton, AB T6L 7E8 · <a href="tel:+18257772253">(825) 777-2253</a></p><span class="credits">Sample website by Southsites. Photos are samples until Cakekoook sends their own: <a href="https://commons.wikimedia.org/wiki/File:Piece_of_chocolate_cake_on_a_white_plate_decorated_with_chocolate_sauce.jpg" target="_blank" rel="noopener">Daria YakovlevaMinor edits made by Subsi</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:Cheshire_cupcakes.jpg" target="_blank" rel="noopener">Katjaskupcakes katja Seaton</a> (CC BY 3.0); <a href="https://commons.wikimedia.org/wiki/File:Box_of_Macarons.jpg" target="_blank" rel="noopener">AlphaLemur</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Birthday_Cupcakes.jpg" target="_blank" rel="noopener">Kmangwane</a> (CC0); <a href="https://commons.wikimedia.org/wiki/File:Christmas_Cookies_Plateful.JPG" target="_blank" rel="noopener">Fagles</a> (CC BY-SA 2.5).</span></div></footer>
-<div class="k-callbar cb-fab"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cakekoook%2C+1047+James+Crescent+NW%2C+Edmonton%2C+AB+T6L+7E8" target="_blank" rel="noopener"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Directions</span></a><a class="call" href="tel:+18257772253" aria-label="Call Cakekoook"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></a></div>
+<div class="k-callbar cb-pill"><a href="tel:+18257772253">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Cakekoook%2C+1047+James+Crescent+NW%2C+Edmonton%2C+AB+T6L+7E8" target="_blank" rel="noopener">Directions</a></div>
 <script type="application/json" id="biz">{"hours": {}}</script>
 <script>
   // open now, in edmonton time, from the hours on the google listing (split hours, late nights; a day not listed is unknown, not closed)
@@ -339,7 +389,7 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
     const known = Object.keys(H).length;
     if (!known) {   // no hours on the google listing
       for (const el of document.querySelectorAll('[data-state], [data-today]')) el.textContent = 'Call to book';
-      for (const el of document.querySelectorAll('[data-sub]')) el.textContent = 'By appointment';
+      for (const el of document.querySelectorAll('[data-sub]')) el.textContent = 'Hours not listed';
       return;
     }
     let end = null;
@@ -499,8 +549,47 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
         if (len >= 720) band.setAttribute('d', 'M100 8.5a91.5 91.5 0 1 1 0 183a91.5 91.5 0 1 1 0-183');
         else { const [x0, y0] = pt(s[0]), [x1, y1] = pt(s[1]);
           band.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} A91.5 91.5 0 ${len > 360 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`); }
-      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Hours by appointment.';
+      } else dial.querySelector('[data-band]').textContent = H && H.hours && Object.keys(H.hours).length ? 'Closed today.' : 'Call for hours.';
     }
+  })();
+</script>
+<script>
+  // the art-direction motion: headline words rise out of masks, photos wipe in, the full-bleed hero shrinks into a card as
+  // you scroll, the noir wordmark drifts, buttons lean toward the pointer. all of it waits until it's on screen.
+  (() => {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const wrap = (el) => { let k = 0; const walk = (n) => { for (const ch of [...n.childNodes]) {
+      if (ch.nodeType === 3) { const parts = ch.textContent.split(/(\s+)/); const frag = document.createDocumentFragment();
+        for (const p of parts) { if (!p) continue; if (/^\s+$/.test(p)) { frag.append(p); continue; }
+          const w = document.createElement('span'); w.className = 'w'; const s = document.createElement('span'); s.textContent = p; s.style.setProperty('--k', k++); w.append(s); frag.append(w); }
+        ch.replaceWith(frag); }
+      else if (ch.nodeType === 1) walk(ch); } }; walk(el); };
+    document.querySelectorAll('main section .sec-head h2').forEach((h) => h.classList.add('split'));
+    document.querySelectorAll('.split').forEach(wrap);
+    const dir = document.body.className.match(/dir-(\w+)/);
+    if (dir && ['editorial', 'noir', 'full'].includes(dir[1]))
+      document.querySelectorAll('main section figure').forEach((f) => { if (!f.closest('.p-fan, .s-tabs, .s-tiles, .p-swap .thumbs, .p-strip, .s-split .stage')) { f.classList.remove('rv', 'in'); f.setAttribute('data-wipe', ''); } });
+    const targets = document.querySelectorAll('.dx-hero, [data-wipe], main section h2.split');
+    if (still || !('IntersectionObserver' in window)) targets.forEach((t) => t.classList.add('in'));
+    else { const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.18 });
+      targets.forEach((t) => io.observe(t)); }
+    const hero = document.querySelector('.dx-hero');
+    if (hero) { const f = () => document.body.classList.toggle('past-hero', hero.getBoundingClientRect().bottom < innerHeight * .35); f(); addEventListener('scroll', f, { passive: true }); }
+    if (still) return;
+    const zoom = document.querySelector('[data-zoom]'), word = document.querySelector('.dn-word span');
+    if (zoom || word) {
+      const frame = zoom && zoom.querySelector('.df-frame'), over = zoom && zoom.querySelector('.df-over');
+      let q = false;
+      const tick = () => { q = false;
+        if (zoom) { const r = zoom.getBoundingClientRect(), p = Math.min(1, Math.max(0, -r.top / (r.height * .9)));
+          frame.style.transform = `scale(${1 - p * .12}) translateY(${p * 4}%)`; frame.style.borderRadius = `${p * 34}px`; over.style.opacity = String(1 - p * 1.3); }
+        if (word) { const r = word.parentElement.getBoundingClientRect(); word.style.transform = `translateX(${Math.max(-30, Math.min(30, r.top / 14))}%)`; } };
+      addEventListener('scroll', () => { if (!q) { q = true; requestAnimationFrame(tick); } }, { passive: true }); tick();
+    }
+    if (matchMedia('(pointer: fine)').matches) document.querySelectorAll('.dx-hero .btn').forEach((b) => {
+      b.addEventListener('pointermove', (ev) => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(ev.clientX - r.left - r.width / 2) * .18}px, ${(ev.clientY - r.top - r.height / 2) * .3}px)`; });
+      b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+    });
   })();
 </script>
 </div>
@@ -577,6 +666,7 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
     <div class="row"><span>Edmonton founding price, my first 3 shops</span><b class="now"><s>$399</s>$249 once</b></div>
     <div class="row"><span>Your .ca domain, first year</span><b class="free">Included</b></div>
     <div class="row"><span>Hosting and small edits, cancel any month</span><b>$29 a month</b></div>
+    <div class="row"><span>Happy or it doesn't go live: not published or charged until you say it's right</span><b class="free">Promise</b></div>
   </div>
   <a class="more" href="https://southsites.ca/#samples">See other sites I've built</a>
   <footer><b>Jan Gabriel</b>, Southsites, Edmonton<br><a href="tel:+18254615061">825-461-5061</a><a href="mailto:contact@southsites.ca">contact@southsites.ca</a><a href="https://southsites.ca/">southsites.ca</a></footer>
