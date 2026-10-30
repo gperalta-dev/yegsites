@@ -93,10 +93,10 @@ footer.site .credits a { color: inherit; }
 .v-strip h2 { color: var(--on-dark); margin-bottom: 30px; }
 .v-strip .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: color-mix(in srgb, var(--on-dark) 14%, transparent); border-radius: var(--r); overflow: hidden; }
 .v-strip .cols > div { background: var(--dark); padding: clamp(22px, 3vw, 34px); display: grid; gap: 8px; align-content: start; }
-.v-strip .ic { color: var(--accent); }
+.v-strip .ic { color: color-mix(in srgb, var(--accent) 55%, var(--on-dark)); }
 .v-strip .k { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; opacity: .7; }
 .v-strip p { font: var(--hw, 700) clamp(20px, 2.4vw, 26px)/1.25 var(--display); margin: 0; } .v-strip p a { text-decoration: none; }
-.v-strip .go { color: var(--accent); font-weight: 700; margin-top: 6px; }
+.v-strip .go { color: color-mix(in srgb, var(--accent) 45%, var(--on-dark)); font-weight: 700; margin-top: 6px; text-underline-offset: 4px; }
 .v-strip small { opacity: .75; }
 @media (max-width: 760px) { .v-strip .cols { grid-template-columns: 1fr; } }
 
@@ -114,7 +114,7 @@ footer.site .credits a { color: inherit; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.label { display: inline-flex; align-items: center; gap: 12px; font: 700 12px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.label { display: inline-flex; align-items: center; gap: 12px; font: 700 12px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: color-mix(in srgb, var(--accent) 78%, var(--ink)); }
 .label::before { content: ""; width: 28px; height: 1px; background: currentColor; }
 .ic { flex: none; }
 nav.top { background: color-mix(in srgb, var(--bg) 80%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
@@ -215,7 +215,7 @@ footer.f-giant .row a { text-decoration: none; font-weight: 700; }
 
 /* shared: hero entrances wait until the hero is on screen (the site sits under the southsites intro) */
 body[class*="dir-"] main > header :is(.eyebrow, h1, p, .status, .btns) { animation: none; }
-.dx-kicker { display: inline-flex; align-items: center; gap: 8px; font: 700 12.5px/1.2 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.dx-kicker { display: inline-flex; align-items: center; gap: 8px; font: 700 12.5px/1.2 var(--body); letter-spacing: .22em; text-transform: uppercase; color: color-mix(in srgb, var(--accent) 78%, var(--ink)); }
 .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
 .split .w > span { display: inline-block; transform: translateY(108%); transition: transform 1.1s cubic-bezier(.2,.75,.15,1); transition-delay: calc(var(--k, 0) * 55ms + 120ms); }
 .dx-hero.in .split .w > span, .split.in .w > span { transform: none; }
@@ -237,8 +237,8 @@ html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] im
 }
 
 .dir-poster main > section { padding: clamp(64px, 9vw, 120px) 0; position: relative; }
-.dir-poster main > section:nth-of-type(odd) { background: var(--surface); }
-.dir-poster main > section:nth-of-type(odd)::before { content: ""; position: absolute; left: 0; right: 0; top: -17px; height: 18px;
+.dir-poster main > section:nth-of-type(odd):not(.v-strip):not(.p-film):not(.v-full) { background: var(--surface); }
+.dir-poster main > section:nth-of-type(odd):not(.v-strip):not(.p-film):not(.v-full)::before { content: ""; position: absolute; left: 0; right: 0; top: -17px; height: 18px;
   background: radial-gradient(circle at 50% 100%, var(--surface) 17px, transparent 18px) 0 0 / 36px 18px repeat-x; }
 .dir-poster h2 { font-size: clamp(44px, 8vw, 112px); line-height: .88; letter-spacing: -.02em; }
 .dir-poster .btn { border-radius: 999px; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); transition: transform .2s, box-shadow .2s; }
