@@ -101,17 +101,15 @@ footer.site .credits a { color: inherit; }
 @media (max-width: 760px) { .p-strip .row { flex-direction: column; height: auto; } .p-strip figure, .p-strip figure:first-child { flex: none; height: 230px; }
   .p-strip figcaption { opacity: 1; white-space: normal; } }
 
-.o-neon .grid { display: grid; grid-template-columns: minmax(260px, 420px) 1fr; gap: clamp(28px, 6vw, 88px); align-items: center; }
-.o-neon .box { background: #0b0a0d; border-radius: calc(var(--r) + 10px); padding: clamp(36px, 6vw, 64px) 24px; text-align: center; color: #fff;
-  box-shadow: inset 0 0 0 8px #18161c, 0 30px 60px -30px rgba(0,0,0,.6); }
-.o-neon .neon { display: block; font: var(--hw, 700) clamp(52px, 8vw, 96px)/1 var(--display); text-transform: uppercase; letter-spacing: .06em; color: #fff;
-  text-shadow: 0 0 6px #fff, 0 0 18px var(--glow), 0 0 42px var(--glow), 0 0 80px var(--glow); animation: flick 7s infinite; }
-@keyframes flick { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; } 20%, 24%, 55% { opacity: .5; } }
-.o-neon .box small { display: block; margin-top: 16px; opacity: .8; font-size: 15px; }
-.o-neon ul { list-style: none; margin: 18px 0 0; padding: 0; max-width: 480px; }
-.o-neon li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
-.o-neon li.today { color: var(--accent); font-weight: 700; }
-@media (max-width: 760px) { .o-neon .grid { grid-template-columns: 1fr; } }
+.o-today .card { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; background: var(--surface); border-radius: calc(var(--r) * 2); padding: clamp(24px, 5vw, 48px); border: 1px solid var(--line); }
+.o-today .label { color: var(--accent); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
+.o-today .now { font: 700 clamp(34px, 5vw, 52px)/1.05 var(--display); margin: 10px 0 14px; }
+.o-today details { align-self: start; border-top: 1px solid var(--line); }
+.o-today summary { cursor: pointer; padding: 14px 0; font-weight: 700; list-style-position: inside; }
+.o-today ul { list-style: none; margin: 0; padding: 0; }
+.o-today li { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.o-today li.today { font-weight: 800; color: var(--accent); }
+@media (max-width: 760px) { .o-today .card { grid-template-columns: 1fr; } }
 
 .v-full { padding: 0; }
 .v-full .mapwrap { position: relative; min-height: 560px; background: var(--surface); }
@@ -296,9 +294,9 @@ main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { backg
   <div class="ph"><img src="img/0-nails-c0.jpg" alt="A French manicure with a glitter accent"><span class="tag"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sherwood Park</span></div></header>
 
 <section class="s-grid" id="services"><div class="wrap"><div class="sec-head"><span class="label">Pick your set</span><h2>Pick a service<span class="tone"> Starting prices. Ask about yours.</span></h2></div>
-  <div class="cells"><article class="cell"><span class="k">01</span><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><h3>Gel manicure</h3><p class="d">Shaped, buffed and finished in gel.</p><div class="p"><small>from</small><b>$40</b></div></article><article class="cell"><span class="k">02</span><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><h3>Full set</h3><p class="d">Extensions shaped and finished in your colour.</p><div class="p"><small>from</small><b>$55</b></div></article><article class="cell"><span class="k">03</span><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><h3>Pedicure</h3><p class="d">Soak, shape, polish and massage.</p><div class="p"><small>from</small><b>$45</b></div></article></div><div class="btns" style="margin-top:26px"><a class="btn btn-acc" href="tel:+17809933133">Call to book<span class="num"> (780) 993-3133</span></a></div></div></section><section class="p-strip" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>Nail art</h2></div><div class="row"><figure tabindex="0"><img src="img/1-nails-c40.jpg" alt="Bright polish colours" loading="lazy"><figcaption>Bright polish colours</figcaption></figure><figure tabindex="0"><img src="img/2-nails-c16.jpg" alt="A wall of polish colours" loading="lazy"><figcaption>A wall of polish colours</figcaption></figure><figure tabindex="0"><img src="img/3-nails-c14.jpg" alt="Holographic purple nails" loading="lazy"><figcaption>Holographic purple nails</figcaption></figure><figure tabindex="0"><img src="img/4-nails-c25.jpg" alt="A French manicure with a small gem" loading="lazy"><figcaption>A French manicure with a small gem</figcaption></figure></div></div></section><section class="o-neon" id="hours" style="--glow:#ff4f9a"><div class="wrap"><div class="grid">
-  <div class="box" data-rv><span class="neon" data-sign>Hours</span><small data-sub>See the week</small></div>
-  <div><div class="sec-head"><span class="label">Hours</span><h2>Come by<span class="tone"> The sign is live: it reads the hours on Google.</span></h2></div><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>Closed</b></li><li data-day="4"><span>Friday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="5"><span>Saturday</span><b>Closed</b></li><li data-day="6"><span>Sunday</span><b>Closed</b></li></ul></div></div></div></section><section class="v-full" id="visit"><div class="mapwrap"><div class="ph">Map: 661 Wye Rd #190, Sherwood Park, AB T8B 0C6</div>
+  <div class="cells"><article class="cell"><span class="k">01</span><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><h3>Gel manicure</h3><p class="d">Shaped, buffed and finished in gel.</p><div class="p"><small>from</small><b>$40</b></div></article><article class="cell"><span class="k">02</span><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><h3>Full set</h3><p class="d">Extensions shaped and finished in your colour.</p><div class="p"><small>from</small><b>$55</b></div></article><article class="cell"><span class="k">03</span><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><h3>Pedicure</h3><p class="d">Soak, shape, polish and massage.</p><div class="p"><small>from</small><b>$45</b></div></article></div><div class="btns" style="margin-top:26px"><a class="btn btn-acc" href="tel:+17809933133">Call to book<span class="num"> (780) 993-3133</span></a></div></div></section><section class="p-strip" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>Nail art</h2></div><div class="row"><figure tabindex="0"><img src="img/1-nails-c40.jpg" alt="Bright polish colours" loading="lazy"><figcaption>Bright polish colours</figcaption></figure><figure tabindex="0"><img src="img/2-nails-c16.jpg" alt="A wall of polish colours" loading="lazy"><figcaption>A wall of polish colours</figcaption></figure><figure tabindex="0"><img src="img/3-nails-c14.jpg" alt="Holographic purple nails" loading="lazy"><figcaption>Holographic purple nails</figcaption></figure><figure tabindex="0"><img src="img/4-nails-c25.jpg" alt="A French manicure with a small gem" loading="lazy"><figcaption>A French manicure with a small gem</figcaption></figure></div></div></section><section class="o-today" id="hours"><div class="wrap"><div class="card">
+  <div><span class="label">Today</span><div class="now" data-today>See the week</div><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
+  <details open><summary>The whole week</summary><ul><li data-day="0"><span>Monday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="3"><span>Thursday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="4"><span>Friday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="5"><span>Saturday</span><b>10 a.m. to 6 p.m.</b></li><li data-day="6"><span>Sunday</span><b>10 a.m. to 5 p.m.</b></li></ul></details></div></div></section><section class="v-full" id="visit"><div class="mapwrap"><div class="ph">Map: 661 Wye Rd #190, Sherwood Park, AB T8B 0C6</div>
   <iframe title="Map to Monster Nails Spa &amp; Massage" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Monster+Nails+Spa+%26+Massage%2C+661+Wye+Rd+%23190%2C+Sherwood+Park%2C+AB+T8B+0C6&amp;output=embed"></iframe>
   <div class="card"><span class="label">Visit</span><h2>Where we are</h2><p class="addr">661 Wye Rd #190, Sherwood Park, AB T8B 0C6</p>
   <p class="today"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b data-today>Hours above</b> <small data-state></small></span></p>
@@ -306,34 +304,42 @@ main > section:nth-of-type(even):not(.p-film):not(.v-strip):not(.v-full) { backg
 </main>
 <footer class="site f-min"><div class="wrap"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Monster Nails Spa &amp; Massage logo"><rect x="4" y="4" width="92" height="92" rx="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="11" y="11" width="78" height="78" rx="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/><text x="50" y="52" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="38" style="font-family:var(--display);font-weight:600">MN</text></svg><b>Monster Nails Spa &amp; Massage</b><p>661 Wye Rd #190, Sherwood Park, AB T8B 0C6 · <a href="tel:+17809933133">(780) 993-3133</a></p><span class="credits">Sample website by Southsites. Photos are samples until Monster Nails Spa &amp; Massage sends their own: <a href="https://commons.wikimedia.org/wiki/File:French_Manicure_with_Glitter_nail_art_on_ring_finger.jpg" target="_blank" rel="noopener">Theknowhau</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Colourful_nail_polishes.jpg" target="_blank" rel="noopener">Etsy Ketsy</a> (CC BY-SA 2.0); <a href="https://commons.wikimedia.org/wiki/File:Nail_Polish_bottles_(2).jpg" target="_blank" rel="noopener">Joe Shlabotnik</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Glitter_nail_polish_(purple).jpg" target="_blank" rel="noopener">Romina Campos</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Nail_art_-_Glitter_Diamond.jpg" target="_blank" rel="noopener">lisa bentley</a> (CC BY 2.0).</span></div></footer>
 <div class="k-callbar cb-fab"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Monster+Nails+Spa+%26+Massage%2C+661+Wye+Rd+%23190%2C+Sherwood+Park%2C+AB+T8B+0C6" target="_blank" rel="noopener"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Directions</span></a><a class="call" href="tel:+17809933133" aria-label="Call Monster Nails Spa &amp; Massage"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></a></div>
-<script type="application/json" id="biz">{"hours": {"Friday": "10 a.m. to 7:30 p.m."}}</script>
+<script type="application/json" id="biz">{"hours": {"Monday": "10 a.m. to 7:30 p.m.", "Tuesday": "10 a.m. to 7:30 p.m.", "Wednesday": "10 a.m. to 7:30 p.m.", "Thursday": "10 a.m. to 7:30 p.m.", "Friday": "10 a.m. to 7:30 p.m.", "Saturday": "10 a.m. to 6 p.m.", "Sunday": "10 a.m. to 5 p.m."}}</script>
 <script>
-  // open now, in edmonton time, from the hours on the google listing
+  // open now, in edmonton time, from the hours on the google listing (split hours, late nights; a day not listed is unknown, not closed)
   (() => {
-    const biz = JSON.parse(document.getElementById('biz').textContent), DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const biz = JSON.parse(document.getElementById('biz').textContent), DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], H = biz.hours || {};
     const toMin = (t, ap) => { const m = t.trim().toLowerCase().replace(/\./g, '').match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/); if (!m) return null;
       let h = +m[1] % 12; if ((m[3] || ap) === 'pm') h += 12; return h * 60 + (+m[2] || 0); };
-    const span = (txt) => { if (!txt || /closed/i.test(txt)) return null; if (/24 hours/i.test(txt)) return [0, 1440]; const [a, b] = txt.split(/\s+to\s+/); if (!b) return null;
-      const ap = (b.toLowerCase().replace(/\./g, '').match(/(am|pm)/) || [])[1]; let s = toMin(a, ap), en = toMin(b); if (s === null || en === null) return null;
-      if (s >= en && ap === 'pm' && !/(a\.?m|p\.?m)/i.test(a)) s -= 720; return [s, en <= s ? en + 1440 : en]; };
+    const ranges = (txt) => {
+      if (!txt || /closed/i.test(txt)) return [];
+      if (/24 hours/i.test(txt)) return [[0, 1440]];
+      return txt.split(/\s*,\s*/).map((part) => { const [a, b] = part.split(/\s+to\s+/); if (!b) return null;
+        const ap = (b.toLowerCase().replace(/\./g, '').match(/(am|pm)/) || [])[1]; let s = toMin(a, ap), en = toMin(b); if (s === null || en === null) return null;
+        if (s >= en && ap === 'pm' && !/(a\.?m|p\.?m)/i.test(a)) s -= 720; return [s, en <= s ? en + 1440 : en]; }).filter(Boolean);
+    };
     const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
     const today = (now.getDay() + 6) % 7, minute = now.getHours() * 60 + now.getMinutes();
-    window.ssHours = { span, today, minute, DAYS, hours: biz.hours };
     const nice = (min) => { min %= 1440; const h = Math.floor(min / 60), m = min % 60, ap = h >= 12 ? 'p.m.' : 'a.m.'; return `${h % 12 || 12}${m ? ':' + String(m).padStart(2, '0') : ''} ${ap}`; };
-    if (!Object.keys(biz.hours).length) {   // no hours on the google listing
-      for (const el of document.querySelectorAll('[data-state], [data-sign], [data-today]')) el.textContent = 'Call to book';
+    const known = Object.keys(H).length;
+    if (!known) {   // no hours on the google listing
+      for (const el of document.querySelectorAll('[data-state], [data-today]')) el.textContent = 'Call to book';
       for (const el of document.querySelectorAll('[data-sub]')) el.textContent = 'By appointment';
       return;
     }
-    const cur = span(biz.hours[DAYS[today]]), open = cur && minute >= cur[0] && minute < cur[1];
+    let end = null;
+    for (const [a, b] of ranges(H[DAYS[today]])) if (minute >= a && minute < b) end = b;
+    for (const [, b] of ranges(H[DAYS[(today + 6) % 7]])) if (b > 1440 && minute < b - 1440) end = b - 1440;
+    const open = end !== null, unknown = !open && !(DAYS[today] in H);
     let sub = '';
-    if (open) sub = cur[1] - cur[0] >= 1440 ? 'Open 24 hours' : `Closes at ${nice(cur[1])}`;
-    else for (let k = 0; k < 7; k++) { const dd = (today + k) % 7, s = span(biz.hours[DAYS[dd]]); if (s && (k > 0 || s[0] > minute)) { sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(s[0])}`; break; } }
-    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : 'Closed now';
+    if (open) sub = end - minute >= 1440 || /24 hours/i.test(H[DAYS[today]] || '') ? 'Open 24 hours' : `Closes at ${nice(end)}`;
+    else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7; for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
+      sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(a)}`; break; } }
+    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call to check' : 'Closed now';
     for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
     for (const el of document.querySelectorAll('[data-sub]')) el.textContent = sub;
-    for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : 'closed';
-    for (const el of document.querySelectorAll('[data-today]')) el.textContent = biz.hours[DAYS[today]] || 'Closed today';
+    for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : unknown ? '' : 'closed';
+    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call to check');
     for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
   })();
 </script>

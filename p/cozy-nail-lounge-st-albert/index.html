@@ -105,14 +105,14 @@ footer.site .credits a { color: inherit; }
 @media (max-width: 760px) { .p-fan .deck { height: auto; grid-template-columns: 1fr 1fr; gap: 14px; }
   .p-fan figure, .p-fan .deck.in figure { position: relative; width: auto; transform: rotate(calc(var(--k) * 1.5deg)); } }
 
-.o-ledger .grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
-.o-ledger table { width: 100%; border-collapse: collapse; font-size: 17px; }
-.o-ledger td { padding: 14px 4px; border-bottom: 1px solid var(--accent); }
-.o-ledger td:last-child { text-align: right; font-family: var(--display); font-style: italic; }
-.o-ledger tr:first-child td { border-top: 3px double var(--accent); }
-.o-ledger tr.today td { font-weight: 700; color: var(--dark); background: color-mix(in srgb, var(--accent) 14%, transparent); }
-.o-ledger .status { margin-top: 14px; }
-@media (max-width: 760px) { .o-ledger .grid { grid-template-columns: 1fr; } }
+.o-strip .days { list-style: none; margin: 0; padding: 4px 0 10px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(130px, 1fr); gap: 10px; overflow-x: auto; }
+.o-strip .days li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 14px; display: grid; gap: 6px; }
+.o-strip .days li span { font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.o-strip .days li b { font-weight: 600; font-size: 16px; }
+.o-strip .days li.today { background: var(--dark); color: var(--on-dark); border-color: var(--dark); }
+.o-strip .days li.today span { color: var(--accent2); }
+.o-strip .status { margin-bottom: 18px; }
+@media (max-width: 760px) { .o-strip .days { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; } .o-strip .days li:last-child { grid-column: 1 / -1; } }
 
 .v-full { padding: 0; }
 .v-full .mapwrap { position: relative; min-height: 560px; background: var(--surface); }
@@ -320,8 +320,8 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
 <div class="ribbon r-tape" aria-hidden="true"><div class="band a"><div class="track"><div class="half"><span>Gel manicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Full set</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Pedicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg></div><div class="half"><span>Gel manicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Full set</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Pedicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg></div></div></div><div class="band b"><div class="track"><div class="half"><span>Gel manicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Full set</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Pedicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg></div><div class="half"><span>Gel manicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Full set</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg><span>Pedicure</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6l1 11H8z"/><path d="M10 10V6h4v4M11 6V3h2v3"/></svg></div></div></div></div>
 <section class="s-menu" id="services"><div class="wrap"><div class="card">
   <span class="hand">Price list</span><h2>Pick your set</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Gel manicure<small>Shaped, buffed and finished in gel.</small></span><b>from $40</b></li><li><span>Full set<small>Extensions shaped and finished in your colour.</small></span><b>from $55</b></li><li><span>Pedicure<small>Soak, shape, polish and massage.</small></span><b>from $45</b></li></ul>
-  <div class="btns"><a class="btn btn-acc" href="tel:+15876479999">Call to book<span class="num"> (587) 647-9999</span></a></div></div></div></section><section class="p-fan" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>Nail art</h2></div><div class="deck" data-rv><figure style="--k:-1.5;--a:1.5"><img src="img/1-nails-c39.jpg" alt="Red polish" loading="lazy"><figcaption>Red polish</figcaption></figure><figure style="--k:-0.5;--a:0.5"><img src="img/2-nails-c19.jpg" alt="Pink glitter nails" loading="lazy"><figcaption>Pink glitter nails</figcaption></figure><figure style="--k:0.5;--a:0.5"><img src="img/3-nails-c11.jpg" alt="Purple nails and a glitter polish" loading="lazy"><figcaption>Purple nails and a glitter polish</figcaption></figure><figure style="--k:1.5;--a:1.5"><img src="img/4-nails-c24.jpg" alt="Charcoal grey nails" loading="lazy"><figcaption>Charcoal grey nails</figcaption></figure></div></div></section><section class="o-ledger" id="hours"><div class="wrap"><div class="grid">
-  <div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div><table><tbody><tr data-day="0"><td>Monday</td><td>Closed</td></tr><tr data-day="1"><td>Tuesday</td><td>Closed</td></tr><tr data-day="2"><td>Wednesday</td><td>Closed</td></tr><tr data-day="3"><td>Thursday</td><td>Closed</td></tr><tr data-day="4"><td>Friday</td><td>10 a.m. to 7:30 p.m.</td></tr><tr data-day="5"><td>Saturday</td><td>Closed</td></tr><tr data-day="6"><td>Sunday</td><td>Closed</td></tr></tbody></table></div></div></section><section class="v-full" id="visit"><div class="mapwrap"><div class="ph">Map: 260 Bellerose Dr #130, St. Albert, AB T8N 8E8</div>
+  <div class="btns"><a class="btn btn-acc" href="tel:+15876479999">Call to book<span class="num"> (587) 647-9999</span></a></div></div></div></section><section class="p-fan" id="photos"><div class="wrap"><div class="sec-head"><span class="label">Photos</span><h2>Nail art</h2></div><div class="deck" data-rv><figure style="--k:-1.5;--a:1.5"><img src="img/1-nails-c39.jpg" alt="Red polish" loading="lazy"><figcaption>Red polish</figcaption></figure><figure style="--k:-0.5;--a:0.5"><img src="img/2-nails-c19.jpg" alt="Pink glitter nails" loading="lazy"><figcaption>Pink glitter nails</figcaption></figure><figure style="--k:0.5;--a:0.5"><img src="img/3-nails-c11.jpg" alt="Purple nails and a glitter polish" loading="lazy"><figcaption>Purple nails and a glitter polish</figcaption></figure><figure style="--k:1.5;--a:1.5"><img src="img/4-nails-c24.jpg" alt="Charcoal grey nails" loading="lazy"><figcaption>Charcoal grey nails</figcaption></figure></div></div></section><section class="o-strip" id="hours"><div class="wrap"><div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
+  <ul class="days"><li data-day="0"><span>Monday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="3"><span>Thursday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="4"><span>Friday</span><b>10 a.m. to 7:30 p.m.</b></li><li data-day="5"><span>Saturday</span><b>10 a.m. to 6 p.m.</b></li><li data-day="6"><span>Sunday</span><b>11 a.m. to 5 p.m.</b></li></ul></div></section><section class="v-full" id="visit"><div class="mapwrap"><div class="ph">Map: 260 Bellerose Dr #130, St. Albert, AB T8N 8E8</div>
   <iframe title="Map to Cozy nail lounge St.Albert" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Cozy+nail+lounge+St.Albert%2C+260+Bellerose+Dr+%23130%2C+St.+Albert%2C+AB+T8N+8E8&amp;output=embed"></iframe>
   <div class="card"><span class="label">Visit</span><h2>Come see us</h2><p class="addr">260 Bellerose Dr #130, St. Albert, AB T8N 8E8</p>
   <p class="today"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b data-today>Hours above</b> <small data-state></small></span></p>
@@ -330,34 +330,42 @@ main > section.p-film, main > section.v-strip { background: var(--dark); }
 <footer class="site f-giant"><div class="wrap"><div class="big">Cozy nail lounge St.Albert</div>
   <div class="row"><span>Nail salon in St. Albert</span><span>260 Bellerose Dr #130, St. Albert, AB T8N 8E8</span><a href="tel:+15876479999">(587) 647-9999</a></div><span class="credits">Sample website by Southsites. Photos are samples until Cozy nail lounge St.Albert sends their own: <a href="https://commons.wikimedia.org/wiki/File:Glitter_nail_polish_(blue).jpg" target="_blank" rel="noopener">Romina Campos</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Bottle_of_red_polish.jpg" target="_blank" rel="noopener">Disco-Dan</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Pink_nail_polish_(2).jpg" target="_blank" rel="noopener">evhoffman</a> (CC BY-SA 2.0); <a href="https://commons.wikimedia.org/wiki/File:Dark_violete_nail_polish_and_shimmer.jpg" target="_blank" rel="noopener">Lelê Breveglieri</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Nail_Art_Strass.jpg" target="_blank" rel="noopener">Maëlyne.Nagel</a> (CC BY-SA 4.0).</span></div></footer>
 <div class="k-callbar cb-pill"><a href="tel:+15876479999">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Cozy+nail+lounge+St.Albert%2C+260+Bellerose+Dr+%23130%2C+St.+Albert%2C+AB+T8N+8E8" target="_blank" rel="noopener">Directions</a></div>
-<script type="application/json" id="biz">{"hours": {"Friday": "10 a.m. to 7:30 p.m."}}</script>
+<script type="application/json" id="biz">{"hours": {"Monday": "10 a.m. to 7:30 p.m.", "Tuesday": "10 a.m. to 7:30 p.m.", "Wednesday": "10 a.m. to 7:30 p.m.", "Thursday": "10 a.m. to 7:30 p.m.", "Friday": "10 a.m. to 7:30 p.m.", "Saturday": "10 a.m. to 6 p.m.", "Sunday": "11 a.m. to 5 p.m."}}</script>
 <script>
-  // open now, in edmonton time, from the hours on the google listing
+  // open now, in edmonton time, from the hours on the google listing (split hours, late nights; a day not listed is unknown, not closed)
   (() => {
-    const biz = JSON.parse(document.getElementById('biz').textContent), DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const biz = JSON.parse(document.getElementById('biz').textContent), DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], H = biz.hours || {};
     const toMin = (t, ap) => { const m = t.trim().toLowerCase().replace(/\./g, '').match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/); if (!m) return null;
       let h = +m[1] % 12; if ((m[3] || ap) === 'pm') h += 12; return h * 60 + (+m[2] || 0); };
-    const span = (txt) => { if (!txt || /closed/i.test(txt)) return null; if (/24 hours/i.test(txt)) return [0, 1440]; const [a, b] = txt.split(/\s+to\s+/); if (!b) return null;
-      const ap = (b.toLowerCase().replace(/\./g, '').match(/(am|pm)/) || [])[1]; let s = toMin(a, ap), en = toMin(b); if (s === null || en === null) return null;
-      if (s >= en && ap === 'pm' && !/(a\.?m|p\.?m)/i.test(a)) s -= 720; return [s, en <= s ? en + 1440 : en]; };
+    const ranges = (txt) => {
+      if (!txt || /closed/i.test(txt)) return [];
+      if (/24 hours/i.test(txt)) return [[0, 1440]];
+      return txt.split(/\s*,\s*/).map((part) => { const [a, b] = part.split(/\s+to\s+/); if (!b) return null;
+        const ap = (b.toLowerCase().replace(/\./g, '').match(/(am|pm)/) || [])[1]; let s = toMin(a, ap), en = toMin(b); if (s === null || en === null) return null;
+        if (s >= en && ap === 'pm' && !/(a\.?m|p\.?m)/i.test(a)) s -= 720; return [s, en <= s ? en + 1440 : en]; }).filter(Boolean);
+    };
     const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Edmonton' }));
     const today = (now.getDay() + 6) % 7, minute = now.getHours() * 60 + now.getMinutes();
-    window.ssHours = { span, today, minute, DAYS, hours: biz.hours };
     const nice = (min) => { min %= 1440; const h = Math.floor(min / 60), m = min % 60, ap = h >= 12 ? 'p.m.' : 'a.m.'; return `${h % 12 || 12}${m ? ':' + String(m).padStart(2, '0') : ''} ${ap}`; };
-    if (!Object.keys(biz.hours).length) {   // no hours on the google listing
-      for (const el of document.querySelectorAll('[data-state], [data-sign], [data-today]')) el.textContent = 'Call to book';
+    const known = Object.keys(H).length;
+    if (!known) {   // no hours on the google listing
+      for (const el of document.querySelectorAll('[data-state], [data-today]')) el.textContent = 'Call to book';
       for (const el of document.querySelectorAll('[data-sub]')) el.textContent = 'By appointment';
       return;
     }
-    const cur = span(biz.hours[DAYS[today]]), open = cur && minute >= cur[0] && minute < cur[1];
+    let end = null;
+    for (const [a, b] of ranges(H[DAYS[today]])) if (minute >= a && minute < b) end = b;
+    for (const [, b] of ranges(H[DAYS[(today + 6) % 7]])) if (b > 1440 && minute < b - 1440) end = b - 1440;
+    const open = end !== null, unknown = !open && !(DAYS[today] in H);
     let sub = '';
-    if (open) sub = cur[1] - cur[0] >= 1440 ? 'Open 24 hours' : `Closes at ${nice(cur[1])}`;
-    else for (let k = 0; k < 7; k++) { const dd = (today + k) % 7, s = span(biz.hours[DAYS[dd]]); if (s && (k > 0 || s[0] > minute)) { sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(s[0])}`; break; } }
-    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : 'Closed now';
+    if (open) sub = end - minute >= 1440 || /24 hours/i.test(H[DAYS[today]] || '') ? 'Open 24 hours' : `Closes at ${nice(end)}`;
+    else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7; for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
+      sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(a)}`; break; } }
+    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call to check' : 'Closed now';
     for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
     for (const el of document.querySelectorAll('[data-sub]')) el.textContent = sub;
-    for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : 'closed';
-    for (const el of document.querySelectorAll('[data-today]')) el.textContent = biz.hours[DAYS[today]] || 'Closed today';
+    for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : unknown ? '' : 'closed';
+    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call to check');
     for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
   })();
 </script>
