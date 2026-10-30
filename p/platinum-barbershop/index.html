@@ -363,11 +363,11 @@ html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] im
     if (open) sub = end - minute >= 1440 || /24 hours/i.test(H[DAYS[today]] || '') ? 'Open 24 hours' : `Closes at ${nice(end)}`;
     else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7; for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
       sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(a)}`; break; } }
-    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call to check' : 'Closed now';
+    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call for hours' : 'Closed now';
     for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
     for (const el of document.querySelectorAll('[data-sub]')) el.textContent = sub;
     for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : unknown ? '' : 'closed';
-    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call to check');
+    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call for hours');
     for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
   })();
 </script>
@@ -621,7 +621,7 @@ html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] im
       <ul><li><span>Website</span><b class="bad">Your listing links to your current website</b></li></ul>
     </div>
     <div class="box"><small>Your new site</small>
-      <ul class="checks"><li>Your hours and open now</li><li>One-tap call and directions</li><li>Your reviews up front</li><li>Your prices and photos</li><li>Made for phones</li></ul>
+      <ul class="checks"><li>Your hours and open now</li><li>One-tap call and directions</li><li>Your prices and photos</li><li>Made for phones</li></ul>
     </div>
   </div>
   <div class="price"><small>If you want to keep it</small>

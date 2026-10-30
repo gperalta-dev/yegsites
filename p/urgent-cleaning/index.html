@@ -339,12 +339,12 @@ html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] im
   <div class="facts3"><div><small>Today</small><b data-today>Hours above</b></div><div><small>Call</small><b><a href="tel:+15877784791">(587) 778-4791</a></b></div>
   <div><small>Area</small><b>Mill Woods</b></div></div>
   <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Urgent+Cleaning%2C+2624+Mill+Woods+Rd+E+%23110%2C+Edmonton%2C+AB+T6L+5K7" target="_blank" rel="noopener">Directions<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-line" href="tel:+15877784791">Call<span class="num"> (587) 778-4791</span></a></div></div></section><section class="o-ledger" id="hours"><div class="wrap"><div class="grid">
-  <div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div><table><tbody><tr data-day="0"><td>Monday</td><td>Open 24 hours</td></tr><tr data-day="1"><td>Tuesday</td><td>Open 24 hours</td></tr><tr data-day="2"><td>Wednesday</td><td>Open 24 hours</td></tr><tr data-day="3"><td>Thursday</td><td>Open 24 hours</td></tr><tr data-day="4"><td>Friday</td><td>Open 24 hours</td></tr><tr data-day="5"><td>Saturday</td><td>Open 24 hours</td></tr><tr data-day="6"><td>Sunday</td><td>Open 24 hours</td></tr></tbody></table></div></div></section>
+  <div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div><table><tbody><tr data-day="0"><td>Monday</td><td>9 a.m. to 8:30 p.m.</td></tr><tr data-day="1"><td>Tuesday</td><td>9 a.m. to 8:30 p.m.</td></tr><tr data-day="2"><td>Wednesday</td><td>9 a.m. to 8:30 p.m.</td></tr><tr data-day="3"><td>Thursday</td><td>9 a.m. to 8:30 p.m.</td></tr><tr data-day="4"><td>Friday</td><td>9 a.m. to 8:30 p.m.</td></tr><tr data-day="5"><td>Saturday</td><td>Call for hours</td></tr><tr data-day="6"><td>Sunday</td><td>Call for hours</td></tr></tbody></table></div></div></section>
 </main>
 <footer class="site f-giant"><div class="wrap"><div class="big" style="--fs: clamp(40px, 8.53vw, 180px)">Urgent Cleaning</div>
   <div class="row"><span>House cleaning service in Mill Woods</span><span>2624 Mill Woods Rd E #110, Edmonton, AB T6L 5K7</span><a href="tel:+15877784791">(587) 778-4791</a></div><span class="credits">Sample website by Southsites. Photos are samples until Urgent Cleaning sends their own: <a href="https://commons.wikimedia.org/wiki/File:Cleaning_windows.jpg" target="_blank" rel="noopener">Andrés Nieto Porras from Palma de Mallor</a> (CC BY-SA 2.0); <a href="https://commons.wikimedia.org/wiki/File:Bucket_with_cleaning_products.jpg" target="_blank" rel="noopener">Panamitsu</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Grace_Shrock-Hurst_mops_floor_Our_Community_Place_in_Harrisonburg_VA_May_2008.jpg" target="_blank" rel="noopener">Artaxerxes</a> (CC BY-SA 3.0); <a href="https://commons.wikimedia.org/wiki/File:True_Hepa_Vacuum_Cleaner.jpg" target="_blank" rel="noopener">Infrogmation</a> (CC BY 4.0); <a href="https://commons.wikimedia.org/wiki/File:Two_men_washing_the_floor.jpg" target="_blank" rel="noopener">Tarre10</a> (CC BY-SA 4.0).</span></div></footer>
 <div class="k-callbar cb-pill"><a href="tel:+15877784791">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Urgent+Cleaning%2C+2624+Mill+Woods+Rd+E+%23110%2C+Edmonton%2C+AB+T6L+5K7" target="_blank" rel="noopener">Directions</a></div>
-<script type="application/json" id="biz">{"hours": {"Monday": "Open 24 hours", "Tuesday": "Open 24 hours", "Wednesday": "Open 24 hours", "Thursday": "Open 24 hours", "Friday": "Open 24 hours", "Saturday": "Open 24 hours", "Sunday": "Open 24 hours"}}</script>
+<script type="application/json" id="biz">{"hours": {"Monday": "9 a.m. to 8:30 p.m.", "Tuesday": "9 a.m. to 8:30 p.m.", "Wednesday": "9 a.m. to 8:30 p.m.", "Thursday": "9 a.m. to 8:30 p.m.", "Friday": "9 a.m. to 8:30 p.m."}}</script>
 <script>
   // open now, in edmonton time, from the hours on the google listing (split hours, late nights; a day not listed is unknown, not closed)
   (() => {
@@ -375,11 +375,11 @@ html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] im
     if (open) sub = end - minute >= 1440 || /24 hours/i.test(H[DAYS[today]] || '') ? 'Open 24 hours' : `Closes at ${nice(end)}`;
     else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7; for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
       sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(a)}`; break; } }
-    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call to check' : 'Closed now';
+    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call for hours' : 'Closed now';
     for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
     for (const el of document.querySelectorAll('[data-sub]')) el.textContent = sub;
     for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : unknown ? '' : 'closed';
-    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call to check');
+    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call for hours');
     for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
   })();
 </script>
@@ -633,7 +633,7 @@ html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] im
       <ul><li><span>Website</span><b class="bad">Your listing links to your current website</b></li></ul>
     </div>
     <div class="box"><small>Your new site</small>
-      <ul class="checks"><li>Your hours and open now</li><li>One-tap call and directions</li><li>Your reviews up front</li><li>Your prices and photos</li><li>Made for phones</li></ul>
+      <ul class="checks"><li>Your hours and open now</li><li>One-tap call and directions</li><li>Your prices and photos</li><li>Made for phones</li></ul>
     </div>
   </div>
   <div class="price"><small>If you want to keep it</small>
