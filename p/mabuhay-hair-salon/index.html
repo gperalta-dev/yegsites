@@ -6,6 +6,7 @@
 <meta name="description" content="Hair colouring, styling and trims at 1241 16a St NW. A perfect 5.0 from 55 Google reviews.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%20role%3D%22img%22%20aria-label%3D%22Mabuhay%20Hair%20Salon%20logo%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2247%22%20fill%3D%22none%22%20stroke%3D%22%23ce1126%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22%23ce1126%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.2%22/%3E%3Cpath%20id%3D%22lr-mabuhay-hair-salon%22%20d%3D%22M50%2050m-38.5%200a38.5%2038.5%200%201%201%2077%200a38.5%2038.5%200%201%201-77%200%22%20fill%3D%22none%22/%3E%3Ctext%20fill%3D%22%23ce1126%22%20font-size%3D%229.46%22%20letter-spacing%3D%222%22%20style%3D%22font-family%3Asans-serif%3Bfont-weight%3A700%22%3E%3CtextPath%20href%3D%22%23lr-mabuhay-hair-salon%22%3EMABUHAY%20HAIR%20SALON%20%E2%80%A2%20LAUREL%20%E2%80%A2%3C/textPath%3E%3C/text%3E%3Cg%20transform%3D%22translate%2835%2035%29%20scale%281.25%29%22%20fill%3D%22none%22%20stroke%3D%22%23ce1126%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.6%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%224%22/%3E%3Cpath%20d%3D%22M12%202v3M12%2019v3M2%2012h3M19%2012h3M4.9%204.9%207%207M17%2017l2.1%202.1M4.9%2019.1%207%2017M17%207l2.1-2.1%22/%3E%3C/g%3E%3C/svg%3E">
 <style>
 :root { --bg: #fffaf0; --ink: #0c1b4d; --muted: #44507a; --surface: #ffffff; --line: #efe3c8; --accent: #ce1126; --accent-ink: #ffffff; --dark: #0038a8; --on-dark: #ffffff; --accent2: #fcd116; --display: "Baloo 2", Georgia, serif; --body: "Nunito Sans", system-ui, sans-serif;  --r: 14px; --rb: 999px; }
 :root { --accent2-on: #fcd116; }
@@ -99,14 +100,23 @@ footer.site .credits a { color: inherit; }
 .p-arches figcaption { margin-top: 12px; font-size: 15px; font-weight: 600; color: var(--muted); }
 @media (max-width: 560px) { .p-arches .row { grid-template-columns: 1fr 1fr; } }
 
-.r-words { background: var(--accent); color: var(--accent-ink); }
-.r-words h2 { color: inherit; }
-.r-words .lines { display: grid; gap: 18px; margin: 28px 0; }
-.r-words .line { display: grid; grid-template-columns: minmax(64px, auto) 1fr; gap: 18px; align-items: baseline; }
-.r-words .line b { font: 700 clamp(44px, 7vw, 72px)/1 var(--display); }
-.r-words .line span { font: 600 clamp(22px, 3.4vw, 34px)/1.15 var(--display); }
-.r-words .line small { display: block; font: 500 14px/1.3 var(--body); opacity: .8; margin-top: 4px; }
-.r-words .btn-line { color: inherit; }
+.story .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.story .media { position: sticky; top: 96px; margin: 0; height: min(78vh, 700px); border-radius: min(var(--r), 22px); overflow: hidden; background: var(--surface); }
+.story .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; scale: 1.08; transition: opacity 1s ease, scale 1.8s cubic-bezier(.2,.7,.2,1); }
+.story .media img.on { opacity: 1; scale: 1; }
+.story .media figcaption { position: absolute; left: 16px; bottom: 16px; background: var(--bg); color: var(--ink); padding: 7px 12px; font-size: 13px; font-weight: 600; border-radius: 4px; }
+.story .step { min-height: 58vh; display: grid; align-content: center; gap: 8px; border-top: 1px solid var(--line); padding: 32px 0; }
+.story .step .num { font: var(--hw, 700) clamp(76px, 11vw, 136px)/.9 var(--display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.story .step .glyph { color: var(--accent); }
+.story .step h3 { font-size: clamp(28px, 3.6vw, 42px); }
+.story .step p { color: var(--muted); }
+.story .step img.m { display: none; }
+.story .btn { margin-top: 18px; }
+@media (max-width: 760px) {
+  .story .grid { grid-template-columns: 1fr; } .story .media { display: none; }
+  .story .step { min-height: 0; padding: 26px 0; }
+  .story .step img.m { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: min(var(--r), 16px); margin-bottom: 12px; }
+}
 
 .o-today .card { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; background: var(--surface); border-radius: calc(var(--r) * 2); padding: clamp(24px, 5vw, 48px); border: 1px solid var(--line); }
 .o-today .label { color: var(--accent); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
@@ -117,6 +127,56 @@ footer.site .credits a { color: inherit; }
 .o-today li { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
 .o-today li.today { font-weight: 800; color: var(--accent); }
 @media (max-width: 760px) { .o-today .card { grid-template-columns: 1fr; } }
+
+
+.ribbon { overflow: hidden; background: var(--accent); color: var(--accent-ink); }
+.ribbon .track { display: flex; width: max-content; animation: ribbon 42s linear infinite; }
+.ribbon .half { display: flex; align-items: center; gap: 30px; padding: 18px 30px 18px 0; font: var(--hw, 700) clamp(18px, 2.2vw, 24px)/1 var(--display);
+  text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+.ribbon .ic { opacity: .75; }
+@keyframes ribbon { to { transform: translateX(-50%); } }
+
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.label { display: inline-flex; align-items: center; gap: 12px; font: 700 12px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.label::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.ic { flex: none; }
+nav.top { background: color-mix(in srgb, var(--bg) 80%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
+nav.top .brand { display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; }
+nav.top .brand .mark { width: 42px; height: 42px; flex: none; color: var(--accent); }
+nav.top .links a:not(.btn) { position: relative; }
+nav.top .links a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s ease; }
+nav.top .links a:not(.btn):hover::after { transform: scaleX(1); transform-origin: left; }
+.btn { transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, color .25s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -14px color-mix(in srgb, var(--accent) 80%, transparent); }
+.btn-line:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+main figure { overflow: hidden; }
+main figure img { transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
+main figure:hover img { transform: scale(1.05); }
+@keyframes up { from { opacity: 0; transform: translateY(24px); } }
+@keyframes kb { from { scale: 1.16; } to { scale: 1; } }
+@keyframes rise { from { opacity: 0; scale: .93; } }
+main > header :is(.eyebrow, h1, p, .status, .btns) { animation: up 1.1s cubic-bezier(.2,.7,.2,1) both; }
+main > header h1 { animation-delay: .12s; } main > header p { animation-delay: .28s; }
+main > header .status { animation-delay: .38s; } main > header .btns { animation-delay: .5s; }
+.h-overlay > img, .h-banner figure img { animation: kb 20s cubic-bezier(.2,.6,.2,1) both; }
+:is(.h-round .plate, .h-arch .arch, .h-blobs .pill, .h-frame figure, .h-door .scene, .h-sun figure) { animation: rise 1.3s cubic-bezier(.2,.7,.2,1) .25s both; }
+html.js .rv { opacity: 0; translate: 0 28px; transition: opacity 1s cubic-bezier(.2,.7,.2,1), translate 1s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+html.js .rv.in { opacity: 1; translate: 0 0; }
+.visit .facts { list-style: none; margin: 22px 0 26px; padding: 0; display: grid; gap: 4px; }
+.visit .facts li { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.visit .facts .ic { color: var(--accent); margin-top: 2px; }
+.visit .facts b { display: block; font-size: 18px; }
+.visit .facts b a { text-decoration: none; }
+.visit .facts small { color: var(--muted); font-size: 14.5px; }
+footer.site .fgrid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; padding-bottom: 26px; border-bottom: 1px solid color-mix(in srgb, var(--on-dark) 18%, transparent); margin-bottom: 18px; }
+footer.site .fb { display: grid; gap: 8px; justify-items: start; }
+footer.site .fb .mark { width: 64px; height: 64px; color: var(--accent); }
+footer.site .label { color: var(--accent); margin-bottom: 10px; }
+footer.site p a { color: inherit; text-decoration: none; }
+@media (max-width: 760px) { footer.site .fgrid { grid-template-columns: 1fr; } }
 
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -196,24 +256,37 @@ footer.site .credits a { color: inherit; }
 </template></ss-intro>
 <div id="ss-stage">
 
-<nav class="top"><div class="wrap"><a class="name" href="#">Mabuhay Hair Salon</a>
-  <div class="links"><a href="#services">Services</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+17808079802">Call<span class="num"> (780) 807-9802</span></a></div></div></nav>
+<nav class="top"><div class="wrap"><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Mabuhay Hair Salon logo"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/><path id="lr-mabuhay-hair-salon" d="M50 50m-38.5 0a38.5 38.5 0 1 1 77 0a38.5 38.5 0 1 1-77 0" fill="none"/><text fill="currentColor" font-size="9.46" letter-spacing="2" style="font-family:var(--body);font-weight:700"><textPath href="#lr-mabuhay-hair-salon">MABUHAY HAIR SALON • LAUREL •</textPath></text><g transform="translate(35 35) scale(1.25)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></g></svg><span class="name">Mabuhay Hair Salon</span></a>
+  <div class="links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+17808079802">Call<span class="num"> (780) 807-9802</span></a></div></div></nav>
 <main>
 <header class="h-sun"><div class="wrap">
   <div><div class="sunball" aria-hidden="true"></div><h1>Mabuhay!<span>Welcome in.</span></h1><p>Hair colouring, styling and trims at 1241 16a St NW. A perfect 5.0 from 55 Google reviews.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
   <div class="btns"><a class="btn btn-acc" href="tel:+17808079802">Call<span class="num"> (780) 807-9802</span></a><a class="btn btn-line" href="#services">See prices</a></div></div>
   <figure><img src="img/colour-foils.jpg" alt="Colour and foils"><figcaption>Colour and foils</figcaption></figure></div></header>
+<div class="ribbon" aria-hidden="true"><div class="track"><div class="half"><span>Hair styling</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Hair coloring</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Trimming</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>hair stylist</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>affordable</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div><div class="half"><span>Hair styling</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Hair coloring</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Trimming</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>hair stylist</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>affordable</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div></div></div>
 <section class="s-board" id="services"><div class="wrap"><div class="board">
-  <h2>Services</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Hair styling<small>12 Google reviews mention it</small></span><b>from $40</b></li><li><span>Hair coloring<small>7 Google reviews mention it</small></span><b>from $80</b></li><li><span>Trimming<small>2 Google reviews mention it</small></span><b>from $20</b></li></ul><div class="btns"><a class="btn btn-acc" href="tel:+17808079802">Book:<span class="num"> (780) 807-9802</span></a></div></div></div></section><section class="p-arches" id="photos"><div class="wrap"><div class="sec-head"><h2>Colour and cuts</h2></div><div class="row"><figure><img src="img/trim.jpg" alt="A trim in progress" loading="lazy"><figcaption>A trim in progress</figcaption></figure><figure><img src="img/photo-4.jpg" alt="Rollers and clips" loading="lazy"><figcaption>Rollers and clips</figcaption></figure><figure><img src="img/photo-scissors.jpg" alt="Salon scissors" loading="lazy"><figcaption>Salon scissors</figcaption></figure></div></div></section><section class="r-words"><div class="wrap"><h2>5.0 stars from 55 Google reviews</h2>
-  <div class="lines"><div class="line"><b>14</b><span>&ldquo;hair stylist&rdquo;<small>reviewers used these words</small></span></div><div class="line"><b>7</b><span>&ldquo;hair coloring&rdquo;<small>reviewers used these words</small></span></div><div class="line"><b>6</b><span>&ldquo;affordable&rdquo;<small>reviewers used these words</small></span></div></div><a class="btn btn-line" href="https://www.google.com/maps/place/Mabuhay+Hair+Salon/data=!4m7!3m6!1s0x53a019da7e4c1add:0x2e4226d4ba473c76!8m2!3d53.4485534!4d-113.367539!16s%2Fg%2F11v19g7dzj!19sChIJ3RpMftoZoFMRdjxHutQmQi4" target="_blank" rel="noopener">Read them on Google</a></div></section><section class="o-today" id="hours"><div class="wrap"><div class="card">
+  <h2>Services</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Hair styling<small>Blow-outs and styling for every day or an event.</small></span><b>from $40</b></li><li><span>Hair coloring<small>Colour, roots and toning.</small></span><b>from $80</b></li><li><span>Trimming<small>A tidy trim to keep your shape.</small></span><b>from $20</b></li></ul><div class="btns"><a class="btn btn-acc" href="tel:+17808079802">Book:<span class="num"> (780) 807-9802</span></a></div></div></div></section><section class="p-arches" id="photos"><div class="wrap"><div class="sec-head"><h2>Colour and cuts</h2></div><div class="row"><figure><img src="img/trim.jpg" alt="A trim in progress" loading="lazy"><figcaption>A trim in progress</figcaption></figure><figure><img src="img/photo-4.jpg" alt="Rollers and clips" loading="lazy"><figcaption>Rollers and clips</figcaption></figure><figure><img src="img/photo-scissors.jpg" alt="Salon scissors" loading="lazy"><figcaption>Salon scissors</figcaption></figure></div></div></section><section class="story" id="reviews"><div class="wrap"><div class="grid">
+  <figure class="media"><img src="img/trim.jpg" alt="A trim in progress" loading="lazy" class=on><img src="img/photo-4.jpg" alt="Rollers and clips" loading="lazy"><img src="img/photo-scissors.jpg" alt="Salon scissors" loading="lazy"><figcaption>A trim in progress</figcaption></figure>
+  <div class="steps"><div class="sec-head"><span class="label">What reviewers say</span>
+    <h2><span data-count="5.0" data-dec="1">5.0</span> stars from 55 Google reviews</h2></div>
+    <article class="step" data-step="0"><img class="m" src="img/trim.jpg" alt="A trim in progress" loading="lazy"><b class="num" data-count="14">14</b><h3>Hair stylist</h3><p>14 of 55 Google reviews bring it up.</p></article><article class="step" data-step="1"><img class="m" src="img/photo-4.jpg" alt="Rollers and clips" loading="lazy"><b class="num" data-count="7">7</b><h3>Hair coloring</h3><p>7 of 55 Google reviews bring it up.</p></article><article class="step" data-step="2"><img class="m" src="img/photo-scissors.jpg" alt="Salon scissors" loading="lazy"><b class="num" data-count="6">6</b><h3>Affordable</h3><p>6 of 55 Google reviews bring it up.</p></article><a class="btn btn-line" href="https://www.google.com/maps/place/Mabuhay+Hair+Salon/data=!4m7!3m6!1s0x53a019da7e4c1add:0x2e4226d4ba473c76!8m2!3d53.4485534!4d-113.367539!16s%2Fg%2F11v19g7dzj!19sChIJ3RpMftoZoFMRdjxHutQmQi4" target="_blank" rel="noopener">Read them on Google</a></div>
+  </div></div></section><section class="o-today" id="hours"><div class="wrap"><div class="card">
   <div><span class="label">Today</span><div class="now" data-today>See the week</div><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
   <details open><summary>The whole week</summary><ul><li data-day="0"><span>Monday</span><b>Closed</b></li><li data-day="1"><span>Tuesday</span><b>Closed</b></li><li data-day="2"><span>Wednesday</span><b>Closed</b></li><li data-day="3"><span>Thursday</span><b>11 a.m. to 4 p.m.</b></li><li data-day="4"><span>Friday</span><b>11 a.m. to 4 p.m.</b></li><li data-day="5"><span>Saturday</span><b>11 a.m. to 4 p.m.</b></li><li data-day="6"><span>Sunday</span><b>11 a.m. to 4 p.m.</b></li></ul></details></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
-  <div><h2>Come see us</h2><p class="addr">1241 16a St NW, Edmonton, AB T6T 2S4</p><p class="note"><b>Hair salon in Laurel.</b> Call (780) 807-9802 before you come.</p>
+  <div><span class="label">Visit</span><h2>Come see us</h2>
+  <ul class="facts">
+    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>1241 16a St NW, Edmonton, AB T6T 2S4</b><small>Hair salon in Laurel.</small></div></li>
+    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-today>See the week above</b><small><span data-state></span> <span data-sub></span></small></div></li>
+    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><div><b><a href="tel:+17808079802">(780) 807-9802</a></b><small>Call before you come.</small></div></li>
+  </ul>
   <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Mabuhay+Hair+Salon%2C+1241+16a+St+NW%2C+Edmonton%2C+AB+T6T+2S4" target="_blank" rel="noopener">Get directions</a><a class="btn btn-line" href="tel:+17808079802">Call<span class="num"> (780) 807-9802</span></a></div></div>
   <div class="map"><span>Map: 1241 16a St NW, Edmonton, AB T6T 2S4</span><iframe title="Map to Mabuhay Hair Salon" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Mabuhay+Hair+Salon%2C+1241+16a+St+NW%2C+Edmonton%2C+AB+T6T+2S4&amp;output=embed"></iframe></div>
   </div></div></section>
 </main>
-<footer class="site"><div class="wrap"><b>Mabuhay Hair Salon</b><span>1241 16a St NW, Edmonton, AB T6T 2S4. (780) 807-9802</span>
+<footer class="site"><div class="wrap"><div class="fgrid">
+  <div class="fb"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Mabuhay Hair Salon logo"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/><path id="lr-mabuhay-hair-salon" d="M50 50m-38.5 0a38.5 38.5 0 1 1 77 0a38.5 38.5 0 1 1-77 0" fill="none"/><text fill="currentColor" font-size="9.46" letter-spacing="2" style="font-family:var(--body);font-weight:700"><textPath href="#lr-mabuhay-hair-salon">MABUHAY HAIR SALON • LAUREL •</textPath></text><g transform="translate(35 35) scale(1.25)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></g></svg><b>Mabuhay Hair Salon</b><span>Hair salon in Laurel</span></div>
+  <div><span class="label">Visit</span><p>1241 16a St NW, Edmonton, AB T6T 2S4</p></div>
+  <div><span class="label">Call</span><p><a href="tel:+17808079802">(780) 807-9802</a></p></div></div>
   <span class="credits">Sample website by Southsites. Photos are samples until Mabuhay Hair Salon sends their own: <a href="https://commons.wikimedia.org/wiki/File:Hair_coloring_at_hair_salon_(51213255633).jpg" target="_blank" rel="noopener">Hair Spies from US</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Faces_of_Kadena-_The_people_behind_the_mission_(9520611).jpg" target="_blank" rel="noopener">U.S. Air Force photo by Senior Airman Ja</a> (Public domain); <a href="https://commons.wikimedia.org/wiki/File:Lockenwickler.jpg" target="_blank" rel="noopener">Slick</a> (CC0); <a href="https://www.flickr.com/photos/13316988@N00/16851413642" target="_blank" rel="noopener">Yandle</a> (CC BY-SA 2.0).</span></div></footer>
 <div class="k-callbar"><a href="tel:+17808079802">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Mabuhay+Hair+Salon%2C+1241+16a+St+NW%2C+Edmonton%2C+AB+T6T+2S4" target="_blank" rel="noopener">Directions</a></div>
 <script type="application/json" id="biz">{"hours": {"Monday": "Closed", "Tuesday": "Closed", "Wednesday": "Closed", "Thursday": "11 a.m. to 4 p.m.", "Friday": "11 a.m. to 4 p.m.", "Saturday": "11 a.m. to 4 p.m.", "Sunday": "11 a.m. to 4 p.m."}}</script>
@@ -244,6 +317,45 @@ footer.site .credits a { color: inherit; }
     for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : 'closed';
     for (const el of document.querySelectorAll('[data-today]')) el.textContent = biz.hours[DAYS[today]] || 'Closed today';
     for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
+  })();
+</script>
+<script>
+  // reveal on scroll, count-up numbers, the review story's photo, and a slow parallax on the hero photo
+  (() => {
+    const root = document.documentElement, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.classList.add('js');
+    const sel = '.sec-head, .card, .tag, .sw, .board, .s-elegant li, .s-tape .chart, main section figure, .sign, .days li, .o-ledger table, .o-today .card, .visit .facts li, .visit .map, .story .step, footer .fgrid > *';
+    const els = [...document.querySelectorAll(sel)].filter((el) => !el.closest('main > header, .story .media'));
+    els.forEach((el) => { el.style.setProperty('--d', `${Math.min([...el.parentElement.children].indexOf(el), 5) * 90}ms`); el.classList.add('rv'); });
+    if (still || !('IntersectionObserver' in window)) els.forEach((el) => el.classList.add('in'));
+    else {
+      const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => io.observe(el));
+      const cio = new IntersectionObserver((es) => es.forEach((en) => {
+        if (!en.isIntersecting) return;
+        cio.unobserve(en.target);
+        const el = en.target, to = +el.dataset.count, dec = +(el.dataset.dec || 0), t0 = performance.now();
+        if (!to) return;
+        const tick = (t) => { const k = Math.min(1, (t - t0) / 1500); el.textContent = (to * (1 - Math.pow(1 - k, 3))).toFixed(dec); if (k < 1) requestAnimationFrame(tick); };
+        requestAnimationFrame(tick);
+      }), { threshold: 0.6 });
+      document.querySelectorAll('[data-count]').forEach((el) => cio.observe(el));
+    }
+    const pics = document.querySelectorAll('.story .media img'), cap = document.querySelector('.story .media figcaption');
+    if ('IntersectionObserver' in window) {
+      const sio = new IntersectionObserver((es) => es.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const i = +en.target.dataset.step;
+        pics.forEach((m, k) => m.classList.toggle('on', k === i));
+        if (cap && pics[i]) cap.textContent = pics[i].alt;
+      }), { rootMargin: '-45% 0px -45% 0px' });
+      document.querySelectorAll('.story .step').forEach((st) => sio.observe(st));
+    }
+    const par = document.querySelector('.h-overlay > img, .h-banner figure img');
+    if (par && !still) {
+      let q = false;
+      addEventListener('scroll', () => { if (q) return; q = true; requestAnimationFrame(() => { q = false; par.style.translate = `0 ${Math.min(scrollY, innerHeight) * 0.2}px`; }); }, { passive: true });
+    }
   })();
 </script>
 </div>

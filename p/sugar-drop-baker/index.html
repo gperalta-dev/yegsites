@@ -6,8 +6,9 @@
 <meta name="description" content="Birthday cakes, custom cakes and butterscotch cake at 3007 24 Ave NW. Order ahead by phone.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%20role%3D%22img%22%20aria-label%3D%22Sugar%20Drop%20Baker%20logo%22%3E%3Cpath%20d%3D%22M50%204s36%2040%2036%2060a36%2036%200%200%201-72%200C14%2044%2050%204%2050%204Z%22%20fill%3D%22none%22%20stroke%3D%22%23e0457b%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2264%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20fill%3D%22%23e0457b%22%20font-size%3D%2238%22%20style%3D%22font-family%3A%27Fraunces%27%2C%20serif%3Bfont-weight%3A600%22%3ESD%3C/text%3E%3C/svg%3E">
 <style>
-:root { --bg: #fff5f0; --ink: #3a1d14; --muted: #7a5a4f; --surface: #ffffff; --line: #f1d6cf; --accent: #b0175a; --accent-ink: #ffffff; --dark: #3a1d14; --on-dark: #fff5f0; --accent2: #f7c1d5; --display: "Fraunces", Georgia, serif; --body: "Nunito", system-ui, sans-serif;  --r: 18px; --rb: 999px; }
+:root { --bg: #1d0f0b; --ink: #f6e9e1; --muted: #c9ab9d; --surface: #29150f; --line: #432820; --accent: #e0457b; --accent-ink: #ffffff; --dark: #120806; --on-dark: #f6e9e1; --accent2: #f7c1d5; --display: "Fraunces", Georgia, serif; --body: "Nunito", system-ui, sans-serif;  --r: 18px; --rb: 999px; }
 
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -82,14 +83,23 @@ footer.site .credits a { color: inherit; }
 .h-round p { max-width: 560px; color: var(--muted); font-size: 18px; }
 .h-round .btns { justify-content: center; }
 
-.r-words { background: var(--accent); color: var(--accent-ink); }
-.r-words h2 { color: inherit; }
-.r-words .lines { display: grid; gap: 18px; margin: 28px 0; }
-.r-words .line { display: grid; grid-template-columns: minmax(64px, auto) 1fr; gap: 18px; align-items: baseline; }
-.r-words .line b { font: 700 clamp(44px, 7vw, 72px)/1 var(--display); }
-.r-words .line span { font: 600 clamp(22px, 3.4vw, 34px)/1.15 var(--display); }
-.r-words .line small { display: block; font: 500 14px/1.3 var(--body); opacity: .8; margin-top: 4px; }
-.r-words .btn-line { color: inherit; }
+.story .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.story .media { position: sticky; top: 96px; margin: 0; height: min(78vh, 700px); border-radius: min(var(--r), 22px); overflow: hidden; background: var(--surface); }
+.story .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; scale: 1.08; transition: opacity 1s ease, scale 1.8s cubic-bezier(.2,.7,.2,1); }
+.story .media img.on { opacity: 1; scale: 1; }
+.story .media figcaption { position: absolute; left: 16px; bottom: 16px; background: var(--bg); color: var(--ink); padding: 7px 12px; font-size: 13px; font-weight: 600; border-radius: 4px; }
+.story .step { min-height: 58vh; display: grid; align-content: center; gap: 8px; border-top: 1px solid var(--line); padding: 32px 0; }
+.story .step .num { font: var(--hw, 700) clamp(76px, 11vw, 136px)/.9 var(--display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.story .step .glyph { color: var(--accent); }
+.story .step h3 { font-size: clamp(28px, 3.6vw, 42px); }
+.story .step p { color: var(--muted); }
+.story .step img.m { display: none; }
+.story .btn { margin-top: 18px; }
+@media (max-width: 760px) {
+  .story .grid { grid-template-columns: 1fr; } .story .media { display: none; }
+  .story .step { min-height: 0; padding: 26px 0; }
+  .story .step img.m { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: min(var(--r), 16px); margin-bottom: 12px; }
+}
 
 .s-menu .card { position: relative; max-width: 720px; margin: 0 auto; background: var(--surface); padding: clamp(36px, 6vw, 64px) clamp(22px, 5vw, 60px) clamp(30px, 5vw, 52px); text-align: center;
   border-radius: 6px; box-shadow: 0 20px 50px -30px rgba(0,0,0,.35); }
@@ -120,6 +130,56 @@ footer.site .credits a { color: inherit; }
 .o-today li { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
 .o-today li.today { font-weight: 800; color: var(--accent); }
 @media (max-width: 760px) { .o-today .card { grid-template-columns: 1fr; } }
+
+
+.ribbon { overflow: hidden; background: var(--accent); color: var(--accent-ink); }
+.ribbon .track { display: flex; width: max-content; animation: ribbon 42s linear infinite; }
+.ribbon .half { display: flex; align-items: center; gap: 30px; padding: 18px 30px 18px 0; font: var(--hw, 700) clamp(18px, 2.2vw, 24px)/1 var(--display);
+  text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+.ribbon .ic { opacity: .75; }
+@keyframes ribbon { to { transform: translateX(-50%); } }
+
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.label { display: inline-flex; align-items: center; gap: 12px; font: 700 12px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.label::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.ic { flex: none; }
+nav.top { background: color-mix(in srgb, var(--bg) 80%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
+nav.top .brand { display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; }
+nav.top .brand .mark { width: 42px; height: 42px; flex: none; color: var(--accent); }
+nav.top .links a:not(.btn) { position: relative; }
+nav.top .links a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s ease; }
+nav.top .links a:not(.btn):hover::after { transform: scaleX(1); transform-origin: left; }
+.btn { transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, color .25s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -14px color-mix(in srgb, var(--accent) 80%, transparent); }
+.btn-line:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+main figure { overflow: hidden; }
+main figure img { transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
+main figure:hover img { transform: scale(1.05); }
+@keyframes up { from { opacity: 0; transform: translateY(24px); } }
+@keyframes kb { from { scale: 1.16; } to { scale: 1; } }
+@keyframes rise { from { opacity: 0; scale: .93; } }
+main > header :is(.eyebrow, h1, p, .status, .btns) { animation: up 1.1s cubic-bezier(.2,.7,.2,1) both; }
+main > header h1 { animation-delay: .12s; } main > header p { animation-delay: .28s; }
+main > header .status { animation-delay: .38s; } main > header .btns { animation-delay: .5s; }
+.h-overlay > img, .h-banner figure img { animation: kb 20s cubic-bezier(.2,.6,.2,1) both; }
+:is(.h-round .plate, .h-arch .arch, .h-blobs .pill, .h-frame figure, .h-door .scene, .h-sun figure) { animation: rise 1.3s cubic-bezier(.2,.7,.2,1) .25s both; }
+html.js .rv { opacity: 0; translate: 0 28px; transition: opacity 1s cubic-bezier(.2,.7,.2,1), translate 1s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+html.js .rv.in { opacity: 1; translate: 0 0; }
+.visit .facts { list-style: none; margin: 22px 0 26px; padding: 0; display: grid; gap: 4px; }
+.visit .facts li { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.visit .facts .ic { color: var(--accent); margin-top: 2px; }
+.visit .facts b { display: block; font-size: 18px; }
+.visit .facts b a { text-decoration: none; }
+.visit .facts small { color: var(--muted); font-size: 14.5px; }
+footer.site .fgrid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; padding-bottom: 26px; border-bottom: 1px solid color-mix(in srgb, var(--on-dark) 18%, transparent); margin-bottom: 18px; }
+footer.site .fb { display: grid; gap: 8px; justify-items: start; }
+footer.site .fb .mark { width: 64px; height: 64px; color: var(--accent); }
+footer.site .label { color: var(--accent); margin-bottom: 10px; }
+footer.site p a { color: inherit; text-decoration: none; }
+@media (max-width: 760px) { footer.site .fgrid { grid-template-columns: 1fr; } }
 
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -199,26 +259,39 @@ footer.site .credits a { color: inherit; }
 </template></ss-intro>
 <div id="ss-stage">
 
-<nav class="top"><div class="wrap"><a class="name" href="#">Sugar Drop Baker</a>
-  <div class="links"><a href="#services">Services</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+18253330209">Call<span class="num"> (825) 333-0209</span></a></div></div></nav>
+<nav class="top"><div class="wrap"><a class="brand" href="#"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Sugar Drop Baker logo"><path d="M50 4s36 40 36 60a36 36 0 0 1-72 0C14 44 50 4 50 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><text x="50" y="64" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="38" style="font-family:var(--display);font-weight:600">SD</text></svg><span class="name">Sugar Drop Baker</span></a>
+  <div class="links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+18253330209">Call<span class="num"> (825) 333-0209</span></a></div></div></nav>
 <main>
 <header class="h-round sprinkles"><div class="wrap">
   <div class="plate"><img src="img/photo-1.jpg" alt="A decorated birthday cake"><span class="badge"><span><b>4.6</b>299 reviews</span></span></div>
   <span class="eyebrow">Cake shop in Mill Woods</span><h1>Cakes people call delicious.</h1><p>Birthday cakes, custom cakes and butterscotch cake at 3007 24 Ave NW. Order ahead by phone.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
   <div class="btns"><a class="btn btn-acc" href="tel:+18253330209">Call to order<span class="num"> (825) 333-0209</span></a><a class="btn btn-line" href="#services">See the menu</a></div></div></header>
-<section class="r-words"><div class="wrap"><h2>4.6 stars from 299 Google reviews</h2>
-  <div class="lines"><div class="line"><b>49</b><span>&ldquo;delicious cake&rdquo;<small>reviewers used these words</small></span></div><div class="line"><b>19</b><span>&ldquo;birthday cake&rdquo;<small>reviewers used these words</small></span></div><div class="line"><b>17</b><span>&ldquo;custom cake&rdquo;<small>reviewers used these words</small></span></div></div><a class="btn btn-line" href="https://www.google.com/maps/place/Sugar+drop+baker/data=!4m7!3m6!1s0x53a01968f14c2fcf:0x5d2aae18711750c7!8m2!3d53.4543621!4d-113.3839689!16s%2Fg%2F11l2ycqrr_!19sChIJzy9M8WgZoFMRx1AXcRiuKl0" target="_blank" rel="noopener">Read them on Google</a></div></section><section class="s-menu" id="services"><div class="wrap"><div class="card">
-  <span class="hand">Order ahead</span><h2>The cake menu</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Birthday cake<small>19 reviewers mention it</small></span><b>from $55</b></li><li><span>Custom cake<small>17 reviewers mention it</small></span><b>from $75</b></li><li><span>Cake design<small>13 reviewers mention it</small></span><b>from $85</b></li></ul>
+<div class="ribbon" aria-hidden="true"><div class="track"><div class="half"><span>Birthday cake</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg><span>Custom cake</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg><span>Cake design</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg><span>delicious cake</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg></div><div class="half"><span>Birthday cake</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg><span>Custom cake</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg><span>Cake design</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg><span>delicious cake</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0"/><path d="M12 14V9M12 6.5a1.5 1.5 0 0 1-1.5-1.5c0-1 1.5-2.5 1.5-2.5s1.5 1.5 1.5 2.5A1.5 1.5 0 0 1 12 6.5z"/></svg></div></div></div>
+<section class="story" id="reviews"><div class="wrap"><div class="grid">
+  <figure class="media"><img src="img/photo-2.jpg" alt="Tiered cake with fresh flowers" loading="lazy" class=on><img src="img/photo-3.jpg" alt="Flower cupcakes" loading="lazy"><img src="img/photo-4.jpg" alt="Fondant cake with sugar flowers" loading="lazy"><figcaption>Tiered cake with fresh flowers</figcaption></figure>
+  <div class="steps"><div class="sec-head"><span class="label">What reviewers say</span>
+    <h2><span data-count="4.6" data-dec="1">4.6</span> stars from 299 Google reviews</h2></div>
+    <article class="step" data-step="0"><img class="m" src="img/photo-2.jpg" alt="Tiered cake with fresh flowers" loading="lazy"><b class="num" data-count="49">49</b><h3>Delicious cake</h3><p>49 of 299 Google reviews bring it up.</p></article><article class="step" data-step="1"><img class="m" src="img/photo-3.jpg" alt="Flower cupcakes" loading="lazy"><b class="num" data-count="19">19</b><h3>Birthday cake</h3><p>19 of 299 Google reviews bring it up.</p></article><article class="step" data-step="2"><img class="m" src="img/photo-4.jpg" alt="Fondant cake with sugar flowers" loading="lazy"><b class="num" data-count="17">17</b><h3>Custom cake</h3><p>17 of 299 Google reviews bring it up.</p></article><a class="btn btn-line" href="https://www.google.com/maps/place/Sugar+drop+baker/data=!4m7!3m6!1s0x53a01968f14c2fcf:0x5d2aae18711750c7!8m2!3d53.4543621!4d-113.3839689!16s%2Fg%2F11l2ycqrr_!19sChIJzy9M8WgZoFMRx1AXcRiuKl0" target="_blank" rel="noopener">Read them on Google</a></div>
+  </div></div></section><section class="s-menu" id="services"><div class="wrap"><div class="card">
+  <span class="hand">Order ahead</span><h2>The cake menu</h2><p class="sub">Starting prices. Call for a quote on yours.</p><ul><li><span>Birthday cake<small>Layered birthday cakes, decorated to the theme.</small></span><b>from $55</b></li><li><span>Custom cake<small>Designed with you, from flavour to finish.</small></span><b>from $75</b></li><li><span>Cake design<small>Your idea drawn up and built into a finished cake.</small></span><b>from $85</b></li></ul>
   <div class="btns"><a class="btn btn-acc" href="tel:+18253330209">Call to order<span class="num"> (825) 333-0209</span></a></div></div></div></section><section class="p-polaroid sprinkles" id="photos"><div class="wrap"><div class="sec-head" style="text-align:center;margin-inline:auto"><h2>Fresh from the oven</h2></div>
   <div class="row"><figure style="--tilt:-3deg"><img src="img/photo-2.jpg" alt="Tiered cake with fresh flowers" loading="lazy"><figcaption>Tiered cake with fresh flowers</figcaption></figure><figure style="--tilt:2deg"><img src="img/photo-3.jpg" alt="Flower cupcakes" loading="lazy"><figcaption>Flower cupcakes</figcaption></figure><figure style="--tilt:-1deg"><img src="img/photo-4.jpg" alt="Fondant cake with sugar flowers" loading="lazy"><figcaption>Fondant cake with sugar flowers</figcaption></figure></div></div></section><section class="o-today" id="hours"><div class="wrap"><div class="card">
   <div><span class="label">Today</span><div class="now" data-today>See the week</div><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
   <details open><summary>The whole week</summary><ul><li data-day="0"><span>Monday</span><b>9 a.m. to 11 p.m.</b></li><li data-day="1"><span>Tuesday</span><b>9 a.m. to 11 p.m.</b></li><li data-day="2"><span>Wednesday</span><b>9 a.m. to 11 p.m.</b></li><li data-day="3"><span>Thursday</span><b>9 a.m. to 11 p.m.</b></li><li data-day="4"><span>Friday</span><b>9 a.m. to 11 p.m.</b></li><li data-day="5"><span>Saturday</span><b>9 a.m. to 11 p.m.</b></li><li data-day="6"><span>Sunday</span><b>9 a.m. to 10 p.m.</b></li></ul></details></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
-  <div><h2>Come see us</h2><p class="addr">3007 24 Ave NW, Edmonton, AB T6T 0G7</p><p class="note"><b>Cake shop in Mill Woods.</b> Call (825) 333-0209 before you come.</p>
+  <div><span class="label">Visit</span><h2>Come see us</h2>
+  <ul class="facts">
+    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>3007 24 Ave NW, Edmonton, AB T6T 0G7</b><small>Cake shop in Mill Woods.</small></div></li>
+    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b data-today>See the week above</b><small><span data-state></span> <span data-sub></span></small></div></li>
+    <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><div><b><a href="tel:+18253330209">(825) 333-0209</a></b><small>Call before you come.</small></div></li>
+  </ul>
   <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sugar+Drop+Baker%2C+3007+24+Ave+NW%2C+Edmonton%2C+AB+T6T+0G7" target="_blank" rel="noopener">Get directions</a><a class="btn btn-line" href="tel:+18253330209">Call<span class="num"> (825) 333-0209</span></a></div></div>
   <div class="map"><span>Map: 3007 24 Ave NW, Edmonton, AB T6T 0G7</span><iframe title="Map to Sugar Drop Baker" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Sugar+Drop+Baker%2C+3007+24+Ave+NW%2C+Edmonton%2C+AB+T6T+0G7&amp;output=embed"></iframe></div>
   </div></div></section>
 </main>
-<footer class="site"><div class="wrap"><b>Sugar Drop Baker</b><span>3007 24 Ave NW, Edmonton, AB T6T 0G7. (825) 333-0209</span>
+<footer class="site"><div class="wrap"><div class="fgrid">
+  <div class="fb"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Sugar Drop Baker logo"><path d="M50 4s36 40 36 60a36 36 0 0 1-72 0C14 44 50 4 50 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><text x="50" y="64" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="38" style="font-family:var(--display);font-weight:600">SD</text></svg><b>Sugar Drop Baker</b><span>Cake shop in Mill Woods</span></div>
+  <div><span class="label">Visit</span><p>3007 24 Ave NW, Edmonton, AB T6T 0G7</p></div>
+  <div><span class="label">Call</span><p><a href="tel:+18253330209">(825) 333-0209</a></p></div></div>
   <span class="credits">Sample website by Southsites. Photos are samples until Sugar Drop Baker sends their own: <a href="https://commons.wikimedia.org/wiki/File:Birthday_Cake_(decorated).jpg" target="_blank" rel="noopener">Horacio Cambeiro</a> (CC BY 3.0); <a href="https://commons.wikimedia.org/wiki/File:Summer_wedding_cake_with_flower.jpg" target="_blank" rel="noopener">Kimberly Vardeman</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Cheshire_cupcakes.jpg" target="_blank" rel="noopener">Katjaskupcakes katja Seaton</a> (CC BY 3.0); <a href="https://commons.wikimedia.org/wiki/File:Fondant_Cake_decorated_with_flowers.jpg" target="_blank" rel="noopener">https://www.pexels.com/@aliciazinn</a> (CC0).</span></div></footer>
 <div class="k-callbar"><a href="tel:+18253330209">Call now</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Sugar+Drop+Baker%2C+3007+24+Ave+NW%2C+Edmonton%2C+AB+T6T+0G7" target="_blank" rel="noopener">Directions</a></div>
 <script type="application/json" id="biz">{"hours": {"Monday": "9 a.m. to 11 p.m.", "Tuesday": "9 a.m. to 11 p.m.", "Wednesday": "9 a.m. to 11 p.m.", "Thursday": "9 a.m. to 11 p.m.", "Friday": "9 a.m. to 11 p.m.", "Saturday": "9 a.m. to 11 p.m.", "Sunday": "9 a.m. to 10 p.m."}}</script>
@@ -249,6 +322,45 @@ footer.site .credits a { color: inherit; }
     for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : 'closed';
     for (const el of document.querySelectorAll('[data-today]')) el.textContent = biz.hours[DAYS[today]] || 'Closed today';
     for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
+  })();
+</script>
+<script>
+  // reveal on scroll, count-up numbers, the review story's photo, and a slow parallax on the hero photo
+  (() => {
+    const root = document.documentElement, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.classList.add('js');
+    const sel = '.sec-head, .card, .tag, .sw, .board, .s-elegant li, .s-tape .chart, main section figure, .sign, .days li, .o-ledger table, .o-today .card, .visit .facts li, .visit .map, .story .step, footer .fgrid > *';
+    const els = [...document.querySelectorAll(sel)].filter((el) => !el.closest('main > header, .story .media'));
+    els.forEach((el) => { el.style.setProperty('--d', `${Math.min([...el.parentElement.children].indexOf(el), 5) * 90}ms`); el.classList.add('rv'); });
+    if (still || !('IntersectionObserver' in window)) els.forEach((el) => el.classList.add('in'));
+    else {
+      const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => io.observe(el));
+      const cio = new IntersectionObserver((es) => es.forEach((en) => {
+        if (!en.isIntersecting) return;
+        cio.unobserve(en.target);
+        const el = en.target, to = +el.dataset.count, dec = +(el.dataset.dec || 0), t0 = performance.now();
+        if (!to) return;
+        const tick = (t) => { const k = Math.min(1, (t - t0) / 1500); el.textContent = (to * (1 - Math.pow(1 - k, 3))).toFixed(dec); if (k < 1) requestAnimationFrame(tick); };
+        requestAnimationFrame(tick);
+      }), { threshold: 0.6 });
+      document.querySelectorAll('[data-count]').forEach((el) => cio.observe(el));
+    }
+    const pics = document.querySelectorAll('.story .media img'), cap = document.querySelector('.story .media figcaption');
+    if ('IntersectionObserver' in window) {
+      const sio = new IntersectionObserver((es) => es.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const i = +en.target.dataset.step;
+        pics.forEach((m, k) => m.classList.toggle('on', k === i));
+        if (cap && pics[i]) cap.textContent = pics[i].alt;
+      }), { rootMargin: '-45% 0px -45% 0px' });
+      document.querySelectorAll('.story .step').forEach((st) => sio.observe(st));
+    }
+    const par = document.querySelector('.h-overlay > img, .h-banner figure img');
+    if (par && !still) {
+      let q = false;
+      addEventListener('scroll', () => { if (q) return; q = true; requestAnimationFrame(() => { q = false; par.style.translate = `0 ${Math.min(scrollY, innerHeight) * 0.2}px`; }); }, { passive: true });
+    }
   })();
 </script>
 </div>
