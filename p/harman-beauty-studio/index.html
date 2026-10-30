@@ -80,15 +80,31 @@ footer.site .credits a { color: inherit; }
 .h-arch .arch::before { content: ""; position: absolute; inset: -14px -14px 24px 24px; border: 1px solid var(--accent2); border-radius: 999px 999px 18px 18px; z-index: -1; }
 @media (max-width: 760px) { .h-arch .wrap { grid-template-columns: 1fr; } .h-arch .arch { order: -1; max-width: 360px; justify-self: center; width: 86%; } }
 
-.s-elegant .grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); }
-.s-elegant h2 { font-weight: 500; font-size: clamp(40px, 6vw, 64px); }
-.s-elegant .sec-head p { margin-top: 10px; }
-.s-elegant ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-.s-elegant li { display: grid; grid-template-columns: 1fr auto; gap: 6px 18px; padding: 24px 0; border-bottom: 1px solid var(--line); }
-.s-elegant li h3 { font-size: clamp(26px, 3.4vw, 34px); font-weight: 500; font-style: italic; }
-.s-elegant li b { font-family: var(--display); font-size: 22px; font-weight: 500; color: var(--accent); align-self: center; }
-.s-elegant li small { grid-column: 1 / -1; color: var(--muted); font-size: 14px; letter-spacing: .04em; }
-@media (max-width: 760px) { .s-elegant .grid { grid-template-columns: 1fr; } }
+.s-stack .cards { display: grid; gap: 22px; }
+.s-stack .sc { position: sticky; top: calc(92px + var(--i) * 20px); min-height: min(74vh, 620px); border-radius: 30px; padding: clamp(24px, 4vw, 48px);
+  color: var(--fgc); display: grid; grid-template-rows: auto 1fr auto; gap: 24px; overflow: hidden;
+  background: radial-gradient(130% 140% at 0% 0%, color-mix(in srgb, var(--bgc) 72%, #fff) 0%, var(--bgc) 46%, color-mix(in srgb, var(--bgc) 68%, #000) 100%);
+  box-shadow: 0 -24px 60px -34px rgba(0, 0, 0, .55); }
+.s-stack .sc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid color-mix(in srgb, currentColor 28%, transparent); }
+.s-stack .sc-top h3 { font-size: clamp(34px, 5.4vw, 68px); line-height: .98; color: inherit; }
+.s-stack .sc-n { font: var(--hw, 700) clamp(44px, 6.4vw, 88px)/1 var(--display); opacity: .92; }
+.s-stack .sc-mid { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
+.s-stack .sc-d { display: flex; gap: 12px; align-items: flex-start; font-size: clamp(17px, 1.6vw, 20px); max-width: 44ch; opacity: .92; }
+.s-stack .sc-p { text-align: right; }
+.s-stack .sc-p small { display: block; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; opacity: .75; }
+.s-stack .sc-p b { font: var(--hw, 700) clamp(40px, 6vw, 76px)/1 var(--display); white-space: nowrap; }
+.s-stack .sc-bot { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+.s-stack .pill { display: inline-flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 22px; border-radius: 999px; background: var(--fgc); color: var(--bgc);
+  font-weight: 700; text-decoration: none; transition: transform .25s ease; }
+.s-stack .pill:hover { transform: translateY(-2px); }
+.s-stack figure { margin: 0; width: min(340px, 44%); aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; position: relative; flex: none; }
+.s-stack figure img { width: 100%; height: 100%; object-fit: cover; }
+.s-stack figcaption { position: absolute; left: 10px; bottom: 10px; font-size: 12px; font-weight: 600; background: rgba(0, 0, 0, .55); color: #fff; padding: 5px 9px; border-radius: 8px; }
+@media (max-width: 760px) {
+  .s-stack .sc { min-height: 0; top: calc(78px + var(--i) * 12px); border-radius: 24px; }
+  .s-stack .sc-mid { grid-template-columns: 1fr; } .s-stack .sc-p { text-align: left; }
+  .s-stack .sc-bot { flex-direction: column-reverse; align-items: stretch; } .s-stack figure { width: 100%; }
+}
 
 .p-arches .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
 .p-arches figure { margin: 0; text-align: center; }
@@ -122,6 +138,18 @@ footer.site .credits a { color: inherit; }
 .o-ledger tr.today td { font-weight: 700; color: var(--dark); background: color-mix(in srgb, var(--accent) 14%, transparent); }
 .o-ledger .status { margin-top: 14px; }
 @media (max-width: 760px) { .o-ledger .grid { grid-template-columns: 1fr; } }
+
+.faq .grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq details:first-child { border-top: 1px solid var(--line); }
+.faq summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; cursor: pointer;
+  font: var(--hw, 600) clamp(19px, 2.2vw, 26px)/1.2 var(--display); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font: 400 30px/1 var(--body); color: var(--accent); transition: transform .3s ease; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq .a { margin: 0; padding: 0 0 22px; color: var(--muted); max-width: 62ch; }
+.faq .a a { color: var(--ink); font-weight: 700; }
+@media (max-width: 760px) { .faq .grid { grid-template-columns: 1fr; } }
 
 
 .ribbon { overflow: hidden; background: var(--accent); color: var(--accent-ink); }
@@ -172,6 +200,26 @@ footer.site .fb .mark { width: 64px; height: 64px; color: var(--accent); }
 footer.site .label { color: var(--accent); margin-bottom: 10px; }
 footer.site p a { color: inherit; text-decoration: none; }
 @media (max-width: 760px) { footer.site .fgrid { grid-template-columns: 1fr; } }
+
+
+h1 .tone, h2 .tone { display: block; color: color-mix(in srgb, currentColor 46%, transparent); }
+h2 .tone { font-size: .62em; line-height: 1.2; margin-top: 8px; }
+nav.top { top: 10px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; pointer-events: none; }
+nav.top .wrap { min-height: 60px; }
+nav.top .brand, nav.top .links { pointer-events: auto; background: color-mix(in srgb, var(--surface) 72%, transparent); -webkit-backdrop-filter: saturate(1.5) blur(16px);
+  backdrop-filter: saturate(1.5) blur(16px); border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); border-radius: 999px; box-shadow: 0 10px 30px -18px rgba(0,0,0,.35); }
+nav.top .brand { padding: 5px 16px 5px 5px; color: var(--ink); }
+nav.top .brand .mark { width: 38px; height: 38px; }
+nav.top .links { padding: 5px 5px 5px 20px; }
+nav.top .links .btn { border-radius: 999px; min-height: 40px; }
+.k-callbar { display: flex; position: fixed; left: 50%; right: auto; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40; gap: 4px;
+  padding: 5px; border-radius: 999px; background: color-mix(in srgb, var(--dark) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px -14px rgba(0,0,0,.55); }
+.k-callbar a { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 999px; font-weight: 700; text-decoration: none;
+  background: var(--accent); color: var(--accent-ink); box-shadow: none; flex: none; }
+.k-callbar a + a { background: transparent; color: var(--on-dark); padding: 0 18px; }
+body { padding-bottom: 92px; }
+@media (max-width: 760px) { .k-callbar { left: 12px; right: 12px; transform: none; } .k-callbar a { flex: 1; } .k-callbar a + a { flex: 0 0 auto; } }
 
 </style><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -255,19 +303,20 @@ footer.site p a { color: inherit; text-decoration: none; }
   <div class="links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#photos">Photos</a><a href="#hours">Hours</a><a class="btn btn-acc" href="tel:+16045006262">Call<span class="num"> (604) 500-6262</span></a></div></div></nav>
 <main>
 <header class="h-arch"><div class="wrap">
-  <div><span class="eyebrow">Beauty studio in Laurel</span><h1>Bridal makeup, hair and brows.</h1><p>Hairstyling, bridal makeup and eyebrow lamination at 1824 19 St NW, Laurel. 4.9 stars from 209 Google reviews.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
+  <div><span class="eyebrow">Beauty studio in Laurel</span><h1>Bridal makeup, hair and brows.<span class="tone"> Laurel.</span></h1><p>Hairstyling, bridal makeup and eyebrow lamination at 1824 19 St NW, Laurel. 4.9 stars from 209 Google reviews.</p><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span>
   <div class="btns"><a class="btn btn-acc" href="tel:+16045006262">Book a call<span class="num"> (604) 500-6262</span></a><a class="btn btn-line" href="#services">Services</a></div></div>
   <div class="arch"><img src="img/eye-makeup.jpg" alt="Bridal eye makeup"></div></div></header>
 <div class="ribbon" aria-hidden="true"><div class="track"><div class="half"><span>Hairstyle</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>Bridal makeup</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>Eyebrow lamination</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>makeup artist</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>flawless makeup</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg></div><div class="half"><span>Hairstyle</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>Bridal makeup</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>Eyebrow lamination</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>makeup artist</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>flawless makeup</span><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg></div></div></div>
-<section class="s-elegant" id="services"><div class="wrap"><div class="grid">
-  <div class="sec-head"><h2>Services</h2><p>Starting prices. Call for a quote on yours.</p><div class="btns" style="margin-top:14px"><a class="btn btn-acc" href="tel:+16045006262">Book a call<span class="num"> (604) 500-6262</span></a></div></div>
-  <ul><li><h3>Hairstyle</h3><b>from $50</b><small>Updos, curls and event styling.</small></li><li><h3>Bridal makeup</h3><b>from $250</b><small>Wedding-day makeup for the bride and her party.</small></li><li><h3>Eyebrow lamination</h3><b>from $65</b><small>Brows brushed up, set and shaped.</small></li></ul></div></div></section><section class="p-arches" id="photos"><div class="wrap"><div class="sec-head"><h2>The look</h2></div><div class="row"><figure><img src="img/makeup-chair.jpg" alt="Makeup in the chair" loading="lazy"><figcaption>Makeup in the chair</figcaption></figure><figure><img src="img/photo-1.jpg" alt="An eyeshadow palette" loading="lazy"><figcaption>An eyeshadow palette</figcaption></figure><figure><img src="img/photo-2.jpg" alt="Makeup brushes" loading="lazy"><figcaption>Makeup brushes</figcaption></figure><figure><img src="img/photo-4.jpg" alt="Lipsticks" loading="lazy"><figcaption>Lipsticks</figcaption></figure></div></div></section><section class="story" id="reviews"><div class="wrap"><div class="grid">
+<section class="s-stack" id="services"><div class="wrap"><div class="sec-head"><span class="label">Services</span>
+  <h2>What we do<span class="tone"> Starting prices. Call for a quote on yours.</span></h2></div>
+  <div class="cards"><article class="sc" style="--bgc:var(--accent);--fgc:var(--accent-ink);--i:0"><div class="sc-top"><h3>Hairstyle</h3><span class="sc-n">01</span></div><div class="sc-mid"><p class="sc-d"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>Updos, curls and event styling.</span></p><div class="sc-p"><small>from</small><b>$50</b></div></div><div class="sc-bot"><a class="pill" href="tel:+16045006262">Call to book<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><figure><img src="img/makeup-chair.jpg" alt="Makeup in the chair" loading="lazy"><figcaption>Makeup in the chair</figcaption></figure></div></article><article class="sc" style="--bgc:var(--dark);--fgc:var(--on-dark);--i:1"><div class="sc-top"><h3>Bridal makeup</h3><span class="sc-n">02</span></div><div class="sc-mid"><p class="sc-d"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>Wedding-day makeup for the bride and her party.</span></p><div class="sc-p"><small>from</small><b>$250</b></div></div><div class="sc-bot"><a class="pill" href="tel:+16045006262">Call to book<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><figure><img src="img/photo-1.jpg" alt="An eyeshadow palette" loading="lazy"><figcaption>An eyeshadow palette</figcaption></figure></div></article><article class="sc" style="--bgc:color-mix(in srgb, var(--accent) 55%, var(--dark));--fgc:var(--on-dark);--i:2"><div class="sc-top"><h3>Eyebrow lamination</h3><span class="sc-n">03</span></div><div class="sc-mid"><p class="sc-d"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M19 3v4M17 5h4"/></svg><span>Brows brushed up, set and shaped.</span></p><div class="sc-p"><small>from</small><b>$65</b></div></div><div class="sc-bot"><a class="pill" href="tel:+16045006262">Call to book<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><figure><img src="img/photo-2.jpg" alt="Makeup brushes" loading="lazy"><figcaption>Makeup brushes</figcaption></figure></div></article></div></div></section><section class="p-arches" id="photos"><div class="wrap"><div class="sec-head"><h2>The look</h2></div><div class="row"><figure><img src="img/makeup-chair.jpg" alt="Makeup in the chair" loading="lazy"><figcaption>Makeup in the chair</figcaption></figure><figure><img src="img/photo-1.jpg" alt="An eyeshadow palette" loading="lazy"><figcaption>An eyeshadow palette</figcaption></figure><figure><img src="img/photo-2.jpg" alt="Makeup brushes" loading="lazy"><figcaption>Makeup brushes</figcaption></figure><figure><img src="img/photo-4.jpg" alt="Lipsticks" loading="lazy"><figcaption>Lipsticks</figcaption></figure></div></div></section><section class="story" id="reviews"><div class="wrap"><div class="grid">
   <figure class="media"><img src="img/makeup-chair.jpg" alt="Makeup in the chair" loading="lazy" class=on><img src="img/photo-1.jpg" alt="An eyeshadow palette" loading="lazy"><img src="img/photo-2.jpg" alt="Makeup brushes" loading="lazy"><figcaption>Makeup in the chair</figcaption></figure>
   <div class="steps"><div class="sec-head"><span class="label">What reviewers say</span>
     <h2><span data-count="4.9" data-dec="1">4.9</span> stars from 209 Google reviews</h2></div>
     <article class="step" data-step="0"><img class="m" src="img/makeup-chair.jpg" alt="Makeup in the chair" loading="lazy"><b class="num" data-count="29">29</b><h3>Makeup artist</h3><p>29 of 209 Google reviews bring it up.</p></article><article class="step" data-step="1"><img class="m" src="img/photo-1.jpg" alt="An eyeshadow palette" loading="lazy"><b class="num" data-count="17">17</b><h3>Hairstyle</h3><p>17 of 209 Google reviews bring it up.</p></article><article class="step" data-step="2"><img class="m" src="img/photo-2.jpg" alt="Makeup brushes" loading="lazy"><b class="num" data-count="10">10</b><h3>Flawless makeup</h3><p>10 of 209 Google reviews bring it up.</p></article><a class="btn btn-line" href="https://www.google.com/maps/place/Harman+Beauty+Studio-+Permanent+Eyebrows+Lips+Eyelash+Makeup+Hair+Henna+Artist+-+Laser+Hair+Removal-+Skin+Treatments/data=!4m7!3m6!1s0x4d73c4e2ef35517b:0xdb7e216f510ef8a6!8m2!3d53.4492499!4d-113.3717903!16s%2Fg%2F11sprc86lv!19sChIJe1E17-LEc00RpvgOUW8hfts" target="_blank" rel="noopener">Read them on Google</a></div>
   </div></div></section><section class="o-ledger" id="hours"><div class="wrap"><div class="grid">
-  <div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div><table><tbody><tr data-day=""><td>Every day</td><td>By appointment. Call to book</td></tr></tbody></table></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
+  <div class="sec-head"><h2>Hours</h2><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div><table><tbody><tr data-day=""><td>Every day</td><td>By appointment. Call to book</td></tr></tbody></table></div></div></section><section class="faq" id="faq"><div class="wrap"><div class="grid"><div class="sec-head"><span class="label">Questions</span>
+  <h2>Quick answers.<span class="tone"> Straight from the shop's Google listing.</span></h2></div><div class="list"><details><summary>How do I book?</summary><p class="a">Call <a href="tel:+16045006262">(604) 500-6262</a>, or tap Call at the bottom of the screen.</p></details><details><summary>What does it cost?</summary><p class="a">Starting prices: hairstyle from $50; bridal makeup from $250; eyebrow lamination from $65. Call for a quote on yours.</p></details><details><summary>Where are you?</summary><p class="a">1824 19 St NW, Edmonton, AB T6T 2M9. </p></details><details><summary>When are you open?</summary><p class="a">Today: <b data-today>see the hours above</b>. The whole week is in the hours section.</p></details><details><summary>What do customers say?</summary><p class="a">4.9 stars from 209 Google reviews, mostly about makeup artist, hairstyle, flawless makeup.</p></details></div></div></div></section><section class="visit" id="visit"><div class="wrap"><div class="grid">
   <div><span class="label">Visit</span><h2>Come see us</h2>
   <ul class="facts">
     <li><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>1824 19 St NW, Edmonton, AB T6T 2M9</b><small>Beauty salon in Laurel.</small></div></li>
