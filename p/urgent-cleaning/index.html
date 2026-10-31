@@ -373,7 +373,9 @@ html:not(.js) [data-wipe]::after { display: none; } html:not(.js) [data-wipe] im
     const open = end !== null, unknown = !open && !(DAYS[today] in H);
     let sub = '';
     if (open) sub = end - minute >= 1440 || /24 hours/i.test(H[DAYS[today]] || '') ? 'Open 24 hours' : `Closes at ${nice(end)}`;
-    else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7; for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
+    else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7;
+      if (!(DAYS[dd] in H)) { sub = 'Call for hours'; break; }   // an unlisted day in between: never predict the next opening past it
+      for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
       sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(a)}`; break; } }
     for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call for hours' : 'Closed now';
     for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
