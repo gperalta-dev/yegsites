@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Your website preview, Lustry Nails &amp; Spa St.Albert | Southsites</title>
-<meta name="description" content="Find us at 700 St Albert Trl, St. Albert. Call to book.">
+<meta name="description" content="Call to book.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%20role%3D%22img%22%20aria-label%3D%22Lustry%20Nails%20%26amp%3B%20Spa%20St.Albert%20logo%22%3E%3Cpath%20d%3D%22M12%2097V46a38%2038%200%200%201%2076%200v51Z%22%20fill%3D%22none%22%20stroke%3D%22%23ff4f9a%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M19%2090V46a31%2031%200%200%201%2062%200v44Z%22%20fill%3D%22none%22%20stroke%3D%22%23ff4f9a%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20fill%3D%22%23ff4f9a%22%20font-size%3D%2238%22%20style%3D%22font-family%3A%27Oswald%27%2C%20serif%3Bfont-weight%3A600%22%3ELN%3C/text%3E%3C/svg%3E">
@@ -11,6 +11,8 @@
 :root { --accent3: #6e5cff; --bg: #111014; --ink: #f3eef2; --muted: #ab9fab; --surface: #1a181e; --line: #2d2a33; --accent: #ff4f9a; --accent-ink: #111014; --dark: #09080b; --on-dark: #f3eef2; --accent2: #ffb3d3; --display: "Oswald", Georgia, serif; --body: "Manrope", system-ui, sans-serif;  --r: 2px; --rb: 2px; }
 
 
+.pin-line { display: inline-flex; align-items: center; gap: .45em; text-transform: none; letter-spacing: .01em; }
+.pin-line .ic { flex: none; }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
@@ -236,7 +238,7 @@ body.dir-noir { background: var(--bg) radial-gradient(90% 60% at 70% 0%, color-m
 .dn-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; grid-template-areas: "copy shot" "copy prices"; gap: 26px clamp(28px, 5vw, 72px); align-items: end; }
 .dn-copy { grid-area: copy; display: grid; gap: 20px; align-content: end; }
 .dn-grid > * { min-width: 0; }
-.dn-copy h1 { font-size: clamp(38px, 9.6vw, 148px); line-height: .88; text-transform: uppercase; letter-spacing: -.01em; overflow-wrap: break-word; }
+.dn-copy h1 { font-size: clamp(38px, 6.4vw, 88px); line-height: .88; text-transform: uppercase; letter-spacing: -.01em; overflow-wrap: break-word; }
 .dn-copy h1 .tone { display: block; color: var(--accent); }
 .dn-copy p { color: var(--muted); max-width: 44ch; font-size: 18px; }
 .dn-shot { grid-area: shot; margin: 0; position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
@@ -333,8 +335,8 @@ body.dir-noir { background: var(--bg) radial-gradient(90% 60% at 70% 0%, color-m
 <header class="dx-hero dn-hero">
   <div class="dn-word" aria-hidden="true"><span>LUSTRY</span></div>
   <div class="wrap dn-grid">
-    <div class="dn-copy"><span class="dx-kicker rise">Beauty salon in St. Albert</span><h1 class="split">Nails<span class="tone"> in St. Albert.</span></h1>
-      <p class="rise" style="--i:3">Find us at 700 St Albert Trl, St. Albert. Call to book.</p><div class="rise" style="--i:4"><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
+    <div class="dn-copy"><span class="dx-kicker rise"><span class="pin-line"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>700 St Albert Trl, St. Albert</span></span><h1 class="split">Nails<span class="tone"> in St. Albert.</span></h1>
+      <p class="rise" style="--i:3">Call to book.</p><div class="rise" style="--i:4"><span class="status"><i data-dot></i><b data-state>Hours below</b><small data-sub></small></span></div>
       <div class="btns rise" style="--i:5"><a class="btn btn-acc" href="tel:+17803478143">Book now<span class="num"> (780) 347-8143</span></a><a class="btn btn-line" href="#services">Prices</a></div></div>
     <figure class="dn-shot" data-wipe><img src="img/0-nails-c8.jpg" alt="White nails with black dots"><figcaption>White nails with black dots</figcaption></figure>
     <aside class="dn-prices rise" style="--i:6"><span class="dx-kicker">Starting prices</span><ul><li><span>Gel manicure</span><i></i><b>$40</b></li><li><span>Full set</span><i></i><b>$55</b></li><li><span>Pedicure</span><i></i><b>$45</b></li></ul></aside>
@@ -352,7 +354,7 @@ body.dir-noir { background: var(--bg) radial-gradient(90% 60% at 70% 0%, color-m
   <div class="btns"><a class="btn btn-acc" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lustry+Nails+%26+Spa+St.Albert%2C+700+St+Albert+Trl%2C+St.+Albert%2C+AB+T8N+7A5" target="_blank" rel="noopener">Directions<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-line" href="tel:+17803478143">Call<span class="num"> (780) 347-8143</span></a></div></div></section>
 </main>
 <footer class="site f-giant"><div class="wrap"><div class="big" style="--fs: clamp(40px, 4.57vw, 180px)">Lustry Nails &amp; Spa St.Albert</div>
-  <div class="row"><span>Beauty salon in St. Albert</span><span>700 St Albert Trl, St. Albert, AB T8N 7A5</span><a href="tel:+17803478143">(780) 347-8143</a></div><span class="credits">Sample website by Southsites. Photos are samples until Lustry Nails &amp; Spa St.Albert sends their own: <a href="https://commons.wikimedia.org/wiki/File:Queer_manicure_example.jpg" target="_blank" rel="noopener">Tails Wx</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:French_Manicure_with_Glitter_nail_art_on_ring_finger.jpg" target="_blank" rel="noopener">Theknowhau</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Dark_violete_nail_polish_and_shimmer.jpg" target="_blank" rel="noopener">Lelê Breveglieri</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Pink_nail_polish_(2).jpg" target="_blank" rel="noopener">evhoffman</a> (CC BY-SA 2.0); <a href="https://commons.wikimedia.org/wiki/File:Nail_art_with_stripes.jpg" target="_blank" rel="noopener">Lelê Breveglieri</a> (CC BY 2.0).</span></div></footer>
+  <div class="row"><span>700 St Albert Trl, St. Albert, AB T8N 7A5</span><a href="tel:+17803478143">(780) 347-8143</a></div><span class="credits">Sample website by Southsites. Photos are samples until Lustry Nails &amp; Spa St.Albert sends their own: <a href="https://commons.wikimedia.org/wiki/File:Queer_manicure_example.jpg" target="_blank" rel="noopener">Tails Wx</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:French_Manicure_with_Glitter_nail_art_on_ring_finger.jpg" target="_blank" rel="noopener">Theknowhau</a> (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Dark_violete_nail_polish_and_shimmer.jpg" target="_blank" rel="noopener">Lelê Breveglieri</a> (CC BY 2.0); <a href="https://commons.wikimedia.org/wiki/File:Pink_nail_polish_(2).jpg" target="_blank" rel="noopener">evhoffman</a> (CC BY-SA 2.0); <a href="https://commons.wikimedia.org/wiki/File:Nail_art_with_stripes.jpg" target="_blank" rel="noopener">Lelê Breveglieri</a> (CC BY 2.0).</span></div></footer>
 <div class="k-callbar cb-dock"><a href="tel:+17803478143"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>Call (780) 347-8143</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Lustry+Nails+%26+Spa+St.Albert%2C+700+St+Albert+Trl%2C+St.+Albert%2C+AB+T8N+7A5" target="_blank" rel="noopener"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Directions</a></div>
 <script type="application/json" id="biz">{"hours": {"Monday": "9 a.m. to 9 p.m.", "Tuesday": "9 a.m. to 9 p.m.", "Wednesday": "9 a.m. to 9 p.m.", "Thursday": "9 a.m. to 9 p.m.", "Friday": "9 a.m. to 9 p.m.", "Saturday": "9 a.m. to 9 p.m.", "Sunday": "9 a.m. to 7 p.m."}}</script>
 <script>
@@ -383,13 +385,15 @@ body.dir-noir { background: var(--bg) radial-gradient(90% 60% at 70% 0%, color-m
     const open = end !== null, unknown = !open && !(DAYS[today] in H);
     let sub = '';
     if (open) sub = end - minute >= 1440 || /24 hours/i.test(H[DAYS[today]] || '') ? 'Open 24 hours' : `Closes at ${nice(end)}`;
-    else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7; for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
+    else for (let k = 0; k < 8 && !sub; k++) { const dd = (today + k) % 7;
+      if (!(DAYS[dd] in H)) { sub = 'Call for hours'; break; }   // an unlisted day in between: never predict the next opening past it
+      for (const [a] of ranges(H[DAYS[dd]]).sort((x, y) => x[0] - y[0])) if (k > 0 || a > minute) {
       sub = `Opens ${k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]} at ${nice(a)}`; break; } }
-    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call to check' : 'Closed now';
+    for (const el of document.querySelectorAll('[data-state]')) el.textContent = open ? 'Open now' : unknown ? 'Call for hours' : 'Closed now';
     for (const el of document.querySelectorAll('[data-sign]')) el.textContent = open ? 'Open' : 'Closed';
     for (const el of document.querySelectorAll('[data-sub]')) el.textContent = sub;
     for (const el of document.querySelectorAll('[data-dot]')) el.className = open ? 'open' : unknown ? '' : 'closed';
-    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call to check');
+    for (const el of document.querySelectorAll('[data-today]')) el.textContent = H[DAYS[today]] || (known === 7 ? 'Closed today' : 'Call for hours');
     for (const el of document.querySelectorAll(`[data-day="${today}"]`)) { el.classList.add('today'); const n = el.firstElementChild; if (n) n.textContent += ' (today)'; }
   })();
 </script>
@@ -643,7 +647,7 @@ body.dir-noir { background: var(--bg) radial-gradient(90% 60% at 70% 0%, color-m
       <ul><li><span>Website</span><b class="bad">No website on your listing</b></li></ul>
     </div>
     <div class="box"><small>Your new site</small>
-      <ul class="checks"><li>Your hours and open now</li><li>One-tap call and directions</li><li>Your reviews up front</li><li>Your prices and photos</li><li>Made for phones</li></ul>
+      <ul class="checks"><li>Your hours and open now</li><li>One-tap call and directions</li><li>Your prices and photos</li><li>Made for phones</li></ul>
     </div>
   </div>
   <div class="price"><small>If you want to keep it</small>
